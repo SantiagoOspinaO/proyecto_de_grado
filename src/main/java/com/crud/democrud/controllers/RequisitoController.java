@@ -16,7 +16,7 @@ public class RequisitoController {
     RequisitoService requisitoService;
 
     @GetMapping()
-    public ArrayList<RequisitoModel> obtenerUsuarios() {
+    public ArrayList<RequisitoModel> obtenerRequisitos() {
         return requisitoService.obtenerRequisitos();
     }
 
@@ -26,23 +26,23 @@ public class RequisitoController {
     }
 
     @PutMapping(path = "/{id}")
-    public RequisitoModel actualizarRequisito(@RequestBody RequisitoModel requisito,@PathVariable("id") Long id) {
+    public RequisitoModel actualizarRequisito(@RequestBody RequisitoModel requisito,@PathVariable("id") Integer id) {
         requisito.setId(id);
         return this.requisitoService.guardarRequisito(requisito);
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Long id) {
-        return this.requisitoService.obtenerPorId(id);
+    public Optional<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Integer id) {
+        return this.requisitoService.obtenerPorId(Long.valueOf(id));
     }
 
     @DeleteMapping(path = "/{id}")
     public String eliminarPorId(@PathVariable("id") Long id) {
         boolean validarRequisito = this.requisitoService.eliminarRequisito(id);
         if (validarRequisito) {
-            return "Se eliminó el requisito con id " + id;
+            return "Se eliminó el requisito con Id " + id;
         } else {
-            return "No pudo eliminar el requisito con id" + id;
+            return "No se pudo eliminar el requisito con Id " + id + " porque no se encuentra en la base de datos";
         }
     }
 }

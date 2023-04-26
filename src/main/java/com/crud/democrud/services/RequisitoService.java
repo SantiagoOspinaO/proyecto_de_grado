@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class RequisitoService {
@@ -18,12 +17,10 @@ public class RequisitoService {
     }
 
     public RequisitoModel guardarRequisito(RequisitoModel requisito){
-
         return requisitoRepository.save(requisito);
     }
 
-    public Optional<RequisitoModel> obtenerPorId(Long id){
-
+    public ArrayList<RequisitoModel> obtenerPorId(Integer id){
         return requisitoRepository.findById(id);
     }
 

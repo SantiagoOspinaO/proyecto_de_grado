@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface RequisitoRepository extends CrudRepository<RequisitoModel, Long> {
-    public abstract ArrayList<RequisitoModel> findById(Integer id);
+    ArrayList<RequisitoModel> findById(Integer id);
 }

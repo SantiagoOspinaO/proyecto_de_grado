@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -32,8 +31,8 @@ public class RequisitoController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Integer id) {
-        return this.requisitoService.obtenerPorId(Long.valueOf(id));
+    public ArrayList<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Integer id) {
+        return this.requisitoService.obtenerPorId(id);
     }
 
     @DeleteMapping(path = "/{id}")

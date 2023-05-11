@@ -11,28 +11,29 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/requisitos")
 public class RequisitoController {
+
     @Autowired
     RequisitoService requisitoService;
+
+    @PostMapping()
+    public RequisitoModel guardarRequisito(@RequestBody RequisitoModel requisito) {
+        return this.requisitoService.guardarRequisito(requisito).getBody();
+    }
 
     @GetMapping()
     public ArrayList<RequisitoModel> obtenerRequisitos() {
         return requisitoService.obtenerRequisitos();
     }
 
-    @PostMapping()
-    public RequisitoModel guardarRequisito(@RequestBody RequisitoModel requisito) {
-        return this.requisitoService.guardarRequisito(requisito);
+    @GetMapping(path = "/{id}")
+    public ArrayList<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Integer id) {
+        return this.requisitoService.obtenerRequisitoPorId(id);
     }
 
     @PutMapping(path = "/{id}")
-    public RequisitoModel actualizarRequisito(@RequestBody RequisitoModel requisito,@PathVariable("id") Integer id) {
+    public RequisitoModel actualizarRequisito(@RequestBody RequisitoModel requisito, @PathVariable("id") Integer id) {
         requisito.setId(id);
-        return this.requisitoService.guardarRequisito(requisito);
-    }
-
-    @GetMapping(path = "/{id}")
-    public ArrayList<RequisitoModel> obtenerRequisitoPorId(@PathVariable("id") Integer id) {
-        return this.requisitoService.obtenerPorId(id);
+        return this.requisitoService.guardarRequisito(requisito).getBody();
     }
 
     @DeleteMapping(path = "/{id}")

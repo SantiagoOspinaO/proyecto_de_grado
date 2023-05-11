@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.crud</groupId>
-	<artifactId>democrud</artifactId>
+	<artifactId>crudrequisito</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>democrud</name>
-	<description>democrud de tabla mysql</description>
+	<name>crudrequisito</name>
+	<description>crudrequisito</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -49,7 +49,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>

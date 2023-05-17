@@ -10,32 +10,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RequisitoService {
 
+
+    private final RequisitoRepository requisitoRepository;
+
     @Autowired
-    RequisitoRepository requisitoRepository;
-
-    public ResponseEntity<RequisitoModel> guardarRequisito(RequisitoModel requisito) {
-        try {
-
-            if (requisito.getNombre() == null || requisito.getNombre().isEmpty()) {
-                throw new RuntimeException("¡ERROR! El campo nombre no es válido.");
-            }
-            requisitoRepository.save(requisito);
-            return ResponseEntity.ok(requisito);
-
-        } catch (DuplicateKeyException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+    public RequisitoService(RequisitoRepository requisitoRepository) {
+        this.requisitoRepository = requisitoRepository;
     }
 
-    public ArrayList<RequisitoModel> obtenerRequisitos() {
+    public RequisitoModel guardarRequisito(RequisitoModel requisito) {
+
+        if (requisito.getNombre() == null || requisito.getNombre().isEmpty()) {
+            throw new RuntimeException("¡ERROR! El campo nombre no es válido.");
+        }
+        requisitoRepository.save(requisito);
+        return ResponseEntity.ok(requisito).getBody();
+    }
+
+    public List<RequisitoModel> obtenerRequisitos() {
         return (ArrayList<RequisitoModel>) requisitoRepository.findAll();
     }
 
-    public ArrayList<RequisitoModel> obtenerRequisitoPorId(Integer id) {
+    public List<RequisitoModel> obtenerRequisitoPorId(Integer id) {
         if (requisitoRepository.findById(id).isEmpty()) {
             throw new NotFoundException("¡ERROR! El requisito no se encontró en la base de datos.");
         }

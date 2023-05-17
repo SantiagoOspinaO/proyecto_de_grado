@@ -8,10 +8,10 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "requisito")
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequisitoModel {
+@Table(name = "requisito")
+public class RequirementModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +23,8 @@ public class RequisitoModel {
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
+
+//    @Column(name = "tipo_requisito", nullable = false)
+//    private String tipoRequisito;
+
 }

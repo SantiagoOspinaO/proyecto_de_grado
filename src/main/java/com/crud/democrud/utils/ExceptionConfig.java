@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionConfig {
 
-    @ExceptionHandler
+    /*@ExceptionHandler
     public ResponseEntity<?> notFoundException(Exception e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
@@ -19,5 +19,5 @@ public class ExceptionConfig {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("!ERROR¡ Ya existe un requisito con ese nombre.");
-    }
+    }*/
 }

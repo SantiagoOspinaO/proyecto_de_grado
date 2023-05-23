@@ -18,13 +18,13 @@ public class RequirementModel {
     @Column(unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(nullable = false)
     private String descripcion;
 
-//    @Column(name = "tipo_requisito", nullable = false)
-//    private String tipoRequisito;
+    @Column(nullable = false)
+    private String tipoRequisito;
 
 }

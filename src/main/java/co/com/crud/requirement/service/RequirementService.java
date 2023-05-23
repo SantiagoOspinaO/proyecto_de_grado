@@ -1,12 +1,16 @@
 package co.com.crud.requirement.service;
 
-import co.com.crud.requirement.repository.RequirementRepository;
-import co.com.crud.requirement.exception.domain.NotFoundException;
+import co.com.crud.requirement.dto.RequirementDTO;
 import co.com.crud.requirement.model.RequirementModel;
+import co.com.crud.requirement.repository.RequirementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static co.com.crud.requirement.exception.domain.validation.DomainValidator.mandatoryMessage;
+import static co.com.crud.requirement.exception.domain.validation.DomainValidator.validateMandatory;
+import static org.hibernate.persister.entity.EntityPersister.ENTITY_ID;
 
 @Service
 public class RequirementService {
@@ -19,10 +23,6 @@ public class RequirementService {
     }
 
     public RequirementModel saveRequirement(RequirementModel requirement) {
-
-        if (requirement.getNombre() == null || requirement.getNombre().isEmpty()) {
-            throw new RuntimeException("¡ERROR! El campo nombre no es válido.");
-        }
         return requirementRepository.save(requirement);
     }
 
@@ -31,10 +31,11 @@ public class RequirementService {
     }
 
     public List<RequirementModel> getRequirementById(Integer id) {
-        if (requirementRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("¡ERROR! El requisito no se encontró en la base de datos.");
-        }
         return requirementRepository.findById(id);
+    }
+
+    private void validate(RequirementDTO dto) {
+        validateMandatory(dto.getNombre(), mandatoryMessage(ENTITY_ID));
     }
 
 }

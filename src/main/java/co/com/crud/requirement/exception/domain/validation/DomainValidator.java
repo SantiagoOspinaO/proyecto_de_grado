@@ -12,9 +12,12 @@ public class DomainValidator {
     public static final String NUMBERS_DECIMAL_PATTERN = "^[+-]?([0-9]+\\.?[0-9]*|\\.[0-9]+)$";
     public static final String LETTERS_AND_NUMBERS_PATTERN = "^[\\w\\sáéíóúÁÉÍÓÚñÑ]+$";
     public static final String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-
-    private static final String FIELD_MANDATORY = "El campo %s es obligatorio.";
+    private static final String FIELD_MANDATORY = "El campo %s es obligatorio";
+    public static final String NAME_FIELD_MANDATORY = "El campo nombre es obligatorio";
+    public static final String DESCRIPTION_FIELD_MANDATORY = "El campo descripción es obligatorio";
+    public static final String TYPE_FIELD_MANDATORY = "El campo tipo de requisito es obligatorio y se debe especificar";
     public static final String DEFAULT_MESSAGE = "Ocurrió un error procesando la solicitud. Por favor pongase en contacto con soporte.";
+    public static final String MAX_MIN_NANE_LENGHT_MESSAGE = "El campo nombre tiene una longitud minima de 10 caracteres, y maxima de 50 caracteres, porfavor verifica";
 
     private DomainValidator() {}
 
@@ -115,8 +118,8 @@ public class DomainValidator {
         }
     }
 
-    public static <T> void validateNonEmpty(List<T> list, String humanMessage) {
-        if (list == null || list.isEmpty()) {
+    public static <T> void validateNonEmpty(String value, String humanMessage) {
+        if (value == null || value.isEmpty()) {
             throw new NoDataException(humanMessage);
         }
     }

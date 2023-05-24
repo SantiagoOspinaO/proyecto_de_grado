@@ -23,7 +23,7 @@ public class RestExceptionHandler {
         STATES.put(MaxLengthException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(MinLengthException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
         STATES.put(NoDataException.class.getSimpleName(), HttpStatus.NOT_FOUND);
-        STATES.put(EntityNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        STATES.put(RequirementNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
         STATES.put(MandatoryValueException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 

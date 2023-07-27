@@ -1,4 +1,4 @@
-package co.com.crud.requirement.model;
+package co.com.crud.requirement.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "requisito")
-public class RequirementModel {
+public class RequirementEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,7 @@
-package co.com.crud.requirement.exception.web;
+package co.com.crud.requirement.web.exception;
 
-import co.com.crud.requirement.exception.domain.*;
-import co.com.crud.requirement.exception.domain.validation.DomainValidator;
+import co.com.crud.requirement.domain.exception.*;
+import co.com.crud.requirement.domain.exception.validation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

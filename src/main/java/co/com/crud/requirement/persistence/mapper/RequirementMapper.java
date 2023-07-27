@@ -1,0 +1,27 @@
+package co.com.crud.requirement.persistence.mapper;
+
+import co.com.crud.requirement.domain.model.Requirement;
+import co.com.crud.requirement.persistence.entity.RequirementEntity;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface RequirementMapper {
+
+    @Mappings({
+            @Mapping(source = "id", target = "requirementId"),
+            @Mapping(source = "nombre", target = "name"),
+            @Mapping(source = "descripcion", target = "description"),
+            @Mapping(source = "tipoRequisito", target = "typeRequirement"),
+    })
+    Requirement toRequirement(RequirementEntity requirementEntity);
+
+    List<Requirement> toRequirementsEntity(List<RequirementEntity> requirements);
+
+    @InheritInverseConfiguration
+    RequirementEntity toRequirements(Requirement requirement);
+}

@@ -1,6 +1,6 @@
-package co.com.crud.requirement.exception.domain.validation;
+package co.com.crud.requirement.domain.exception.validation;
 
-import co.com.crud.requirement.exception.domain.*;
+import co.com.crud.requirement.domain.exception.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

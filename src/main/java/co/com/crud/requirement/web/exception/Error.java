@@ -1,4 +1,4 @@
-package co.com.crud.requirement.exception.web;
+package co.com.crud.requirement.web.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

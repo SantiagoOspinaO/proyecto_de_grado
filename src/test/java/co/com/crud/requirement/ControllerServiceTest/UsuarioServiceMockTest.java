@@ -1,7 +1,7 @@
 package co.com.crud.requirement.ControllerServiceTest;
 
-import co.com.crud.requirement.repository.RequirementRepository;
-import co.com.crud.requirement.service.RequirementService;
+import co.com.crud.requirement.domain.service.RequirementService;
+import co.com.crud.requirement.persistence.crud.RequirementCrudRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,16 +17,16 @@ import static org.mockito.Mockito.when;
 public class UsuarioServiceMockTest {
 
     @MockBean
-    RequirementRepository requirementRepository;
+    RequirementCrudRepository requirementCrudRepository;
 
     @Autowired
     RequirementService requirementService;
 
     @Test
     public void testRequisitoMock() {
-        when(requirementRepository.findAll()).thenReturn(new ArrayList<>());
+        when(requirementCrudRepository.findAll()).thenReturn(new ArrayList<>());
         assertThat(requirementService.getAllRequirements().isEmpty());
-        verify(requirementRepository).findAll();
+        verify(requirementCrudRepository).findAll();
     }
 
     public void testRequisitoRolMock() {

@@ -35,23 +35,19 @@ public class RequirementRepository implements RequirementDomainRepository {
         return requirementMapper.toRequirementsEntity(requirementEntities);
     }
 
-//    @Override
-//    public Optional<Requirement> getRequirementById(Integer id) {
-//        List<RequirementEntity> requirementEntity = requirementCrudRepository.findById(id);
-//        if (requirementEntity.isEmpty()) {
-//            return Optional.of(requirementMapper.toRequirement(requirementEntity.get(id)));
-//        } else {
-//            return Optional.empty();
-//        }
-//    }
-
     @Override
     public Optional<Requirement> getRequirementById(Integer id) {
-        return requirementCrudRepository.findById(id).map(requirement -> requirementMapper.toRequirement(requirement));
+        return requirementCrudRepository.findById(id).map(requirementMapper::toRequirement);
     }
 
     @Override
     public Optional<List<Requirement>> getRequirementByType(String type) {
         return Optional.empty();
     }
+
+    @Override
+    public void deleteRequirement(Integer id) {
+        requirementCrudRepository.deleteById(id);
+    }
+
 }

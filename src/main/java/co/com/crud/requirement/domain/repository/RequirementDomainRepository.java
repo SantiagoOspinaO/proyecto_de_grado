@@ -14,4 +14,6 @@ public interface RequirementDomainRepository {
     Optional<Requirement> getRequirementById(Integer id);
 
     Optional<List<Requirement>> getRequirementByType(String type);
+
+    void deleteRequirement(Integer requirementId);
 }

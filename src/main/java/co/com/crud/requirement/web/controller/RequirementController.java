@@ -42,4 +42,14 @@ public class RequirementController {
         requirement.setRequirementId(id);
         return ResponseEntity.ok(requirementService.saveRequirement(requirement));
     }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity deleteRequirement(@PathVariable("id") Integer requirementId) {
+        if (requirementService.deleteRequirement(requirementId)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

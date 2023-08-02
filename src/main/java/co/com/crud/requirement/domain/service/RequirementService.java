@@ -41,4 +41,13 @@ public class RequirementService {
         }
         return requirements;
     }
+
+    public boolean deleteRequirement(Integer requirementId){
+        return getRequirementById(requirementId).map(requirement -> {
+            requirementDomainRepository.deleteRequirement(requirementId);
+
+            return true;
+        }).orElse(false);
+    }
+
 }

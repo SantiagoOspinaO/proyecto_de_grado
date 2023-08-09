@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/requisitos")
+@RequestMapping("/requirements")
 public class RequirementController {
 
     private final RequirementService requirementService;

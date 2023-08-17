@@ -2,6 +2,7 @@ package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Character;
 import co.com.crud.requirement.domain.service.CharacterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ public class CharacterController {
 
     private final CharacterService characterService;
 
+    @Autowired
     public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
     }

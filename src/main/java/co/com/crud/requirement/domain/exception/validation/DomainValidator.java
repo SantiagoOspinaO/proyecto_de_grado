@@ -16,6 +16,7 @@ public class DomainValidator {
     public static final String NAME_FIELD_MANDATORY = "El campo nombre es obligatorio";
     public static final String DESCRIPTION_FIELD_MANDATORY = "El campo descripción es obligatorio";
     public static final String TYPE_FIELD_MANDATORY = "El campo tipo de requisito es obligatorio y se debe especificar";
+    public static final String NAME_ALREADY_EXISTS = "El nombre ingresado ya existe";
     public static final String DEFAULT_MESSAGE = "Ocurrió un error procesando la solicitud. Por favor pongase en contacto con soporte.";
     public static final String MAX_MIN_NANE_LENGHT_MESSAGE = "El campo nombre tiene una longitud minima de 10 caracteres, y maxima de 50 caracteres, porfavor verifica";
 
@@ -24,6 +25,12 @@ public class DomainValidator {
     public static void validateMandatory(Object value, String humanMessage) {
         if (value == null || (value instanceof String && ((String) value).trim().isEmpty())) {
             throw new MandatoryValueException(humanMessage);
+        }
+    }
+
+    public static void validateNameExists(String name, String humanMessage) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new TheNameAlreadyExists(humanMessage);
         }
     }
 

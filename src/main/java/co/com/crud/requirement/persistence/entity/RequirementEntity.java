@@ -1,10 +1,12 @@
 package co.com.crud.requirement.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +29,12 @@ public class RequirementEntity {
     @Column(nullable = false)
     private String tipoRequisito;
 
+    @OneToMany(mappedBy = "requisito", targetEntity = CharacterEntity.class,
+            fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<CharacterEntity> characterEntity;
+
+    @OneToOne(mappedBy = "requisito", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private TypeErrorCharacterEntity typeErrorCharacterEntity;
 }

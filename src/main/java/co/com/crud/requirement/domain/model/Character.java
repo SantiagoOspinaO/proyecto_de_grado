@@ -1,5 +1,8 @@
 package co.com.crud.requirement.domain.model;
 
+import lombok.Getter;
+
+@Getter
 public class Character {
 
     private Integer characterId;
@@ -8,27 +11,21 @@ public class Character {
 
     private String description;
 
-    public Integer getCharacterId() {
-        return characterId;
-    }
+    private double grade;
 
     public void setCharacterId(Integer characterId) {
         this.characterId = characterId;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 }

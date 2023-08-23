@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RequirementMapper {
-
     @Mappings({
             @Mapping(source = "id", target = "requirementId"),
             @Mapping(source = "nombre", target = "name"),

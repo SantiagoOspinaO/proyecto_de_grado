@@ -3,16 +3,18 @@ package co.com.crud.requirement.domain.model;
 import lombok.Getter;
 
 @Getter
-public class Requirement {
+public class TypeErrorCharacter {
 
-    private Integer requirementId;
+    private Integer typeErrorId;
+
     private String name;
+
     private String description;
-    private String typeRequirement;
 
+    private String causeError;
 
-    public void setRequirementId(Integer requirementId) {
-        this.requirementId = requirementId;
+    public void setTypeErrorId(Integer typeErrorId) {
+        this.typeErrorId = typeErrorId;
     }
 
     public void setName(String name) {
@@ -23,7 +25,7 @@ public class Requirement {
         this.description = description;
     }
 
-    public void setTypeRequirement(String typeRequirement) {
-        this.typeRequirement = typeRequirement;
+    public void setCauseError(String causeError) {
+        this.causeError = causeError;
     }
 }

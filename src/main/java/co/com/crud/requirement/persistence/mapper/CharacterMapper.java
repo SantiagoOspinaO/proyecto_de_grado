@@ -15,6 +15,7 @@ public interface CharacterMapper {
             @Mapping(source = "id", target = "characterId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description"),
+            @Mapping(source = "nota", target = "grade")
     })
     Character toCharacter(CharacterEntity characterEntity);
 

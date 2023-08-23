@@ -30,5 +30,4 @@ public class CharacterController {
     public ResponseEntity<Optional<Character>> getCharacterById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(characterService.getCharacterById(id));
     }
-
 }

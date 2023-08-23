@@ -1,5 +1,6 @@
 package co.com.crud.requirement.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "caracteristicas")
+@Table(name = "caracteristica")
 public class CharacterEntity {
 
     @Id
@@ -23,4 +24,12 @@ public class CharacterEntity {
 
     @Column(nullable = false)
     private String descripcion;
+
+    @Column()
+    private double nota;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = RequirementEntity.class)
+    @JoinColumn()
+    @JsonManagedReference
+    private RequirementEntity requisito;
 }

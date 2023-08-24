@@ -25,7 +25,7 @@ public class TypeErrorCharacterEntity {
     @Column(nullable = false)
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column()
     private String causaError;
 
     @OneToOne(fetch = FetchType.LAZY)

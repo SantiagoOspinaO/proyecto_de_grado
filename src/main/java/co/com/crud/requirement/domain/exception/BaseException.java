@@ -7,7 +7,7 @@ public abstract class BaseException extends RuntimeException {
 
     private final String humanMessage;
 
-    protected BaseException(String humanMessage) {
+    public BaseException(String humanMessage) {
         this.humanMessage = humanMessage;
     }
 }

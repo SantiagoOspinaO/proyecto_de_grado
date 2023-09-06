@@ -1,7 +1,7 @@
 package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.exception.TypeErrorNotFoundException;
-import co.com.crud.requirement.domain.model.TypeErrorCharacter;
+import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacterDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ public class TypeErrorCharacterService {
         this.typeErrorCharacterDomainRepository = typeErrorCharacterDomainRepository;
     }
 
-    public List<TypeErrorCharacter> getAllTypesErrors() {
+    public List<TypeErrorCharacteristic> getAllTypesErrors() {
         return typeErrorCharacterDomainRepository.getAllTypesErrors();
     }
 
-    public Optional<TypeErrorCharacter> getTypeErrorById(Integer id) {
-        Optional<TypeErrorCharacter> typeError = typeErrorCharacterDomainRepository.getTypeErrorById(id);
+    public Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id) {
+        Optional<TypeErrorCharacteristic> typeError = typeErrorCharacterDomainRepository.getTypeErrorById(id);
         if (typeError.isEmpty()) {
             throw new TypeErrorNotFoundException(id);
         }

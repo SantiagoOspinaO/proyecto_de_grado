@@ -1,6 +1,6 @@
 package co.com.crud.requirement.persistence;
 
-import co.com.crud.requirement.domain.model.TypeErrorCharacter;
+import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacterDomainRepository;
 import co.com.crud.requirement.persistence.crud.TypeErrorCharacterCrudRepository;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacterEntity;
@@ -25,13 +25,13 @@ public class TypeErrorCharacterRepository implements TypeErrorCharacterDomainRep
     }
 
     @Override
-    public List<TypeErrorCharacter> getAllTypesErrors() {
+    public List<TypeErrorCharacteristic> getAllTypesErrors() {
         List<TypeErrorCharacterEntity> typesErrorsEntities = (List<TypeErrorCharacterEntity>) typeErrorCharacterCrudRepository.findAll();
         return typeErrorCharacterMapper.toTypesErrorsEntities(typesErrorsEntities);
     }
 
     @Override
-    public Optional<TypeErrorCharacter> getTypeErrorById(Integer id) {
+    public Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id) {
         return typeErrorCharacterCrudRepository.findById(id).map(typeErrorCharacterMapper::toTypeError);
     }
 }

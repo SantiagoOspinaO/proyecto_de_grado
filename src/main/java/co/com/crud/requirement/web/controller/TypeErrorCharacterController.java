@@ -1,6 +1,6 @@
 package co.com.crud.requirement.web.controller;
 
-import co.com.crud.requirement.domain.model.TypeErrorCharacter;
+import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.service.TypeErrorCharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class TypeErrorCharacterController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TypeErrorCharacter>> getAllTypeErrors() {
+    public ResponseEntity<List<TypeErrorCharacteristic>> getAllTypeErrors() {
         return ResponseEntity.ok(typeErrorCharacterService.getAllTypesErrors());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<TypeErrorCharacter>> getTypeErrorById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Optional<TypeErrorCharacteristic>> getTypeErrorById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(typeErrorCharacterService.getTypeErrorById(id));
     }
 }

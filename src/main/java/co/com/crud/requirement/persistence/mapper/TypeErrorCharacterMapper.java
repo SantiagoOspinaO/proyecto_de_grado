@@ -1,6 +1,6 @@
 package co.com.crud.requirement.persistence.mapper;
 
-import co.com.crud.requirement.domain.model.TypeErrorCharacter;
+import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacterEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -17,10 +17,10 @@ public interface TypeErrorCharacterMapper {
             @Mapping(source = "descripcion", target = "description"),
             @Mapping(source = "causaError", target = "causeError")
     })
-    TypeErrorCharacter toTypeError(TypeErrorCharacterEntity typeErrorCharacterEntity);
+    TypeErrorCharacteristic toTypeError(TypeErrorCharacterEntity typeErrorCharacterEntity);
 
-    List<TypeErrorCharacter> toTypesErrorsEntities(List<TypeErrorCharacterEntity> typesErrors);
+    List<TypeErrorCharacteristic> toTypesErrorsEntities(List<TypeErrorCharacterEntity> typesErrors);
 
     @InheritInverseConfiguration
-    TypeErrorCharacterEntity toTypesErrors(TypeErrorCharacter typeErrorCharacter);
+    TypeErrorCharacterEntity toTypesErrors(TypeErrorCharacteristic typeErrorCharacteristic);
 }

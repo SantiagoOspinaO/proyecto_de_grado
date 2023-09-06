@@ -1,7 +1,7 @@
 package co.com.crud.requirement.persistence.mapper;
 
-import co.com.crud.requirement.domain.model.Character;
-import co.com.crud.requirement.persistence.entity.CharacterEntity;
+import co.com.crud.requirement.domain.model.Characteristic;
+import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,17 +10,17 @@ import org.mapstruct.Mappings;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface CharacterMapper {
+public interface CharacteristicMapper {
     @Mappings({
-            @Mapping(source = "id", target = "characterId"),
+            @Mapping(source = "id", target = "characteristicId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description"),
             @Mapping(source = "nota", target = "grade")
     })
-    Character toCharacter(CharacterEntity characterEntity);
+    Characteristic toCharacteristic(CharacteristicEntity characteristicEntity);
 
-    List<Character> toCharactersEntity(List<CharacterEntity> characters);
+    List<Characteristic> toCharacteristicsEntity(List<CharacteristicEntity> characters);
 
     @InheritInverseConfiguration
-    CharacterEntity toCharacters(Character character);
+    CharacteristicEntity toCharacteristics(Characteristic characteristic);
 }

@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "caracteristica")
-public class CharacterEntity {
+public class CharacteristicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

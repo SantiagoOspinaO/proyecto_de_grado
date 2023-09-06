@@ -2,6 +2,8 @@ package co.com.crud.requirement.domain.model;
 
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class Requirement {
 
@@ -9,7 +11,6 @@ public class Requirement {
     private String name;
     private String description;
     private String typeRequirement;
-
 
     public void setRequirementId(Integer requirementId) {
         this.requirementId = requirementId;

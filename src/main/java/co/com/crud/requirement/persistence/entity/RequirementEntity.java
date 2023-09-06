@@ -21,6 +21,9 @@ public class RequirementEntity {
     private Integer id;
 
     @Column(unique = true, nullable = false)
+    private Integer proyectoId;
+
+    @Column(unique = true, nullable = false)
     private String nombre;
 
     @Column(nullable = false)
@@ -29,10 +32,10 @@ public class RequirementEntity {
     @Column(nullable = false)
     private String tipoRequisito;
 
-    @OneToMany(mappedBy = "requisito", targetEntity = CharacterEntity.class,
+    @OneToMany(mappedBy = "requisito", targetEntity = CharacteristicEntity.class,
             fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonManagedReference
-    private List<CharacterEntity> characterEntity;
+    private List<CharacteristicEntity> characteristics;
 
     @OneToOne(mappedBy = "requisito", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference

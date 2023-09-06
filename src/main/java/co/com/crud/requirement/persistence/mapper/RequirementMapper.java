@@ -13,9 +13,10 @@ import java.util.List;
 public interface RequirementMapper {
     @Mappings({
             @Mapping(source = "id", target = "requirementId"),
+            @Mapping(source = "proyectoId", target = "projectId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description"),
-            @Mapping(source = "tipoRequisito", target = "typeRequirement"),
+            @Mapping(source = "tipoRequisito", target = "typeRequirement")
     })
     Requirement toRequirement(RequirementEntity requirementEntity);
 

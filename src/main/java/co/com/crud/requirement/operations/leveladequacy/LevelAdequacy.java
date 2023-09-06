@@ -1,39 +1,20 @@
 package co.com.crud.requirement.operations.leveladequacy;
 
-import co.com.crud.requirement.domain.exception.ErrorConnectionToDB;
+import co.com.crud.requirement.operations.ConnectionToDB;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class LevelAdequacy {
 
-    public Connection getConnectionToDB() throws SQLException, IOException {
-        try {
-            Properties properties = new Properties();
-            FileInputStream stream = new FileInputStream("src/main/resources/application-devso.properties");
-            properties.load(stream);
-            stream.close();
-            String url = properties.getProperty("spring.datasource.url");
-            String username = properties.getProperty("spring.datasource.username");
-            String password = properties.getProperty("spring.datasource.password");
-            return DriverManager.getConnection(url, username, password);
-
-        } catch (SQLException | FileNotFoundException e) {
-            throw new ErrorConnectionToDB(e.getMessage());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public double calculateLevelAdequacy() {
         try {
-            Connection connection = getConnectionToDB();
+            Connection connection = ConnectionToDB.getConnectionToDB();
             Statement statement = connection.createStatement();
-            String query = "select caracteristica.nota from public.caracteristica";
+            String query = "SELECT * FROM consultar_notas_caracteristica();";
             ResultSet resultSet = statement.executeQuery(query);
 
             double sum = 0.0;

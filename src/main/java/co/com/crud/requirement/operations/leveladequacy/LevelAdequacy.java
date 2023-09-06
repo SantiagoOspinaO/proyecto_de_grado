@@ -1,8 +1,7 @@
 package co.com.crud.requirement.operations.leveladequacy;
 
-import co.com.crud.requirement.operations.ConnectionToDB;
-import co.com.crud.requirement.domain.exception.ErrorConnectionToDB;
 import co.com.crud.requirement.domain.exception.validation.RequirementAdecuationValidator;
+import co.com.crud.requirement.operations.ConnectionToDB;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -47,9 +46,9 @@ public class LevelAdequacy {
 
     public double MaximunAccumulatedScore() {
         try {
-            Connection connection = getConnectionToDB();
+            Connection connection = ConnectionToDB.getConnectionToDB();
             Statement statement = connection.createStatement();
-            String queryMaximunScore = "select caracteristica.nota from public.caracteristica";
+            String queryMaximunScore = "SELECT * FROM consultar_notas_caracteristica();";
             ResultSet resultSet = statement.executeQuery(queryMaximunScore);
 
             double sum = 0.0;
@@ -81,9 +80,9 @@ public class LevelAdequacy {
 
     public Integer EvaluatedCharacterForRequirement() {
         try {
-            Connection connection = getConnectionToDB();
+            Connection connection = ConnectionToDB.getConnectionToDB();
             Statement statement = connection.createStatement();
-            String queryMaximunScore = "select caracteristica.nota from public.caracteristica";
+            String queryMaximunScore = "SELECT * FROM consultar_notas_caracteristica();";
             ResultSet resultSet = statement.executeQuery(queryMaximunScore);
 
             int count = 0;
@@ -115,9 +114,9 @@ public class LevelAdequacy {
 
     public double calculateWeightedAverage() {
         try {
-            Connection connection = getConnectionToDB();
+            Connection connection = ConnectionToDB.getConnectionToDB();
             Statement statement = connection.createStatement();
-            String query = "select caracteristica.nota from public.caracteristica";
+            String query = "SELECT * FROM consultar_notas_caracteristica();";
             ResultSet resultSet = statement.executeQuery(query);
 
             double sum = 0.0;

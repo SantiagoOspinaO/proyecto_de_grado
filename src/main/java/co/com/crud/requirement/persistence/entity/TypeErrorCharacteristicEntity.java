@@ -12,14 +12,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "TipoErrorCaracteristica")
-public class TypeErrorCharacterEntity {
+public class TypeErrorCharacteristicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = false)
@@ -27,9 +27,4 @@ public class TypeErrorCharacterEntity {
 
     @Column()
     private String causaError;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "requirementId")
-    @JsonBackReference
-    private RequirementEntity requisito;
 }

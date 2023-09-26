@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface RequirementCrudRepository extends CrudRepository<RequirementEntity, Integer> {
+public interface IRequirementCrudRepository extends CrudRepository<RequirementEntity, Integer> {
     Optional<RequirementEntity> findById(Integer id);
 }

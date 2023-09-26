@@ -30,4 +30,22 @@ public class CharacteristicController {
     public ResponseEntity<Optional<Characteristic>> getCharacteristicById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(characteristicService.getCharacteristicById(id));
     }
+
+    @GetMapping(path = "/level-adequacy")
+    public double calculateLevelAdequacy() {
+        return characteristicService.calculateLevelAdequacy();
+    }
+
+//    public ResponseEntity<Optional<Characteristic>> getCharacteristicByRequirement() {
+//        try {
+//            Connection connection = ConnectionToDB.getConnectionToDB();
+//            Statement statement = connection.createStatement();
+//            String query = "SELECT * FROM consultar_notas_caracteristica();";
+//            ResultSet resultSet = statement.executeQuery(query);
+//        } catch (SQLException e) {
+//            System.out.println("ERROR: " + e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

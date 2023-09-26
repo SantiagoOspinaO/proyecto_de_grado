@@ -14,8 +14,7 @@ public interface CharacteristicMapper {
     @Mappings({
             @Mapping(source = "id", target = "characteristicId"),
             @Mapping(source = "nombre", target = "name"),
-            @Mapping(source = "descripcion", target = "description"),
-            @Mapping(source = "nota", target = "grade")
+            @Mapping(source = "descripcion", target = "description")
     })
     Characteristic toCharacteristic(CharacteristicEntity characteristicEntity);
 

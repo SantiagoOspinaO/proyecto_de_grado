@@ -12,5 +12,4 @@ public class Requirement {
     private String name;
     private String description;
     private String typeRequirement;
-
 }

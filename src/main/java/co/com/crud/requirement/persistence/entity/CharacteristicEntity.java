@@ -25,12 +25,4 @@ public class CharacteristicEntity {
 
     @Column(nullable = false)
     private String descripcion;
-
-    @Column()
-    private double nota;
-
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = RequirementEntity.class)
-    @JoinColumn()
-    @JsonManagedReference
-    private RequirementEntity requisito;
 }

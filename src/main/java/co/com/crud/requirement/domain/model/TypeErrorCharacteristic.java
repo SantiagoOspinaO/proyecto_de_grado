@@ -14,5 +14,4 @@ public class TypeErrorCharacteristic {
     private String description;
 
     private String causeError;
-
 }

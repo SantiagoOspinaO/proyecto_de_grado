@@ -2,7 +2,7 @@ package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
-import co.com.crud.requirement.persistence.crud.RequirementCrudRepository;
+import co.com.crud.requirement.persistence.crud.IRequirementCrudRepository;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
 import co.com.crud.requirement.persistence.mapper.RequirementMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,30 +14,30 @@ import java.util.Optional;
 @Repository
 public class RequirementRepository implements RequirementDomainRepository {
 
-    private final RequirementCrudRepository requirementCrudRepository;
+    private final IRequirementCrudRepository IRequirementCrudRepository;
     private final RequirementMapper requirementMapper;
 
     @Autowired
-    public RequirementRepository(RequirementCrudRepository requirementCrudRepository, RequirementMapper requirementMapper) {
-        this.requirementCrudRepository = requirementCrudRepository;
+    public RequirementRepository(IRequirementCrudRepository IRequirementCrudRepository, RequirementMapper requirementMapper) {
+        this.IRequirementCrudRepository = IRequirementCrudRepository;
         this.requirementMapper = requirementMapper;
     }
 
     @Override
     public Requirement saveRequirement(Requirement requirement) {
         RequirementEntity requirementEntity = requirementMapper.toRequirements(requirement);
-        return requirementMapper.toRequirement(requirementCrudRepository.save(requirementEntity));
+        return requirementMapper.toRequirement(IRequirementCrudRepository.save(requirementEntity));
     }
 
     @Override
     public List<Requirement> getAllRequirements() {
-        List<RequirementEntity> requirementEntities = (List<RequirementEntity>) requirementCrudRepository.findAll();
+        List<RequirementEntity> requirementEntities = (List<RequirementEntity>) IRequirementCrudRepository.findAll();
         return requirementMapper.toRequirementsEntity(requirementEntities);
     }
 
     @Override
     public Optional<Requirement> getRequirementById(Integer id) {
-        return requirementCrudRepository.findById(id).map(requirementMapper::toRequirement);
+        return IRequirementCrudRepository.findById(id).map(requirementMapper::toRequirement);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RequirementRepository implements RequirementDomainRepository {
 
     @Override
     public void deleteRequirement(Integer id) {
-        requirementCrudRepository.deleteById(id);
+        IRequirementCrudRepository.deleteById(id);
     }
 
 }

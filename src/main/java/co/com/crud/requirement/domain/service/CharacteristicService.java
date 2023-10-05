@@ -3,6 +3,7 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.CharacteristicNotFoundException;
 import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.ICharacteristicByRequirement;
+import co.com.crud.requirement.domain.model.queryresult.IGradeOfCharacteristic;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,17 +33,16 @@ public class CharacteristicService {
         return characteristics;
     }
 
-    //-->
     public double calculateLevelAdequacy() {
-        List<ICharacteristicByRequirement> characteristics = characteristicDomainRepository.getAllGrades();
+        List<IGradeOfCharacteristic> grades = characteristicDomainRepository.getGradesOfCharacteristics();
         double sumGrade = 0;
-        for (ICharacteristicByRequirement characteristic : characteristics) {
-            sumGrade += characteristic.getGrade();
+        for (IGradeOfCharacteristic grade : grades) {
+            sumGrade += grade.getGrade();
         }
-        return sumGrade / characteristics.size();
+        return sumGrade / grades.size();
     }
 
-    public Optional<Characteristic> getCharacteristicByRequirement() {
-        return null;
+    public List<ICharacteristicByRequirement> getCharacteristicByRequirement() {
+        return characteristicDomainRepository.getCharacteristicByRequirement();
     }
 }

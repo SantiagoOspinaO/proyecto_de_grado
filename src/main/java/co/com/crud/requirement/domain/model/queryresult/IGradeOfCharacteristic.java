@@ -1,7 +1,6 @@
 package co.com.crud.requirement.domain.model.queryresult;
 
-public interface ICharacteristicGrade {
+public interface IGradeOfCharacteristic {
 
     Double getGrade();
-
 }

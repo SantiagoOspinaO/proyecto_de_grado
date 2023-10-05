@@ -1,6 +1,7 @@
 package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Characteristic;
+import co.com.crud.requirement.domain.model.queryresult.ICharacteristicByRequirement;
 import co.com.crud.requirement.domain.service.CharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,16 +37,8 @@ public class CharacteristicController {
         return characteristicService.calculateLevelAdequacy();
     }
 
-//    public ResponseEntity<Optional<Characteristic>> getCharacteristicByRequirement() {
-//        try {
-//            Connection connection = ConnectionToDB.getConnectionToDB();
-//            Statement statement = connection.createStatement();
-//            String query = "SELECT * FROM consultar_notas_caracteristica();";
-//            ResultSet resultSet = statement.executeQuery(query);
-//        } catch (SQLException e) {
-//            System.out.println("ERROR: " + e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    @GetMapping(path = "characteristics-requirement")
+    public List<ICharacteristicByRequirement> getCharacteristicByRequirement() {
+        return characteristicService.getCharacteristicByRequirement();
+    }
 }

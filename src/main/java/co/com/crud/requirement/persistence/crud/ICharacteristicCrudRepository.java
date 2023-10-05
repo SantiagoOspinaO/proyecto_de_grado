@@ -16,7 +16,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
 
     Optional<CharacteristicEntity> findById(Integer id);
 
-    @Query(value = "SELECT req.id AS id, req.nombre AS nameReq, car.nombre AS nameCharac, car.descripcion AS description " +
+    @Query(value = "SELECT req.id AS id, car.nombre AS nameCharac, car.descripcion AS description " +
             " FROM requisito req " +
             " INNER JOIN requisito_caracteristica_nota reqca ON req.id = reqca.requisito_id " +
             " INNER JOIN caracteristica car ON reqca.caracteristica_id = car.id ", nativeQuery = true)

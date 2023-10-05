@@ -4,8 +4,6 @@ public interface ICharacteristicByRequirement {
 
     Integer getId();
 
-    String getNameReq();
-
     String getNameCharac();
 
     String getDescription();

@@ -37,6 +37,21 @@ public class CharacteristicController {
         return characteristicService.calculateLevelAdequacy();
     }
 
+    @GetMapping(path = "/maximunAccumulatedScore")
+    public double calculateMaximunAccumulatedScore() {
+        return characteristicService.maximunAccumulatedScore();
+    }
+
+    @GetMapping(path = "/level-weight-score")
+    public double calculateLevelWeightScoreForNineCharacters() {
+        return characteristicService.levelWeightScoreForNineCharacters();
+    }
+
+    @GetMapping(path = "/all-evaluation-characters-result")
+    public String calculateAllEvaluationCharactersResult() {
+        return characteristicService.allEvaluationCharactersResult();
+    }
+
     @GetMapping(path = "characteristics-requirement")
     public List<ICharacteristicByRequirement> getCharacteristicByRequirement() {
         return characteristicService.getCharacteristicByRequirement();

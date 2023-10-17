@@ -1,8 +1,8 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicByRequirement;
-import co.com.crud.requirement.domain.model.queryresult.IGradeOfCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +13,11 @@ public interface CharacteristicDomainRepository {
 
     Optional<Characteristic> getCharacteristicById(Integer id);
 
-    List<ICharacteristicByRequirement> getCharacteristicByRequirement();
+    List<IGradeCharacteristicByRequirementId> getGradesCharacteristicByRequirementId(Integer requirementId);
 
-    List<IGradeOfCharacteristic> getGradesOfCharacteristics();
+    List<ICharacteristicsByRequirementId> getCharacteristicsByRequirementId(Integer requirementId);
 
-    void updateGradeOfCharacteristic(Integer requirementId, Integer characteristicId, Double gradeInput);
+    void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId);
+
+    void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId, Integer typeErrorId);
 }

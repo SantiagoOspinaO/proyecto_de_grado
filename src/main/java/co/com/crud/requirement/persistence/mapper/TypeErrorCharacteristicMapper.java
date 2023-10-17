@@ -14,8 +14,7 @@ public interface TypeErrorCharacteristicMapper {
     @Mappings({
             @Mapping(source = "id", target = "typeErrorId"),
             @Mapping(source = "nombre", target = "name"),
-            @Mapping(source = "descripcion", target = "description"),
-            @Mapping(source = "causaError", target = "causeError")
+            @Mapping(source = "descripcion", target = "description")
     })
     TypeErrorCharacteristic toTypeError(TypeErrorCharacteristicEntity typeErrorCharacteristicEntity);
 

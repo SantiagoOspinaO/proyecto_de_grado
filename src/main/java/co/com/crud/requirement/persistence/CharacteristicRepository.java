@@ -1,8 +1,8 @@
 package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicByRequirement;
-import co.com.crud.requirement.domain.model.queryresult.IGradeOfCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import co.com.crud.requirement.persistence.crud.ICharacteristicCrudRepository;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
@@ -38,17 +38,22 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public List<IGradeOfCharacteristic> getGradesOfCharacteristics() {
-        return characteristicCrudRepository.findGradesOfCharacteristics();
+    public List<IGradeCharacteristicByRequirementId> getGradesCharacteristicByRequirementId(Integer requirementId) {
+        return characteristicCrudRepository.findGradesByRequirementId(requirementId);
     }
 
     @Override
-    public void updateGradeOfCharacteristic(Integer requirementId, Integer characteristicId, Double gradeInput) {
-        characteristicCrudRepository.updateGradeOfCharacteristic(requirementId, characteristicId, gradeInput);
+    public List<ICharacteristicsByRequirementId> getCharacteristicsByRequirementId(Integer requirementId) {
+        return characteristicCrudRepository.findCharacteristicsByRequirementId(requirementId);
     }
 
     @Override
-    public List<ICharacteristicByRequirement> getCharacteristicByRequirement() {
-        return characteristicCrudRepository.findCharacteristicsByRequirement();
+    public void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId) {
+        characteristicCrudRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
+    }
+
+    @Override
+    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId, Integer typeErrorId) {
+        characteristicCrudRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
     }
 }

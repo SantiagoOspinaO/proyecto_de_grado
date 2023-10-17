@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "TipoErrorCaracteristica")
+@Table(name = "TipoError")
 public class TypeErrorCharacteristicEntity {
 
     @Id
@@ -23,7 +23,4 @@ public class TypeErrorCharacteristicEntity {
 
     @Column(nullable = false)
     private String descripcion;
-
-    @Column()
-    private String causaError;
 }

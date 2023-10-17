@@ -23,7 +23,7 @@ public class RequirementEntity {
     @Column(nullable = false)
     private Integer proyectoId;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = false)

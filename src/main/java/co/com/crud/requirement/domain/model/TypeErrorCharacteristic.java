@@ -12,6 +12,4 @@ public class TypeErrorCharacteristic {
     private String name;
 
     private String description;
-
-    private String causeError;
 }

@@ -1,6 +1,7 @@
 package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.exception.CharacteristicNotFoundException;
+import co.com.crud.requirement.domain.exception.validation.RequirementAdecuationValidator;
 import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
 import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
@@ -50,24 +51,56 @@ public class CharacteristicService {
         characteristicDomainRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
     }
 
-    /*public double maximunAccumulatedScore() { // Suma todas las notas de la catacterisitca evaluada
-        List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId();
+    public Integer evalutedCharacteristicForRequirement(Integer requirementId){ // Evalua todas las caracteristicas por requisito y devuelve el numero de caracteristicas evaluadas
+        List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
+        int requirementEvaluated = 0;
+        for (IGradeCharacteristicByRequirementId grade : grades) {
+            requirementEvaluated = grades.size();
+        }
+        return requirementEvaluated;
+    }
+
+    public double calculateWeightAverage(Integer requirementId){
+        List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
+        double sumGrade = 0.0;
+        for (IGradeCharacteristicByRequirementId grade : grades) {
+            sumGrade += grade.getGrade();
+        }
+        double average = sumGrade / grades.size();
+        double weightAverage = average / evalutedCharacteristicForRequirement(requirementId);
+        return weightAverage;
+    }
+
+    public double maximunAccumulatedScore(Integer requirementId) { // Suma todas las notas de la catacterisitca evaluada
+        List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0;
         double sum = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
             sumGrade += grade.getGrade();
         }
         return sumGrade;
-    }*/
+    }
 
-    /*public double levelWeightScoreForNineCharacters() { // Devuelve un porcentaje
-        double maxScore = maximunAccumulatedScore();
+    public double levelWeightScoreForNineCharacters(Integer requirementId) { // Devuelve un porcentaje
+        double maxScore = maximunAccumulatedScore(requirementId);
         double result = ((maxScore / 81 ) * 100);
         return result;
-    }*/
+    }
+    /*
+    public list<double> allOperations(Integer requirementId) {
+        double levelAdecuacy = calculateLevelAdequacy(requirementId);
+        double evaluatedCharacteristics = evalutedCharacteristicForRequirement(requirementId);
+        double levelWeightScore = levelWeightScoreForNineCharacters(requirementId);
+        double maximunScore = maximunAccumulatedScore(requirementId);
+        String allEvaluation = allEvaluationCharactersResult(requirementId);
 
-    /*public String allEvaluationCharactersResult() {
-        double result = maximunAccumulatedScore();
+
+        return (levelAdecuacy, evaluatedCharacteristics, levelWeightScore, maximunScore, allEvaluation);
+
+    }
+    */
+    public String allEvaluationCharactersResult(Integer requirementId) { //Devuelve un string de acuerdo a puntaje maximo acumulado
+        double result = maximunAccumulatedScore(requirementId);
         if (result > 72) {
             return RequirementAdecuationValidator.Adecuation_Alto_Alto;
         } else if (result < 72 && result > 63) {
@@ -88,7 +121,7 @@ public class CharacteristicService {
             return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
         }
         return null;
-    }*/
+    }
 
     public List<ICharacteristicsByRequirementId> getCharacteristicByRequirement(Integer requirementId) {
         return characteristicDomainRepository.getCharacteristicsByRequirementId(requirementId);

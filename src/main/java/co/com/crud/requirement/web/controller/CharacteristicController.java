@@ -38,8 +38,8 @@ public class CharacteristicController {
         return characteristicService.calculateLevelAdequacy(requirementId);
     }
 
-        @GetMapping(path = "/evalutedCharacteristicForRequirement/{id}")
-    public double calculateEvalutedCharacteristicForRequirement(@PathVariable("id") Integer requirementId) {
+        @GetMapping(path = "/evaluated-characteristic-for-requirement/{id}")
+    public double calculateEvaluatedCharacteristicForRequirement(@PathVariable("id") Integer requirementId) {
         return characteristicService.evalutedCharacteristicForRequirement(requirementId);
     }
 
@@ -63,8 +63,8 @@ public class CharacteristicController {
         return ResponseEntity.ok("¡Tipo de error actualizado con éxito!");
     }
 
-    @GetMapping(path = "/maximun-accumulated-score/{id}")
-    public double calculateMaximunAccumulatedScore(@PathVariable("id") Integer requirementId) {
+    @GetMapping(path = "/maximum-accumulated-score/{id}")
+    public double calculateMaximumAccumulatedScore(@PathVariable("id") Integer requirementId) {
         return characteristicService.maximunAccumulatedScore(requirementId);
     }
 
@@ -78,8 +78,19 @@ public class CharacteristicController {
         return characteristicService.allEvaluationCharactersResult(requirementId);
     }
 
+    @GetMapping(path = "/calculate-weight-average/{id}")
+    public double calculateWeightAverage(@PathVariable("id") Integer requirementId) {
+        return characteristicService.calculateWeightAverage(requirementId);
+    }
+
     @GetMapping(path = "characteristics-requirement/{id}")
     public List<ICharacteristicsByRequirementId> getCharacteristicByRequirement(@PathVariable("id") Integer requirementId) {
         return characteristicService.getCharacteristicByRequirement(requirementId);
     }
+
+    @GetMapping(path = "all-operations/{id}")
+    public List<Double> getAllOperations(@PathVariable("id") Integer requirementId) {
+        return characteristicService.allOperations(requirementId);
+    }
+
 }

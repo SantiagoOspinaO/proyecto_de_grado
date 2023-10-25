@@ -9,6 +9,7 @@ import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,19 +87,22 @@ public class CharacteristicService {
         double result = ((maxScore / 81 ) * 100);
         return result;
     }
-    /*
-    public list<double> allOperations(Integer requirementId) {
+
+    public List<Double> allOperations(Integer requirementId) {
+        List<Double> resultados = new ArrayList<>();
         double levelAdecuacy = calculateLevelAdequacy(requirementId);
         double evaluatedCharacteristics = evalutedCharacteristicForRequirement(requirementId);
         double levelWeightScore = levelWeightScoreForNineCharacters(requirementId);
         double maximunScore = maximunAccumulatedScore(requirementId);
-        String allEvaluation = allEvaluationCharactersResult(requirementId);
-
-
-        return (levelAdecuacy, evaluatedCharacteristics, levelWeightScore, maximunScore, allEvaluation);
-
+        double calculateWeightAverage = calculateWeightAverage(requirementId);
+        resultados.add(levelAdecuacy);
+        resultados.add(evaluatedCharacteristics);
+        resultados.add(levelWeightScore);
+        resultados.add(maximunScore);
+        resultados.add(calculateWeightAverage);
+        return resultados;
     }
-    */
+
     public String allEvaluationCharactersResult(Integer requirementId) { //Devuelve un string de acuerdo a puntaje maximo acumulado
         double result = maximunAccumulatedScore(requirementId);
         if (result > 72) {

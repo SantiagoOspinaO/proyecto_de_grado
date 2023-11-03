@@ -25,6 +25,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     @Query(value = "SELECT " +
             "c.nombre AS nameCharacteristic, " +
             "c.descripcion AS descriptionCharacteristic, " +
+            "c.nombre_opuesto AS oppositeName, " +
+            "c.descripcion_opuesta AS oppositeDescription, " +
             "ncr.nota_caracteristica AS gradeCharacteristic, " +
             "te.nombre AS typeError, " +
             "te.descripcion AS descriptiontypeError, " +

@@ -6,6 +6,10 @@ public interface ICharacteristicsByRequirementId {
 
     String getDescriptionCharacteristic();
 
+    String getOppositeName();
+
+    String getOppositeDescription();
+
     String getGradeCharacteristic();
 
     String getTypeError();
@@ -14,7 +18,7 @@ public interface ICharacteristicsByRequirementId {
 
     Boolean getDde();
 
-    String getDii();
+    Boolean getDii();
 
-    String getVar();
+    Boolean getVar();
 }

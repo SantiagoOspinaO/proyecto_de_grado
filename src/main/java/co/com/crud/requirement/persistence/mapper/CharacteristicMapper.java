@@ -14,7 +14,9 @@ public interface CharacteristicMapper {
     @Mappings({
             @Mapping(source = "id", target = "characteristicId"),
             @Mapping(source = "nombre", target = "name"),
-            @Mapping(source = "descripcion", target = "description")
+            @Mapping(source = "nombreOpuesto", target = "oppositeName"),
+            @Mapping(source = "descripcion", target = "description"),
+            @Mapping(source = "descripcionOpuesta", target = "oppositeDescription")
     })
     Characteristic toCharacteristic(CharacteristicEntity characteristicEntity);
 

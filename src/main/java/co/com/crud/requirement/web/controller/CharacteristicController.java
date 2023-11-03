@@ -44,13 +44,13 @@ public class CharacteristicController {
     }
 
     @PostMapping(path = "/update-grade/{requirementId}/{characteristicId}")
-    public ResponseEntity<String> updateGradeCharacteristicByRequirement(@RequestBody Double gradeInput, @PathVariable Integer requirementId, @PathVariable Integer characteristicId) {
+    public ResponseEntity<Void> updateGradeCharacteristicByRequirement(@RequestBody Double gradeInput, @PathVariable Integer requirementId, @PathVariable Integer characteristicId) {
         characteristicService.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
-        return ResponseEntity.ok("¡Nota actualizada con exito!");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping(path = "/update-type-error/{requirementId}/{characteristicId}/{typeErrorId}")
-    public ResponseEntity<String> updateTypeErrorOfCharacteristic(
+    public ResponseEntity<Void> updateTypeErrorOfCharacteristic(
             @PathVariable Integer requirementId,
             @PathVariable Integer characteristicId,
             @PathVariable Integer typeErrorId,
@@ -60,7 +60,7 @@ public class CharacteristicController {
         boolean dii = typeErrorData.get("dii");
         boolean var = typeErrorData.get("var");
         characteristicService.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
-        return ResponseEntity.ok("¡Tipo de error actualizado con éxito!");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(path = "/maximum-accumulated-score/{id}")

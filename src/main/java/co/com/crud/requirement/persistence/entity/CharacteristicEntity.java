@@ -1,12 +1,10 @@
 package co.com.crud.requirement.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -23,6 +21,12 @@ public class CharacteristicEntity {
     @Column(unique = true, nullable = false)
     private String nombre;
 
+    @Column(unique = true, nullable = false)
+    private String nombreOpuesto;
+
     @Column(nullable = false)
     private String descripcion;
+
+    @Column(nullable = false)
+    private String descripcionOpuesta;
 }

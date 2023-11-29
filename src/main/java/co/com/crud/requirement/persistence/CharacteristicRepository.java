@@ -48,12 +48,17 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
+    public void updateCharacteristicByRequirementId(Integer requirementId, Integer characteristicId, String name, String description, String oppositeName, String oppositeDescription, Double gradeCharacteristic, boolean dde, boolean dii, boolean var) {
+        characteristicCrudRepository.updateCharacteristicByRequirementId(requirementId, characteristicId, name, description, oppositeName, oppositeDescription, gradeCharacteristic, dde, dii, var);
+    }
+
+    @Override
     public void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId) {
         characteristicCrudRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
     @Override
-    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId, Integer typeErrorId) {
-        characteristicCrudRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
+    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
+        characteristicCrudRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 }

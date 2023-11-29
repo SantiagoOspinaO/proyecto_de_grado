@@ -23,6 +23,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     List<IGradeCharacteristicByRequirementId> findGradesByRequirementId(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT " +
+            "c.id AS idCharacteristic, " +
             "c.nombre AS nameCharacteristic, " +
             "c.descripcion AS descriptionCharacteristic, " +
             "c.nombre_opuesto AS oppositeName, " +
@@ -41,12 +42,39 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "WHERE r.id = :requisitoId", nativeQuery = true)
     List<ICharacteristicsByRequirementId> findCharacteristicsByRequirementId(@Param("requisitoId") Integer requirementId);
 
+
+    @Modifying
+    @Query(value = "UPDATE caracteristica c " +
+            "JOIN nota_caracteristica_requisito ncr ON c.id = ncr.caracteristica_id " +
+            "JOIN requisito r ON ncr.requisito_id = r.id " +
+            "LEFT JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id AND c.id = tec.caracteristica_id " +
+            "SET c.nombre = :nombre, " +
+            "    c.descripcion = :descripcion, " +
+            "    c.nombre_opuesto = :nombre_opuesto, " +
+            "    c.descripcion_opuesta = :descripcion_opuesta, " +
+            "    ncr.nota_caracteristica = :nota_caracteristica, " +
+            "    tec.dde = :dde, " +
+            "    tec.dii = :dii, " +
+            "    tec.var = :var " +
+            "WHERE r.id = :requisitoId AND c.id = :caracteristicaId", nativeQuery = true)
+    void updateCharacteristicByRequirementId(@Param("requisitoId") Integer requirementId,
+                                             @Param("caracteristicaId") Integer characteristicId,
+                                             @Param("nombre") String name,
+                                             @Param("descripcion") String description,
+                                             @Param("nombre_opuesto") String oppositeName,
+                                             @Param("descripcion_opuesta") String oppositeDescription,
+                                             @Param("nota_caracteristica") Double gradeCharacteristic,
+                                             @Param("dde") boolean dde,
+                                             @Param("dii") boolean dii,
+                                             @Param("var") boolean var);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE nota_caracteristica_requisito " +
             "SET nota_caracteristica = :notaIngresada " +
             "WHERE requisito_id = :requisitoId AND caracteristica_id = :caracteristicaId", nativeQuery = true)
-    void updateGradeCharacteristicByRequirement(@Param("notaIngresada") Double gradeInput, @Param("requisitoId") Integer requirementId,
+    void updateGradeCharacteristicByRequirement(@Param("notaIngresada") Double gradeInput,
+                                                @Param("requisitoId") Integer requirementId,
                                                 @Param("caracteristicaId") Integer characteristicId);
 
     @Modifying
@@ -54,9 +82,11 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     @Query(value = "UPDATE tipo_error_caracteristica " +
             "SET dde = :dde, dii = :dii, var = :var " +
             "WHERE requisito_id = :requisitoId " +
-            "AND caracteristica_id = :caracteristicaId " +
-            "AND tipo_error_id = :tipoErrorId", nativeQuery = true)
-    void updateTypeErrorOfCharacteristic(@Param("dde") boolean dde, @Param("dii") boolean dii, @Param("var") boolean var,
-                                         @Param("requisitoId") Integer requirementId, @Param("caracteristicaId") Integer characteristicId,
-                                         @Param("tipoErrorId") Integer typeErrorId);
+            "AND caracteristica_id = :caracteristicaId ", nativeQuery = true)
+    void updateTypeErrorOfCharacteristic(@Param("dde") boolean dde,
+                                         @Param("dii") boolean dii,
+                                         @Param("var") boolean var,
+                                         @Param("requisitoId") Integer requirementId,
+                                         @Param("caracteristicaId") Integer characteristicId);
+
 }

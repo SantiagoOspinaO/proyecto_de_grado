@@ -38,7 +38,7 @@ public class CharacteristicController {
         return characteristicService.calculateLevelAdequacy(requirementId);
     }
 
-        @GetMapping(path = "/evaluated-characteristic-for-requirement/{id}")
+    @GetMapping(path = "/evaluated-characteristic-for-requirement/{id}")
     public double calculateEvaluatedCharacteristicForRequirement(@PathVariable("id") Integer requirementId) {
         return characteristicService.evalutedCharacteristicForRequirement(requirementId);
     }
@@ -49,17 +49,36 @@ public class CharacteristicController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(path = "/update-type-error/{requirementId}/{characteristicId}/{typeErrorId}")
+    @PostMapping(path = "/update-characteristic-requirement/{requirementId}/{characteristicId}")
+    public ResponseEntity<Void> updateCharacteristicByRequirementId(
+            @PathVariable Integer requirementId,
+            @PathVariable Integer characteristicId,
+            @RequestBody Map<String, Object> requestData) {
+
+        String name = (String) requestData.get("name");
+        String description = (String) requestData.get("description");
+        String oppositeName = (String) requestData.get("oppositeName");
+        String oppositeDescription = (String) requestData.get("oppositeDescription");
+        Double gradeCharacteristic = (Double) requestData.get("gradeCharacteristic");
+        Boolean dde = (Boolean) requestData.get("dde");
+        Boolean dii = (Boolean) requestData.get("dii");
+        Boolean var = (Boolean) requestData.get("var");
+
+        characteristicService.updateCharacteristicByRequirementId(requirementId, characteristicId, name, description, oppositeName, oppositeDescription, gradeCharacteristic, dde, dii, var);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "/update-type-error/{requirementId}/{characteristicId}")
     public ResponseEntity<Void> updateTypeErrorOfCharacteristic(
             @PathVariable Integer requirementId,
             @PathVariable Integer characteristicId,
-            @PathVariable Integer typeErrorId,
             @RequestBody Map<String, Boolean> typeErrorData) {
 
         boolean dde = typeErrorData.get("dde");
         boolean dii = typeErrorData.get("dii");
         boolean var = typeErrorData.get("var");
-        characteristicService.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
+
+        characteristicService.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
 

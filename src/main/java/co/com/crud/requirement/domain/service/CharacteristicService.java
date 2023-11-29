@@ -54,7 +54,6 @@ public class CharacteristicService {
         return characteristics;
     }
 
-
     /**
      * Calcular nivel de adecuacion ( sumar todas las notas y dividirlo por el total de las notas calificadas)
      *
@@ -70,8 +69,32 @@ public class CharacteristicService {
         return sumGrade / grades.size();
     }
 
+    /**
+     * Update grade characteristic by requirement.
+     *
+     * @param gradeInput       the grade input
+     * @param requirementId    the requirement id
+     * @param characteristicId the characteristic id
+     */
     public void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId) {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
+    }
+
+    /**
+     * Update characteristic by requirement id.
+     *
+     * @param requirementId       the requirement id
+     * @param name                the name
+     * @param description         the description
+     * @param oppositeName        the opposite name
+     * @param oppositeDescription the opposite description
+     * @param gradeCharacteristic the grade characteristic
+     * @param dde                 the dde
+     * @param dii                 the dii
+     * @param var                 the var
+     */
+    public void updateCharacteristicByRequirementId(Integer requirementId, Integer characteristicId, String name, String description, String oppositeName, String oppositeDescription, Double gradeCharacteristic, boolean dde, boolean dii, boolean var) {
+        characteristicDomainRepository.updateCharacteristicByRequirementId(requirementId, characteristicId, name, description, oppositeName, oppositeDescription, gradeCharacteristic, dde, dii, var);
     }
 
     /**
@@ -82,10 +105,9 @@ public class CharacteristicService {
      * @param var              the var
      * @param requirementId    the requirement id
      * @param characteristicId the characteristic id
-     * @param typeErrorId      the type error id
      */
-    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId, Integer typeErrorId) {
-        characteristicDomainRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId, typeErrorId);
+    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 
     /**
@@ -116,8 +138,7 @@ public class CharacteristicService {
             sumGrade += grade.getGrade();
         }
         double average = sumGrade / grades.size();
-        double weightAverage = average / evalutedCharacteristicForRequirement(requirementId);
-        return weightAverage;
+        return average / evalutedCharacteristicForRequirement(requirementId);
     }
 
     /**
@@ -144,8 +165,7 @@ public class CharacteristicService {
      */
     public double levelWeightScoreForNineCharacters(Integer requirementId) {
         double maxScore = maximunAccumulatedScore(requirementId);
-        double result = ((maxScore / 81) * 100);
-        return result;
+        return ((maxScore / 81) * 100);
     }
 
     /**

@@ -34,4 +34,9 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     public Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id) {
         return ITypeErrorCharacteristicCrudRepository.findById(id).map(typeErrorCharacteristicMapper::toTypeError);
     }
+
+    @Override
+    public int countRequirementsByTypeAndError(String typeRequirement, String typeError) {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(typeRequirement, typeError);
+    }
 }

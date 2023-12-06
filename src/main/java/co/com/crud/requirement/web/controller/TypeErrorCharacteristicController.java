@@ -30,4 +30,9 @@ public class TypeErrorCharacteristicController {
     public ResponseEntity<Optional<TypeErrorCharacteristic>> getTypeErrorById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(typeErrorCharacteristicService.getTypeErrorById(id));
     }
+
+    @GetMapping(path = "/get-type-requirements-error/{typeRequirement}/{typeError}")
+    public int countRequirementsByTypeAndError(@PathVariable String typeRequirement, @PathVariable String typeError) {
+        return typeErrorCharacteristicService.countRequirementsByTypeAndError(typeRequirement, typeError);
+    }
 }

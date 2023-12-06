@@ -10,4 +10,6 @@ public interface TypeErrorCharacteristicDomainRepository {
     List<TypeErrorCharacteristic> getAllTypesErrors();
 
     Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id);
+
+    int countRequirementsByTypeAndError(String typeRequirement, String typeError);
 }

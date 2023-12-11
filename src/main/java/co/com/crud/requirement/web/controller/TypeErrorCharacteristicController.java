@@ -35,4 +35,19 @@ public class TypeErrorCharacteristicController {
     public int countRequirementsByTypeAndError(@PathVariable String typeRequirement, @PathVariable String typeError) {
         return typeErrorCharacteristicService.countRequirementsByTypeAndError(typeRequirement, typeError);
     }
+
+    @GetMapping(path = "/get-type-error-all-requirement/dde")
+    public int countRequirementsByErrorDDE() {
+        return typeErrorCharacteristicService.countRequirementsByErrorDDE();
+    }
+
+    @GetMapping(path = "/get-type-error-all-requirement/dii")
+    public int countRequirementsByErrorDII() {
+        return typeErrorCharacteristicService.countRequirementsByErrorDII();
+    }
+
+    @GetMapping(path = "/get-type-error-all-requirement/var")
+    public int countRequirementsByErrorVAR() {
+        return typeErrorCharacteristicService.countRequirementsByErrorVAR();
+    }
 }

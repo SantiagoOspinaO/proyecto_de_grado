@@ -39,4 +39,20 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     public int countRequirementsByTypeAndError(String typeRequirement, String typeError) {
         return ITypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(typeRequirement, typeError);
     }
+
+    @Override
+    public int countRequirementByErrorDDE() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE();
+    }
+
+    @Override
+    public int countRequirementByErrorDII() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII();
+    }
+
+    @Override
+    public int countRequirementByErrorVAR() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR();
+    }
+
 }

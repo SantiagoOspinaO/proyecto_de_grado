@@ -5,7 +5,6 @@ import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +32,17 @@ public class TypeErrorCharacteristicService {
 
     public int countRequirementsByTypeAndError(String typeRequirement, String typeError) {
         return typeErrorCharacteristicDomainRepository.countRequirementsByTypeAndError(typeRequirement, typeError);
+    }
+
+    public int countRequirementsByErrorDDE(){
+        return typeErrorCharacteristicDomainRepository.countRequirementByErrorDDE();
+    }
+
+    public int countRequirementsByErrorDII(){
+        return typeErrorCharacteristicDomainRepository.countRequirementByErrorDII();
+    }
+
+    public int countRequirementsByErrorVAR(){
+        return typeErrorCharacteristicDomainRepository.countRequirementByErrorVAR();
     }
 }

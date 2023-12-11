@@ -1,7 +1,6 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +11,10 @@ public interface TypeErrorCharacteristicDomainRepository {
     Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id);
 
     int countRequirementsByTypeAndError(String typeRequirement, String typeError);
+
+    int countRequirementByErrorDDE();
+
+    int countRequirementByErrorDII();
+
+    int countRequirementByErrorVAR();
 }

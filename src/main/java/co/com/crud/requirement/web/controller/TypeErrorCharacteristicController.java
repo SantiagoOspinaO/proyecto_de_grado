@@ -50,4 +50,35 @@ public class TypeErrorCharacteristicController {
     public int countRequirementsByErrorVAR() {
         return typeErrorCharacteristicService.countRequirementsByErrorVAR();
     }
+
+    @GetMapping(path = "/EIE/{id}")
+    public int countTypeErrorEIEByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorEIEByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/MCC/{id}")
+    public int countTypeErrorMCCByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorMCCByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/all/{id}")
+    public int countTypeErrorsByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorsByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/percentageOfTypeErrorEIEById/{id}")
+    public double percentageOfTypeErrorEIEById(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.percentageOfTypeErrorEIEById(requirementId);
+    }
+
+    @GetMapping(path = "/percentageOfTypeErrorMCCById/{id}")
+    public double percentageOfTypeErrorMCCById(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.percentageOfTypeErrorMCCById(requirementId);
+    }
+
+    @GetMapping(path = "/percentageOfAllTypeErrorById/{id}")
+    public double percentageOfAllTypeErrorById(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.percentageOffAllErrorById(requirementId);
+    }
+
 }

@@ -45,4 +45,37 @@ public class TypeErrorCharacteristicService {
     public int countRequirementsByErrorVAR(){
         return typeErrorCharacteristicDomainRepository.countRequirementByErrorVAR();
     }
+
+    public int countTypeErrorEIEByRequirement(Integer requirementId){
+        return typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
+    }
+
+    public int countTypeErrorMCCByRequirement(Integer requirementId){
+        return typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
+    }
+
+    public int countTypeErrorsByRequirement(Integer requirementId){
+        return typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+    }
+
+    public double percentageOfTypeErrorEIEById(Integer requirementId){
+        Integer allRequirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+        double requirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
+        double result = (requirementEIE / allRequirements) * 100;
+        return result;
+    }
+
+    public double percentageOfTypeErrorMCCById(Integer requirementId){
+        Integer allRequirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+        double requirementMCC = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
+        double result = (requirementMCC / allRequirements) * 100;
+        return result;
+    }
+
+    public double percentageOffAllErrorById(Integer requirementId){
+        double MCC = percentageOfTypeErrorMCCById(requirementId);
+        double EIE = percentageOfTypeErrorEIEById(requirementId);
+        return (MCC + EIE);
+    }
+
 }

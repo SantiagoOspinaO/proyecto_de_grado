@@ -55,4 +55,19 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
         return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR();
     }
 
+    @Override
+    public int countTypeErrorEIEByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorMCCByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorsByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requirementId);
+    }
+
 }

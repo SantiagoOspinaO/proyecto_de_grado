@@ -28,7 +28,20 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "FROM tipo_error_caracteristica " +
             "WHERE var = 'true' ", nativeQuery = true)
     int countRequirementsByErrorVAR();
+    // Para EIE
+    @Query(value = "SELECT count(*) " +
+            "FROM tipo_error_caracteristica " +
+            "WHERE tipo_error_id = 1 and requisito_id = :requisitoId", nativeQuery = true)
+    int countTypeErrorEIEByRequirement(@Param("requisitoId") Integer requirementId);
+    // Para MCC
+    @Query(value = "SELECT count(*) " +
+            "FROM tipo_error_caracteristica " +
+            "WHERE tipo_error_id = 2 and requisito_id = :requisitoId", nativeQuery = true)
+    int countTypeErrorMCCByRequirement(@Param("requisitoId") Integer requirementId);
 
-
+    @Query(value = "SELECT count(*) " +
+            "FROM tipo_error_caracteristica " +
+            "WHERE tipo_error_id = :requisitoId", nativeQuery = true)
+    int countTypeErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
 }

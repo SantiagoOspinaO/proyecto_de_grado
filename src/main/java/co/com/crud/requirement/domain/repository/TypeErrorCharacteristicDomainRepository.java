@@ -1,7 +1,6 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,7 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id);
 
-    int countRequirementsByTypeAndError(String typeRequirement, String typeError);
+    int countRequirementsByTypeAndTypeError(String typeRequirement, String typeError);
 
     int countRequirementByErrorDDE();
 
@@ -21,6 +20,8 @@ public interface TypeErrorCharacteristicDomainRepository {
     int countRequirementByErrorVAR();
 
     int countTypeErrorEIEByRequirement(Integer requirementId);
+
     int countTypeErrorMCCByRequirement(Integer requirementId);
+
     int countTypeErrorsByRequirement(Integer requirementId);
 }

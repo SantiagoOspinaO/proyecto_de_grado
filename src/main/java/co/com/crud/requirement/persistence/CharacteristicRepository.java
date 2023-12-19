@@ -61,4 +61,9 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
         characteristicCrudRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
+
+    @Override
+    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic) {
+        return characteristicCrudRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
+    }
 }

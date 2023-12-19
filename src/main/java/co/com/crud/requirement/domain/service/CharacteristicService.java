@@ -228,4 +228,8 @@ public class CharacteristicService {
     public List<ICharacteristicsByRequirementId> getCharacteristicByRequirement(Integer requirementId) {
         return characteristicDomainRepository.getCharacteristicsByRequirementId(requirementId);
     }
+
+    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic) {
+        return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
+    }
 }

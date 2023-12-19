@@ -112,4 +112,10 @@ public class CharacteristicController {
         return characteristicService.allOperations(requirementId);
     }
 
+    @GetMapping(path = "/count-type-requirement-type-error-characteristic")
+    public int countRequirementsByTypeAndNameCharacteristic(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam String nameCharacteristic) {
+        return characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
+    }
 }

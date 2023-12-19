@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -87,5 +88,17 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
                                          @Param("var") boolean var,
                                          @Param("requisitoId") Integer requirementId,
                                          @Param("caracteristicaId") Integer characteristicId);
+
+    @Query(value = "SELECT COUNT(r.id) " +
+            "FROM requisito r " +
+            "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
+            "WHERE " +
+            "(:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND " +
+            "(c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)",
+            nativeQuery = true)
+    int countRequirementsByTypeAndNameCharacteristic(@Param("tipoRequisito") String typeRequirement,
+                                                     @Param("nombreCaracteristica") String nameCharacteristic);
 
 }

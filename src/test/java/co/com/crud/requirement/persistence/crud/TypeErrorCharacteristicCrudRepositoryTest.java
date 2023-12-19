@@ -45,16 +45,16 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(anyString(), anyString())).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(tipoRequisito, tipoError);
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndTypeError(eq(tipoRequisito), eq(tipoError));
         assertEquals(1, result);
     }
 
@@ -64,16 +64,16 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(anyString(), anyString())).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndError(tipoRequisito, tipoError);
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndTypeError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndTypeError(eq(tipoRequisito), eq(tipoError));
         assertNotEquals(10, result);
     }
 

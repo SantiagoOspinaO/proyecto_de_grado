@@ -24,4 +24,6 @@ public interface CharacteristicDomainRepository {
     void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId);
 
     int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic);
+
+    int countRequirementsByNameRequirementAndCauseError(String nameRequirement, String causeError, Integer projectId);
 }

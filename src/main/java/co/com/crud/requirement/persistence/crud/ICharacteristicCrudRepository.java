@@ -23,17 +23,17 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     List<IGradeCharacteristicByRequirementId> findGradesByRequirementId(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT " +
-            "c.id AS idCharacteristic, " +
-            "c.nombre AS nameCharacteristic, " +
-            "c.descripcion AS descriptionCharacteristic, " +
-            "c.nombre_opuesto AS oppositeName, " +
-            "c.descripcion_opuesta AS oppositeDescription, " +
-            "ncr.nota_caracteristica AS gradeCharacteristic, " +
-            "te.nombre AS typeError, " +
-            "te.descripcion AS descriptiontypeError, " +
-            "tec.dde as dde, " +
-            "tec.dii as dii, " +
-            "tec.var as var " +
+            "   c.id AS idCharacteristic, " +
+            "   c.nombre AS nameCharacteristic, " +
+            "   c.descripcion AS descriptionCharacteristic, " +
+            "   c.nombre_opuesto AS oppositeName, " +
+            "   c.descripcion_opuesta AS oppositeDescription, " +
+            "   ncr.nota_caracteristica AS gradeCharacteristic, " +
+            "   te.nombre AS typeError, " +
+            "   te.descripcion AS descriptiontypeError, " +
+            "   tec.dde as dde, " +
+            "   tec.dii as dii, " +
+            "   tec.var as var " +
             "FROM requisito r " +
             "LEFT JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "LEFT JOIN caracteristica c ON ncr.caracteristica_id = c.id " +
@@ -41,7 +41,6 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "LEFT JOIN tipo_error te ON tec.tipo_error_id = te.id " +
             "WHERE r.id = :requisitoId", nativeQuery = true)
     List<ICharacteristicsByRequirementId> findCharacteristicsByRequirementId(@Param("requisitoId") Integer requirementId);
-
 
     @Modifying
     @Query(value = "UPDATE caracteristica c " +
@@ -93,12 +92,25 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "FROM requisito r " +
             "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
-            "WHERE " +
-            "(:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
-            "AND " +
-            "(c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)",
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)",
             nativeQuery = true)
     int countRequirementsByTypeAndNameCharacteristic(@Param("tipoRequisito") String typeRequirement,
                                                      @Param("nombreCaracteristica") String nameCharacteristic);
+
+    @Query(value = "SELECT COUNT(r.id) " +
+            "FROM requisito r " +
+            "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
+            "WHERE (r.nombre = :nombreRequisito) " +
+            "AND " +
+            "(" +
+            "   (:causaError = 'dii' AND tec.dii = true) OR " +
+            "   (:causaError = 'dde' AND tec.dde = true) OR " +
+            "   (:causaError = 'var' AND tec.var = true)" +
+            ") " +
+            "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
+    int countRequirementsByNameRequirementAndCauseError(@Param("nombreRequisito") String nameRequirement,
+                                                        @Param("causaError") String causeError,
+                                                        @Param("proyectoId") Integer projectId);
 
 }

@@ -232,4 +232,8 @@ public class CharacteristicService {
     public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic) {
         return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
     }
+
+    public int countRequirementsByNameRequirementAndCauseError(String nameRequirement, String causeError, Integer projectId) {
+        return characteristicDomainRepository.countRequirementsByNameRequirementAndCauseError(nameRequirement, causeError, projectId);
+    }
 }

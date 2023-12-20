@@ -44,7 +44,11 @@ public class CharacteristicController {
     }
 
     @PostMapping(path = "/update-grade/{requirementId}/{characteristicId}")
-    public ResponseEntity<Void> updateGradeCharacteristicByRequirement(@RequestBody Double gradeInput, @PathVariable Integer requirementId, @PathVariable Integer characteristicId) {
+    public ResponseEntity<Void> updateGradeCharacteristicByRequirement(
+            @RequestBody Double gradeInput,
+            @PathVariable Integer requirementId,
+            @PathVariable Integer characteristicId
+    ) {
         characteristicService.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
@@ -53,8 +57,8 @@ public class CharacteristicController {
     public ResponseEntity<Void> updateCharacteristicByRequirementId(
             @PathVariable Integer requirementId,
             @PathVariable Integer characteristicId,
-            @RequestBody Map<String, Object> requestData) {
-
+            @RequestBody Map<String, Object> requestData
+    ) {
         String name = (String) requestData.get("name");
         String description = (String) requestData.get("description");
         String oppositeName = (String) requestData.get("oppositeName");
@@ -72,8 +76,8 @@ public class CharacteristicController {
     public ResponseEntity<Void> updateCauseErrorOfCharacteristic(
             @PathVariable Integer requirementId,
             @PathVariable Integer characteristicId,
-            @RequestBody Map<String, Boolean> causeErrorData) {
-
+            @RequestBody Map<String, Boolean> causeErrorData
+    ) {
         boolean dde = causeErrorData.get("dde");
         boolean dii = causeErrorData.get("dii");
         boolean var = causeErrorData.get("var");
@@ -115,7 +119,17 @@ public class CharacteristicController {
     @GetMapping(path = "/count-type-requirement-type-error-characteristic")
     public int countRequirementsByTypeAndNameCharacteristic(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam String nameCharacteristic) {
+            @RequestParam String nameCharacteristic
+    ) {
         return characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
+    }
+
+    @GetMapping(path = "/count-name-requirement-cause-error")
+    public int countRequirementsByNameRequirementAndCauseError(
+            @RequestParam String nameRequirement,
+            @RequestParam String causeError,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countRequirementsByNameRequirementAndCauseError(nameRequirement, causeError, projectId);
     }
 }

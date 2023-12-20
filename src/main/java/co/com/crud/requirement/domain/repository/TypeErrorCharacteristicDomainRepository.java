@@ -2,6 +2,7 @@ package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,15 +14,22 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     int countRequirementsByTypeAndCauseError(String typeRequirement, String causeError);
 
-    int countRequirementByErrorDDE();
+    int countRequirementByCauseErrorDDE();
 
-    int countRequirementByErrorDII();
+    int countRequirementByCauseErrorDII();
 
-    int countRequirementByErrorVAR();
+    int countRequirementByCauseErrorVAR();
+
+    int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, String causeError);
 
     int countTypeErrorEIEByRequirement(Integer requirementId);
 
     int countTypeErrorMCCByRequirement(Integer requirementId);
 
+    int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId);
+
     int countTypeErrorsByRequirement(Integer requirementId);
+
+    int countCauseErrorsByRequirement(Integer requirementId);
+
 }

@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -78,92 +77,83 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountRequirementsByErrorDDEReturnExpectedResult() {
+    public void testCountRequirementsByCauseErrorDDEReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE()).thenReturn(requisito);
-
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorDDE();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorDDE();
         assertEquals(1, result);
     }
 
     @Test
-    public void testcountRequirementsByErrorDDEReturnUnexpectedResult() {
+    public void testCountRequirementsByCauseErrorDDEReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE()).thenReturn(requisito);
-
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorDDE();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorDDE();
         assertNotEquals(10, result);
     }
 
     @Test
-    public void testcountRequirementsByErrorDIIReturnExpectedResult() {
+    public void testCountRequirementsByCauseErrorDIIReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII()).thenReturn(requisito);
-
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorDII();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorDII();
         assertEquals(1, result);
     }
 
     @Test
-    public void testcountRequirementsByErrorDIIReturnUnexpectedResult() {
+    public void testCountRequirementsByCauseErrorDIIReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII()).thenReturn(requisito);
-
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorDII();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorDII();
         assertNotEquals(10, result);
     }
 
     @Test
-    public void testcountRequirementsByErrorVARReturnExpectedResult() {
+    public void testCountRequirementsByCauseErrorVARReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
 
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorVAR();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorVAR();
         assertEquals(1, result);
     }
 
@@ -173,15 +163,109 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR()).thenReturn(requisito);
-
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR()).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR();
+        int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR();
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByErrorVAR();
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByCauseErrorVAR();
+        assertNotEquals(10, result);
+    }
+
+    @Test
+    public void testCountTypeErrorMCCByRequirementReturnExpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorMCCByRequirement(requisito);
+        assertNotEquals(1, result);
+    }
+
+    @Test
+    public void testCountTypeErrorMCCByRequirementReturnUnexpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorMCCByRequirement(requisito);
+        assertNotEquals(10, result);
+    }
+
+    @Test
+    public void testcountTypeErrorEIEByRequirementReturnExpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorEIEByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorEIEByRequirement(requisito);
+        assertNotEquals(1, result);
+    }
+
+    @Test
+    public void testcountTypeErrorEIEByRequirementReturnUnexpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorEIEByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorEIEByRequirement(requisito);
+        assertNotEquals(10, result);
+    }
+
+    @Test
+    public void testCountTypeErrorsByRequirementReturnExpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorsByRequirement(requisito);
+        assertNotEquals(1, result);
+    }
+
+    @Test
+    public void testCountTypeErrorsByRequirementReturnUnexpectedResult() {
+        //Arrange
+        int requisito = 1;
+        TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
+        ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
+
+        //Act
+        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requisito);
+
+        //Assert
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorsByRequirement(requisito);
         assertNotEquals(10, result);
     }
 }

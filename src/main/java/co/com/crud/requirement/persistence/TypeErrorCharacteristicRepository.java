@@ -41,18 +41,23 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     }
 
     @Override
-    public int countRequirementByErrorDDE() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorDDE();
+    public int countRequirementByCauseErrorDDE() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE();
     }
 
     @Override
-    public int countRequirementByErrorDII() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorDII();
+    public int countRequirementByCauseErrorDII() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII();
     }
 
     @Override
-    public int countRequirementByErrorVAR() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByErrorVAR();
+    public int countRequirementByCauseErrorVAR() {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR();
+    }
+
+    @Override
+    public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, String causeError) {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, causeError);
     }
 
     @Override
@@ -65,9 +70,18 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
         return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requirementId);
     }
 
+    public int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirements(typeErrorId, requirementId);
+    }
+
     @Override
     public int countTypeErrorsByRequirement(Integer requirementId) {
         return ITypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requirementId);
+    }
+
+    @Override
+    public int countCauseErrorsByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countCauseErrorsByRequirement(requirementId);
     }
 
 }

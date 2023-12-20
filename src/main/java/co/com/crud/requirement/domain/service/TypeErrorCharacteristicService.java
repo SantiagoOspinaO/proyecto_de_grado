@@ -30,8 +30,8 @@ public class TypeErrorCharacteristicService {
         return typeError;
     }
 
-    public int countRequirementsByTypeAndTypeError(String typeRequirement, String typeError) {
-        return typeErrorCharacteristicDomainRepository.countRequirementsByTypeAndTypeError(typeRequirement, typeError);
+    public int countRequirementsByTypeAndCauseError(String typeRequirement, String causeError) {
+        return typeErrorCharacteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, causeError);
     }
 
     public int countRequirementsByErrorDDE(){

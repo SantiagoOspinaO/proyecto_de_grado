@@ -21,7 +21,7 @@ public interface CharacteristicDomainRepository {
 
     void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId);
 
-    void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId);
+    void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId);
 
     int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic);
 }

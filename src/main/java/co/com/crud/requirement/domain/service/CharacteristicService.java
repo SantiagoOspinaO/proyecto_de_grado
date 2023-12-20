@@ -106,8 +106,8 @@ public class CharacteristicService {
      * @param requirementId    the requirement id
      * @param characteristicId the characteristic id
      */
-    public void updateTypeErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
-        characteristicDomainRepository.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 
     /**

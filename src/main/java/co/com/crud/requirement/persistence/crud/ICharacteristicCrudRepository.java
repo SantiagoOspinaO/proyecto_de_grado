@@ -83,11 +83,11 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "SET dde = :dde, dii = :dii, var = :var " +
             "WHERE requisito_id = :requisitoId " +
             "AND caracteristica_id = :caracteristicaId ", nativeQuery = true)
-    void updateTypeErrorOfCharacteristic(@Param("dde") boolean dde,
-                                         @Param("dii") boolean dii,
-                                         @Param("var") boolean var,
-                                         @Param("requisitoId") Integer requirementId,
-                                         @Param("caracteristicaId") Integer characteristicId);
+    void updateCauseErrorOfCharacteristic(@Param("dde") boolean dde,
+                                          @Param("dii") boolean dii,
+                                          @Param("var") boolean var,
+                                          @Param("requisitoId") Integer requirementId,
+                                          @Param("caracteristicaId") Integer characteristicId);
 
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +

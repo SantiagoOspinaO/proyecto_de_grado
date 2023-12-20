@@ -17,13 +17,13 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND " +
-            "((:tipoError = 'dii' AND tec.dii = true) OR " +
-            "   (:tipoError = 'dde' AND tec.dde = true) OR " +
-            "   (:tipoError = 'var' AND tec.var = true))",
+            "((:causaError = 'dii' AND tec.dii = true) OR " +
+            "   (:causaError = 'dde' AND tec.dde = true) OR " +
+            "   (:causaError = 'var' AND tec.var = true))",
             nativeQuery = true)
-    int countRequirementsByTypeAndTypeError(
+    int countRequirementsByTypeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,
-            @Param("tipoError") String typeError);
+            @Param("causaError") String causeError);
 
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +

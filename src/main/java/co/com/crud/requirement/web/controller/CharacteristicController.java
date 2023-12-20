@@ -68,17 +68,17 @@ public class CharacteristicController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(path = "/update-type-error/{requirementId}/{characteristicId}")
-    public ResponseEntity<Void> updateTypeErrorOfCharacteristic(
+    @PostMapping(path = "/update-cause-error/{requirementId}/{characteristicId}")
+    public ResponseEntity<Void> updateCauseErrorOfCharacteristic(
             @PathVariable Integer requirementId,
             @PathVariable Integer characteristicId,
-            @RequestBody Map<String, Boolean> typeErrorData) {
+            @RequestBody Map<String, Boolean> causeErrorData) {
 
-        boolean dde = typeErrorData.get("dde");
-        boolean dii = typeErrorData.get("dii");
-        boolean var = typeErrorData.get("var");
+        boolean dde = causeErrorData.get("dde");
+        boolean dii = causeErrorData.get("dii");
+        boolean var = causeErrorData.get("var");
 
-        characteristicService.updateTypeErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
 

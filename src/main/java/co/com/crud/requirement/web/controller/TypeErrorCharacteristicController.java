@@ -31,9 +31,9 @@ public class TypeErrorCharacteristicController {
         return ResponseEntity.ok(typeErrorCharacteristicService.getTypeErrorById(id));
     }
 
-    @GetMapping(path = "/count-type-requirement-type-error")
-    public int countRequirementsByTypeAndTypeError(@RequestParam(required = false) String typeRequirement, @RequestParam String typeError) {
-        return typeErrorCharacteristicService.countRequirementsByTypeAndTypeError(typeRequirement, typeError);
+    @GetMapping(path = "/count-type-requirement-cause-error")
+    public int countRequirementsByTypeAndCauseError(@RequestParam(required = false) String typeRequirement, @RequestParam String causeError) {
+        return typeErrorCharacteristicService.countRequirementsByTypeAndCauseError(typeRequirement, causeError);
     }
 
     @GetMapping(path = "/get-type-error-all-requirement/dde")

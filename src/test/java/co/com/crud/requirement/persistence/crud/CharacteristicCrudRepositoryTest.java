@@ -104,9 +104,9 @@ public class CharacteristicCrudRepositoryTest {
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        iCharacteristicCrudRepository.updateTypeErrorOfCharacteristic(dde,dii,var, requisitoID,characteristicId);
+        iCharacteristicCrudRepository.updateCauseErrorOfCharacteristic(dde,dii,var, requisitoID,characteristicId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).updateTypeErrorOfCharacteristic(dde,dii,var,requisitoID,characteristicId);
+        verify(iCharacteristicCrudRepository, times(1)).updateCauseErrorOfCharacteristic(dde,dii,var,requisitoID,characteristicId);
     }
 }

@@ -11,7 +11,7 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id);
 
-    int countRequirementsByTypeAndTypeError(String typeRequirement, String typeError);
+    int countRequirementsByTypeAndCauseError(String typeRequirement, String causeError);
 
     int countRequirementByErrorDDE();
 

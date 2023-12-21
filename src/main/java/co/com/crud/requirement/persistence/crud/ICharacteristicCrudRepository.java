@@ -101,7 +101,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +
             "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
-            "WHERE (r.nombre = :nombreRequisito) " +
+            "WHERE (r.id = :requisitoId) " +
             "AND " +
             "(" +
             "   (:causaError = 'dii' AND tec.dii = true) OR " +
@@ -109,8 +109,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "   (:causaError = 'var' AND tec.var = true)" +
             ") " +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    int countRequirementsByNameRequirementAndCauseError(@Param("nombreRequisito") String nameRequirement,
-                                                        @Param("causaError") String causeError,
-                                                        @Param("proyectoId") Integer projectId);
+    int countRequirementsByRequirementIdAndCauseError(@Param("requisitoId") Integer requirementId,
+                                                      @Param("causaError") String causeError,
+                                                      @Param("proyectoId") Integer projectId);
 
 }

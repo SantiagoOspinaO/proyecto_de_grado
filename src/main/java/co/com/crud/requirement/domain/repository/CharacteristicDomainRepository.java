@@ -25,5 +25,5 @@ public interface CharacteristicDomainRepository {
 
     int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic);
 
-    int countRequirementsByNameRequirementAndCauseError(String nameRequirement, String causeError, Integer projectId);
+    int countRequirementsByRequirementIdAndCauseError(Integer requirementId, String causeError, Integer projectId);
 }

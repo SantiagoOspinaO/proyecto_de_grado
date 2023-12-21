@@ -68,7 +68,7 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public int countRequirementsByNameRequirementAndCauseError(String nameRequirement, String causeError, Integer projectId) {
-        return characteristicCrudRepository.countRequirementsByNameRequirementAndCauseError(nameRequirement, causeError, projectId);
+    public int countRequirementsByRequirementIdAndCauseError(Integer requirementId, String causeError, Integer projectId) {
+        return characteristicCrudRepository.countRequirementsByRequirementIdAndCauseError(requirementId, causeError, projectId);
     }
 }

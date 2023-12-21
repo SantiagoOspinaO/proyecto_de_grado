@@ -124,12 +124,12 @@ public class CharacteristicController {
         return characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
     }
 
-    @GetMapping(path = "/count-name-requirement-cause-error")
-    public int countRequirementsByNameRequirementAndCauseError(
-            @RequestParam String nameRequirement,
+    @GetMapping(path = "/count-requirement-id-cause-error")
+    public int countRequirementsByRequirementIdAndCauseError(
+            @RequestParam Integer requirementId,
             @RequestParam String causeError,
             @RequestParam Integer projectId
     ) {
-        return characteristicService.countRequirementsByNameRequirementAndCauseError(nameRequirement, causeError, projectId);
+        return characteristicService.countRequirementsByRequirementIdAndCauseError(requirementId, causeError, projectId);
     }
 }

@@ -17,10 +17,11 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND " +
-            "((:causaError = 'dii' AND tec.dii = true) OR " +
+            "(" +
+            "   (:causaError = 'dii' AND tec.dii = true) OR " +
             "   (:causaError = 'dde' AND tec.dde = true) OR " +
-            "   (:causaError = 'var' AND tec.var = true))",
-            nativeQuery = true)
+            "   (:causaError = 'var' AND tec.var = true)" +
+            ")", nativeQuery = true)
     int countRequirementsByTypeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,
             @Param("causaError") String causeError);
@@ -34,7 +35,6 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             @Param("requisitoId") Integer requirementId,
             @Param("causaError") String causeError);
 
-
     // Para dar el valor de los requisitos que tienen tipo error DDE en true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
@@ -46,7 +46,6 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "FROM tipo_error_caracteristica " +
             "WHERE dii = 'true' ", nativeQuery = true)
     int countRequirementsByCauseErrorDII();
-
 
     // Para dar el valor de los requisitos que tienen tipo error VAR en true
     @Query(value = "SELECT count(*) " +
@@ -84,6 +83,5 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "FROM tipo_error_caracteristica " +
             "WHERE dde = 'true' and  dii = 'true' and var = 'true' and tipo_error_id = :requisitoId", nativeQuery = true)
     int countCauseErrorsByRequirement(@Param("requisitoId") Integer requirementId);
-
 
 }

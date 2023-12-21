@@ -75,13 +75,13 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     }
 
     @Override
-    public int countTypeErrorsByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requirementId);
+    public int countAllTypeErrorsByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countAllTypeErrorsByRequirement(requirementId);
     }
 
     @Override
-    public int countCauseErrorsByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countCauseErrorsByRequirement(requirementId);
+    public int countAllCauseErrorsByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countAllCauseErrorsByRequirement(requirementId);
     }
 
 }

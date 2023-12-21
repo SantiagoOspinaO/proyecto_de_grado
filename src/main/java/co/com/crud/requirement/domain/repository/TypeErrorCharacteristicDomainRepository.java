@@ -1,8 +1,6 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +26,8 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId);
 
-    int countTypeErrorsByRequirement(Integer requirementId);
+    int countAllTypeErrorsByRequirement(Integer requirementId);
 
-    int countCauseErrorsByRequirement(Integer requirementId);
+    int countAllCauseErrorsByRequirement(Integer requirementId);
 
 }

@@ -246,10 +246,10 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requisito);
+        int result = iTypeErrorCharacteristicCrudRepository.countAllTypeErrorsByRequirement(requisito);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorsByRequirement(requisito);
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countAllTypeErrorsByRequirement(requisito);
         assertNotEquals(1, result);
     }
 
@@ -262,10 +262,10 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR()).thenReturn(requisito);
 
         //Act
-        int result = iTypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirement(requisito);
+        int result = iTypeErrorCharacteristicCrudRepository.countAllTypeErrorsByRequirement(requisito);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countTypeErrorsByRequirement(requisito);
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countAllTypeErrorsByRequirement(requisito);
         assertNotEquals(10, result);
     }
 }

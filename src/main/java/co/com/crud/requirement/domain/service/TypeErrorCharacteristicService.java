@@ -48,7 +48,7 @@ public class TypeErrorCharacteristicService {
     }
 
     public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, String causeError) {
-        return typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId,causeError);
+        return typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, causeError);
     }
 
     public int countTypeErrorEIEByRequirement(Integer requirementId) {
@@ -63,30 +63,42 @@ public class TypeErrorCharacteristicService {
         return typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirements(typeErrorId, requirementId);
     }
 
-    public int countTypeErrorsByRequirement(Integer requirementId) {
-        return typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+    public int countAllTypeErrorsByRequirement(Integer requirementId) {
+        return typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
     }
 
-    public int countCauseErrorsByRequirement(Integer requirementId) {
-        return typeErrorCharacteristicDomainRepository.countCauseErrorsByRequirement(requirementId);
+    public int countAllCauseErrorsByRequirement(Integer requirementId) {
+        return typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
+    }
+
+    public Integer numberOfCauseErrorById(Integer requirementId, String causeError) {
+        Integer causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId,causeError);
+        return causeErrorByCause;
+    }
+
+    public double percentageOfCauseErrorById(Integer requirementId, String causeError) {
+        Integer allCauseErrors = typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
+        double causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId,causeError);
+        double result = (causeErrorByCause / allCauseErrors) * 100;
+        return result;
     }
 
     public double percentageOfTypeErrorEIEById(Integer requirementId) {
-        Integer allRequirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+        Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
         double result = (requirementEIE / allRequirements) * 100;
         return result;
     }
 
     public double percentageOfTypeErrorMCCById(Integer requirementId) {
-        Integer allRequirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+        Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirementMCC = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
         double result = (requirementMCC / allRequirements) * 100;
         return result;
     }
 
     public double percentageOfTypeErrosById(Integer typeErrorID, Integer requirementId) {
-        Integer allRequirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirement(requirementId);
+        Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirements(typeErrorID, requirementId);
         double result = (requirements / allRequirements) * 100;
         return result;
@@ -98,24 +110,4 @@ public class TypeErrorCharacteristicService {
         return (MCC + EIE);
     }
 
-    public double percentageOffAllCauseErrorById(Integer requirementId) {
-        double VAR = percentageOfTypeErrorMCCById(requirementId);
-        double DDE = percentageOfTypeErrorEIEById(requirementId);
-        double DII = percentageOfTypeErrorEIEById(requirementId);
-        return (VAR + DDE + DII);
-    }
-/*
-    public double percentageOffCauseErrorDEE(){
-        Integer allCauseErrors = typeErrorCharacteristicDomainRepository.countCauseErrorsByRequirement()
-
-    }
-
-    public double percentageOffCauseErrorDII(){
-
-    }
-
-    public double percentageOffCauseErrorVAR(){
-
-    }
-*/
 }

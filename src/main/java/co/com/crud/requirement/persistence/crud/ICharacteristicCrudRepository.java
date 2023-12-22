@@ -93,10 +93,11 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
-            "AND (c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)",
-            nativeQuery = true)
+            "AND (c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)" +
+            "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
     int countRequirementsByTypeAndNameCharacteristic(@Param("tipoRequisito") String typeRequirement,
-                                                     @Param("nombreCaracteristica") String nameCharacteristic);
+                                                     @Param("nombreCaracteristica") String nameCharacteristic,
+                                                     @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +

@@ -229,8 +229,8 @@ public class CharacteristicService {
         return characteristicDomainRepository.getCharacteristicsByRequirementId(requirementId);
     }
 
-    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic) {
-        return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic);
+    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic, Integer projectId) {
+        return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic, projectId);
     }
 
     public int countRequirementsByRequirementIdAndCauseError(Integer requirementId, String causeError, Integer projectId) {

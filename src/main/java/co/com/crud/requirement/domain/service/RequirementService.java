@@ -3,6 +3,7 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.RequirementNotFoundException;
 import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
+import co.com.crud.requirement.persistence.crud.IMCCAndEIEStatisticsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -47,5 +48,9 @@ public class RequirementService {
 
             return true;
         }).orElse(false);
+    }
+
+    public IMCCAndEIEStatisticsDTO countRequirementsByFilterCauseError(Integer requirementId) {
+        return requirementDomainRepository.countRequirementsByFilterCauseError(requirementId);
     }
 }

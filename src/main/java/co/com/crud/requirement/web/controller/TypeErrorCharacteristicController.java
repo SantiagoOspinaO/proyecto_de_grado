@@ -56,8 +56,6 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.countRequirementsByCauseErrorVAR();
     }
 
-
-
     @GetMapping(path = "/EIE/{id}")
     public int countTypeErrorEIEByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorEIEByRequirement(requirementId);

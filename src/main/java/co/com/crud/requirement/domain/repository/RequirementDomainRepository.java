@@ -1,6 +1,7 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.Requirement;
+import co.com.crud.requirement.persistence.crud.IMCCAndEIEStatisticsDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,4 +17,7 @@ public interface RequirementDomainRepository {
     Optional<List<Requirement>> getRequirementByType(String type);
 
     void deleteRequirement(Integer requirementId);
+
+    IMCCAndEIEStatisticsDTO countRequirementsByFilterCauseError(Integer requirementId);
+
 }

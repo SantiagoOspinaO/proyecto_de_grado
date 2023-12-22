@@ -28,9 +28,9 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
 
     @Query(value = "SELECT COUNT(*)  " +
             "FROM tipo_error_caracteristica " +
-            "WHERE (requisito_id = :requisitoId)  AND dde = 'true' AND (:causaError = 'dde') OR " +
-            "(requisito_id = :requisitoId)  AND dii = 'true' AND (:causaError = 'dii') OR" +
-            "(requisito_id = :requisitoId)  AND var = 'true' AND (:causaError = 'var')", nativeQuery = true)
+            "WHERE (requisito_id = :requisitoId  AND dde = 'true' AND (:causaError = 'dde')) OR " +
+            "(requisito_id = :requisitoId  AND dii = 'true' AND (:causaError = 'dii')) OR" +
+            "(requisito_id = :requisitoId  AND var = 'true' AND (:causaError = 'var'))", nativeQuery = true)
     int countRequirementsByCauseErrorAndRequirementId(
             @Param("requisitoId") Integer requirementId,
             @Param("causaError") String causeError);
@@ -76,12 +76,12 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = :requisitoId", nativeQuery = true)
-    int countTypeErrorsByRequirement(@Param("requisitoId") Integer requirementId);
+    int countAllTypeErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
     //Para contar todos las causas de error por requsiito En true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
-            "WHERE dde = 'true' and  dii = 'true' and var = 'true' and tipo_error_id = :requisitoId", nativeQuery = true)
-    int countCauseErrorsByRequirement(@Param("requisitoId") Integer requirementId);
+            "WHERE (dde = 'true' OR  dii = 'true' OR var = 'true') AND tipo_error_id = :requisitoId", nativeQuery = true)
+    int countAllCauseErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
 }

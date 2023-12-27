@@ -48,4 +48,17 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             @Param("tipoRequisito") String typeRequirement,
             @Param("causaError") String causeError,
             @Param("proyectoId") Integer projectId);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (5,6,7)) AS severeMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (5,6,7)) AS moderateMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (5,6,7)) AS mildMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (1,2,3,4,8,9)) AS severeEIE, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (1,2,3,4,8,9)) AS moderateEIE, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (1,2,3,4,8,9)) AS mildEIE " +
+            "FROM requisito r " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE r.tipo_requisito = :tipoRequisito", nativeQuery = true)
+    IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(@Param("tipoRequisito") String typeRequirement);
 }

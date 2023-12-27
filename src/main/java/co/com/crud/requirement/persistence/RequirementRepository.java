@@ -62,4 +62,11 @@ public class RequirementRepository implements RequirementDomainRepository {
         return requirementCrudRepository.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
+    @Override
+    public IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(String typeRequirement) {
+        return requirementCrudRepository.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+
+
 }

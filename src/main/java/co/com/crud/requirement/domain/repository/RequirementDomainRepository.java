@@ -23,4 +23,5 @@ public interface RequirementDomainRepository {
 
     IRequirementByGradeAndCauseErrorDTO countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId);
 
+    IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(String typeRequirement);
 }

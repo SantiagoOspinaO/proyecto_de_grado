@@ -47,8 +47,8 @@ public class TypeErrorCharacteristicService {
         return typeErrorCharacteristicDomainRepository.countRequirementByCauseErrorVAR();
     }
 
-    public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, String causeError) {
-        return typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, causeError);
+    public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, Integer typeErrorId, String causeError) {
+        return typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
     }
 
     public int countTypeErrorEIEByRequirement(Integer requirementId) {
@@ -71,14 +71,14 @@ public class TypeErrorCharacteristicService {
         return typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
     }
 
-    public Integer numberOfCauseErrorById(Integer requirementId, String causeError) {
-        Integer causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId,causeError);
+    public Integer numberOfCauseErrorById(Integer requirementId, Integer typeError, String causeError) {
+        Integer causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeError, causeError);
         return causeErrorByCause;
     }
 
-    public double percentageOfCauseErrorById(Integer requirementId, String causeError) {
+    public double percentageOfCauseErrorById(Integer requirementId, Integer typeErrorId, String causeError) {
         Integer allCauseErrors = typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
-        double causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId,causeError);
+        double causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
         double result = (causeErrorByCause / allCauseErrors) * 100;
         return result;
     }

@@ -37,8 +37,8 @@ public class TypeErrorCharacteristicController {
     }
 
     @GetMapping(path = "/get-cause-errors")
-    public int countRequirementsByCauseErrorAndRequirementId(@RequestParam(required = false) Integer requirementId, @RequestParam String causeError) {
-        return typeErrorCharacteristicService.countRequirementsByCauseErrorAndRequirementId(requirementId, causeError);
+    public int countRequirementsByCauseErrorAndRequirementId(@RequestParam(required = false) Integer requirementId, @RequestParam Integer typeErrorId, @RequestParam String causeError) {
+        return typeErrorCharacteristicService.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
     }
 
     @GetMapping(path = "/get-cause-error-all-requirement/dde")
@@ -65,51 +65,52 @@ public class TypeErrorCharacteristicController {
     public int countTypeErrorMCCByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorMCCByRequirement(requirementId);
     }
+
     // Los 2 de arriba pero dinamicos
     @GetMapping(path = "/{typeErrorId}/{id}")
     public int countTypeErrorsByRequirements(@PathVariable("typeErrorId") Integer typeErrorId, @PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorsByRequirements(typeErrorId, requirementId);
     }
 
-    @GetMapping(path = "/allTypeErrors/{id}")
+    @GetMapping(path = "/all-type-errors/{id}")
     public int countAllTypeErrorsByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countAllTypeErrorsByRequirement(requirementId);
     }
 
-    @GetMapping(path = "/allCauseErrors/{id}")
+    @GetMapping(path = "/all-cause-errors/{id}")
     public int countCauseErrorsByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countAllCauseErrorsByRequirement(requirementId);
     }
 
-    @GetMapping(path = "/percentageOfTypeErrorEIEById/{id}")
+    @GetMapping(path = "/percentage-of-type-error-eie-by-id/{id}")
     public double percentageOfTypeErrorEIEById(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.percentageOfTypeErrorEIEById(requirementId);
     }
 
-    @GetMapping(path = "/percentageOfTypeErrorMCCById/{id}")
+    @GetMapping(path = "/percentage-of-type-error-mcc-by-id/{id}")
     public double percentageOfTypeErrorMCCById(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.percentageOfTypeErrorMCCById(requirementId);
     }
 
     // Es los 2 querys de arriba pero dinamico
-    @GetMapping(path = "/percentageOfTypeErrors/{typeErrorID}/{id}")
+    @GetMapping(path = "/percentage-of-type-errors/{typeErrorID}/{id}")
     public double percentageOfTypeErrorsById(@PathVariable("id") Integer typeErrorID, @PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.percentageOfTypeErrosById(typeErrorID, requirementId);
     }
 
-    @GetMapping(path = "/percentageOfAllTypeErrorById/{id}")
+    @GetMapping(path = "/percentage-of-all-type-error-by-id/{id}")
     public double percentageOfAllTypeErrorById(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.percentageOffAllTypeErrorById(requirementId);
     }
 
-    @GetMapping(path = "/numberOfCauseErrorById/{id}/{causeError}")
-    public Integer numberOfCauseErrorById(@PathVariable("id") Integer requirementId, @PathVariable("causeError") String causeError){
-        return typeErrorCharacteristicService.numberOfCauseErrorById(requirementId,causeError);
+    @GetMapping(path = "/number-of-cause-error-by-id/{id}/{errorid}/{causeError}")
+    public Integer numberOfCauseErrorById(@PathVariable("id") Integer requirementId, @PathVariable("errorid") Integer typeError, @PathVariable("causeError") String causeError) {
+        return typeErrorCharacteristicService.numberOfCauseErrorById(requirementId, typeError, causeError);
     }
 
-    @GetMapping(path = "/percentageOfCauseErrorById/{id}/{causeError}")
-    public double percentageOfCauseErrorById(@PathVariable("id") Integer requirementId, @PathVariable("causeError") String causeError){
-        return typeErrorCharacteristicService.percentageOfCauseErrorById(requirementId,causeError);
+    @GetMapping(path = "/percentage-of-cause-error-by-id/{id}/{errorid}/{causeError}")
+    public double percentageOfCauseErrorById(@PathVariable("id") Integer requirementId, @PathVariable("errorid") Integer typeErrorId, @PathVariable("causeError") String causeError) {
+        return typeErrorCharacteristicService.percentageOfCauseErrorById(requirementId, typeErrorId, causeError);
     }
 
 }

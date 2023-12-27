@@ -68,4 +68,10 @@ public class RequirementController {
         return requirementService.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
+    @GetMapping(path = "/count-cause-error-requirement-type")
+    public IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(@RequestParam(required = false) String typeRequirement) {
+        return requirementService.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+
 }

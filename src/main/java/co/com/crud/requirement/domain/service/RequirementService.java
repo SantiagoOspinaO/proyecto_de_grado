@@ -58,4 +58,10 @@ public class RequirementService {
     public IRequirementByGradeAndCauseErrorDTO countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId) {
         return requirementDomainRepository.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
+
+    public IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(String typeRequirement) {
+        return requirementDomainRepository.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+
 }

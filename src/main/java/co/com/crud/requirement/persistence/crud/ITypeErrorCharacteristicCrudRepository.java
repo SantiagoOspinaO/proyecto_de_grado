@@ -28,11 +28,12 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
 
     @Query(value = "SELECT COUNT(*)  " +
             "FROM tipo_error_caracteristica " +
-            "WHERE (requisito_id = :requisitoId  AND dde = 'true' AND (:causaError = 'dde')) OR " +
-            "(requisito_id = :requisitoId  AND dii = 'true' AND (:causaError = 'dii')) OR" +
-            "(requisito_id = :requisitoId  AND var = 'true' AND (:causaError = 'var'))", nativeQuery = true)
+            "WHERE (requisito_id = :requisitoId AND tipo_error_id =:tipoErrorId AND dde = 'true' AND (:causaError = 'dde')) OR " +
+            "(requisito_id = :requisitoId AND tipo_error_id =:tipoErrorId AND dii = 'true' AND (:causaError = 'dii')) OR" +
+            "(requisito_id = :requisitoId AND tipo_error_id =:tipoErrorId AND var = 'true' AND (:causaError = 'var'))", nativeQuery = true)
     int countRequirementsByCauseErrorAndRequirementId(
             @Param("requisitoId") Integer requirementId,
+            @Param("tipoErrorId") Integer typeErrorId,
             @Param("causaError") String causeError);
 
     // Para dar el valor de los requisitos que tienen tipo error DDE en true

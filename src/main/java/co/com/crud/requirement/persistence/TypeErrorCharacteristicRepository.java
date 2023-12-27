@@ -56,8 +56,8 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     }
 
     @Override
-    public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, String causeError) {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, causeError);
+    public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, Integer typeErrorId, String causeError) {
+        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
     }
 
     @Override

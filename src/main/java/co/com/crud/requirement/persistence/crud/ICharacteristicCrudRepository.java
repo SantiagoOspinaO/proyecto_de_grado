@@ -56,25 +56,27 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "    tec.dii = :dii, " +
             "    tec.var = :var " +
             "WHERE r.id = :requisitoId AND c.id = :caracteristicaId", nativeQuery = true)
-    void updateCharacteristicByRequirementId(@Param("requisitoId") Integer requirementId,
-                                             @Param("caracteristicaId") Integer characteristicId,
-                                             @Param("nombre") String name,
-                                             @Param("descripcion") String description,
-                                             @Param("nombre_opuesto") String oppositeName,
-                                             @Param("descripcion_opuesta") String oppositeDescription,
-                                             @Param("nota_caracteristica") Double gradeCharacteristic,
-                                             @Param("dde") boolean dde,
-                                             @Param("dii") boolean dii,
-                                             @Param("var") boolean var);
+    void updateCharacteristicByRequirementId(
+            @Param("requisitoId") Integer requirementId,
+            @Param("caracteristicaId") Integer characteristicId,
+            @Param("nombre") String name,
+            @Param("descripcion") String description,
+            @Param("nombre_opuesto") String oppositeName,
+            @Param("descripcion_opuesta") String oppositeDescription,
+            @Param("nota_caracteristica") Double gradeCharacteristic,
+            @Param("dde") boolean dde,
+            @Param("dii") boolean dii,
+            @Param("var") boolean var);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE nota_caracteristica_requisito " +
             "SET nota_caracteristica = :notaIngresada " +
             "WHERE requisito_id = :requisitoId AND caracteristica_id = :caracteristicaId", nativeQuery = true)
-    void updateGradeCharacteristicByRequirement(@Param("notaIngresada") Double gradeInput,
-                                                @Param("requisitoId") Integer requirementId,
-                                                @Param("caracteristicaId") Integer characteristicId);
+    void updateGradeCharacteristicByRequirement(
+            @Param("notaIngresada") Double gradeInput,
+            @Param("requisitoId") Integer requirementId,
+            @Param("caracteristicaId") Integer characteristicId);
 
     @Modifying
     @Transactional
@@ -82,11 +84,12 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "SET dde = :dde, dii = :dii, var = :var " +
             "WHERE requisito_id = :requisitoId " +
             "AND caracteristica_id = :caracteristicaId ", nativeQuery = true)
-    void updateCauseErrorOfCharacteristic(@Param("dde") boolean dde,
-                                          @Param("dii") boolean dii,
-                                          @Param("var") boolean var,
-                                          @Param("requisitoId") Integer requirementId,
-                                          @Param("caracteristicaId") Integer characteristicId);
+    void updateCauseErrorOfCharacteristic(
+            @Param("dde") boolean dde,
+            @Param("dii") boolean dii,
+            @Param("var") boolean var,
+            @Param("requisitoId") Integer requirementId,
+            @Param("caracteristicaId") Integer characteristicId);
 
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +
@@ -95,9 +98,10 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)" +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    int countRequirementsByTypeAndNameCharacteristic(@Param("tipoRequisito") String typeRequirement,
-                                                     @Param("nombreCaracteristica") String nameCharacteristic,
-                                                     @Param("proyectoId") Integer projectId);
+    int countRequirementsByTypeAndNameCharacteristic(
+            @Param("tipoRequisito") String typeRequirement,
+            @Param("nombreCaracteristica") String nameCharacteristic,
+            @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +
@@ -110,8 +114,9 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "   (:causaError = 'var' AND tec.var = true)" +
             ") " +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    int countRequirementsByRequirementIdAndCauseError(@Param("requisitoId") Integer requirementId,
-                                                      @Param("causaError") String causeError,
-                                                      @Param("proyectoId") Integer projectId);
+    int countRequirementsByRequirementIdAndCauseError(
+            @Param("requisitoId") Integer requirementId,
+            @Param("causaError") String causeError,
+            @Param("proyectoId") Integer projectId);
 
 }

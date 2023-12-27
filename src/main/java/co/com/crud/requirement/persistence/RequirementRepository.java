@@ -2,7 +2,8 @@ package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
-import co.com.crud.requirement.persistence.crud.IMCCAndEIEStatisticsDTO;
+import co.com.crud.requirement.persistence.crud.interfaces.IRequirementByGradeAndCauseErrorDTO;
+import co.com.crud.requirement.persistence.crud.interfaces.IRequirementsByFilterCauseErrorDTO;
 import co.com.crud.requirement.persistence.crud.IRequirementCrudRepository;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
 import co.com.crud.requirement.persistence.mapper.RequirementMapper;
@@ -52,8 +53,13 @@ public class RequirementRepository implements RequirementDomainRepository {
     }
 
     @Override
-    public IMCCAndEIEStatisticsDTO countRequirementsByFilterCauseError(Integer requirementId) {
+    public IRequirementsByFilterCauseErrorDTO countRequirementsByFilterCauseError(Integer requirementId) {
         return requirementCrudRepository.countRequirementsByFilterCauseError(requirementId);
+    }
+
+    @Override
+    public IRequirementByGradeAndCauseErrorDTO countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId) {
+        return requirementCrudRepository.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
 }

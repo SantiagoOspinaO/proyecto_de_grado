@@ -1,6 +1,6 @@
-package co.com.crud.requirement.persistence.crud;
+package co.com.crud.requirement.persistence.crud.interfaces;
 
-public interface IMCCAndEIEStatisticsDTO {
+public interface IRequirementsByFilterCauseErrorDTO {
     Integer getSevereMCC();
 
     Integer getModerateMCC();

@@ -56,17 +56,52 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.countRequirementsByCauseErrorVAR();
     }
 
-    @GetMapping(path = "/EIE/{id}")
+    @GetMapping(path = "/eie/{id}")
     public int countTypeErrorEIEByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorEIEByRequirement(requirementId);
     }
 
-    @GetMapping(path = "/MCC/{id}")
+    @GetMapping(path = "/eie/dde/{id}")
+    public int countTypeErrorEIEAndCauseErrorDDEByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/eie/dii/{id}")
+    public int countTypeErrorEIEAndCauseErrorDIIByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/eie/var/{id}")
+    public int countTypeErrorEIEAndCauseErrorVARByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/mcc/{id}")
     public int countTypeErrorMCCByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorMCCByRequirement(requirementId);
     }
 
-    // Los 2 de arriba pero dinamicos
+    @GetMapping(path = "/mcc/dde/{id}")
+    public int countTypeErrorMCCAndCauseErrorDDEByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/mcc/dii/{id}")
+    public int countTypeErrorMCCAndCauseErrorDIIByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
+    }
+
+    @GetMapping(path = "/mcc/var/{id}")
+    public int countTypeErrorMCCAndCauseErrorVARByRequirement(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
+    }
+    // Devuelve todas las operaciones de la hoja distribucionErroresRequisito
+    @GetMapping(path = "/all-number-percentage-operations/{id}")
+    public List<Double> allNumberAntPercentageOperations(@PathVariable("id") Integer requirementId) {
+        return typeErrorCharacteristicService.allNumbersAndPercentageOperations(requirementId);
+    }
+
+    // Los 2 de arriba pero dinamicos // Revisar que pasa cuando la nota es 9, lo esta contando
     @GetMapping(path = "/{typeErrorId}/{id}")
     public int countTypeErrorsByRequirements(@PathVariable("typeErrorId") Integer typeErrorId, @PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorsByRequirements(typeErrorId, requirementId);

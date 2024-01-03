@@ -23,7 +23,19 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     int countTypeErrorEIEByRequirement(Integer requirementId);
 
+    int countTypeErrorEIEAndCauseErrorDDEByRequirement(Integer requirementId);
+
+    int countTypeErrorEIEAndCauseErrorDIIByRequirement(Integer requirementId);
+
+    int countTypeErrorEIEAndCauseErrorVARByRequirement(Integer requirementId);
+
     int countTypeErrorMCCByRequirement(Integer requirementId);
+
+    int countTypeErrorMCCAndCauseErrorDDEByRequirement(Integer requirementId);
+
+    int countTypeErrorMCCAndCauseErrorDIIByRequirement(Integer requirementId);
+
+    int countTypeErrorMCCAndCauseErrorVARByRequirement(Integer requirementId);
 
     int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId);
 

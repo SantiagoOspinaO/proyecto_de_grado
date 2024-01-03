@@ -66,8 +66,38 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     }
 
     @Override
+    public int countTypeErrorEIEAndCauseErrorDDEByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorEIEAndCauseErrorDIIByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorEIEAndCauseErrorVARByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
+    }
+
+    @Override
     public int countTypeErrorMCCByRequirement(Integer requirementId) {
         return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorMCCAndCauseErrorDDEByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorMCCAndCauseErrorDIIByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
+    }
+
+    @Override
+    public int countTypeErrorMCCAndCauseErrorVARByRequirement(Integer requirementId) {
+        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
     }
 
     public int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId) {

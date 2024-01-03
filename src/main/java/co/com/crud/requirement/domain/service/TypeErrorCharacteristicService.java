@@ -187,38 +187,55 @@ public class TypeErrorCharacteristicService {
     public List<Double> allNumbersAndPercentageOperations(Integer requirementId){
         List<Double> result = new ArrayList<>();
         double countTypeErrorEIEByRequirement = countTypeErrorEIEByRequirement(requirementId);
-        double percentageOfTypeErrorEIEById = percentageOfTypeErrorEIEById(requirementId);
         double countTypeErrorMCCByRequirement = countTypeErrorMCCByRequirement(requirementId);
-        double percentageOfTypeErrorMCCById = percentageOfTypeErrorMCCById(requirementId);
+        double countAllTypeErrorById = countTypeErrorEIEByRequirement + countTypeErrorMCCByRequirement  ;
+        double percentageOfTypeErrorEIEById = (countTypeErrorEIEByRequirement / countAllTypeErrorById ) * 100 ;
+        double percentageOfTypeErrorMCCById = (countTypeErrorMCCByRequirement / countAllTypeErrorById ) * 100 ;
+        double percentageAllTypeErrorById = percentageOfTypeErrorEIEById+ percentageOfTypeErrorMCCById;
+
         double countTypeErrorEIEAndCauseErrorDDEByRequirement = countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
-        double percentageOfTypeErrorEIEAndCauseErrorDDEById = percentageOfTypeErrorEIEAndCauseErrorDDEById(requirementId);
         double countTypeErrorEIEAndCauseErrorDIIByRequirement = countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
-        double percentageOfTypeErrorEIEAndCauseErrorDIIById = percentageOfTypeErrorEIEAndCauseErrorDIIById(requirementId);
         double countTypeErrorEIEAndCauseErrorVARByRequirement = countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
-        double percentageOfTypeErrorEIEAndCauseErrorVARById = percentageOfTypeErrorEIEAndCauseErrorVARById(requirementId);
+        double totalTypeErrorEIEWithCauseError = countTypeErrorEIEAndCauseErrorDDEByRequirement+ countTypeErrorEIEAndCauseErrorDIIByRequirement + countTypeErrorEIEAndCauseErrorVARByRequirement;
+        double percentageOfTypeErrorEIEAndCauseErrorDDEById = (countTypeErrorEIEAndCauseErrorDDEByRequirement / totalTypeErrorEIEWithCauseError) * 100;
+        double percentageOfTypeErrorEIEAndCauseErrorDIIById = (countTypeErrorEIEAndCauseErrorDIIByRequirement / totalTypeErrorEIEWithCauseError) * 100;
+        double percentageOfTypeErrorEIEAndCauseErrorVARById = (countTypeErrorEIEAndCauseErrorVARByRequirement / totalTypeErrorEIEWithCauseError) * 100;
+        double percentageOfTypeErrorEIEAndCauseError= percentageOfTypeErrorEIEAndCauseErrorDDEById + percentageOfTypeErrorEIEAndCauseErrorDIIById + percentageOfTypeErrorEIEAndCauseErrorVARById;
+
         double countTypeErrorMCCAndCauseErrorDDEByRequirement = countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
-        double percentageOfTypeErrorMCCAndCauseErrorDDEById = percentageOfTypeErrorMCCAndCauseErrorDDEById(requirementId);
         double countTypeErrorMCCAndCauseErrorDIIByRequirement = countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
-        double percentageOfTypeErrorMCCAndCauseErrorDIIById = percentageOfTypeErrorMCCAndCauseErrorDIIById(requirementId);
         double countTypeErrorMCCAndCauseErrorVARByRequirement = countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
-        double percentageOfTypeErrorMCCAndCauseErrorVARById = percentageOfTypeErrorMCCAndCauseErrorVARById(requirementId);
+        double totalTypeErrorMCCWithCauseError = countTypeErrorMCCAndCauseErrorDDEByRequirement+ countTypeErrorMCCAndCauseErrorDIIByRequirement + countTypeErrorMCCAndCauseErrorVARByRequirement;
+        double percentageOfTypeErrorMCCAndCauseErrorDDEById = (countTypeErrorMCCAndCauseErrorDDEByRequirement / totalTypeErrorMCCWithCauseError) * 100;
+        double percentageOfTypeErrorMCCAndCauseErrorDIIById = (countTypeErrorMCCAndCauseErrorDIIByRequirement / totalTypeErrorMCCWithCauseError) * 100;
+        double percentageOfTypeErrorMCCAndCauseErrorVARById = (countTypeErrorMCCAndCauseErrorVARByRequirement / totalTypeErrorMCCWithCauseError) * 100;
+        double percentageOfTypeErrorMCCAndCauseError= percentageOfTypeErrorMCCAndCauseErrorDDEById + percentageOfTypeErrorMCCAndCauseErrorDIIById + percentageOfTypeErrorMCCAndCauseErrorVARById ;
 
         result.add(countTypeErrorEIEByRequirement);
         result.add(percentageOfTypeErrorEIEById);
         result.add(countTypeErrorMCCByRequirement);
         result.add(percentageOfTypeErrorMCCById);
+        result.add(countAllTypeErrorById);
+        result.add(percentageAllTypeErrorById);
+
         result.add(countTypeErrorEIEAndCauseErrorDDEByRequirement);
         result.add(percentageOfTypeErrorEIEAndCauseErrorDDEById);
         result.add(countTypeErrorEIEAndCauseErrorDIIByRequirement);
         result.add(percentageOfTypeErrorEIEAndCauseErrorDIIById);
         result.add(countTypeErrorEIEAndCauseErrorVARByRequirement);
         result.add(percentageOfTypeErrorEIEAndCauseErrorVARById);
+        result.add(totalTypeErrorEIEWithCauseError);
+        result.add(percentageOfTypeErrorEIEAndCauseError);
+
         result.add(countTypeErrorMCCAndCauseErrorDDEByRequirement);
         result.add(percentageOfTypeErrorMCCAndCauseErrorDDEById);
         result.add(countTypeErrorMCCAndCauseErrorDIIByRequirement);
         result.add(percentageOfTypeErrorMCCAndCauseErrorDIIById);
         result.add(countTypeErrorMCCAndCauseErrorVARByRequirement);
         result.add(percentageOfTypeErrorMCCAndCauseErrorVARById);
+        result.add(totalTypeErrorMCCWithCauseError);
+        result.add(percentageOfTypeErrorMCCAndCauseError);
+
         return result;
     }
 

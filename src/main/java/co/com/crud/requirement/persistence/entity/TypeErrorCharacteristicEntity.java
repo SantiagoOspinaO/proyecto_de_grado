@@ -22,4 +22,5 @@ public class TypeErrorCharacteristicEntity {
 
     @Column(nullable = false)
     private String descripcion;
+
 }

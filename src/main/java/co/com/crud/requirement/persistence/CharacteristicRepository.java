@@ -1,14 +1,12 @@
 package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import co.com.crud.requirement.persistence.crud.ICharacteristicCrudRepository;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
 import co.com.crud.requirement.persistence.mapper.CharacteristicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -64,12 +62,23 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic, Integer projectId) {
-        return characteristicCrudRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic, projectId);
+    public IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(String typeRequirement, Integer projectId) {
+        return characteristicCrudRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
     }
 
     @Override
-    public int countRequirementsByRequirementIdAndCauseError(Integer requirementId, String causeError, Integer projectId) {
-        return characteristicCrudRepository.countRequirementsByRequirementIdAndCauseError(requirementId, causeError, projectId);
+    public IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId) {
+        return characteristicCrudRepository.countRequirementsByRequirementIdAndCauseError(requirementId, projectId);
     }
+
+    @Override
+    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement) {
+        return characteristicCrudRepository.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+    @Override
+    public IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(String typeRequirement, Integer projectId) {
+        return characteristicCrudRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
+    }
+
 }

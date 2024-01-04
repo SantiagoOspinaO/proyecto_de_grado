@@ -1,6 +1,7 @@
-package co.com.crud.requirement.persistence.crud.interfaces;
+package co.com.crud.requirement.domain.model.queryresult;
 
-public interface IRequirementsByFilterCauseErrorDTO {
+public interface IRequirementsByFilterCauseError {
+
     Integer getSevereMCC();
 
     Integer getModerateMCC();
@@ -12,4 +13,5 @@ public interface IRequirementsByFilterCauseErrorDTO {
     Integer getModerateEIE();
 
     Integer getMildEIE();
+
 }

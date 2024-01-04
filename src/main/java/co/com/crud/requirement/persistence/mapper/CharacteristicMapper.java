@@ -24,4 +24,5 @@ public interface CharacteristicMapper {
 
     @InheritInverseConfiguration
     CharacteristicEntity toCharacteristics(Characteristic characteristic);
+
 }

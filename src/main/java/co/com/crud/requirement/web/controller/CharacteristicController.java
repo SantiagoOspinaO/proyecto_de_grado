@@ -2,6 +2,9 @@ package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndNameCharacteristic;
 import co.com.crud.requirement.domain.service.CharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -117,20 +120,32 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/count-type-requirement-name-characteristic")
-    public int countRequirementsByTypeAndNameCharacteristic(
+    public IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam String nameCharacteristic,
             @RequestParam Integer projectId
     ) {
-        return characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic, projectId);
+        return characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/count-requirement-id-cause-error")
-    public int countRequirementsByRequirementIdAndCauseError(
+    public IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(
             @RequestParam Integer requirementId,
-            @RequestParam String causeError,
             @RequestParam Integer projectId
     ) {
-        return characteristicService.countRequirementsByRequirementIdAndCauseError(requirementId, causeError, projectId);
+        return characteristicService.countRequirementsByRequirementIdAndCauseError(requirementId, projectId);
     }
+
+    @GetMapping(path = "/count-cause-error-requirement-type")
+    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(@RequestParam(required = false) String typeRequirement) {
+        return characteristicService.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+    @GetMapping(path = "/count-type-requirement-cause-error")
+    public IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
+    }
+
 }

@@ -6,6 +6,9 @@ import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
 import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndNameCharacteristic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -229,11 +232,20 @@ public class CharacteristicService {
         return characteristicDomainRepository.getCharacteristicsByRequirementId(requirementId);
     }
 
-    public int countRequirementsByTypeAndNameCharacteristic(String typeRequirement, String nameCharacteristic, Integer projectId) {
-        return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, nameCharacteristic, projectId);
+    public IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(String typeRequirement, Integer projectId) {
+        return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
     }
 
-    public int countRequirementsByRequirementIdAndCauseError(Integer requirementId, String causeError, Integer projectId) {
-        return characteristicDomainRepository.countRequirementsByRequirementIdAndCauseError(requirementId, causeError, projectId);
+    public IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId) {
+        return characteristicDomainRepository.countRequirementsByRequirementIdAndCauseError(requirementId, projectId);
     }
+
+    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement) {
+        return characteristicDomainRepository.countCauseErrorByRequirementType(typeRequirement);
+    }
+
+    public IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(String typeRequirement, Integer projectId) {
+        return characteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
+    }
+
 }

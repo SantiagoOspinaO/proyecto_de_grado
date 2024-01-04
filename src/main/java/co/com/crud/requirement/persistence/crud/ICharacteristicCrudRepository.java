@@ -1,7 +1,6 @@
 package co.com.crud.requirement.persistence.crud;
 
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,9 +30,9 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "   ncr.nota_caracteristica AS gradeCharacteristic, " +
             "   te.nombre AS typeError, " +
             "   te.descripcion AS descriptiontypeError, " +
-            "   tec.dde as dde, " +
-            "   tec.dii as dii, " +
-            "   tec.var as var " +
+            "   tec.dde AS dde, " +
+            "   tec.dii AS dii, " +
+            "   tec.var AS var " +
             "FROM requisito r " +
             "LEFT JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "LEFT JOIN caracteristica c ON ncr.caracteristica_id = c.id " +
@@ -91,32 +90,71 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             @Param("requisitoId") Integer requirementId,
             @Param("caracteristicaId") Integer characteristicId);
 
-    @Query(value = "SELECT COUNT(r.id) " +
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Correcto' AND ncr.nota_caracteristica > 8) AS Correcto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incorrecto' AND ncr.nota_caracteristica <= 8) AS Incorrecto, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Inequívoco' AND ncr.nota_caracteristica > 8) AS Inequivoco, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Ambiguo' AND ncr.nota_caracteristica <= 8) AS Ambiguo, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Completo' AND ncr.nota_caracteristica > 8) AS Completo, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incompleto' AND ncr.nota_caracteristica <= 8) AS Incompleto, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Consistente' AND ncr.nota_caracteristica > 8) AS Consistente, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Débil' AND ncr.nota_caracteristica <= 8) AS Debil, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Importante' AND ncr.nota_caracteristica > 8) AS Importante, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Intrascendente' AND ncr.nota_caracteristica <= 8) AS Intrascendente, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Estable' AND ncr.nota_caracteristica > 8) AS Estable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Inestable' AND ncr.nota_caracteristica <= 8) AS Inestable, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Comprobable' AND ncr.nota_caracteristica > 8) AS Comprobable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Comprobable' AND ncr.nota_caracteristica <= 8) AS NoComprobable, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Identificable' AND ncr.nota_caracteristica > 8) AS Identificable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Identificable' AND ncr.nota_caracteristica <= 8) AS NoIdentificable, " +
+            "SUM(1) FILTER (WHERE c.nombre = 'Trazable' AND ncr.nota_caracteristica > 8) AS Trazable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8) AS NoTrazable " +
             "FROM requisito r " +
-            "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
-            "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
-            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
-            "AND (c.nombre = :nombreCaracteristica OR c.nombre_opuesto = :nombreCaracteristica)" +
+            "INNER JOIN nota_caracteristica_requisito ncr on r.id = ncr.requisito_id " +
+            "INNER JOIN caracteristica c on c.id = ncr.caracteristica_id " +
+            "WHERE (r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    int countRequirementsByTypeAndNameCharacteristic(
+    IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(
             @Param("tipoRequisito") String typeRequirement,
-            @Param("nombreCaracteristica") String nameCharacteristic,
             @Param("proyectoId") Integer projectId);
 
-    @Query(value = "SELECT COUNT(r.id) " +
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE tec.dde = true) AS causeErrorDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true) AS causeErrorDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true) AS causeErrorVAR " +
+            "FROM tipo_error_caracteristica tec " +
+            "JOIN caracteristica c ON c.id = tec.caracteristica_id " +
+            "JOIN requisito r ON r.id = tec.requisito_id " +
+            "WHERE (r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
+    IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
+            @Param("tipoRequisito") String typeRequirement,
+            @Param("proyectoId") Integer projectId);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (5,6,7)) AS severeMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (5,6,7)) AS moderateMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (5,6,7)) AS mildMCC, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (1,2,3,4,8,9)) AS severeEIE, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (1,2,3,4,8,9)) AS moderateEIE, " +
+            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (1,2,3,4,8,9)) AS mildEIE " +
             "FROM requisito r " +
-            "INNER JOIN tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
-            "WHERE (r.id = :requisitoId) " +
-            "AND " +
-            "(" +
-            "   (:causaError = 'dii' AND tec.dii = true) OR " +
-            "   (:causaError = 'dde' AND tec.dde = true) OR " +
-            "   (:causaError = 'var' AND tec.var = true)" +
-            ") " +
-            "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    int countRequirementsByRequirementIdAndCauseError(
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE :tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito", nativeQuery = true)
+    IRequirementsByFilterCauseError countCauseErrorByRequirementType(@Param("tipoRequisito") String typeRequirement);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE tec.dde = true) AS causeErrorDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true) AS causeErrorDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true) AS causeErrorVAR " +
+            "FROM tipo_error_caracteristica tec " +
+            "JOIN caracteristica c ON c.id = tec.caracteristica_id " +
+            "JOIN requisito r ON r.id = tec.requisito_id " +
+            "WHERE r.id = :requisitoId " +
+            "AND r.proyecto_id = :proyectoId ", nativeQuery = true)
+    IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(
             @Param("requisitoId") Integer requirementId,
-            @Param("causaError") String causeError,
             @Param("proyectoId") Integer projectId);
 
 }

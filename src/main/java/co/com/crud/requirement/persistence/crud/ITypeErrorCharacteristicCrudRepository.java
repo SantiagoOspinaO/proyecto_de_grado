@@ -104,14 +104,6 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and var = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorVARByRequirement(@Param("requisitoId") Integer requirementId);
 
-
-
-
-
-
-
-
-
     //MCC y EIE dinamico -- Para contar cuantos hay MCC y EIE por id de requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +

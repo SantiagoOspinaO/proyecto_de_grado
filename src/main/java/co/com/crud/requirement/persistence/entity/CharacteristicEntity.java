@@ -29,4 +29,5 @@ public class CharacteristicEntity {
 
     @Column(nullable = false)
     private String descripcionOpuesta;
+
 }

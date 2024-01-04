@@ -22,4 +22,5 @@ public interface TypeErrorCharacteristicMapper {
 
     @InheritInverseConfiguration
     TypeErrorCharacteristicEntity toTypesErrors(TypeErrorCharacteristic typeErrorCharacteristic);
+
 }

@@ -1,6 +1,6 @@
-package co.com.crud.requirement.persistence.crud.interfaces;
+package co.com.crud.requirement.domain.model.queryresult;
 
-public interface IRequirementByGradeAndCauseErrorDTO {
+public interface IRequirementByGradeAndCauseError {
 
     Integer getPerfectEvaluationDII();
 

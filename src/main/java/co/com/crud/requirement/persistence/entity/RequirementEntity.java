@@ -28,4 +28,5 @@ public class RequirementEntity {
 
     @Column(nullable = false)
     private String tipoRequisito;
+
 }

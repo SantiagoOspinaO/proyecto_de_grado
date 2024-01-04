@@ -16,4 +16,5 @@ public class Characteristic {
     private String description;
 
     private String oppositeDescription;
+
 }

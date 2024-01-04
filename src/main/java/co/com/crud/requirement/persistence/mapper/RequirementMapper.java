@@ -24,4 +24,5 @@ public interface RequirementMapper {
 
     @InheritInverseConfiguration
     RequirementEntity toRequirements(Requirement requirement);
+
 }

@@ -23,4 +23,5 @@ public interface ICharacteristicsByRequirementId {
     Boolean getDii();
 
     Boolean getVar();
+
 }

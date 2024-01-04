@@ -16,4 +16,5 @@ public class Requirement {
     private String description;
 
     private String typeRequirement;
+
 }

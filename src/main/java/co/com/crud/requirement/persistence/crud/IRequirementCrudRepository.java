@@ -1,7 +1,7 @@
 package co.com.crud.requirement.persistence.crud;
 
-import co.com.crud.requirement.persistence.crud.interfaces.IRequirementByGradeAndCauseErrorDTO;
-import co.com.crud.requirement.persistence.crud.interfaces.IRequirementsByFilterCauseErrorDTO;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,7 +24,7 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
             "WHERE r.id = :requisitoId", nativeQuery = true)
-    IRequirementsByFilterCauseErrorDTO countRequirementsByFilterCauseError(@Param("requisitoId") Integer requirementId);
+    IRequirementsByFilterCauseError countRequirementsByFilterCauseError(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT " +
             "SUM(CASE WHEN ncr.nota_caracteristica > 8 AND tec.dii = true THEN 1 ELSE 0 END) AS PerfectEvaluationDII, " +
@@ -44,21 +44,9 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "   (:causaError = 'var' AND tec.var = true)" +
             ") " +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    IRequirementByGradeAndCauseErrorDTO countRequirementsByGradeAndCauseError(
+    IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,
             @Param("causaError") String causeError,
             @Param("proyectoId") Integer projectId);
 
-    @Query(value = "SELECT " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (5,6,7)) AS severeMCC, " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (5,6,7)) AS moderateMCC, " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (5,6,7)) AS mildMCC, " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 0 AND ncr.nota_caracteristica <= 3 AND c.id IN (1,2,3,4,8,9)) AS severeEIE, " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 3 AND ncr.nota_caracteristica <= 6 AND c.id IN (1,2,3,4,8,9)) AS moderateEIE, " +
-            "SUM(1) FILTER (WHERE ncr.nota_caracteristica > 6 AND ncr.nota_caracteristica <= 8 AND c.id IN (1,2,3,4,8,9)) AS mildEIE " +
-            "FROM requisito r " +
-            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
-            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE r.tipo_requisito = :tipoRequisito", nativeQuery = true)
-    IRequirementsByFilterCauseErrorDTO countCauseErrorByRequirementType(@Param("tipoRequisito") String typeRequirement);
 }

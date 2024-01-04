@@ -119,12 +119,36 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
-            "SUM(1) FILTER (WHERE tec.dde = true) AS causeErrorDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true) AS causeErrorDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true) AS causeErrorVAR " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Incorrecto') AS IncorrectoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Ambiguo') AS AmbiguoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Incompleto') AS IncompletoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Débil' ) AS DebilDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Débil' ) AS DebilDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Débil') AS DebilVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Intrascendente') AS IntrascendenteVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'Inestable' ) AS InestableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'Inestable' ) AS InestableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'Inestable') AS InestableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'No Comprobable') AS NoComprobableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'No Identificable') AS NoIdentificableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND c.nombre_opuesto = 'No Trazable') AS NoTrazableVAR " +
             "FROM tipo_error_caracteristica tec " +
-            "JOIN caracteristica c ON c.id = tec.caracteristica_id " +
-            "JOIN requisito r ON r.id = tec.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
+            "INNER JOIN requisito r ON r.id = tec.requisito_id " +
             "WHERE (r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
@@ -153,7 +177,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "JOIN requisito r ON r.id = tec.requisito_id " +
             "WHERE r.id = :requisitoId " +
             "AND r.proyecto_id = :proyectoId ", nativeQuery = true)
-    IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(
+    IRequirementsByRequirementIdAndCauseError countRequirementsByRequirementIdAndCauseError(
             @Param("requisitoId") Integer requirementId,
             @Param("proyectoId") Integer projectId);
 

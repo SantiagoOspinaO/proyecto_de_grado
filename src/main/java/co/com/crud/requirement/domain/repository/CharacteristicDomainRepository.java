@@ -1,11 +1,7 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndNameCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +24,7 @@ public interface CharacteristicDomainRepository {
 
     IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(String typeRequirement, Integer projectId);
 
-    IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId);
+    IRequirementsByRequirementIdAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId);
 
     IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement);
 

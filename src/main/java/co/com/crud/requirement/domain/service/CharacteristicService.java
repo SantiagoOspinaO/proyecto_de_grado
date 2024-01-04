@@ -3,12 +3,8 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.CharacteristicNotFoundException;
 import co.com.crud.requirement.domain.exception.validation.RequirementAdecuationValidator;
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
+import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndNameCharacteristic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -236,7 +232,7 @@ public class CharacteristicService {
         return characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
     }
 
-    public IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId) {
+    public IRequirementsByRequirementIdAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId) {
         return characteristicDomainRepository.countRequirementsByRequirementIdAndCauseError(requirementId, projectId);
     }
 

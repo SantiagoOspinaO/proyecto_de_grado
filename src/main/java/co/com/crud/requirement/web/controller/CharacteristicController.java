@@ -1,10 +1,7 @@
 package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Characteristic;
-import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequirementId;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
-import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndNameCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.service.CharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -128,7 +125,7 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/count-requirement-id-cause-error")
-    public IRequirementsByTypeAndCauseError countRequirementsByRequirementIdAndCauseError(
+    public IRequirementsByRequirementIdAndCauseError countRequirementsByRequirementIdAndCauseError(
             @RequestParam Integer requirementId,
             @RequestParam Integer projectId
     ) {

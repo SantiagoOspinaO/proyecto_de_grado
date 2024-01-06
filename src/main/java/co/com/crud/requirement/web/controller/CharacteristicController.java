@@ -133,8 +133,11 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/count-cause-error-requirement-type")
-    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(@RequestParam(required = false) String typeRequirement) {
-        return characteristicService.countCauseErrorByRequirementType(typeRequirement);
+    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countCauseErrorByRequirementType(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/count-type-requirement-cause-error")

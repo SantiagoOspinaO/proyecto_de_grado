@@ -7,6 +7,7 @@ import co.com.crud.requirement.persistence.crud.ICharacteristicCrudRepository;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
 import co.com.crud.requirement.persistence.mapper.CharacteristicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -72,8 +73,8 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement) {
-        return characteristicCrudRepository.countCauseErrorByRequirementType(typeRequirement);
+    public IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement, Integer projectId) {
+        return characteristicCrudRepository.countCauseErrorByRequirementType(typeRequirement, projectId);
     }
 
     @Override

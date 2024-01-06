@@ -26,7 +26,7 @@ public interface CharacteristicDomainRepository {
 
     IRequirementsByRequirementIdAndCauseError countRequirementsByRequirementIdAndCauseError(Integer requirementId, Integer projectId);
 
-    IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement);
+    IRequirementsByFilterCauseError countCauseErrorByRequirementType(String typeRequirement, Integer projectId);
 
     IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(String typeRequirement, Integer projectId);
 

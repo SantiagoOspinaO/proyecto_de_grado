@@ -110,9 +110,9 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "SUM(1) FILTER (WHERE c.nombre = 'Trazable' AND ncr.nota_caracteristica > 8) AS Trazable, " +
             "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8) AS NoTrazable " +
             "FROM requisito r " +
-            "INNER JOIN nota_caracteristica_requisito ncr on r.id = ncr.requisito_id " +
-            "INNER JOIN caracteristica c on c.id = ncr.caracteristica_id " +
-            "WHERE (r.tipo_requisito = :tipoRequisito) " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
     IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(
             @Param("tipoRequisito") String typeRequirement,

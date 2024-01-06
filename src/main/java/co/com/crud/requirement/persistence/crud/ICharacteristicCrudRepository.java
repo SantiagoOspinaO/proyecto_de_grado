@@ -165,8 +165,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "FROM requisito r " +
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE :tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito " +
-            "AND r.proyecto_id = :proyectoId ", nativeQuery = true)
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementsByFilterCauseError countCauseErrorByRequirementType(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);

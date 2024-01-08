@@ -3,12 +3,12 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.CharacteristicNotFoundException;
 import co.com.crud.requirement.domain.exception.validation.RequirementAdecuationValidator;
 import co.com.crud.requirement.domain.model.Characteristic;
+import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,7 +115,7 @@ public class CharacteristicService {
      * @param requirementId the requirement id
      * @return the integer
      */
-    public Integer evalutedCharacteristicForRequirement(Integer requirementId) {
+    public double evalutedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         int requirementEvaluated = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
@@ -172,7 +172,7 @@ public class CharacteristicService {
      *
      * @param requirementId the requirement id
      * @return the list
-     */
+     */ /*
     public List<Double> allOperations(Integer requirementId) {
         List<Double> resultados = new ArrayList<>();
         double levelAdecuacy = calculateLevelAdequacy(requirementId);
@@ -186,6 +186,19 @@ public class CharacteristicService {
         resultados.add(maximunScore);
         resultados.add(calculateWeightAverage);
         return resultados;
+    }*/
+
+    public Operation allOperations(Integer operationId,Integer requirementId) {
+        Operation operation = new Operation();
+        operation.setOperationId(operationId);
+        operation.setRequirementId(requirementId);
+        operation.setLevelAdecuacy(calculateLevelAdequacy(requirementId));
+        operation.setEvaluatedCharacteristics(evalutedCharacteristicForRequirement(requirementId));
+        operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
+        operation.setMaximumScore(maximunAccumulatedScore(requirementId));
+        operation.setCalculatedWeightAverage(calculateWeightAverage(requirementId));
+
+        return operation;
     }
 
     /**

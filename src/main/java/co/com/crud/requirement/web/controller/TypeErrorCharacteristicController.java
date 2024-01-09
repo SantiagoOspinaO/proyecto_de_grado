@@ -1,6 +1,8 @@
 package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.service.TypeErrorCharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -141,6 +143,16 @@ public class TypeErrorCharacteristicController {
     @GetMapping(path = "/percentage-of-cause-error-by-id/{id}/{errorid}/{causeError}")
     public double percentageOfCauseErrorById(@PathVariable("id") Integer requirementId, @PathVariable("errorid") Integer typeErrorId, @PathVariable("causeError") String causeError) {
         return typeErrorCharacteristicService.percentageOfCauseErrorById(requirementId, typeErrorId, causeError);
+    }
+
+    @GetMapping(path = "cause-error-by-characteristic-for-requirements/{id}")
+    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(@PathVariable("id") Integer projectId){
+        return typeErrorCharacteristicService.causeErrorByCharacteristicForRequirements(projectId);
+    }
+
+    @GetMapping(path = "error-distribution-all-requirements/{id}")
+    public IErrorDistributionAllRequirements errorDistributionAllRequirements(@PathVariable("id") Integer projectId){
+        return typeErrorCharacteristicService.errorDistributionAllRequirements(projectId);
     }
 
 }

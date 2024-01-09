@@ -1,6 +1,7 @@
 package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Characteristic;
+import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.service.CharacteristicService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -115,8 +116,8 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "all-operations/{id}")
-    public List<Double> getAllOperations(@PathVariable("id") Integer requirementId) {
-        return characteristicService.allOperations(requirementId);
+    public Operation getAllOperations(@PathVariable("id") Integer operationId,@PathVariable("id") Integer requirementId) {
+        return characteristicService.allOperations(operationId,requirementId);
     }
 
     @GetMapping(path = "/count-type-requirement-name-characteristic")

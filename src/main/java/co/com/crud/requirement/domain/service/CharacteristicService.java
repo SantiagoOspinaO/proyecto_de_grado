@@ -3,6 +3,7 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.CharacteristicNotFoundException;
 import co.com.crud.requirement.domain.exception.validation.RequirementAdecuationValidator;
 import co.com.crud.requirement.domain.model.Characteristic;
+import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +62,7 @@ public class CharacteristicService {
         characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 
-    public Integer evaluatedCharacteristicForRequirement(Integer requirementId) {
+    public double evalutedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         int requirementEvaluated = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
@@ -71,6 +71,12 @@ public class CharacteristicService {
         return requirementEvaluated;
     }
 
+    /**
+     * Calculate weight average double.
+     *
+     * @param requirementId the requirement id
+     * @return the double
+     */
     public double calculateWeightAverage(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0.0;
@@ -78,7 +84,7 @@ public class CharacteristicService {
             sumGrade += grade.getGrade();
         }
         double average = sumGrade / grades.size();
-        return average / evaluatedCharacteristicForRequirement(requirementId);
+        return average / evalutedCharacteristicForRequirement(requirementId);
     }
 
     public double maximumAccumulatedScore(Integer requirementId) {
@@ -96,6 +102,12 @@ public class CharacteristicService {
         return ((maxScore / 81) * 100);
     }
 
+    /**
+     * All operations list.
+     *
+     * @param requirementId the requirement id
+     * @return the list
+     */ /*
     public List<Double> allOperations(Integer requirementId) {
         List<Double> resultados = new ArrayList<>();
         double levelAdequacy = calculateLevelAdequacy(requirementId);
@@ -109,6 +121,19 @@ public class CharacteristicService {
         resultados.add(maximumScore);
         resultados.add(calculateWeightAverage);
         return resultados;
+    }*/
+
+    public Operation allOperations(Integer operationId,Integer requirementId) {
+        Operation operation = new Operation();
+        operation.setOperationId(operationId);
+        operation.setRequirementId(requirementId);
+        operation.setLevelAdecuacy(calculateLevelAdequacy(requirementId));
+        operation.setEvaluatedCharacteristics(evalutedCharacteristicForRequirement(requirementId));
+        operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
+        operation.setMaximumScore(maximunAccumulatedScore(requirementId));
+        operation.setCalculatedWeightAverage(calculateWeightAverage(requirementId));
+
+        return operation;
     }
 
     public String allEvaluationCharactersResult(Integer requirementId) {

@@ -1,5 +1,7 @@
 package co.com.crud.requirement.persistence.crud;
 
+import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -36,97 +38,127 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             @Param("tipoErrorId") Integer typeErrorId,
             @Param("causaError") String causeError);
 
-    // Para dar el valor de los requisitos que tienen tipo error DDE en true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE dde = 'true' ", nativeQuery = true)
     int countRequirementsByCauseErrorDDE();
 
-    // Para dar el valor de los requisitos que tienen tipo error DII en true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE dii = 'true' ", nativeQuery = true)
     int countRequirementsByCauseErrorDII();
 
-    // Para dar el valor de los requisitos que tienen tipo error VAR en true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE var = 'true' ", nativeQuery = true)
     int countRequirementsByCauseErrorVAR();
 
-    // Contar cuantos requisitos tienen tipo de error EIE por id de requisito segun la nota
-    /*@Query(value = "SELECT count(*) " +
-            "FROM tipo_error_caracteristica " +
-            "WHERE tipo_error_id = 1 and requisito_id = :requisitoId", nativeQuery = true)*/
     @Query(value = "SELECT count(*) " +
             "FROM nota_caracteristica_requisito ncr " +
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
             "WHERE tec.tipo_error_id = 1 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorEIEByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error EIE tiene causa de error DDE por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 1 and requisito_id = :requisitoId and dde = 'true' ", nativeQuery = true)
     int countTypeErrorEIEAndCauseErrorDDEByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error EIE tiene causa de error DII por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 1 and requisito_id = :requisitoId and dii = 'true' ", nativeQuery = true)
     int countTypeErrorEIEAndCauseErrorDIIByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error EIE tiene causa de error VAR por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 1 and requisito_id = :requisitoId and var = 'true' ", nativeQuery = true)
     int countTypeErrorEIEAndCauseErrorVARByRequirement(@Param("requisitoId") Integer requirementId);
 
-    // Contar cuantos requisitos tienen tipo de error MCC por id de requisito
-    /*@Query(value = "SELECT count(*) " +
-            "FROM tipo_error_caracteristica " +
-            "WHERE tipo_error_id = 2 and requisito_id = :requisitoId", nativeQuery = true)*/
     @Query(value = "SELECT count(*) " +
             "FROM nota_caracteristica_requisito ncr " +
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
             "WHERE tec.tipo_error_id = 2 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorMCCByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error MCC tiene causa de error DDE por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and dde = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorDDEByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error mcc tiene causa de error DII por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and dii = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorDIIByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Contar cuantos tipos de error MCC tiene causa de error VAR por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and var = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorVARByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //MCC y EIE dinamico -- Para contar cuantos hay MCC y EIE por id de requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
-            "WHERE tipo_error_id = :typeErrorId and requisito_id = :requisitoId", nativeQuery = true)
+            "WHERE (tipo_error_id = :typeErrorId) AND (requisito_id = :requisitoId)", nativeQuery = true)
     int countTypeErrorsByRequirements(@Param("typeErrorId") Integer typeErrorId,
                                       @Param("requisitoId") Integer requirementId);
 
-    // Para contar los tipos de error por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE requisito_id = :requisitoId", nativeQuery = true)
     int countAllTypeErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
-    //Para contar todos las causas de error por requsiito En true
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE (dde = 'true' OR  dii = 'true' OR var = 'true') AND tipo_error_id = :requisitoId", nativeQuery = true)
     int countAllCauseErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDII, " +
+            "SUM(1) FILTER (wHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableVAR, " +
+            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDDE, " +
+            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDII, " +
+            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableVAR " +
+            "FROM tipo_error_caracteristica tec " +
+            "INNER JOIN requisito r on tec.requisito_id=r.id " +
+            "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
+            "WHERE (r.proyecto_id = :proyectoId)", nativeQuery = true)
+    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(@Param("proyectoId") Integer projectId);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoEIE, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoEIE, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoEIE, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilEIE, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteMCC, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableMCC, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable') AS NoComprobableMCC, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable') AS NoIdentificableEIE, " +
+            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable') AS NoTrazableEIE " +
+            "FROM tipo_error_caracteristica tec " +
+            "INNER JOIN requisito r on tec.requisito_id=r.id " +
+            "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
+            "INNER JOIN nota_caracteristica_requisito ncr on ncr.caracteristica_id = tec.caracteristica_id and ncr.requisito_id = tec.requisito_id " +
+            "WHERE (r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8", nativeQuery = true)
+    IErrorDistributionAllRequirements errorDistributionAllRequirements(@Param("proyectoId") Integer projectId);
 }

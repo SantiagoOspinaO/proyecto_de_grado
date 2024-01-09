@@ -20,4 +20,5 @@ public class Operation {
     private Double maximumScore;
 
     private Double calculatedWeightAverage;
+
 }

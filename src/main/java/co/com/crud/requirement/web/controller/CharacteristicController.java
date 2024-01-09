@@ -5,7 +5,6 @@ import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.service.CharacteristicService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

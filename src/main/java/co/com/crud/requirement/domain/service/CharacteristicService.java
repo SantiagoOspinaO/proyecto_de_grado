@@ -9,16 +9,12 @@ import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-/**
- * The type Characteristic service.
- */
 @Service
 public class CharacteristicService {
 
@@ -62,7 +58,7 @@ public class CharacteristicService {
         characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 
-    public double evalutedCharacteristicForRequirement(Integer requirementId) {
+    public double evaluatedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         int requirementEvaluated = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
@@ -71,12 +67,6 @@ public class CharacteristicService {
         return requirementEvaluated;
     }
 
-    /**
-     * Calculate weight average double.
-     *
-     * @param requirementId the requirement id
-     * @return the double
-     */
     public double calculateWeightAverage(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0.0;
@@ -84,7 +74,7 @@ public class CharacteristicService {
             sumGrade += grade.getGrade();
         }
         double average = sumGrade / grades.size();
-        return average / evalutedCharacteristicForRequirement(requirementId);
+        return average / evaluatedCharacteristicForRequirement(requirementId);
     }
 
     public double maximumAccumulatedScore(Integer requirementId) {
@@ -102,12 +92,7 @@ public class CharacteristicService {
         return ((maxScore / 81) * 100);
     }
 
-    /**
-     * All operations list.
-     *
-     * @param requirementId the requirement id
-     * @return the list
-     */ /*
+    /*
     public List<Double> allOperations(Integer requirementId) {
         List<Double> resultados = new ArrayList<>();
         double levelAdequacy = calculateLevelAdequacy(requirementId);
@@ -123,14 +108,14 @@ public class CharacteristicService {
         return resultados;
     }*/
 
-    public Operation allOperations(Integer operationId,Integer requirementId) {
+    public Operation allOperations(Integer operationId, Integer requirementId) {
         Operation operation = new Operation();
         operation.setOperationId(operationId);
         operation.setRequirementId(requirementId);
         operation.setLevelAdecuacy(calculateLevelAdequacy(requirementId));
-        operation.setEvaluatedCharacteristics(evalutedCharacteristicForRequirement(requirementId));
+        operation.setEvaluatedCharacteristics(evaluatedCharacteristicForRequirement(requirementId));
         operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
-        operation.setMaximumScore(maximunAccumulatedScore(requirementId));
+        operation.setMaximumScore(maximumAccumulatedScore(requirementId));
         operation.setCalculatedWeightAverage(calculateWeightAverage(requirementId));
 
         return operation;
@@ -192,7 +177,7 @@ public class CharacteristicService {
         return objectMapper.writeValueAsString(jsonNode);
     }
 
-    private double sumValues(String jsonString)  throws JsonProcessingException {
+    private double sumValues(String jsonString) throws JsonProcessingException {
         double sum = 0.0;
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(jsonString);

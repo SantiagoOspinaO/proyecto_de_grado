@@ -1,6 +1,8 @@
 package co.com.crud.requirement.domain.repository;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +44,9 @@ public interface TypeErrorCharacteristicDomainRepository {
     int countAllTypeErrorsByRequirement(Integer requirementId);
 
     int countAllCauseErrorsByRequirement(Integer requirementId);
+
+    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(Integer projectId);
+
+    IErrorDistributionAllRequirements errorDistributionAllRequirements(Integer projectId);
 
 }

@@ -2,6 +2,8 @@ package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.exception.TypeErrorNotFoundException;
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
+import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,60 +119,27 @@ public class TypeErrorCharacteristicService {
         return (requirementEIE / allRequirements) * 100;
     }
 
-    public Double percentageOfTypeErrorEIEAndCauseErrorDDEById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-    public Double percentageOfTypeErrorEIEAndCauseErrorDIIById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-    public double percentageOfTypeErrorEIEAndCauseErrorVARById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-    public double percentageOfTypeErrorMCCAndCauseErrorDDEById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-    public double percentageOfTypeErrorMCCAndCauseErrorDIIById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-    public double percentageOfTypeErrorMCCAndCauseErrorVARById(Integer requirementId) {
-        double allRequirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
-        double requirementEIEAndDDE = typeErrorCharacteristicDomainRepository.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
-        return (requirementEIEAndDDE / allRequirementEIE) * 100;
-    }
-
-
-
     public Double percentageOfTypeErrorMCCById(Integer requirementId) {
         double allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirementMCC = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
         return (requirementMCC / allRequirements) * 100;
     }
 
-    public Integer percentageOfTypeErrosById(Integer typeErrorID, Integer requirementId) {
+    public Double percentageOfTypeErrosById(Integer typeErrorID, Integer requirementId) {
         Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         Integer requirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirements(typeErrorID, requirementId);
-        return (requirements / allRequirements) * 100;
+        double result = ((double)requirements / (double)allRequirements) * 100 ;
+        return result;
     }
 
     public Double percentageOffAllTypeErrorById(Integer requirementId) {
         Double MCC = percentageOfTypeErrorMCCById(requirementId);
         Double EIE = percentageOfTypeErrorEIEById(requirementId);
-        return (MCC + EIE);
+        Double result = (MCC + EIE);
+        if( result > 99.9){
+            result = 100.0;
+        }
+        return result;
     }
 
     public List<Double> allNumbersAndPercentageOperations(Integer requirementId){
@@ -226,6 +195,14 @@ public class TypeErrorCharacteristicService {
         result.add(percentageOfTypeErrorMCCAndCauseError);
 
         return result;
+    }
+
+    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(Integer projectId){
+        return typeErrorCharacteristicDomainRepository.causeErrorByCharacteristicForRequirements(projectId);
+    }
+
+    public IErrorDistributionAllRequirements errorDistributionAllRequirements(Integer projectId){
+        return typeErrorCharacteristicDomainRepository.errorDistributionAllRequirements(projectId);
     }
 
 }

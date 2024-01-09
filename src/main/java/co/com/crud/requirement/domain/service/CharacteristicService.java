@@ -5,6 +5,10 @@ import co.com.crud.requirement.domain.exception.validation.RequirementAdecuation
 import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +24,15 @@ public class CharacteristicService {
 
     private final CharacteristicDomainRepository characteristicDomainRepository;
 
-    /**
-     * Instantiates a new Characteristic service.
-     *
-     * @param characteristicDomainRepository the characteristic domain repository
-     */
     @Autowired
     public CharacteristicService(CharacteristicDomainRepository characteristicDomainRepository) {
         this.characteristicDomainRepository = characteristicDomainRepository;
     }
 
-    /**
-     * Gets all characteristics.
-     *
-     * @return the all characteristics
-     */
     public List<Characteristic> getAllCharacteristics() {
         return characteristicDomainRepository.getAllCharacteristics();
     }
 
-    /**
-     * Gets characteristic by id.
-     *
-     * @param id the id
-     * @return the characteristic by id
-     */
     public Optional<Characteristic> getCharacteristicById(Integer id) {
         Optional<Characteristic> characteristics = characteristicDomainRepository.getCharacteristicById(id);
         if (characteristics.isEmpty()) {
@@ -53,12 +41,6 @@ public class CharacteristicService {
         return characteristics;
     }
 
-    /**
-     * Calcular nivel de adecuacion ( sumar todas las notas y dividirlo por el total de las notas calificadas)
-     *
-     * @param requirementId the requirement id
-     * @return the double
-     */
     public double calculateLevelAdequacy(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0;
@@ -68,54 +50,19 @@ public class CharacteristicService {
         return sumGrade / grades.size();
     }
 
-    /**
-     * Update grade characteristic by requirement.
-     *
-     * @param gradeInput       the grade input
-     * @param requirementId    the requirement id
-     * @param characteristicId the characteristic id
-     */
     public void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId) {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    /**
-     * Update characteristic by requirement id.
-     *
-     * @param requirementId       the requirement id
-     * @param name                the name
-     * @param description         the description
-     * @param oppositeName        the opposite name
-     * @param oppositeDescription the opposite description
-     * @param gradeCharacteristic the grade characteristic
-     * @param dde                 the dde
-     * @param dii                 the dii
-     * @param var                 the var
-     */
     public void updateCharacteristicByRequirementId(Integer requirementId, Integer characteristicId, String name, String description, String oppositeName, String oppositeDescription, Double gradeCharacteristic, boolean dde, boolean dii, boolean var) {
         characteristicDomainRepository.updateCharacteristicByRequirementId(requirementId, characteristicId, name, description, oppositeName, oppositeDescription, gradeCharacteristic, dde, dii, var);
     }
 
-    /**
-     * Update type error of characteristic.
-     *
-     * @param dde              the dde
-     * @param dii              the dii
-     * @param var              the var
-     * @param requirementId    the requirement id
-     * @param characteristicId the characteristic id
-     */
     public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
         characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
 
-    /**
-     * Evalua todas las caracteristicas por requisito y devuelve el numero de caracteristicas evaluadas
-     *
-     * @param requirementId the requirement id
-     * @return the integer
-     */
-    public Integer evalutedCharacteristicForRequirement(Integer requirementId) {
+    public Integer evaluatedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         int requirementEvaluated = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
@@ -124,12 +71,6 @@ public class CharacteristicService {
         return requirementEvaluated;
     }
 
-    /**
-     * Calculate weight average double.
-     *
-     * @param requirementId the requirement id
-     * @return the double
-     */
     public double calculateWeightAverage(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0.0;
@@ -137,16 +78,10 @@ public class CharacteristicService {
             sumGrade += grade.getGrade();
         }
         double average = sumGrade / grades.size();
-        return average / evalutedCharacteristicForRequirement(requirementId);
+        return average / evaluatedCharacteristicForRequirement(requirementId);
     }
 
-    /**
-     * Suma todas las notas de la catacterisitca evaluada
-     *
-     * @param requirementId the requirement id
-     * @return the double
-     */
-    public double maximunAccumulatedScore(Integer requirementId) {
+    public double maximumAccumulatedScore(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0;
         double sum = 0;
@@ -156,46 +91,28 @@ public class CharacteristicService {
         return sumGrade;
     }
 
-    /**
-     * Devuelve un porcentaje
-     *
-     * @param requirementId the requirement id
-     * @return the double
-     */
     public double levelWeightScoreForNineCharacters(Integer requirementId) {
-        double maxScore = maximunAccumulatedScore(requirementId);
+        double maxScore = maximumAccumulatedScore(requirementId);
         return ((maxScore / 81) * 100);
     }
 
-    /**
-     * All operations list.
-     *
-     * @param requirementId the requirement id
-     * @return the list
-     */
     public List<Double> allOperations(Integer requirementId) {
         List<Double> resultados = new ArrayList<>();
-        double levelAdecuacy = calculateLevelAdequacy(requirementId);
-        double evaluatedCharacteristics = evalutedCharacteristicForRequirement(requirementId);
+        double levelAdequacy = calculateLevelAdequacy(requirementId);
+        double evaluatedCharacteristics = evaluatedCharacteristicForRequirement(requirementId);
         double levelWeightScore = levelWeightScoreForNineCharacters(requirementId);
-        double maximunScore = maximunAccumulatedScore(requirementId);
+        double maximumScore = maximumAccumulatedScore(requirementId);
         double calculateWeightAverage = calculateWeightAverage(requirementId);
-        resultados.add(levelAdecuacy);
+        resultados.add(levelAdequacy);
         resultados.add(evaluatedCharacteristics);
         resultados.add(levelWeightScore);
-        resultados.add(maximunScore);
+        resultados.add(maximumScore);
         resultados.add(calculateWeightAverage);
         return resultados;
     }
 
-    /**
-     * Devuelve un string de acuerdo a puntaje maximo acumulado
-     *
-     * @param requirementId the requirement id
-     * @return the string
-     */
     public String allEvaluationCharactersResult(Integer requirementId) {
-        double result = maximunAccumulatedScore(requirementId);
+        double result = maximumAccumulatedScore(requirementId);
         if (result > 72) {
             return RequirementAdecuationValidator.Adecuation_Alto_Alto;
         } else if (result < 72 && result > 63) {
@@ -218,12 +135,6 @@ public class CharacteristicService {
         return null;
     }
 
-    /**
-     * Gets characteristic by requirement.
-     *
-     * @param requirementId the requirement id
-     * @return the characteristic by requirement
-     */
     public List<ICharacteristicsByRequirementId> getCharacteristicByRequirement(Integer requirementId) {
         return characteristicDomainRepository.getCharacteristicsByRequirementId(requirementId);
     }
@@ -242,6 +153,32 @@ public class CharacteristicService {
 
     public IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(String typeRequirement, Integer projectId) {
         return characteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
+    }
+
+    public double percentageOfNumberCharacteristics(String typeRequirement, Integer projectId) throws JsonProcessingException {
+        IRequirementsByTypeAndNameCharacteristic allCharacteristicsByProjectId = characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
+        String jsonString = convertToJson(allCharacteristicsByProjectId);
+        return sumValues(jsonString);
+    }
+
+    private String convertToJson(IRequirementsByTypeAndNameCharacteristic requirements) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.valueToTree(requirements);
+        return objectMapper.writeValueAsString(jsonNode);
+    }
+
+    private double sumValues(String jsonString)  throws JsonProcessingException {
+        double sum = 0.0;
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(jsonString);
+
+        for (JsonNode entry : jsonNode) {
+            if (entry.isNumber()) {
+                sum += entry.asDouble();
+            }
+        }
+
+        return sum;
     }
 
 }

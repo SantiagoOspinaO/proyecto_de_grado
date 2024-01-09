@@ -63,16 +63,19 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
             "WHERE tec.tipo_error_id = 1 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorEIEByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error EIE tiene causa de error DDE por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 1 and requisito_id = :requisitoId and dde = 'true' ", nativeQuery = true)
     int countTypeErrorEIEAndCauseErrorDDEByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error EIE tiene causa de error DII por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 1 and requisito_id = :requisitoId and dii = 'true' ", nativeQuery = true)
     int countTypeErrorEIEAndCauseErrorDIIByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error EIE tiene causa de error VAR por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
@@ -88,16 +91,19 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
             "WHERE tec.tipo_error_id = 2 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorMCCByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error MCC tiene causa de error DDE por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and dde = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorDDEByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error mcc tiene causa de error DII por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +
             "WHERE tipo_error_id = 2 and requisito_id = :requisitoId and dii = 'true' ", nativeQuery = true)
     int countTypeErrorMCCAndCauseErrorDIIByRequirement(@Param("requisitoId") Integer requirementId);
+
     //Contar cuantos tipos de error MCC tiene causa de error VAR por requisito
     @Query(value = "SELECT count(*) " +
             "FROM tipo_error_caracteristica " +

@@ -149,7 +149,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "FROM tipo_error_caracteristica tec " +
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
             "INNER JOIN requisito r ON r.id = tec.requisito_id " +
-            "WHERE (r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,

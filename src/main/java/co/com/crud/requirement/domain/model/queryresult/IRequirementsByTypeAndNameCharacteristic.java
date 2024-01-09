@@ -2,40 +2,40 @@ package co.com.crud.requirement.domain.model.queryresult;
 
 public interface IRequirementsByTypeAndNameCharacteristic {
 
-    Integer getCorrecto();
+    Double getCorrecto();
 
-    Integer getIncorrecto();
+    Double getIncorrecto();
 
-    Integer getInequivoco();
+    Double getInequivoco();
 
-    Integer getAmbiguo();
+    Double getAmbiguo();
 
-    Integer getCompleto();
+    Double getCompleto();
 
-    Integer getIncompleto();
+    Double getIncompleto();
 
-    Integer getConsistente();
+    Double getConsistente();
 
-    Integer getDebil();
+    Double getDebil();
 
-    Integer getImportante();
+    Double getImportante();
 
-    Integer getIntrascendente();
+    Double getIntrascendente();
 
-    Integer getEstable();
+    Double getEstable();
 
-    Integer getInestable();
+    Double getInestable();
 
-    Integer getComprobable();
+    Double getComprobable();
 
-    Integer getNoComprobable();
+    Double getNoComprobable();
 
-    Integer getIdentificable();
+    Double getIdentificable();
 
-    Integer getNoIdentificable();
+    Double getNoIdentificable();
 
-    Integer getTrazable();
+    Double getTrazable();
 
-    Integer getNoTrazable();
+    Double getNoTrazable();
 
 }

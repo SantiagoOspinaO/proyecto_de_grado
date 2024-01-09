@@ -3,10 +3,13 @@ package co.com.crud.requirement.web.controller;
 import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.service.CharacteristicService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -40,7 +43,7 @@ public class CharacteristicController {
 
     @GetMapping(path = "/evaluated-characteristic-for-requirement/{id}")
     public double calculateEvaluatedCharacteristicForRequirement(@PathVariable("id") Integer requirementId) {
-        return characteristicService.evalutedCharacteristicForRequirement(requirementId);
+        return characteristicService.evaluatedCharacteristicForRequirement(requirementId);
     }
 
     @PostMapping(path = "/update-grade/{requirementId}/{characteristicId}")
@@ -88,7 +91,7 @@ public class CharacteristicController {
 
     @GetMapping(path = "/maximum-accumulated-score/{id}")
     public double calculateMaximumAccumulatedScore(@PathVariable("id") Integer requirementId) {
-        return characteristicService.maximunAccumulatedScore(requirementId);
+        return characteristicService.maximumAccumulatedScore(requirementId);
     }
 
     @GetMapping(path = "/level-weight-score/{id}")
@@ -142,10 +145,75 @@ public class CharacteristicController {
 
     @GetMapping(path = "/count-type-requirement-cause-error")
     public IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
-            @RequestParam String typeRequirement,
+            @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
     ) {
         return characteristicService.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
+    }
+
+    @GetMapping(path = "/algo")
+    public double algo (@RequestParam String typeRequirement, @RequestParam Integer projectId) throws JsonProcessingException {
+        return characteristicService.percentageOfNumberCharacteristics(typeRequirement, projectId);
+    }
+
+    @GetMapping(path = "/calculate-percentage-of-number-characteristics")
+    public Map<String, Double> getPercentageCountRequirementsByTypeAndNameCharacteristic(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId
+    ) throws JsonProcessingException {
+
+        IRequirementsByTypeAndNameCharacteristic requirements = characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
+
+        double totalRecords = characteristicService.percentageOfNumberCharacteristics(typeRequirement, projectId);
+
+        Double correcto = requirements.getCorrecto();
+        Double incorrecto = requirements.getIncorrecto();
+        Double inequivoco = requirements.getInequivoco();
+        Double ambiguo = requirements.getAmbiguo();
+        Double completo = requirements.getCompleto();
+        Double incompleto = requirements.getIncompleto();
+        Double consistente = requirements.getConsistente();
+        Double debil = requirements.getDebil();
+        Double importante = requirements.getImportante();
+        Double intrascendente = requirements.getIntrascendente();
+        Double estable = requirements.getEstable();
+        Double inestable = requirements.getInestable();
+        Double comprobable = requirements.getComprobable();
+        Double nocomprobable = requirements.getNoComprobable();
+        Double identificable = requirements.getIdentificable();
+        Double noidentificable = requirements.getNoIdentificable();
+        Double trazable = requirements.getTrazable();
+        Double notrazable = requirements.getNoTrazable();
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("correcto", calculatePercentage(correcto != null ? correcto : 0.0, totalRecords));
+        result.put("incorrecto", calculatePercentage(incorrecto != null ? incorrecto : 0.0, totalRecords));
+        result.put("inequivoco", calculatePercentage(inequivoco != null ? inequivoco : 0.0, totalRecords));
+        result.put("ambiguo", calculatePercentage(ambiguo != null ? ambiguo : 0.0, totalRecords));
+        result.put("completo(", calculatePercentage(completo != null ? completo : 0.0, totalRecords));
+        result.put("incompleto", calculatePercentage(incompleto != null ? incompleto : 0.0, totalRecords));
+        result.put("consistente", calculatePercentage(consistente != null ? consistente : 0.0, totalRecords));
+        result.put("debil", calculatePercentage(debil != null ? debil : 0.0, totalRecords));
+        result.put("importante", calculatePercentage(importante != null ? importante : 0.0, totalRecords));
+        result.put("intrascendente", calculatePercentage(intrascendente != null ? intrascendente : 0.0, totalRecords));
+        result.put("estable", calculatePercentage(estable != null ? estable : 0.0, totalRecords));
+        result.put("inestable", calculatePercentage(inestable != null ? inestable : 0.0, totalRecords));
+        result.put("comprobable", calculatePercentage(comprobable != null ? comprobable : 0.0, totalRecords));
+        result.put("noComprobable", calculatePercentage(nocomprobable != null ? nocomprobable : 0.0, totalRecords));
+        result.put("identificable", calculatePercentage(identificable != null ? identificable : 0.0, totalRecords));
+        result.put("noIdentificable", calculatePercentage(noidentificable != null ? noidentificable : 0.0, totalRecords));
+        result.put("trazable", calculatePercentage(trazable != null ? trazable : 0.0, totalRecords));
+        result.put("noTrazable", calculatePercentage(notrazable != null ? notrazable : 0.0, totalRecords));
+
+        return result;
+    }
+
+    private double calculatePercentage(double count, double totalRecords) {
+        if (totalRecords == 0) {
+            return 0.0;
+        } else {
+            return (count / totalRecords) * 100.0;
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.service.TypeErrorCharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,14 +146,18 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.percentageOfCauseErrorById(requirementId, typeErrorId, causeError);
     }
 
-    @GetMapping(path = "cause-error-by-characteristic-for-requirements/{id}")
-    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(@PathVariable("id") Integer projectId){
-        return typeErrorCharacteristicService.causeErrorByCharacteristicForRequirements(projectId);
+    @GetMapping(path = "/cause-error-by-characteristic-for-requirements")
+    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId){
+        return typeErrorCharacteristicService.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
     }
 
-    @GetMapping(path = "error-distribution-all-requirements/{id}")
-    public IErrorDistributionAllRequirements errorDistributionAllRequirements(@PathVariable("id") Integer projectId){
-        return typeErrorCharacteristicService.errorDistributionAllRequirements(projectId);
+    @GetMapping(path = "/error-distribution-all-requirements")
+    public IErrorDistributionAllRequirements errorDistributionAllRequirements(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId){
+        return typeErrorCharacteristicService.errorDistributionAllRequirements(typeRequirement,projectId);
     }
 
 }

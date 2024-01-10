@@ -1,6 +1,7 @@
 package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
 import org.springframework.data.jpa.repository.Query;
@@ -142,8 +143,11 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "FROM tipo_error_caracteristica tec " +
             "INNER JOIN requisito r on tec.requisito_id=r.id " +
             "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
-            "WHERE (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(@Param("proyectoId") Integer projectId);
+            "WHERE (r.proyecto_id = :proyectoId) " +
+            "OR ((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) AND r.proyecto_id = :proyectoId ) ", nativeQuery = true)
+    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(
+            @Param("tipoRequisito") String typeRequirement,
+            @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
             "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoEIE, " +
@@ -159,6 +163,10 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "INNER JOIN requisito r on tec.requisito_id=r.id " +
             "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
             "INNER JOIN nota_caracteristica_requisito ncr on ncr.caracteristica_id = tec.caracteristica_id and ncr.requisito_id = tec.requisito_id " +
-            "WHERE (r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8", nativeQuery = true)
-    IErrorDistributionAllRequirements errorDistributionAllRequirements(@Param("proyectoId") Integer projectId);
+            "WHERE ((r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8) " +
+            "OR (((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) AND r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8) ", nativeQuery = true)
+    IErrorDistributionAllRequirements errorDistributionAllRequirements(
+            @Param("tipoRequisito") String typeRequirement,
+            @Param("proyectoId") Integer projectId);
+
 }

@@ -184,4 +184,58 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             @Param("requisitoId") Integer requirementId,
             @Param("proyectoId") Integer projectId);
 
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incorrecto' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS incorrecto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Ambiguo' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS ambiguo, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Débil' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS debil, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incompleto' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS incompleto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Intrascendente' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS intrascendente, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Inestable' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS inestable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Comprobable' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS noComprobable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Identificable' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS noIdentificable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.dde = true) AS noTrazable " +
+            "FROM requisito r " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
+            @Param("proyectoId") Integer projectId);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incorrecto' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS incorrecto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Ambiguo' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS ambiguo, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Débil' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS debil, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incompleto' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS incompleto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Intrascendente' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS intrascendente, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Inestable' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS inestable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Comprobable' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS noComprobable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Identificable' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS noIdentificable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.dii = true) AS noTrazable " +
+            "FROM requisito r " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(
+            @Param("proyectoId") Integer projectId);
+
+    @Query(value = "SELECT " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incorrecto' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS incorrecto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Ambiguo' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS ambiguo, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Débil' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS debil, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Incompleto' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS incompleto, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Intrascendente' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS intrascendente, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'Inestable' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS inestable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Comprobable' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS noComprobable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Identificable' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS noIdentificable, " +
+            "SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.var = true) AS noTrazable " +
+            "FROM requisito r " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
+            "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
+            "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(
+            @Param("proyectoId") Integer projectId);
+
 }

@@ -6,9 +6,6 @@ import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -165,11 +162,25 @@ public class CharacteristicService {
         return characteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
     }
 
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorDDE(projectId);
+    }
+
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorDII(projectId);
+    }
+
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorVAR(projectId);
+    }
+
     public double calculatePercentage(double count, double totalRecords) {
         if (totalRecords == 0) {
             return 0.0;
         } else {
-            return (count / totalRecords) * 100.0;
+            double percentage = (count / totalRecords) * 100.0;
+            String formattedPercentage = String.format("%.2f", percentage).replace(",", ".");
+            return Double.parseDouble(formattedPercentage);
         }
     }
 

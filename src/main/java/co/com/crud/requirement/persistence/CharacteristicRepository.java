@@ -82,4 +82,19 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
         return characteristicCrudRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
     }
 
+    @Override
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(Integer projectId) {
+        return characteristicCrudRepository.countCharacteristicsByCauseErrorDDE(projectId);
+    }
+
+    @Override
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(Integer projectId) {
+        return characteristicCrudRepository.countCharacteristicsByCauseErrorDII(projectId);
+    }
+
+    @Override
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(Integer projectId) {
+        return characteristicCrudRepository.countCharacteristicsByCauseErrorVAR(projectId);
+    }
+
 }

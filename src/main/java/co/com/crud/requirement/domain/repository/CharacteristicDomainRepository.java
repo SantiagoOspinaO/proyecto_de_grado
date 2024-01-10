@@ -30,4 +30,10 @@ public interface CharacteristicDomainRepository {
 
     IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(String typeRequirement, Integer projectId);
 
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(Integer projectId);
+
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(Integer projectId);
+
+    ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(Integer projectId);
+
 }

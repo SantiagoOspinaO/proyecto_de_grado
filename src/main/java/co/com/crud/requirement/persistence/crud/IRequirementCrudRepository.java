@@ -43,7 +43,7 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "   (:causaError = 'dde' AND tec.dde = true) OR " +
             "   (:causaError = 'var' AND tec.var = true)" +
             ") " +
-            "AND (r.proyecto_id = :proyectoId)", nativeQuery = true)
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,
             @Param("causaError") String causeError,

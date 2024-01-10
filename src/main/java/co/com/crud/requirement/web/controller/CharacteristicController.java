@@ -185,7 +185,7 @@ public class CharacteristicController {
         result.put("incorrecto", characteristicService.calculatePercentage(incorrecto, totalImperfect));
         result.put("inequivoco", characteristicService.calculatePercentage(inequivoco, totalPerfect));
         result.put("ambiguo", characteristicService.calculatePercentage(ambiguo, totalImperfect));
-        result.put("completo(", characteristicService.calculatePercentage(completo, totalPerfect));
+        result.put("completo", characteristicService.calculatePercentage(completo, totalPerfect));
         result.put("incompleto", characteristicService.calculatePercentage(incompleto, totalImperfect));
         result.put("consistente", characteristicService.calculatePercentage(consistente, totalPerfect));
         result.put("debil", characteristicService.calculatePercentage(debil, totalImperfect));

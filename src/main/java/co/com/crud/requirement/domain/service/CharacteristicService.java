@@ -165,30 +165,12 @@ public class CharacteristicService {
         return characteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
     }
 
-    public double percentageOfNumberCharacteristics(String typeRequirement, Integer projectId) throws JsonProcessingException {
-        IRequirementsByTypeAndNameCharacteristic allCharacteristicsByProjectId = characteristicDomainRepository.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
-        String jsonString = convertToJson(allCharacteristicsByProjectId);
-        return sumValues(jsonString);
-    }
-
-    private String convertToJson(IRequirementsByTypeAndNameCharacteristic requirements) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.valueToTree(requirements);
-        return objectMapper.writeValueAsString(jsonNode);
-    }
-
-    private double sumValues(String jsonString) throws JsonProcessingException {
-        double sum = 0.0;
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(jsonString);
-
-        for (JsonNode entry : jsonNode) {
-            if (entry.isNumber()) {
-                sum += entry.asDouble();
-            }
+    public double calculatePercentage(double count, double totalRecords) {
+        if (totalRecords == 0) {
+            return 0.0;
+        } else {
+            return (count / totalRecords) * 100.0;
         }
-
-        return sum;
     }
 
 }

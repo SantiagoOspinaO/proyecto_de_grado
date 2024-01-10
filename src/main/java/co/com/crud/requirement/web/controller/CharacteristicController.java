@@ -151,69 +151,56 @@ public class CharacteristicController {
         return characteristicService.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
     }
 
-    @GetMapping(path = "/algo")
-    public double algo (@RequestParam String typeRequirement, @RequestParam Integer projectId) throws JsonProcessingException {
-        return characteristicService.percentageOfNumberCharacteristics(typeRequirement, projectId);
-    }
-
-    @GetMapping(path = "/calculate-percentage-of-number-characteristics")
+    @GetMapping(path = "/calculate-percentage-of-name-characteristics")
     public Map<String, Double> getPercentageCountRequirementsByTypeAndNameCharacteristic(
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
-    ) throws JsonProcessingException {
-
+    ) {
         IRequirementsByTypeAndNameCharacteristic requirements = characteristicService.countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
 
-        double totalRecords = characteristicService.percentageOfNumberCharacteristics(typeRequirement, projectId);
+        double correcto = requirements.getCorrecto() != null ? requirements.getCorrecto() : 0.0;
+        double incorrecto = requirements.getIncorrecto() != null ? requirements.getIncorrecto() : 0.0;
+        double inequivoco = requirements.getInequivoco() != null ? requirements.getInequivoco() : 0.0;
+        double ambiguo = requirements.getAmbiguo() != null ? requirements.getAmbiguo() : 0.0;
+        double completo = requirements.getCompleto() != null ? requirements.getCompleto() : 0.0;
+        double incompleto = requirements.getIncompleto() != null ? requirements.getIncompleto() : 0.0;
+        double consistente = requirements.getConsistente() != null ? requirements.getConsistente() : 0.0;
+        double debil = requirements.getDebil() != null ? requirements.getDebil() : 0.0;
+        double importante = requirements.getImportante() != null ? requirements.getImportante() : 0.0;
+        double intrascendente = requirements.getIntrascendente() != null ? requirements.getIntrascendente() : 0.0;
+        double estable = requirements.getEstable() != null ? requirements.getEstable() : 0.0;
+        double inestable = requirements.getInestable() != null ? requirements.getInestable() : 0.0;
+        double comprobable = requirements.getComprobable() != null ? requirements.getComprobable() : 0.0;
+        double nocomprobable = requirements.getNoComprobable() != null ? requirements.getNoComprobable() : 0.0;
+        double identificable = requirements.getIdentificable() != null ? requirements.getCorrecto() : 0.0;
+        double noidentificable = requirements.getNoIdentificable() != null ? requirements.getNoIdentificable() : 0.0;
+        double trazable = requirements.getTrazable() != null ? requirements.getTrazable() : 0.0;
+        double notrazable = requirements.getNoTrazable() != null ? requirements.getNoTrazable() : 0.0;
 
-        Double correcto = requirements.getCorrecto();
-        Double incorrecto = requirements.getIncorrecto();
-        Double inequivoco = requirements.getInequivoco();
-        Double ambiguo = requirements.getAmbiguo();
-        Double completo = requirements.getCompleto();
-        Double incompleto = requirements.getIncompleto();
-        Double consistente = requirements.getConsistente();
-        Double debil = requirements.getDebil();
-        Double importante = requirements.getImportante();
-        Double intrascendente = requirements.getIntrascendente();
-        Double estable = requirements.getEstable();
-        Double inestable = requirements.getInestable();
-        Double comprobable = requirements.getComprobable();
-        Double nocomprobable = requirements.getNoComprobable();
-        Double identificable = requirements.getIdentificable();
-        Double noidentificable = requirements.getNoIdentificable();
-        Double trazable = requirements.getTrazable();
-        Double notrazable = requirements.getNoTrazable();
+        double totalPerfect = correcto + inequivoco + completo + consistente + importante + estable + comprobable + identificable + trazable;
+        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + nocomprobable + noidentificable + notrazable;
 
         Map<String, Double> result = new HashMap<>();
-        result.put("correcto", calculatePercentage(correcto != null ? correcto : 0.0, totalRecords));
-        result.put("incorrecto", calculatePercentage(incorrecto != null ? incorrecto : 0.0, totalRecords));
-        result.put("inequivoco", calculatePercentage(inequivoco != null ? inequivoco : 0.0, totalRecords));
-        result.put("ambiguo", calculatePercentage(ambiguo != null ? ambiguo : 0.0, totalRecords));
-        result.put("completo(", calculatePercentage(completo != null ? completo : 0.0, totalRecords));
-        result.put("incompleto", calculatePercentage(incompleto != null ? incompleto : 0.0, totalRecords));
-        result.put("consistente", calculatePercentage(consistente != null ? consistente : 0.0, totalRecords));
-        result.put("debil", calculatePercentage(debil != null ? debil : 0.0, totalRecords));
-        result.put("importante", calculatePercentage(importante != null ? importante : 0.0, totalRecords));
-        result.put("intrascendente", calculatePercentage(intrascendente != null ? intrascendente : 0.0, totalRecords));
-        result.put("estable", calculatePercentage(estable != null ? estable : 0.0, totalRecords));
-        result.put("inestable", calculatePercentage(inestable != null ? inestable : 0.0, totalRecords));
-        result.put("comprobable", calculatePercentage(comprobable != null ? comprobable : 0.0, totalRecords));
-        result.put("noComprobable", calculatePercentage(nocomprobable != null ? nocomprobable : 0.0, totalRecords));
-        result.put("identificable", calculatePercentage(identificable != null ? identificable : 0.0, totalRecords));
-        result.put("noIdentificable", calculatePercentage(noidentificable != null ? noidentificable : 0.0, totalRecords));
-        result.put("trazable", calculatePercentage(trazable != null ? trazable : 0.0, totalRecords));
-        result.put("noTrazable", calculatePercentage(notrazable != null ? notrazable : 0.0, totalRecords));
+        result.put("correcto", characteristicService.calculatePercentage(correcto, totalPerfect));
+        result.put("incorrecto", characteristicService.calculatePercentage(incorrecto, totalImperfect));
+        result.put("inequivoco", characteristicService.calculatePercentage(inequivoco, totalPerfect));
+        result.put("ambiguo", characteristicService.calculatePercentage(ambiguo, totalImperfect));
+        result.put("completo(", characteristicService.calculatePercentage(completo, totalPerfect));
+        result.put("incompleto", characteristicService.calculatePercentage(incompleto, totalImperfect));
+        result.put("consistente", characteristicService.calculatePercentage(consistente, totalPerfect));
+        result.put("debil", characteristicService.calculatePercentage(debil, totalImperfect));
+        result.put("importante", characteristicService.calculatePercentage(importante, totalPerfect));
+        result.put("intrascendente", characteristicService.calculatePercentage(intrascendente, totalImperfect));
+        result.put("estable", characteristicService.calculatePercentage(estable, totalPerfect));
+        result.put("inestable", characteristicService.calculatePercentage(inestable, totalImperfect));
+        result.put("comprobable", characteristicService.calculatePercentage(comprobable, totalPerfect));
+        result.put("noComprobable", characteristicService.calculatePercentage(nocomprobable, totalImperfect));
+        result.put("identificable", characteristicService.calculatePercentage(identificable, totalPerfect));
+        result.put("noIdentificable", characteristicService.calculatePercentage(noidentificable, totalImperfect));
+        result.put("trazable", characteristicService.calculatePercentage(trazable, totalPerfect));
+        result.put("noTrazable", characteristicService.calculatePercentage(notrazable, totalImperfect));
 
         return result;
-    }
-
-    private double calculatePercentage(double count, double totalRecords) {
-        if (totalRecords == 0) {
-            return 0.0;
-        } else {
-            return (count / totalRecords) * 100.0;
-        }
     }
 
 }

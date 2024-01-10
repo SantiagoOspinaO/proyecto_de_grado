@@ -3,6 +3,7 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.TypeErrorNotFoundException;
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,12 +198,12 @@ public class TypeErrorCharacteristicService {
         return result;
     }
 
-    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(Integer projectId){
-        return typeErrorCharacteristicDomainRepository.causeErrorByCharacteristicForRequirements(projectId);
+    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(String typeRequirement,Integer projectId){
+        return typeErrorCharacteristicDomainRepository.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
     }
 
-    public IErrorDistributionAllRequirements errorDistributionAllRequirements(Integer projectId){
-        return typeErrorCharacteristicDomainRepository.errorDistributionAllRequirements(projectId);
+    public IErrorDistributionAllRequirements errorDistributionAllRequirements(String typeRequirement,Integer projectId){
+        return typeErrorCharacteristicDomainRepository.errorDistributionAllRequirements(typeRequirement,projectId);
     }
 
 }

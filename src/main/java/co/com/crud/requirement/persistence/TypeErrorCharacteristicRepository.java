@@ -2,6 +2,7 @@ package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
+import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import co.com.crud.requirement.persistence.crud.ITypeErrorCharacteristicCrudRepository;
@@ -117,13 +118,13 @@ public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristi
     }
 
     @Override
-    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(Integer projectId) {
-        return ITypeErrorCharacteristicCrudRepository.causeErrorByCharacteristicForRequirements(projectId);
+    public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(String typeRequirement,Integer projectId) {
+        return ITypeErrorCharacteristicCrudRepository.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
     }
 
     @Override
-    public IErrorDistributionAllRequirements errorDistributionAllRequirements(Integer projectId) {
-        return ITypeErrorCharacteristicCrudRepository.errorDistributionAllRequirements(projectId);
+    public IErrorDistributionAllRequirements errorDistributionAllRequirements(String typeRequirement, Integer projectId) {
+        return ITypeErrorCharacteristicCrudRepository.errorDistributionAllRequirements(typeRequirement,projectId);
     }
 
 }

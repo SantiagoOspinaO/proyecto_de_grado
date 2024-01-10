@@ -45,8 +45,8 @@ public interface TypeErrorCharacteristicDomainRepository {
 
     int countAllCauseErrorsByRequirement(Integer requirementId);
 
-    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(Integer projectId);
+    IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(String typeRequirement, Integer projectId);
 
-    IErrorDistributionAllRequirements errorDistributionAllRequirements(Integer projectId);
+    IErrorDistributionAllRequirements errorDistributionAllRequirements(String typeRequirement, Integer projectId);
 
 }

@@ -4,7 +4,6 @@ import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.service.CharacteristicService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

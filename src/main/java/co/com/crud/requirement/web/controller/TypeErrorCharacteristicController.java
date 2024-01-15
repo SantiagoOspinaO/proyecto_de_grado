@@ -2,7 +2,6 @@ package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
-import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.service.TypeErrorCharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +92,7 @@ public class TypeErrorCharacteristicController {
     public int countTypeErrorMCCAndCauseErrorVARByRequirement(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
     }
+
     // Devuelve todas las operaciones de la hoja distribucionErroresRequisito
     @GetMapping(path = "/all-number-percentage-operations/{id}")
     public List<Double> allNumberAntPercentageOperations(@PathVariable("id") Integer requirementId) {
@@ -149,15 +149,15 @@ public class TypeErrorCharacteristicController {
     @GetMapping(path = "/cause-error-by-characteristic-for-requirements")
     public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam Integer projectId){
-        return typeErrorCharacteristicService.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
+            @RequestParam Integer projectId) {
+        return typeErrorCharacteristicService.causeErrorByCharacteristicForRequirements(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/error-distribution-all-requirements")
     public IErrorDistributionAllRequirements errorDistributionAllRequirements(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam Integer projectId){
-        return typeErrorCharacteristicService.errorDistributionAllRequirements(typeRequirement,projectId);
+            @RequestParam Integer projectId) {
+        return typeErrorCharacteristicService.errorDistributionAllRequirements(typeRequirement, projectId);
     }
 
 }

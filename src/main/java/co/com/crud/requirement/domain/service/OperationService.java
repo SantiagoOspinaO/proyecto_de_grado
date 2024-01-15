@@ -20,13 +20,13 @@ public class OperationService {
         this.characteristicService = characteristicService;
     }
 
-    public Operation saveOperation(Operation operation){
+    public Operation saveOperation(Operation operation) {
         Operation operationReturn = new Operation();
-        operationReturn = characteristicService.allOperations(operation.getOperationId(),operation.getRequirementId());
+        operationReturn = characteristicService.allOperations(operation.getOperationId(), operation.getRequirementId());
         return operationsDomainRepository.saveOperation(operationReturn);
     }
 
-    public List<Operation> getAllOperations(){
+    public List<Operation> getAllOperations() {
         return operationsDomainRepository.getAllOperations();
     }
 }

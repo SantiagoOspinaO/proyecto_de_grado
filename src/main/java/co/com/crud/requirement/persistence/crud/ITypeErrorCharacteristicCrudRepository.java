@@ -1,7 +1,6 @@
 package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
-import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
 import org.springframework.data.jpa.repository.Query;

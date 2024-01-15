@@ -61,6 +61,11 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
+    @Query(value = "SELECT count(*) " +
+            "FROM operacion " +
+            "WHERE (puntaje_maximo < 72) ", nativeQuery = true)
+    IPerfectOrNotPerfectRequirement countImperfectRequirements();
+
     @Query(value = "SELECT " +
             "SUM(1) FILTER (WHERE op.puntaje_maximo < 72) AS Imperfecto, " +
             "SUM(1) FILTER (WHERE op.puntaje_maximo > 72) AS Perfecto " +

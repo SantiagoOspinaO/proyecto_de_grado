@@ -3,7 +3,6 @@ package co.com.crud.requirement.domain.service;
 import co.com.crud.requirement.domain.exception.TypeErrorNotFoundException;
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
-import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;

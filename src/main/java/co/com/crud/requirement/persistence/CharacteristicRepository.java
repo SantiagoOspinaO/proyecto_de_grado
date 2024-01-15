@@ -7,7 +7,6 @@ import co.com.crud.requirement.persistence.crud.ICharacteristicCrudRepository;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
 import co.com.crud.requirement.persistence.mapper.CharacteristicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

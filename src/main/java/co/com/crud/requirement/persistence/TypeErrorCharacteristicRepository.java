@@ -2,7 +2,6 @@ package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
-import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
 import co.com.crud.requirement.persistence.crud.ITypeErrorCharacteristicCrudRepository;

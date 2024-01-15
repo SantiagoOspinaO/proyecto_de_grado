@@ -2,9 +2,9 @@ package co.com.crud.requirement.web.controller;
 
 import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
-import co.com.crud.requirement.domain.service.RequirementService;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +70,7 @@ public class RequirementController {
     }
 
     @GetMapping(path = "/count-perfect-requirements/{id}")
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements(@PathVariable("id") Integer projectId){
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements(@PathVariable("id") Integer projectId) {
         return requirementService.countPerfectRequirements(projectId);
     }
 
@@ -78,8 +78,13 @@ public class RequirementController {
     public IPerfectOrNotPerfectRequirement countPerfectRequirements1(
             @RequestParam String typeRequirement,
             @RequestParam Integer projectId
-    ){
-        return requirementService.countPerfectRequirements1(typeRequirement,projectId);
+    ) {
+        return requirementService.countPerfectRequirements1(typeRequirement, projectId);
+    }
+
+    @GetMapping(path = "/count-imperfect-requirements")
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements() {
+        return requirementService.countImperfectRequirements();
     }
 
 }

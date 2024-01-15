@@ -22,14 +22,14 @@ public class OperationController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Operation> updateOperation(@RequestBody Operation operation,@PathVariable("id") Integer id) {
+    public ResponseEntity<Operation> updateOperation(@RequestBody Operation operation, @PathVariable("id") Integer id) {
         operation.setOperationId(id);
         operation.setRequirementId(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.operationService.saveOperation(operation));
     }
 
     @GetMapping()
-    public ResponseEntity<List<Operation>> getAllOperations(){
+    public ResponseEntity<List<Operation>> getAllOperations() {
         return ResponseEntity.ok(operationService.getAllOperations());
     }
 }

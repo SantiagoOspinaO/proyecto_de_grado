@@ -37,4 +37,33 @@ public class RequirementCrudRepositoryTest {
         verify(iRequirementCrudRepository, times(1)).findById(eq(requirementId));
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    public void testCountRequirementsByFilterCauseError() {
+        //Arrange
+        int requisitoId = 5;
+        IRequirementCrudRepository iRequirementCrudRepository = mock(IRequirementCrudRepository.class);
+
+        //Act
+        iRequirementCrudRepository.countRequirementsByFilterCauseError(requisitoId);
+
+        //Assert
+        verify(iRequirementCrudRepository, (times(1))).countRequirementsByFilterCauseError(requisitoId);
+    }
+
+    @Test
+    public void testCountRequirementsByGradeAndCauseError() {
+        //Arrange
+        String tipoRequisito = "No funcional";
+        String causeError = "EIE";
+        int projectId = 2;
+        IRequirementCrudRepository iRequirementCrudRepository = mock(IRequirementCrudRepository.class);
+
+        //Act
+        iRequirementCrudRepository.countRequirementsByGradeAndCauseError(tipoRequisito, causeError, projectId);
+
+        //Assert
+        verify(iRequirementCrudRepository, times(1)).countRequirementsByGradeAndCauseError(tipoRequisito, causeError, projectId);
+    }
+
 }

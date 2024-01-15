@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,7 +40,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testFindGradesByRequirementsWhenResultIsNull(){
+    public void testFindGradesByRequirementsWhenResultIsNull() {
         //Arrange
         int requisitoID = 1;
         CharacteristicRepository characteristicRepository = mock(CharacteristicRepository.class);
@@ -54,11 +53,11 @@ public class CharacteristicCrudRepositoryTest {
 
         //Assert
         verify(iCharacteristicCrudRepository, times(1)).findGradesByRequirementId(requisitoID);
-        assertEquals(Collections.emptyList(),result);
+        assertEquals(Collections.emptyList(), result);
     }
 
     @Test
-    public void testFindCharacteristicsByRequirementIDMustReturnEmpty(){
+    public void testFindCharacteristicsByRequirementIDMustReturnEmpty() {
         //Arrange
         int requisitoID = 1;
         CharacteristicRepository characteristicRepository = mock(CharacteristicRepository.class);
@@ -71,11 +70,11 @@ public class CharacteristicCrudRepositoryTest {
 
         //Assert
         verify(iCharacteristicCrudRepository, times(1)).findCharacteristicsByRequirementId(requisitoID);
-        assertEquals(Collections.emptyList(),result);
+        assertEquals(Collections.emptyList(), result);
     }
 
     @Test
-    public void testupdateCharacteristicByRequirementId(){
+    public void testUpdateCharacteristicByRequirementId() {
         //Arrange
         int requisitoID = 1;
         int characteristicId = 1;
@@ -84,29 +83,133 @@ public class CharacteristicCrudRepositoryTest {
         String nombreOpuesto = "Incorrecto";
         String descripcionOpuesta = "PRueba";
         Double notaCaracteristica = 9.0;
-        Boolean dde = true , dii = false, var = true;
+        Boolean dde = true, dii = false, var = true;
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        iCharacteristicCrudRepository.updateCharacteristicByRequirementId(requisitoID,characteristicId,nombre,descripcion,nombreOpuesto,descripcionOpuesta,notaCaracteristica, dde,dii,var);
+        iCharacteristicCrudRepository.updateCharacteristicByRequirementId(requisitoID, characteristicId, nombre, descripcion, nombreOpuesto, descripcionOpuesta, notaCaracteristica, dde, dii, var);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).updateCharacteristicByRequirementId(requisitoID,characteristicId,nombre,descripcion,nombreOpuesto,descripcionOpuesta,notaCaracteristica, dde,dii,var);
+        verify(iCharacteristicCrudRepository, times(1)).updateCharacteristicByRequirementId(requisitoID, characteristicId, nombre, descripcion, nombreOpuesto, descripcionOpuesta, notaCaracteristica, dde, dii, var);
 
     }
 
     @Test
-    public void testUpdateTypeErrorOfCharacteristic(){
+    public void testUpdateGradeCharacteristicByRequirement() {
         //Arrange
+        double notaIngresada = 8.8;
         int requisitoID = 1;
         int characteristicId = 1;
-        Boolean dde = true , dii = false, var = true;
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        iCharacteristicCrudRepository.updateCauseErrorOfCharacteristic(dde,dii,var, requisitoID,characteristicId);
+        iCharacteristicCrudRepository.updateGradeCharacteristicByRequirement(notaIngresada, requisitoID, characteristicId);
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).updateGradeCharacteristicByRequirement(notaIngresada, requisitoID, characteristicId);
+
+    }
+
+    @Test
+    public void testUpdateCauseErrorOfCharacteristic() {
+        //Arrange
+        int requisitoID = 1;
+        int characteristicId = 1;
+        Boolean dde = true, dii = false, var = true;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        iCharacteristicCrudRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requisitoID, characteristicId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).updateCauseErrorOfCharacteristic(dde,dii,var,requisitoID,characteristicId);
+        verify(iCharacteristicCrudRepository, times(1)).updateCauseErrorOfCharacteristic(dde, dii, var, requisitoID, characteristicId);
     }
+
+    @Test
+    public void testCountRequirementsByTypeAndNameCharacteristicMustReturnNull() {
+        //Arrange
+        String tipoRequisito = "Funcional";
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countRequirementsByTypeAndNameCharacteristic(tipoRequisito, projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndNameCharacteristic(tipoRequisito, projectId);
+        assertNull(result);
+    }
+
+    @Test
+    public void testCountCauseErrorByRequirementType() {
+        //Arrange
+        String tipoRequisito = "Funcional";
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(tipoRequisito, projectId);
+        assertNull(result);
+
+    }
+
+    @Test
+    public void testCountRequirementsByRequirementIdAndCauseErrorMustReturnNull() {
+        //Arrange
+        int requisitoId = 2;
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countRequirementsByRequirementIdAndCauseError(requisitoId, projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countRequirementsByRequirementIdAndCauseError(requisitoId, projectId);
+        assertNull(result);
+    }
+
+    @Test
+    public void testCountCharacteristicsByCauseErrorDDEMustReturnNull() {
+        //Arrange
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDDE(projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDDE(projectId);
+        assertNull(result);
+    }
+
+    @Test
+    public void testCountCharacteristicsByCauseErrorDII() {
+        //Arrange
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDII(projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDII(projectId);
+        assertNull(result);
+    }
+
+    @Test
+    public void testCountCharacteristicsByCauseErrorVARMustReturnNull() {
+        //Arrange
+        int projectId = 1;
+        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
+
+        //Act
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorVAR(projectId);
+
+        //Assert
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorVAR(projectId);
+        assertNull(result);
+    }
+
 }

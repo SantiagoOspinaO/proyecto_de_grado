@@ -77,22 +77,12 @@ public class RequirementController {
         return requirementService.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
-    @GetMapping(path = "/count-perfect-requirements/{id}")
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements(@PathVariable("id") Integer projectId) {
-        return requirementService.countPerfectRequirements(projectId);
-    }
-
     @GetMapping(path = "/count-perfect-requirements1")
     public IPerfectOrNotPerfectRequirement countPerfectRequirements1(
-            @RequestParam String typeRequirement,
+            @RequestParam(required = false)String typeRequirement,
             @RequestParam Integer projectId
     ) {
-        return requirementService.countPerfectRequirements1(typeRequirement, projectId);
-    }
-
-    @GetMapping(path = "/count-imperfect-requirements")
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements() {
-        return requirementService.countImperfectRequirements();
+        return requirementService.countPerfectRequirements(typeRequirement, projectId);
     }
 
 }

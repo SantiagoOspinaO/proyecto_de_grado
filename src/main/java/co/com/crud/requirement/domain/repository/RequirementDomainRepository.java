@@ -24,11 +24,7 @@ public interface RequirementDomainRepository {
 
     IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId);
 
-    IPerfectOrNotPerfectRequirement countPerfectRequirements1(String typeRequirement, Integer projectId);
-
-    IPerfectOrNotPerfectRequirement countPerfectRequirements(Integer projectId);
-
-    IPerfectOrNotPerfectRequirement countImperfectRequirements();
+    IPerfectOrNotPerfectRequirement countPerfectRequirements(String typeRequirement, Integer projectId);
 
     List<Requirement> getRequirementsByProyectoId(Integer proyectoId);
 }

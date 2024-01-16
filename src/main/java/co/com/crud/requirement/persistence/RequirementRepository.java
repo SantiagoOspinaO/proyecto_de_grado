@@ -64,18 +64,8 @@ public class RequirementRepository implements RequirementDomainRepository {
     }
 
     @Override
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements1(String typeRequirement, Integer projectId) {
-        return requirementCrudRepository.countPerfectRequirements1(typeRequirement, projectId);
-    }
-
-    @Override
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements(Integer projectId) {
-        return requirementCrudRepository.countPerfectRequirements(projectId);
-    }
-
-    @Override
-    public IPerfectOrNotPerfectRequirement countImperfectRequirements() {
-        return requirementCrudRepository.countImperfectRequirements();
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements(String typeRequirement, Integer projectId) {
+        return requirementCrudRepository.countPerfectRequirements(typeRequirement, projectId);
     }
 
     @Override

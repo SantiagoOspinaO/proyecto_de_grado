@@ -60,16 +60,8 @@ public class RequirementService {
         return requirementDomainRepository.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements1(String typeRequirement, Integer projectId){
-        return  requirementDomainRepository.countPerfectRequirements1(typeRequirement,projectId);
-    }
-
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements(Integer projectId){
-        return requirementDomainRepository.countPerfectRequirements(projectId);
-    }
-
-    public IPerfectOrNotPerfectRequirement countImperfectRequirements(){
-        return requirementDomainRepository.countImperfectRequirements();
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements(String typeRequirement, Integer projectId){
+        return  requirementDomainRepository.countPerfectRequirements(typeRequirement,projectId);
     }
 
     public List<Requirement> getRequirementsByProyectoId(Integer proyectoId) {

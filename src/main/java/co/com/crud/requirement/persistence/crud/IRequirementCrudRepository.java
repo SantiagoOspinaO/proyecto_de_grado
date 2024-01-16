@@ -1,6 +1,5 @@
 package co.com.crud.requirement.persistence.crud;
 
-import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
@@ -59,22 +58,9 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "INNER JOIN requisito r ON op.requisito_id=r.id " +
             "WHERE (r.proyecto_id = :proyectoId) " +
             "OR ((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) AND r.proyecto_id = :proyectoId )", nativeQuery = true)
-    IPerfectOrNotPerfectRequirement countPerfectRequirements1(
+    IPerfectOrNotPerfectRequirement countPerfectRequirements(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
-
-    @Query(value = "SELECT count(*) " +
-            "FROM operacion " +
-            "WHERE (puntaje_maximo < 72) ", nativeQuery = true)
-    IPerfectOrNotPerfectRequirement countImperfectRequirements();
-
-    @Query(value = "SELECT " +
-            "SUM(1) FILTER (WHERE op.puntaje_maximo < 72) AS Imperfecto, " +
-            "SUM(1) FILTER (WHERE op.puntaje_maximo > 72) AS Perfecto " +
-            "FROM operacion op " +
-            "INNER JOIN requisito r ON op.requisito_id=r.id " +
-            "WHERE (r.proyecto_id = :proyectoId)", nativeQuery = true)
-    IPerfectOrNotPerfectRequirement countPerfectRequirements(@Param("proyectoId") Integer projectId);
 
     List<RequirementEntity> getRequirementsByProyectoId(Integer proyectoId);
 }

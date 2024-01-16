@@ -3,6 +3,7 @@ package co.com.crud.requirement.persistence.crud;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +12,8 @@ import java.util.Optional;
 
 public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<TypeErrorCharacteristicEntity, Integer> {
 
-    Optional<TypeErrorCharacteristicEntity> findById(Integer id);
+    @NotNull
+    Optional<TypeErrorCharacteristicEntity> findById(@NotNull Integer id);
 
     @Query(value = "SELECT COUNT(r.id) " +
             "FROM requisito r " +
@@ -112,58 +114,62 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
     int countAllCauseErrorsByRequirement(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteDII, " +
-            "SUM(1) FILTER (wHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable' ) AS NoComprobableVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable' ) AS NoIdentificableVAR, " +
-            "SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDDE, " +
-            "SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableDII, " +
-            "SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable' ) AS NoTrazableVAR " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto'), 0) AS IncorrectoDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto'), 0) AS IncorrectoDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto'), 0) AS IncorrectoVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo'), 0) AS AmbiguoDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo'), 0) AS AmbiguoDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo'), 0) AS AmbiguoVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto'), 0) AS IncompletoDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto'), 0) AS IncompletoDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto'), 0) AS IncompletoVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil'), 0) AS DebilDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil'), 0) AS DebilDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil'), 0) AS DebilVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente'), 0) AS IntrascendenteDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente'), 0) AS IntrascendenteDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente'), 0) AS IntrascendenteVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable'), 0) AS InestableDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable'), 0) AS InestableDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable'), 0) AS InestableVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable'), 0) AS NoComprobableDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable'), 0) AS NoComprobableDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable'), 0) AS NoComprobableVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable'), 0) AS NoIdentificableDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable'), 0) AS NoIdentificableDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable'), 0) AS NoIdentificableVAR, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dde = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable'), 0) AS NoTrazableDDE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.dii = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable'), 0) AS NoTrazableDII, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.var = true AND tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable'), 0) AS NoTrazableVAR " +
             "FROM tipo_error_caracteristica tec " +
-            "INNER JOIN requisito r on tec.requisito_id=r.id " +
-            "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
+            "INNER JOIN requisito r ON tec.requisito_id = r.id " +
+            "INNER JOIN caracteristica c ON tec.caracteristica_id = c.id " +
             "WHERE (r.proyecto_id = :proyectoId) " +
-            "OR ((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) AND r.proyecto_id = :proyectoId ) ", nativeQuery = true)
+            "OR ((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto' ) AS IncorrectoEIE, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo' ) AS AmbiguoEIE, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto' ) AS IncompletoEIE, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil' ) AS DebilEIE, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente' ) AS IntrascendenteMCC, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable' ) AS InestableMCC, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable') AS NoComprobableMCC, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable') AS NoIdentificableEIE, " +
-            "SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable') AS NoTrazableEIE " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incorrecto'), 0) AS IncorrectoEIE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Ambiguo'), 0) AS AmbiguoEIE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Incompleto'), 0) AS IncompletoEIE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'Débil'), 0) AS DebilEIE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Intrascendente'), 0) AS IntrascendenteMCC, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'Inestable'), 0) AS InestableMCC, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 2 AND c.nombre_opuesto = 'No Comprobable'), 0) AS NoComprobableMCC, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Identificable'), 0) AS NoIdentificableEIE, " +
+            "COALESCE(SUM(1) FILTER (WHERE tec.tipo_error_id = 1 AND c.nombre_opuesto = 'No Trazable'), 0) AS NoTrazableEIE " +
             "FROM tipo_error_caracteristica tec " +
-            "INNER JOIN requisito r on tec.requisito_id=r.id " +
-            "INNER JOIN caracteristica c on tec.caracteristica_id=c.id " +
-            "INNER JOIN nota_caracteristica_requisito ncr on ncr.caracteristica_id = tec.caracteristica_id and ncr.requisito_id = tec.requisito_id " +
+            "INNER JOIN requisito r ON tec.requisito_id = r.id " +
+            "INNER JOIN caracteristica c ON tec.caracteristica_id = c.id " +
+            "INNER JOIN nota_caracteristica_requisito ncr ON ncr.caracteristica_id = tec.caracteristica_id " +
+            "AND ncr.requisito_id = tec.requisito_id " +
             "WHERE ((r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8) " +
-            "OR (((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) AND r.proyecto_id = :proyectoId) AND ncr.nota_caracteristica < 8) ", nativeQuery = true)
+            "OR (((:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND r.proyecto_id = :proyectoId) " +
+            "AND ncr.nota_caracteristica < 8) ", nativeQuery = true)
     IErrorDistributionAllRequirements errorDistributionAllRequirements(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);

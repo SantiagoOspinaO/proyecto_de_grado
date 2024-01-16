@@ -173,42 +173,45 @@ public class CharacteristicCrudRepositoryTest {
     @Test
     public void testCountCharacteristicsByCauseErrorDDEMustReturnNull() {
         //Arrange
+        String typeRequirement = "funcional";
         int projectId = 1;
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDDE(projectId);
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDDE(projectId);
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
         assertNull(result);
     }
 
     @Test
     public void testCountCharacteristicsByCauseErrorDII() {
         //Arrange
+        String typeRequirement = "funcional";
         int projectId = 1;
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDII(projectId);
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDII(projectId);
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
         assertNull(result);
     }
 
     @Test
     public void testCountCharacteristicsByCauseErrorVARMustReturnNull() {
         //Arrange
+        String typeRequirement = "funcional";
         int projectId = 1;
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
 
         //Act
-        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorVAR(projectId);
+        var result = iCharacteristicCrudRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorVAR(projectId);
+        verify(iCharacteristicCrudRepository, times(1)).countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
         assertNull(result);
     }
 

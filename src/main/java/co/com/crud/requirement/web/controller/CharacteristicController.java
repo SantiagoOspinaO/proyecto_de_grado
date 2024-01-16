@@ -232,35 +232,53 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-dde")
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(@RequestParam Integer projectId) {
-        return characteristicService.countCharacteristicsByCauseErrorDDE(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/calculate-percentage-characteristics-cause-error-dde")
-    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorDDE(@RequestParam Integer projectId) {
-        ICharacteristicsByCauseError characteristicDDE = characteristicService.countCharacteristicsByCauseErrorDDE(projectId);
+    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorDDE(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        ICharacteristicsByCauseError characteristicDDE = characteristicService.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
         return getStringDoubleMap(characteristicDDE);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-dii")
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(@RequestParam Integer projectId) {
-        return characteristicService.countCharacteristicsByCauseErrorDII(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/calculate-percentage-characteristics-cause-error-dii")
-    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorDII(@RequestParam Integer projectId) {
-        ICharacteristicsByCauseError characteristicDII = characteristicService.countCharacteristicsByCauseErrorDII(projectId);
+    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorDII(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        ICharacteristicsByCauseError characteristicDII = characteristicService.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
         return getStringDoubleMap(characteristicDII);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-var")
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(@RequestParam Integer projectId) {
-        return characteristicService.countCharacteristicsByCauseErrorVAR(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return characteristicService.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/calculate-percentage-characteristics-cause-error-var")
-    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorVAR(@RequestParam Integer projectId) {
-        ICharacteristicsByCauseError characteristicVAR = characteristicService.countCharacteristicsByCauseErrorVAR(projectId);
+    public Map<String, Double> getPercentageCountCharacteristicsByCauseErrorVAR(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        ICharacteristicsByCauseError characteristicVAR = characteristicService.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
         return getStringDoubleMap(characteristicVAR);
     }
 

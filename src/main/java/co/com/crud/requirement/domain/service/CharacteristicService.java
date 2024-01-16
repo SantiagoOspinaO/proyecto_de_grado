@@ -162,16 +162,16 @@ public class CharacteristicService {
         return characteristicDomainRepository.countRequirementsByTypeAndCauseError(typeRequirement, projectId);
     }
 
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(Integer projectId) {
-        return characteristicDomainRepository.countCharacteristicsByCauseErrorDDE(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(String typeRequirement, Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
     }
 
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(Integer projectId) {
-        return characteristicDomainRepository.countCharacteristicsByCauseErrorDII(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(String typeRequirement, Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
     }
 
-    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(Integer projectId) {
-        return characteristicDomainRepository.countCharacteristicsByCauseErrorVAR(projectId);
+    public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(String typeRequirement, Integer projectId) {
+        return characteristicDomainRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
     public double calculatePercentage(double count, double totalRecords) {

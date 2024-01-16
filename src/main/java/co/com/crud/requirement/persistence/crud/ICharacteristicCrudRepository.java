@@ -198,8 +198,10 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
+            @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
@@ -216,8 +218,10 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(
+            @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
@@ -234,8 +238,10 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE r.proyecto_id = :proyectoId ", nativeQuery = true)
+            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(
+            @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
 }

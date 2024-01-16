@@ -281,17 +281,18 @@ public class CharacteristicServiceTest {
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        String typeRequirement = "funcional";
         int projectId = 5;
 
-        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDDE(projectId)).thenReturn(iCharacteristicsByCauseError);
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId)).thenReturn(iCharacteristicsByCauseError);
 
         //Act
-        characteristicService.countCharacteristicsByCauseErrorDDE(projectId);
+        characteristicService.countCharacteristicsByCauseErrorDDE(typeRequirement,projectId);
 
         //Assert
-        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDDE(projectId);
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(projectId);
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(projectId);
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDDE(typeRequirement,projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
     @Test
@@ -300,17 +301,19 @@ public class CharacteristicServiceTest {
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        String typeRequirement = "funcional";
         int projectId = 5;
 
-        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDII(projectId)).thenReturn(iCharacteristicsByCauseError);
+
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDII(typeRequirement, projectId)).thenReturn(iCharacteristicsByCauseError);
 
         //Act
-        characteristicService.countCharacteristicsByCauseErrorDII(projectId);
+        characteristicService.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
 
         //Assert
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(projectId);
-        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDII(projectId);
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
     @Test
@@ -319,17 +322,18 @@ public class CharacteristicServiceTest {
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        String typeRequirement = "funcional";
         int projectId = 5;
 
-        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorVAR(projectId)).thenReturn(iCharacteristicsByCauseError);
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId)).thenReturn(iCharacteristicsByCauseError);
 
         //Act
-        characteristicService.countCharacteristicsByCauseErrorVAR(projectId);
+        characteristicService.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
 
         //Assert
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(projectId);
-        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(projectId);
-        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorVAR(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
     @Test

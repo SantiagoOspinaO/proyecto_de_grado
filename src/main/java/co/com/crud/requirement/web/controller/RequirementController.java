@@ -77,7 +77,7 @@ public class RequirementController {
         return requirementService.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 
-    @GetMapping(path = "/count-perfect-requirements1")
+    @GetMapping(path = "/count-perfect-requirements")
     public IPerfectOrNotPerfectRequirement countPerfectRequirements1(
             @RequestParam(required = false)String typeRequirement,
             @RequestParam Integer projectId

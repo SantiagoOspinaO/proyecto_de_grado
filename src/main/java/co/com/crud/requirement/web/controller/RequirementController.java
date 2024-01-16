@@ -31,8 +31,16 @@ public class RequirementController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Requirement>> getAllRequirements() {
-        return ResponseEntity.ok(requirementService.getAllRequirements());
+    public ResponseEntity<List<Requirement>> getAllRequirements(@RequestParam(required = false) Integer proyectoId) {
+        List<Requirement> requirements;
+
+        if (proyectoId != null) {
+            requirements = requirementService.getRequirementsByProyectoId(proyectoId);
+        } else {
+            requirements = requirementService.getAllRequirements();
+        }
+
+        return ResponseEntity.ok(requirements);
     }
 
     @GetMapping(path = "/{id}")

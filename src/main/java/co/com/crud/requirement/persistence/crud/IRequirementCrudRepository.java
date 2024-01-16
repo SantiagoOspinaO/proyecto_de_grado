@@ -1,5 +1,6 @@
 package co.com.crud.requirement.persistence.crud;
 
+import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IRequirementCrudRepository extends CrudRepository<RequirementEntity, Integer> {
@@ -74,4 +76,5 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "WHERE (r.proyecto_id = :proyectoId)", nativeQuery = true)
     IPerfectOrNotPerfectRequirement countPerfectRequirements(@Param("proyectoId") Integer projectId);
 
+    List<RequirementEntity> getRequirementsByProyectoId(Integer proyectoId);
 }

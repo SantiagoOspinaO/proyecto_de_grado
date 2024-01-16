@@ -78,4 +78,10 @@ public class RequirementRepository implements RequirementDomainRepository {
         return requirementCrudRepository.countImperfectRequirements();
     }
 
+    @Override
+    public List<Requirement> getRequirementsByProyectoId(Integer proyectoId) {
+        List<RequirementEntity> requirementEntities = requirementCrudRepository.getRequirementsByProyectoId(proyectoId);
+        return requirementMapper.toRequirementsEntity(requirementEntities);
+    }
+
 }

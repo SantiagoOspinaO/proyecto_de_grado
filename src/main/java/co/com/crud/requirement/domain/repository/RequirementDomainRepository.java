@@ -29,4 +29,6 @@ public interface RequirementDomainRepository {
     IPerfectOrNotPerfectRequirement countPerfectRequirements(Integer projectId);
 
     IPerfectOrNotPerfectRequirement countImperfectRequirements();
+
+    List<Requirement> getRequirementsByProyectoId(Integer proyectoId);
 }

@@ -72,4 +72,7 @@ public class RequirementService {
         return requirementDomainRepository.countImperfectRequirements();
     }
 
+    public List<Requirement> getRequirementsByProyectoId(Integer proyectoId) {
+        return requirementDomainRepository.getRequirementsByProyectoId(proyectoId);
+    }
 }

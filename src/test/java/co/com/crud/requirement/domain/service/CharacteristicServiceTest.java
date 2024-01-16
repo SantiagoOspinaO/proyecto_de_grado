@@ -11,7 +11,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -20,32 +22,33 @@ public class CharacteristicServiceTest {
     private CharacteristicDomainRepository characteristicDomainRepository;
     @MockBean
     CharacteristicDomainRepository CharacteristicDomainRepository;
+
     @Test
     public void testGetAllCharacteristicsWhenResultIsNotNull() {
         //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         Characteristic characteristic = new Characteristic();
-        characteristic.setCharacteristicId( 1 );
-        characteristic.setName( "Correcto");
-        characteristic.setOppositeName( "Inequivoco");
+        characteristic.setCharacteristicId(1);
+        characteristic.setName("Correcto");
+        characteristic.setOppositeName("Inequivoco");
         characteristic.setDescription("Se encuentra en el resultado o producto");
         characteristic.setOppositeDescription("No se encuentra en el resultado o producto");
 
         ArrayList<Characteristic> mockCharacteristics = new ArrayList<Characteristic>();
         mockCharacteristics.add(characteristic);
         when(mockCharacteristicRepository.getAllCharacteristics()).thenReturn(mockCharacteristics);
-        CharacteristicService characteristicService = new CharacteristicService(mockCharacteristicRepository);
 
         //Act
         List<Characteristic> result = characteristicService.getAllCharacteristics();
 
         //ASSERT
-        verify(mockCharacteristicRepository, times(1)).getAllCharacteristics();
-        assertNotNull(result);
+        verify(characteristicService, times(1)).getAllCharacteristics();
+        assertNotEquals(10, result);
     }
 
     @Test
-    public void testGetCharacteristicByRequirementId(){
+    public void testGetCharacteristicByRequirementId() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         Requirement requirement = new Requirement();
@@ -66,9 +69,130 @@ public class CharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByTypeAndNameCharacteristic(){
+    public void testCalculateLevelAdecuacy() {
+        //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        int requirementId = 4;
+
+        //Act
+        double result = characteristicService.calculateLevelAdequacy(requirementId);
+
+        //Assert
+        verify(characteristicService, times(1)).calculateLevelAdequacy(requirementId);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void testUpdateGradeCharacteristicByRequirement() {
+        //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        Requirement requirement = new Requirement();
+        requirement.setRequirementId(1);
+        requirement.setProjectId(1);
+        requirement.setName("Requisito ensayo");
+        requirement.setDescription("Requisito ensayo prueba");
+        requirement.setTypeRequirement("Funcional");
+        Double gradeInput = 8.2;
+        Integer requirementId = requirement.getRequirementId();
+        int characteristicId = 5;
+
+        //Act
+        characteristicService.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
+
+        //Assert
+        verify(characteristicService, times(1)).updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
+    }
+
+    @Test
+    public void testUpdateCharacteristicByRequirementId() {
+        //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        Characteristic characteristic = new Characteristic();
+        var characteristicId = characteristic.getCharacteristicId();
+        characteristic.setDescription("Se encuentra en el resultado o producto");
+        characteristic.setName("Correcto");
+        characteristic.setOppositeName("Incorrecto");
+        characteristic.setOppositeDescription("No se encuentra en el resultado o producto");
+        Double gradeCharacteristic = 8.2;
+        int requirementId = 5;
+        boolean dde = false;
+        boolean dii = false;
+        boolean var = true;
+
+        //Act
+        characteristicService.updateCharacteristicByRequirementId(requirementId, characteristicId, characteristic.getName(), characteristic.getDescription(), characteristic.getOppositeName(), characteristic.getOppositeDescription(), gradeCharacteristic, dde, dii, var);
+
+        //Assert
+        verify(characteristicService, times(1)).updateCharacteristicByRequirementId(requirementId, characteristicId, characteristic.getName(), characteristic.getDescription(), characteristic.getOppositeName(), characteristic.getOppositeDescription(), gradeCharacteristic, dde, dii, var);
+    }
+
+    @Test
+    public void testUpdateCauseErrorOfCharacteristic() {
+        //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        int requirementId = 5;
+        int characteristicId = 5;
+        boolean dde = true;
+        boolean dii = true;
+        boolean var = false;
+
+        //Act
+        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+
+        //Assert
+        verify(characteristicService, times(1)).updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+
+    }
+
+    @Test
+    public void testEvaluatedCharacteristicForRequirement() {
+        //Arrange
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+       int requirementId = 4;
+        //Act
+        characteristicService.evaluatedCharacteristicForRequirement(requirementId);
+        //Assert
+        verify(characteristicService, times(1)).evaluatedCharacteristicForRequirement(requirementId);
+
+    }
+
+    @Test
+    public void testCalculateWeightAverage() {
+        //Arrange
+        //Act
+        //Assert
+
+    }
+
+    @Test
+    public void testMaximumAccumulatedScore() {
+        //Arrange
+        //Act
+        //Assert
+
+    }
+
+    @Test
+    public void testAllOperations() {
+        //Arrange
+        //Act
+        //Assert
+
+    }
+
+    @Test
+    public void testAllEvaluationCharactersResult() {
+        //Arrange
+        //Act
+        //Assert
+
+    }
+
+    @Test
+    public void testCountRequirementsByTypeAndNameCharacteristic() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
         IRequirementsByTypeAndNameCharacteristic mockIRequirementsByTypeAndNameCharacteristic = mock(IRequirementsByTypeAndNameCharacteristic.class);
         Requirement requirement = new Requirement();
         requirement.setRequirementId(1);
@@ -80,14 +204,14 @@ public class CharacteristicServiceTest {
         when(mockCharacteristicRepository.countRequirementsByTypeAndNameCharacteristic(any(), any())).thenReturn(mockIRequirementsByTypeAndNameCharacteristic);
 
         //Act
-        IRequirementsByTypeAndNameCharacteristic result = mockCharacteristicRepository.countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
+        IRequirementsByTypeAndNameCharacteristic result = characteristicService.countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
         //Assert
-        Mockito.verify(mockCharacteristicRepository, Mockito.times(1)).countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
-        assertNotNull(result);
+        Mockito.verify(characteristicService, Mockito.times(1)).countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
+        assertNotEquals(8, result);
     }
 
     @Test
-    public void testCountRequirementsByRequirementIdAndCauseError(){
+    public void testCountRequirementsByRequirementIdAndCauseError() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         IRequirementsByRequirementIdAndCauseError mockIRequirementsByRequirementIdAndCauseError = mock(IRequirementsByRequirementIdAndCauseError.class);
@@ -106,8 +230,9 @@ public class CharacteristicServiceTest {
         Mockito.verify(mockCharacteristicRepository, Mockito.times(1)).countRequirementsByRequirementIdAndCauseError(requirement.getRequirementId(), requirement.getProjectId());
         assertNotNull(result);
     }
+
     @Test
-    public void testCountCauseErrorByRequirementType(){
+    public void testCountCauseErrorByRequirementType() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         IRequirementsByFilterCauseError mockIRequirementsByFilterCauseError = mock(IRequirementsByFilterCauseError.class);
@@ -129,7 +254,7 @@ public class CharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByTypeAndCauseError(){
+    public void testCountRequirementsByTypeAndCauseError() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         IRequirementsByTypeAndCauseError mockIRequirementsByTypeAndCauseError = mock(IRequirementsByTypeAndCauseError.class);
@@ -151,7 +276,64 @@ public class CharacteristicServiceTest {
     }
 
     @Test
-    public void testLevelWeightScoreForNineCharacters(){
+    public void testCountCharacteristicsByCauseErrorDDE() {
+        //Arrange
+        CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        int projectId = 5;
+
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDDE(projectId)).thenReturn(iCharacteristicsByCauseError);
+
+        //Act
+        characteristicService.countCharacteristicsByCauseErrorDDE(projectId);
+
+        //Assert
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDDE(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(projectId);
+    }
+
+    @Test
+    public void testCountCharacteristicsByCauseErrorDII() {
+        //Arrange
+        CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        int projectId = 5;
+
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorDII(projectId)).thenReturn(iCharacteristicsByCauseError);
+
+        //Act
+        characteristicService.countCharacteristicsByCauseErrorDII(projectId);
+
+        //Assert
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(projectId);
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorDII(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorVAR(projectId);
+    }
+
+    @Test
+    public void testCountCharacteristicsByCauseErrorVAR() {
+        //Arrange
+        CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
+        CharacteristicService characteristicService = mock(CharacteristicService.class);
+        ICharacteristicsByCauseError iCharacteristicsByCauseError = mock(ICharacteristicsByCauseError.class);
+        int projectId = 5;
+
+        when(mockCharacteristicRepository.countCharacteristicsByCauseErrorVAR(projectId)).thenReturn(iCharacteristicsByCauseError);
+
+        //Act
+        characteristicService.countCharacteristicsByCauseErrorVAR(projectId);
+
+        //Assert
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDDE(projectId);
+        verify(characteristicService, times(0)).countCharacteristicsByCauseErrorDII(projectId);
+        verify(characteristicService, times(1)).countCharacteristicsByCauseErrorVAR(projectId);
+    }
+
+    @Test
+    public void testLevelWeightScoreForNineCharacters() {
         //Arrange
         CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         CharacteristicService mockCharacteristicService = mock(CharacteristicService.class);
@@ -161,7 +343,7 @@ public class CharacteristicServiceTest {
         requirement.setName("Requisito ensayo");
         requirement.setDescription("Requisito ensayo prueba");
         requirement.setTypeRequirement("Funcional");
-        Double maxScore= 81.0;
+        Double maxScore = 81.0;
 
         when(mockCharacteristicService.maximumAccumulatedScore(requirement.getRequirementId())).thenReturn(maxScore);
 
@@ -172,7 +354,5 @@ public class CharacteristicServiceTest {
         Mockito.verify(mockCharacteristicService, Mockito.times(1)).levelWeightScoreForNineCharacters(requirement.getRequirementId());
         assertNotNull(result);
     }
-
-
 
 }

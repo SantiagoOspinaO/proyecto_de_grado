@@ -9,17 +9,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @SpringBootTest
 public class RequirementServiceTest {
 
     @MockBean
     RequirementDomainRepository requirementDomainRepository;
+
     @Test
     public void testGetAllRequirementsWhenResultIsNotNull() {
         //Arrange
@@ -66,5 +66,40 @@ public class RequirementServiceTest {
         //Assert
         verify(requirementDomainRepository, times(1)).saveRequirement(eq(requirement));
         assertEquals(requirement, result);
+    }
+
+    @Test
+    public void testGetRequirementById() {
+        //Arrange
+        //Act
+        //Assert
+    }
+
+    @Test
+    public void testCountRequirementsByFilterCauseError() {
+        //Arrange
+        RequirementService requirementService = mock(RequirementService.class);
+        int requirementId = 2;
+
+        //Act
+        var result = requirementService.countRequirementsByFilterCauseError(requirementId);
+
+        //Assert
+        verify(requirementService, times(1)).countRequirementsByFilterCauseError(requirementId);
+    }
+
+    @Test
+    public void testCountRequirementsByGradeAndCauseError() {
+        //Arrange
+        RequirementService requirementService = mock(RequirementService.class);
+        String typeRequirement = "Funcional";
+        String causeError = "MCC";
+        int projectId = 2;
+
+        //Act
+        var result = requirementService.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
+
+        //Assert
+        verify(requirementService, times(1)).countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
     }
 }

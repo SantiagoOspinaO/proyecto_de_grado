@@ -3,12 +3,15 @@ package co.com.crud.requirement.web.controller;
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
+import co.com.crud.requirement.domain.service.CharacteristicService;
 import co.com.crud.requirement.domain.service.TypeErrorCharacteristicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -17,10 +20,12 @@ import java.util.Optional;
 public class TypeErrorCharacteristicController {
 
     private final TypeErrorCharacteristicService typeErrorCharacteristicService;
+    private final CharacteristicService characteristicService;
 
     @Autowired
-    public TypeErrorCharacteristicController(TypeErrorCharacteristicService typeErrorCharacteristicService) {
+    public TypeErrorCharacteristicController(TypeErrorCharacteristicService typeErrorCharacteristicService, CharacteristicService characteristicService) {
         this.typeErrorCharacteristicService = typeErrorCharacteristicService;
+        this.characteristicService = characteristicService;
     }
 
     @GetMapping()
@@ -158,6 +163,40 @@ public class TypeErrorCharacteristicController {
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId) {
         return typeErrorCharacteristicService.errorDistributionAllRequirements(typeRequirement, projectId);
+    }
+
+    @GetMapping(path = "/percentage-error-distribution-requirements")
+    public Map<String, Double> getPercentageCountErrorDistributionRequirements(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        IErrorDistributionAllRequirements requirements = errorDistributionAllRequirements(typeRequirement, projectId);
+
+        double incorrecto = requirements.getIncorrectoEIE() != null ? requirements.getIncorrectoEIE() : 0.0;
+        double ambiguo = requirements.getAmbiguoEIE() != null ? requirements.getAmbiguoEIE() : 0.0;
+        double incompleto = requirements.getIncompletoEIE() != null ? requirements.getIncompletoEIE() : 0.0;
+        double debil = requirements.getDebilEIE() != null ? requirements.getDebilEIE() : 0.0;
+        double noIdentificable = requirements.getNoIdentificableEIE() != null ? requirements.getNoIdentificableEIE() : 0.0;
+        double noTrazable = requirements.getNoTrazableEIE() != null ? requirements.getNoTrazableEIE() : 0.0;
+        double intrascendente = requirements.getIntrascendenteMCC() != null ? requirements.getIntrascendenteMCC() : 0.0;
+        double inestable = requirements.getInestableMCC() != null ? requirements.getInestableMCC() : 0.0;
+        double noComprobable = requirements.getNoComprobableMCC() != null ? requirements.getNoComprobableMCC() : 0.0;
+
+        double totalEIE = incorrecto + ambiguo + incompleto + debil + noIdentificable + noTrazable;
+        double totalMCC = intrascendente + inestable + noComprobable;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("incorrecto", characteristicService.calculatePercentage(incorrecto, totalEIE));
+        result.put("ambiguo", characteristicService.calculatePercentage(ambiguo, totalEIE));
+        result.put("incompleto", characteristicService.calculatePercentage(incompleto, totalEIE));
+        result.put("debil", characteristicService.calculatePercentage(debil, totalEIE));
+        result.put("intrascendente", characteristicService.calculatePercentage(intrascendente, totalMCC));
+        result.put("inestable", characteristicService.calculatePercentage(inestable, totalMCC));
+        result.put("noComprobable", characteristicService.calculatePercentage(noComprobable, totalMCC));
+        result.put("noIdentificable", characteristicService.calculatePercentage(noIdentificable, totalEIE));
+        result.put("noTrazable", characteristicService.calculatePercentage(noTrazable, totalEIE));
+
+        return result;
     }
 
 }

@@ -2,22 +2,22 @@ package co.com.crud.requirement.domain.model.queryresult;
 
 public interface IErrorDistributionAllRequirements {
 
-    Integer getIncorrectoEIE();
+    Double getIncorrectoEIE();
 
-    Integer getAmbiguoEIE();
+    Double getAmbiguoEIE();
 
-    Integer getIncompletoEIE();
+    Double getIncompletoEIE();
 
-    Integer getDebilEIE();
+    Double getDebilEIE();
 
-    Integer getIntrascendenteMCC();
+    Double getIntrascendenteMCC();
 
-    Integer getInestableMCC();
+    Double getInestableMCC();
 
-    Integer getNoComprobableMCC();
+    Double getNoComprobableMCC();
 
-    Integer getNoIdentificableEIE();
+    Double getNoIdentificableEIE();
 
-    Integer getNoTrazableEIE();
+    Double getNoTrazableEIE();
 
 }

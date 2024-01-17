@@ -203,33 +203,7 @@ public class CharacteristicController {
         return result;
     }
 
-    @NotNull
-    public Map<String, Double> getStringDoubleMap(ICharacteristicsByCauseError characteristics) {
-        double incorrecto = characteristics.getIncorrecto() != null ? characteristics.getIncorrecto() : 0.0;
-        double ambiguo = characteristics.getAmbiguo() != null ? characteristics.getAmbiguo() : 0.0;
-        double incompleto = characteristics.getIncompleto() != null ? characteristics.getIncompleto() : 0.0;
-        double debil = characteristics.getDebil() != null ? characteristics.getDebil() : 0.0;
-        double intrascendente = characteristics.getIntrascendente() != null ? characteristics.getIntrascendente() : 0.0;
-        double inestable = characteristics.getInestable() != null ? characteristics.getInestable() : 0.0;
-        double nocomprobable = characteristics.getNoComprobable() != null ? characteristics.getNoComprobable() : 0.0;
-        double noidentificable = characteristics.getNoIdentificable() != null ? characteristics.getNoIdentificable() : 0.0;
-        double notrazable = characteristics.getNoTrazable() != null ? characteristics.getNoTrazable() : 0.0;
 
-        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + nocomprobable + noidentificable + notrazable;
-
-        Map<String, Double> result = new HashMap<>();
-        result.put("incorrecto", characteristicService.calculatePercentage(incorrecto, totalImperfect));
-        result.put("ambiguo", characteristicService.calculatePercentage(ambiguo, totalImperfect));
-        result.put("incompleto", characteristicService.calculatePercentage(incompleto, totalImperfect));
-        result.put("debil", characteristicService.calculatePercentage(debil, totalImperfect));
-        result.put("intrascendente", characteristicService.calculatePercentage(intrascendente, totalImperfect));
-        result.put("inestable", characteristicService.calculatePercentage(inestable, totalImperfect));
-        result.put("noComprobable", characteristicService.calculatePercentage(nocomprobable, totalImperfect));
-        result.put("noIdentificable", characteristicService.calculatePercentage(noidentificable, totalImperfect));
-        result.put("noTrazable", characteristicService.calculatePercentage(notrazable, totalImperfect));
-
-        return result;
-    }
 
     @GetMapping(path = "/count-characteristics-cause-error-dde")
     public ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
@@ -245,7 +219,7 @@ public class CharacteristicController {
             @RequestParam Integer projectId
     ) {
         ICharacteristicsByCauseError characteristicDDE = characteristicService.countCharacteristicsByCauseErrorDDE(typeRequirement, projectId);
-        return getStringDoubleMap(characteristicDDE);
+        return characteristicService.getStringDoubleMap(characteristicDDE);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-dii")
@@ -262,7 +236,7 @@ public class CharacteristicController {
             @RequestParam Integer projectId
     ) {
         ICharacteristicsByCauseError characteristicDII = characteristicService.countCharacteristicsByCauseErrorDII(typeRequirement, projectId);
-        return getStringDoubleMap(characteristicDII);
+        return characteristicService.getStringDoubleMap(characteristicDII);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-var")
@@ -279,7 +253,7 @@ public class CharacteristicController {
             @RequestParam Integer projectId
     ) {
         ICharacteristicsByCauseError characteristicVAR = characteristicService.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
-        return getStringDoubleMap(characteristicVAR);
+        return characteristicService.getStringDoubleMap(characteristicVAR);
     }
 
 }

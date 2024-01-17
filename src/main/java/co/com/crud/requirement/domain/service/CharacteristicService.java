@@ -6,10 +6,13 @@ import co.com.crud.requirement.domain.model.Characteristic;
 import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -172,6 +175,34 @@ public class CharacteristicService {
 
     public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(String typeRequirement, Integer projectId) {
         return characteristicDomainRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
+    }
+
+    @NotNull
+    public Map<String, Double> getStringDoubleMap(ICharacteristicsByCauseError characteristics) {
+        double incorrecto = characteristics.getIncorrecto() != null ? characteristics.getIncorrecto() : 0.0;
+        double ambiguo = characteristics.getAmbiguo() != null ? characteristics.getAmbiguo() : 0.0;
+        double incompleto = characteristics.getIncompleto() != null ? characteristics.getIncompleto() : 0.0;
+        double debil = characteristics.getDebil() != null ? characteristics.getDebil() : 0.0;
+        double intrascendente = characteristics.getIntrascendente() != null ? characteristics.getIntrascendente() : 0.0;
+        double inestable = characteristics.getInestable() != null ? characteristics.getInestable() : 0.0;
+        double nocomprobable = characteristics.getNoComprobable() != null ? characteristics.getNoComprobable() : 0.0;
+        double noidentificable = characteristics.getNoIdentificable() != null ? characteristics.getNoIdentificable() : 0.0;
+        double notrazable = characteristics.getNoTrazable() != null ? characteristics.getNoTrazable() : 0.0;
+
+        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + nocomprobable + noidentificable + notrazable;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("incorrecto", calculatePercentage(incorrecto, totalImperfect));
+        result.put("ambiguo", calculatePercentage(ambiguo, totalImperfect));
+        result.put("incompleto", calculatePercentage(incompleto, totalImperfect));
+        result.put("debil", calculatePercentage(debil, totalImperfect));
+        result.put("intrascendente", calculatePercentage(intrascendente, totalImperfect));
+        result.put("inestable", calculatePercentage(inestable, totalImperfect));
+        result.put("noComprobable", calculatePercentage(nocomprobable, totalImperfect));
+        result.put("noIdentificable", calculatePercentage(noidentificable, totalImperfect));
+        result.put("noTrazable", calculatePercentage(notrazable, totalImperfect));
+
+        return result;
     }
 
     public double calculatePercentage(double count, double totalRecords) {

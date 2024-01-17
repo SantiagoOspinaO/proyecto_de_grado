@@ -98,13 +98,11 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
     }
 
-    // Devuelve todas las operaciones de la hoja distribucionErroresRequisito
     @GetMapping(path = "/all-number-percentage-operations/{id}")
     public List<Double> allNumberAntPercentageOperations(@PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.allNumbersAndPercentageOperations(requirementId);
     }
 
-    // Los 2 de arriba pero dinamicos // Revisar que pasa cuando la nota es 9, lo esta contando
     @GetMapping(path = "/{typeErrorId}/{id}")
     public int countTypeErrorsByRequirements(@PathVariable("typeErrorId") Integer typeErrorId, @PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.countTypeErrorsByRequirements(typeErrorId, requirementId);
@@ -130,7 +128,6 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.percentageOfTypeErrorMCCById(requirementId);
     }
 
-    // Es los 2 querys de arriba pero dinamico
     @GetMapping(path = "/percentage-of-type-errors/{typeErrorID}/{id}")
     public double percentageOfTypeErrorsById(@PathVariable("id") Integer typeErrorID, @PathVariable("id") Integer requirementId) {
         return typeErrorCharacteristicService.percentageOfTypeErrosById(typeErrorID, requirementId);

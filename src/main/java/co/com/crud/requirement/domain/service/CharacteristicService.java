@@ -92,22 +92,6 @@ public class CharacteristicService {
         return ((maxScore / 81) * 100);
     }
 
-    /*
-    public List<Double> allOperations(Integer requirementId) {
-        List<Double> resultados = new ArrayList<>();
-        double levelAdequacy = calculateLevelAdequacy(requirementId);
-        double evaluatedCharacteristics = evaluatedCharacteristicForRequirement(requirementId);
-        double levelWeightScore = levelWeightScoreForNineCharacters(requirementId);
-        double maximumScore = maximumAccumulatedScore(requirementId);
-        double calculateWeightAverage = calculateWeightAverage(requirementId);
-        resultados.add(levelAdequacy);
-        resultados.add(evaluatedCharacteristics);
-        resultados.add(levelWeightScore);
-        resultados.add(maximumScore);
-        resultados.add(calculateWeightAverage);
-        return resultados;
-    }*/
-
     public Operation allOperations(Integer operationId, Integer requirementId) {
         Operation operation = new Operation();
         operation.setOperationId(operationId);
@@ -125,21 +109,21 @@ public class CharacteristicService {
         double result = maximumAccumulatedScore(requirementId);
         if (result > 72) {
             return RequirementAdecuationValidator.Adecuation_Alto_Alto;
-        } else if (result < 72 && result > 63) {
+        } else if (result <= 72 && result > 63) {
             return RequirementAdecuationValidator.Adecuation_Alto_Medio;
-        } else if (result < 63 && result > 54) {
+        } else if (result <= 63 && result > 54) {
             return RequirementAdecuationValidator.Adecuation_Alto_Bajo;
-        } else if (result < 54 && result > 45) {
+        } else if (result <= 54 && result > 45) {
             return RequirementAdecuationValidator.Adecuation_Medio_Alto;
-        } else if (result < 45 && result > 36) {
+        } else if (result <= 45 && result > 36) {
             return RequirementAdecuationValidator.Adecuation_Medio_Medio;
-        } else if (result < 36 && result > 27) {
+        } else if (result <= 36 && result > 27) {
             return RequirementAdecuationValidator.Adecuation_Medio_Bajo;
-        } else if (result < 27 && result > 18) {
+        } else if (result <= 27 && result > 18) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
-        } else if (result < 18 && result > 9) {
+        } else if (result <= 18 && result > 9) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Medio;
-        } else if (result < 9) {
+        } else if (result <= 9) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
         }
         return null;

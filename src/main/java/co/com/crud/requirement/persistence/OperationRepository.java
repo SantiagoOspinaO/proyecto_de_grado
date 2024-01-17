@@ -1,6 +1,7 @@
 package co.com.crud.requirement.persistence;
 
 import co.com.crud.requirement.domain.model.Operation;
+import co.com.crud.requirement.domain.model.queryresult.ITotalMaxScore;
 import co.com.crud.requirement.domain.repository.OperationDomainRepository;
 import co.com.crud.requirement.persistence.crud.IOperationCrudRepository;
 import co.com.crud.requirement.persistence.entity.OperationEntity;
@@ -35,5 +36,14 @@ public class OperationRepository implements OperationDomainRepository {
         return operationMapper.toOperationEntity(operationEntities);
     }
 
+    @Override
+    public ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId) {
+        return operationCrudRepository.countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
+    }
+
+    @Override
+    public ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId) {
+        return operationCrudRepository.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
+    }
 
 }

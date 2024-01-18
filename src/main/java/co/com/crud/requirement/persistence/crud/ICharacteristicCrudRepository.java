@@ -56,7 +56,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "    tec.dde = :dde, " +
             "    tec.dii = :dii, " +
             "    tec.var = :var " +
-            "WHERE r.id = :requisitoId AND c.id = :caracteristicaId", nativeQuery = true)
+            "WHERE r.id = :requisitoId " +
+            "AND c.id = :caracteristicaId ", nativeQuery = true)
     void updateCharacteristicByRequirementId(
             @Param("requisitoId") Integer requirementId,
             @Param("caracteristicaId") Integer characteristicId,
@@ -73,7 +74,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     @Transactional
     @Query(value = "UPDATE nota_caracteristica_requisito " +
             "SET nota_caracteristica = :notaIngresada " +
-            "WHERE requisito_id = :requisitoId AND caracteristica_id = :caracteristicaId", nativeQuery = true)
+            "WHERE requisito_id = :requisitoId " +
+            "AND caracteristica_id = :caracteristicaId ", nativeQuery = true)
     void updateGradeCharacteristicByRequirement(
             @Param("notaIngresada") Double gradeInput,
             @Param("requisitoId") Integer requirementId,
@@ -151,7 +153,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "FROM tipo_error_caracteristica tec " +
             "INNER JOIN caracteristica c ON c.id = tec.caracteristica_id " +
             "INNER JOIN requisito r ON r.id = tec.requisito_id " +
-            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IRequirementsByTypeAndCauseError countRequirementsByTypeAndCauseError(
             @Param("tipoRequisito") String typeRequirement,
@@ -200,7 +202,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
             @Param("tipoRequisito") String typeRequirement,
@@ -220,7 +222,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(
             @Param("tipoRequisito") String typeRequirement,
@@ -240,7 +242,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE (r.tipo_requisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(
             @Param("tipoRequisito") String typeRequirement,

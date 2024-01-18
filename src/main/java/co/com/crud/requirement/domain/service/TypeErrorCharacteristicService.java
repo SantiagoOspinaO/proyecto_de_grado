@@ -5,6 +5,7 @@ import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.model.queryresult.IErrorDistributionAllRequirements;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,12 @@ public class TypeErrorCharacteristicService {
 
     private final TypeErrorCharacteristicDomainRepository typeErrorCharacteristicDomainRepository;
 
+    private final CharacteristicService characteristicService;
+
     @Autowired
-    public TypeErrorCharacteristicService(TypeErrorCharacteristicDomainRepository typeErrorCharacteristicDomainRepository) {
+    public TypeErrorCharacteristicService(TypeErrorCharacteristicDomainRepository typeErrorCharacteristicDomainRepository, CharacteristicService characteristicService) {
         this.typeErrorCharacteristicDomainRepository = typeErrorCharacteristicDomainRepository;
+        this.characteristicService = characteristicService;
     }
 
     public List<TypeErrorCharacteristic> getAllTypesErrors() {
@@ -201,6 +205,110 @@ public class TypeErrorCharacteristicService {
 
     public IErrorDistributionAllRequirements errorDistributionAllRequirements(String typeRequirement, Integer projectId) {
         return typeErrorCharacteristicDomainRepository.errorDistributionAllRequirements(typeRequirement, projectId);
+    }
+
+    @NotNull
+    public Map<String, Double> getPercentageCauseErrorByCharacteristicInterface(IRequirementsByTypeAndCauseError requirements) {
+        double incorrectoDDE = requirements.getIncorrectoDDE();
+        double ambiguoDDE = requirements.getAmbiguoDDE();
+        double incompletoDDE = requirements.getIncompletoDDE();
+        double debilDDE = requirements.getDebilDDE();
+        double intrascendenteDDE = requirements.getIntrascendenteDDE();
+        double inestableDDE = requirements.getInestableDDE();
+        double noComprobableDDE = requirements.getNoComprobableDDE();
+        double noIdentificableDDE = requirements.getNoIdentificableDDE();
+        double noTrazableDDE = requirements.getNoTrazableDDE();
+
+        double incorrectoDII = requirements.getIncorrectoDII();
+        double ambiguoDII = requirements.getAmbiguoDII();
+        double incompletoDII = requirements.getIncompletoDII();
+        double debilDII = requirements.getDebilDII();
+        double intrascendenteDII = requirements.getIntrascendenteDII();
+        double inestableDII = requirements.getInestableDII();
+        double noComprobableDII = requirements.getNoComprobableDII();
+        double noIdentificableDII = requirements.getNoIdentificableDII();
+        double noTrazableDII = requirements.getNoTrazableDII();
+
+        double incorrectoVAR = requirements.getIncorrectoVAR();
+        double ambiguoVAR = requirements.getAmbiguoVAR();
+        double incompletoVAR = requirements.getIncompletoVAR();
+        double debilVAR = requirements.getDebilVAR();
+        double intrascendenteVAR = requirements.getIntrascendenteVAR();
+        double inestableVAR = requirements.getInestableVAR();
+        double noComprobableVAR = requirements.getNoComprobableVAR();
+        double noIdentificableVAR = requirements.getNoIdentificableVAR();
+        double noTrazableVAR = requirements.getNoTrazableVAR();
+
+        double totalDDE = incorrectoDDE + ambiguoDDE + incompletoDDE + debilDDE + intrascendenteDDE +
+                inestableDDE + noComprobableDDE + noIdentificableDDE + noTrazableDDE;
+
+        double totalDII = incorrectoDII + ambiguoDII + incompletoDII + debilDII + intrascendenteDII +
+                inestableDII + noComprobableDII + noIdentificableDII + noTrazableDII;
+
+        double totalVAR = incorrectoVAR + ambiguoVAR + incompletoVAR + debilVAR + intrascendenteVAR +
+                inestableVAR + noComprobableVAR + noIdentificableVAR + noTrazableVAR;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("incorrectoDDE", characteristicService.calculatePercentage(incorrectoDDE, totalDDE));
+        result.put("ambiguoDDE", characteristicService.calculatePercentage(ambiguoDDE, totalDDE));
+        result.put("incompletoDDE", characteristicService.calculatePercentage(incompletoDDE, totalDDE));
+        result.put("debilDDE", characteristicService.calculatePercentage(debilDDE, totalDDE));
+        result.put("intrascendenteDDE", characteristicService.calculatePercentage(intrascendenteDDE, totalDDE));
+        result.put("inestableDDE", characteristicService.calculatePercentage(inestableDDE, totalDDE));
+        result.put("noComprobableDDE", characteristicService.calculatePercentage(noComprobableDDE, totalDDE));
+        result.put("noIdentificableDDE", characteristicService.calculatePercentage(noIdentificableDDE, totalDDE));
+        result.put("noTrazableDDE", characteristicService.calculatePercentage(noTrazableDDE, totalDDE));
+
+        result.put("incorrectoDII", characteristicService.calculatePercentage(incorrectoDII, totalDII));
+        result.put("ambiguoDII", characteristicService.calculatePercentage(ambiguoDII, totalDII));
+        result.put("incompletoDII", characteristicService.calculatePercentage(incompletoDII, totalDII));
+        result.put("debilDII", characteristicService.calculatePercentage(debilDII, totalDII));
+        result.put("intrascendenteDII", characteristicService.calculatePercentage(intrascendenteDII, totalDII));
+        result.put("inestableDII", characteristicService.calculatePercentage(inestableDII, totalDII));
+        result.put("noComprobableDII", characteristicService.calculatePercentage(noComprobableDII, totalDII));
+        result.put("noIdentificableDII", characteristicService.calculatePercentage(noIdentificableDII, totalDII));
+        result.put("noTrazableDII", characteristicService.calculatePercentage(noTrazableDII, totalDII));
+
+        result.put("incorrectoVAR", characteristicService.calculatePercentage(incorrectoVAR, totalVAR));
+        result.put("ambiguoVAR", characteristicService.calculatePercentage(ambiguoVAR, totalVAR));
+        result.put("incompletoVAR", characteristicService.calculatePercentage(incompletoVAR, totalVAR));
+        result.put("debilVAR", characteristicService.calculatePercentage(debilVAR, totalVAR));
+        result.put("intrascendenteVAR", characteristicService.calculatePercentage(intrascendenteVAR, totalVAR));
+        result.put("inestableVAR", characteristicService.calculatePercentage(inestableVAR, totalVAR));
+        result.put("noComprobableVAR", characteristicService.calculatePercentage(noComprobableVAR, totalVAR));
+        result.put("noIdentificableVAR", characteristicService.calculatePercentage(noIdentificableVAR, totalVAR));
+        result.put("noTrazableVAR", characteristicService.calculatePercentage(noTrazableVAR, totalVAR));
+
+        return result;
+    }
+
+    @NotNull
+    public Map<String, Double> getPercentageErrorDistributionRequirementsInterface(IErrorDistributionAllRequirements requirements) {
+        double incorrecto = requirements.getIncorrectoEIE() != null ? requirements.getIncorrectoEIE() : 0.0;
+        double ambiguo = requirements.getAmbiguoEIE() != null ? requirements.getAmbiguoEIE() : 0.0;
+        double incompleto = requirements.getIncompletoEIE() != null ? requirements.getIncompletoEIE() : 0.0;
+        double debil = requirements.getDebilEIE() != null ? requirements.getDebilEIE() : 0.0;
+        double noIdentificable = requirements.getNoIdentificableEIE() != null ? requirements.getNoIdentificableEIE() : 0.0;
+        double noTrazable = requirements.getNoTrazableEIE() != null ? requirements.getNoTrazableEIE() : 0.0;
+        double intrascendente = requirements.getIntrascendenteMCC() != null ? requirements.getIntrascendenteMCC() : 0.0;
+        double inestable = requirements.getInestableMCC() != null ? requirements.getInestableMCC() : 0.0;
+        double noComprobable = requirements.getNoComprobableMCC() != null ? requirements.getNoComprobableMCC() : 0.0;
+
+        double totalEIE = incorrecto + ambiguo + incompleto + debil + noIdentificable + noTrazable;
+        double totalMCC = intrascendente + inestable + noComprobable;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("incorrecto", characteristicService.calculatePercentage(incorrecto, totalEIE));
+        result.put("ambiguo", characteristicService.calculatePercentage(ambiguo, totalEIE));
+        result.put("incompleto", characteristicService.calculatePercentage(incompleto, totalEIE));
+        result.put("debil", characteristicService.calculatePercentage(debil, totalEIE));
+        result.put("intrascendente", characteristicService.calculatePercentage(intrascendente, totalMCC));
+        result.put("inestable", characteristicService.calculatePercentage(inestable, totalMCC));
+        result.put("noComprobable", characteristicService.calculatePercentage(noComprobable, totalMCC));
+        result.put("noIdentificable", characteristicService.calculatePercentage(noIdentificable, totalEIE));
+        result.put("noTrazable", characteristicService.calculatePercentage(noTrazable, totalEIE));
+
+        return result;
     }
 
 }

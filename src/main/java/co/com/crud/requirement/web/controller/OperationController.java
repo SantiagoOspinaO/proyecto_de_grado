@@ -155,7 +155,7 @@ public class OperationController {
 
         averageScore.setBajoAlto(medianBajoAlto);
         averageScore.setBajoMedio(medianBajoMedio);
-        averageScore.setBajoBajo(medianaAltoBajo);
+        averageScore.setBajoBajo(medianBajoBajo);
         return averageScore;
     }
 
@@ -169,6 +169,5 @@ public class OperationController {
         }
         return median;
     }
-
 
 }

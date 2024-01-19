@@ -112,25 +112,25 @@ public class TypeErrorCharacteristicService {
     public double percentageOfCauseErrorById(Integer requirementId, Integer typeErrorId, String causeError) {
         Integer allCauseErrors = typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
         double causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
-        return (causeErrorByCause / allCauseErrors) * 100;
+        return characteristicService.calculatePercentage(causeErrorByCause, allCauseErrors);
     }
 
     public Double percentageOfTypeErrorEIEById(Integer requirementId) {
         double allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirementEIE = typeErrorCharacteristicDomainRepository.countTypeErrorEIEByRequirement(requirementId);
-        return (requirementEIE / allRequirements) * 100;
+        return characteristicService.calculatePercentage(requirementEIE, allRequirements);
     }
 
     public Double percentageOfTypeErrorMCCById(Integer requirementId) {
         double allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         double requirementMCC = typeErrorCharacteristicDomainRepository.countTypeErrorMCCByRequirement(requirementId);
-        return (requirementMCC / allRequirements) * 100;
+        return characteristicService.calculatePercentage(requirementMCC, allRequirements);
     }
 
     public Double percentageOfTypeErrosById(Integer typeErrorID, Integer requirementId) {
         Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         Integer requirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirements(typeErrorID, requirementId);
-        double result = ((double) requirements / (double) allRequirements) * 100;
+        double result = characteristicService.calculatePercentage(requirements, allRequirements);
         return result;
     }
 
@@ -149,26 +149,26 @@ public class TypeErrorCharacteristicService {
         double countTypeErrorEIEByRequirement = countTypeErrorEIEByRequirement(requirementId);
         double countTypeErrorMCCByRequirement = countTypeErrorMCCByRequirement(requirementId);
         double countAllTypeErrorById = countTypeErrorEIEByRequirement + countTypeErrorMCCByRequirement;
-        double percentageOfTypeErrorEIEById = (countTypeErrorEIEByRequirement / countAllTypeErrorById) * 100;
-        double percentageOfTypeErrorMCCById = (countTypeErrorMCCByRequirement / countAllTypeErrorById) * 100;
+        double percentageOfTypeErrorEIEById = characteristicService.calculatePercentage(countTypeErrorEIEByRequirement, countAllTypeErrorById);
+        double percentageOfTypeErrorMCCById = characteristicService.calculatePercentage(countTypeErrorMCCByRequirement, countAllTypeErrorById);
         double percentageAllTypeErrorById = percentageOfTypeErrorEIEById + percentageOfTypeErrorMCCById;
 
         double countTypeErrorEIEAndCauseErrorDDEByRequirement = countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
         double countTypeErrorEIEAndCauseErrorDIIByRequirement = countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
         double countTypeErrorEIEAndCauseErrorVARByRequirement = countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
         double totalTypeErrorEIEWithCauseError = countTypeErrorEIEAndCauseErrorDDEByRequirement + countTypeErrorEIEAndCauseErrorDIIByRequirement + countTypeErrorEIEAndCauseErrorVARByRequirement;
-        double percentageOfTypeErrorEIEAndCauseErrorDDEById = (countTypeErrorEIEAndCauseErrorDDEByRequirement / totalTypeErrorEIEWithCauseError) * 100;
-        double percentageOfTypeErrorEIEAndCauseErrorDIIById = (countTypeErrorEIEAndCauseErrorDIIByRequirement / totalTypeErrorEIEWithCauseError) * 100;
-        double percentageOfTypeErrorEIEAndCauseErrorVARById = (countTypeErrorEIEAndCauseErrorVARByRequirement / totalTypeErrorEIEWithCauseError) * 100;
+        double percentageOfTypeErrorEIEAndCauseErrorDDEById = characteristicService.calculatePercentage(countTypeErrorEIEAndCauseErrorDDEByRequirement, totalTypeErrorEIEWithCauseError);
+        double percentageOfTypeErrorEIEAndCauseErrorDIIById = characteristicService.calculatePercentage(countTypeErrorEIEAndCauseErrorDIIByRequirement, totalTypeErrorEIEWithCauseError);
+        double percentageOfTypeErrorEIEAndCauseErrorVARById = characteristicService.calculatePercentage(countTypeErrorEIEAndCauseErrorVARByRequirement, totalTypeErrorEIEWithCauseError);
         double percentageOfTypeErrorEIEAndCauseError = percentageOfTypeErrorEIEAndCauseErrorDDEById + percentageOfTypeErrorEIEAndCauseErrorDIIById + percentageOfTypeErrorEIEAndCauseErrorVARById;
 
         double countTypeErrorMCCAndCauseErrorDDEByRequirement = countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
         double countTypeErrorMCCAndCauseErrorDIIByRequirement = countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
         double countTypeErrorMCCAndCauseErrorVARByRequirement = countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
         double totalTypeErrorMCCWithCauseError = countTypeErrorMCCAndCauseErrorDDEByRequirement + countTypeErrorMCCAndCauseErrorDIIByRequirement + countTypeErrorMCCAndCauseErrorVARByRequirement;
-        double percentageOfTypeErrorMCCAndCauseErrorDDEById = (countTypeErrorMCCAndCauseErrorDDEByRequirement / totalTypeErrorMCCWithCauseError) * 100;
-        double percentageOfTypeErrorMCCAndCauseErrorDIIById = (countTypeErrorMCCAndCauseErrorDIIByRequirement / totalTypeErrorMCCWithCauseError) * 100;
-        double percentageOfTypeErrorMCCAndCauseErrorVARById = (countTypeErrorMCCAndCauseErrorVARByRequirement / totalTypeErrorMCCWithCauseError) * 100;
+        double percentageOfTypeErrorMCCAndCauseErrorDDEById = characteristicService.calculatePercentage(countTypeErrorMCCAndCauseErrorDDEByRequirement, totalTypeErrorMCCWithCauseError);
+        double percentageOfTypeErrorMCCAndCauseErrorDIIById = characteristicService.calculatePercentage(countTypeErrorMCCAndCauseErrorDIIByRequirement, totalTypeErrorMCCWithCauseError);
+        double percentageOfTypeErrorMCCAndCauseErrorVARById = characteristicService.calculatePercentage(countTypeErrorMCCAndCauseErrorVARByRequirement, totalTypeErrorMCCWithCauseError);
         double percentageOfTypeErrorMCCAndCauseError = percentageOfTypeErrorMCCAndCauseErrorDDEById + percentageOfTypeErrorMCCAndCauseErrorDIIById + percentageOfTypeErrorMCCAndCauseErrorVARById;
 
         result.add(countTypeErrorEIEByRequirement);

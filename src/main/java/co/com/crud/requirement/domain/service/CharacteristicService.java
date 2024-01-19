@@ -50,10 +50,6 @@ public class CharacteristicService {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    public void updateCharacteristicByRequirementId(Integer requirementId, Integer characteristicId, String name, String description, String oppositeName, String oppositeDescription, Double gradeCharacteristic, boolean dde, boolean dii, boolean var) {
-        characteristicDomainRepository.updateCharacteristicByRequirementId(requirementId, characteristicId, name, description, oppositeName, oppositeDescription, gradeCharacteristic, dde, dii, var);
-    }
-
     public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
         characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
     }
@@ -162,18 +158,65 @@ public class CharacteristicService {
     }
 
     @NotNull
-    public Map<String, Double> getStringDoubleMap(ICharacteristicsByCauseError characteristics) {
+    public Map<String, Double> getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(IRequirementsByTypeAndNameCharacteristic requirements) {
+        double correcto = requirements.getCorrecto() != null ? requirements.getCorrecto() : 0.0;
+        double incorrecto = requirements.getIncorrecto() != null ? requirements.getIncorrecto() : 0.0;
+        double inequivoco = requirements.getInequivoco() != null ? requirements.getInequivoco() : 0.0;
+        double ambiguo = requirements.getAmbiguo() != null ? requirements.getAmbiguo() : 0.0;
+        double completo = requirements.getCompleto() != null ? requirements.getCompleto() : 0.0;
+        double incompleto = requirements.getIncompleto() != null ? requirements.getIncompleto() : 0.0;
+        double consistente = requirements.getConsistente() != null ? requirements.getConsistente() : 0.0;
+        double debil = requirements.getDebil() != null ? requirements.getDebil() : 0.0;
+        double importante = requirements.getImportante() != null ? requirements.getImportante() : 0.0;
+        double intrascendente = requirements.getIntrascendente() != null ? requirements.getIntrascendente() : 0.0;
+        double estable = requirements.getEstable() != null ? requirements.getEstable() : 0.0;
+        double inestable = requirements.getInestable() != null ? requirements.getInestable() : 0.0;
+        double comprobable = requirements.getComprobable() != null ? requirements.getComprobable() : 0.0;
+        double noComprobable = requirements.getNoComprobable() != null ? requirements.getNoComprobable() : 0.0;
+        double identificable = requirements.getIdentificable() != null ? requirements.getCorrecto() : 0.0;
+        double noIdentificable = requirements.getNoIdentificable() != null ? requirements.getNoIdentificable() : 0.0;
+        double trazable = requirements.getTrazable() != null ? requirements.getTrazable() : 0.0;
+        double noTrazable = requirements.getNoTrazable() != null ? requirements.getNoTrazable() : 0.0;
+
+        double totalPerfect = correcto + inequivoco + completo + consistente + importante + estable + comprobable + identificable + trazable;
+        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + noComprobable + noIdentificable + noTrazable;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("correcto", calculatePercentage(correcto, totalPerfect));
+        result.put("incorrecto", calculatePercentage(incorrecto, totalImperfect));
+        result.put("inequivoco", calculatePercentage(inequivoco, totalPerfect));
+        result.put("ambiguo", calculatePercentage(ambiguo, totalImperfect));
+        result.put("completo", calculatePercentage(completo, totalPerfect));
+        result.put("incompleto", calculatePercentage(incompleto, totalImperfect));
+        result.put("consistente", calculatePercentage(consistente, totalPerfect));
+        result.put("debil", calculatePercentage(debil, totalImperfect));
+        result.put("importante", calculatePercentage(importante, totalPerfect));
+        result.put("intrascendente", calculatePercentage(intrascendente, totalImperfect));
+        result.put("estable", calculatePercentage(estable, totalPerfect));
+        result.put("inestable", calculatePercentage(inestable, totalImperfect));
+        result.put("comprobable", calculatePercentage(comprobable, totalPerfect));
+        result.put("noComprobable", calculatePercentage(noComprobable, totalImperfect));
+        result.put("identificable", calculatePercentage(identificable, totalPerfect));
+        result.put("noIdentificable", calculatePercentage(noIdentificable, totalImperfect));
+        result.put("trazable", calculatePercentage(trazable, totalPerfect));
+        result.put("noTrazable", calculatePercentage(noTrazable, totalImperfect));
+
+        return result;
+    }
+
+    @NotNull
+    public Map<String, Double> getPercentageCharacteristicsByCauseErrorInterface(ICharacteristicsByCauseError characteristics) {
         double incorrecto = characteristics.getIncorrecto() != null ? characteristics.getIncorrecto() : 0.0;
         double ambiguo = characteristics.getAmbiguo() != null ? characteristics.getAmbiguo() : 0.0;
         double incompleto = characteristics.getIncompleto() != null ? characteristics.getIncompleto() : 0.0;
         double debil = characteristics.getDebil() != null ? characteristics.getDebil() : 0.0;
         double intrascendente = characteristics.getIntrascendente() != null ? characteristics.getIntrascendente() : 0.0;
         double inestable = characteristics.getInestable() != null ? characteristics.getInestable() : 0.0;
-        double nocomprobable = characteristics.getNoComprobable() != null ? characteristics.getNoComprobable() : 0.0;
-        double noidentificable = characteristics.getNoIdentificable() != null ? characteristics.getNoIdentificable() : 0.0;
-        double notrazable = characteristics.getNoTrazable() != null ? characteristics.getNoTrazable() : 0.0;
+        double noComprobable = characteristics.getNoComprobable() != null ? characteristics.getNoComprobable() : 0.0;
+        double noIdentificable = characteristics.getNoIdentificable() != null ? characteristics.getNoIdentificable() : 0.0;
+        double noTrazable = characteristics.getNoTrazable() != null ? characteristics.getNoTrazable() : 0.0;
 
-        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + nocomprobable + noidentificable + notrazable;
+        double totalImperfect = incorrecto + ambiguo + incompleto + debil + intrascendente + inestable + noComprobable + noIdentificable + noTrazable;
 
         Map<String, Double> result = new HashMap<>();
         result.put("incorrecto", calculatePercentage(incorrecto, totalImperfect));
@@ -182,9 +225,9 @@ public class CharacteristicService {
         result.put("debil", calculatePercentage(debil, totalImperfect));
         result.put("intrascendente", calculatePercentage(intrascendente, totalImperfect));
         result.put("inestable", calculatePercentage(inestable, totalImperfect));
-        result.put("noComprobable", calculatePercentage(nocomprobable, totalImperfect));
-        result.put("noIdentificable", calculatePercentage(noidentificable, totalImperfect));
-        result.put("noTrazable", calculatePercentage(notrazable, totalImperfect));
+        result.put("noComprobable", calculatePercentage(noComprobable, totalImperfect));
+        result.put("noIdentificable", calculatePercentage(noIdentificable, totalImperfect));
+        result.put("noTrazable", calculatePercentage(noTrazable, totalImperfect));
 
         return result;
     }

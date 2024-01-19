@@ -16,8 +16,6 @@ public interface CharacteristicDomainRepository {
 
     List<ICharacteristicsByRequirementId> getCharacteristicsByRequirementId(Integer requirementId);
 
-    void updateCharacteristicByRequirementId(Integer requirementId, Integer characteristicId, String name, String description, String oppositeName, String oppositeDescription, Double gradeCharacteristic, boolean dde, boolean dii, boolean var);
-
     void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId);
 
     void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId);

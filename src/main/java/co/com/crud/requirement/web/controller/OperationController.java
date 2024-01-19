@@ -52,7 +52,7 @@ public class OperationController {
         return operationService.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
-    @GetMapping(path = "/averageScoreByProjectIdOrTypeRequirement")
+    @GetMapping(path = "/average-score-by-projectId-or-typeRequirement")
     public AverageScore averageScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId) {

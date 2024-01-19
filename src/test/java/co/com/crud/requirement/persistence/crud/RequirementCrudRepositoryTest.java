@@ -42,13 +42,14 @@ public class RequirementCrudRepositoryTest {
     public void testCountRequirementsByFilterCauseError() {
         //Arrange
         int requisitoId = 5;
+        int projectId = 1;
         IRequirementCrudRepository iRequirementCrudRepository = mock(IRequirementCrudRepository.class);
 
         //Act
-        iRequirementCrudRepository.countRequirementsByFilterCauseError(requisitoId);
+        iRequirementCrudRepository.countRequirementsByFilterCauseError(requisitoId, projectId);
 
         //Assert
-        verify(iRequirementCrudRepository, (times(1))).countRequirementsByFilterCauseError(requisitoId);
+        verify(iRequirementCrudRepository, (times(1))).countRequirementsByFilterCauseError(requisitoId, projectId);
     }
 
     @Test

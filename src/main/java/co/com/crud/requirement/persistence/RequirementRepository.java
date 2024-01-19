@@ -54,8 +54,8 @@ public class RequirementRepository implements RequirementDomainRepository {
     }
 
     @Override
-    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId) {
-        return requirementCrudRepository.countRequirementsByFilterCauseError(requirementId);
+    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId, Integer projectId) {
+        return requirementCrudRepository.countRequirementsByFilterCauseError(requirementId, projectId);
     }
 
     @Override

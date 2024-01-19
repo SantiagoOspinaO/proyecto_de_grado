@@ -27,8 +27,11 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "FROM requisito r " +
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
-            "WHERE r.id = :requisitoId", nativeQuery = true)
-    IRequirementsByFilterCauseError countRequirementsByFilterCauseError(@Param("requisitoId") Integer requirementId);
+            "WHERE (r.id = :requisitoId) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
+    IRequirementsByFilterCauseError countRequirementsByFilterCauseError(
+            @Param("requisitoId") Integer requirementId,
+            @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
             "COALESCE(SUM(CASE WHEN ncr.nota_caracteristica > 8 AND tec.dii = true THEN 1 ELSE 0 END), 0) AS PerfectEvaluationDII, " +

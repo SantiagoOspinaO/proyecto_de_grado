@@ -53,8 +53,8 @@ public class RequirementService {
         }).orElse(false);
     }
 
-    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId) {
-        return requirementDomainRepository.countRequirementsByFilterCauseError(requirementId);
+    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId, Integer projectId) {
+        return requirementDomainRepository.countRequirementsByFilterCauseError(requirementId, projectId);
     }
 
     public IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId) {

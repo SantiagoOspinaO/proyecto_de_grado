@@ -64,8 +64,11 @@ public class RequirementController {
     }
 
     @GetMapping(path = "/count-requirement-id-filter-cause-error")
-    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(@RequestParam Integer requirementId) {
-        return requirementService.countRequirementsByFilterCauseError(requirementId);
+    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(
+            @RequestParam Integer requirementId,
+            @RequestParam Integer projectId
+    ) {
+        return requirementService.countRequirementsByFilterCauseError(requirementId, projectId);
     }
 
     @GetMapping(path = "/count-requirement-grade-cause-error")

@@ -79,7 +79,7 @@ public class OperationService {
         return averageScore;
     }
 
-    public AverageScore calculateMedian(Integer projectId){
+    public AverageScore calculateMedian(Integer projectId) {
         AverageScore averageScore = new AverageScore();
         AverageScore funcional = averageScoreByProjectIdOrTypeRequirement("funcional", projectId);
         AverageScore noFuncional = averageScoreByProjectIdOrTypeRequirement("no funcional", projectId);
@@ -125,10 +125,12 @@ public class OperationService {
         Arrays.sort(bajoAlto.toArray());
         Arrays.sort(bajoMedio.toArray());
         Arrays.sort(bajoBajo.toArray());
+
         boolean pair = true;
         double medianaAltoAlto, medianaAltoMedio, medianaAltoBajo;
         double medianMedioAlto, medianMedioMedio, medianMedioBajo;
         double medianBajoAlto, medianBajoMedio, medianBajoBajo;
+
         if (funcional.getAltoAlto() == 0 && funcional.getAltoMedio() == 0 && funcional.getAltoBajo() == 0 && funcional.getMedioAlto() == 0 && funcional.getMedioMedio() == 0 && funcional.getMedioBajo() == 0 && funcional.getBajoAlto() == 0 && funcional.getBajoMedio() == 0 && funcional.getBajoBajo() == 0) {
             pair = false;
             altoAlto.remove(funcional.getAltoAlto());
@@ -175,6 +177,7 @@ public class OperationService {
         averageScore.setBajoAlto(medianBajoAlto);
         averageScore.setBajoMedio(medianBajoMedio);
         averageScore.setBajoBajo(medianBajoBajo);
+
         return averageScore;
     }
 
@@ -187,5 +190,55 @@ public class OperationService {
             median = list.get(0);
         }
         return median;
+    }
+
+    private double calculateMedian1(List<Double> list, boolean par) {
+        double median;
+        if (par) {
+            double sumaMedios = list.get(list.size() / 2) + list.get((list.size() / 2) - 1);
+            median = sumaMedios / 2;
+        } else {
+            median = list.get(4);
+        }
+        return median;
+    }
+
+    public double prueba3(AverageScore averageScore) {
+        List<Double> list = new ArrayList<>();
+
+        list.add(averageScore.getAltoAlto());
+        list.add(averageScore.getAltoMedio());
+        list.add(averageScore.getAltoBajo());
+
+        list.add(averageScore.getMedioAlto());
+        list.add(averageScore.getMedioMedio());
+        list.add(averageScore.getMedioBajo());
+
+        list.add(averageScore.getBajoAlto());
+        list.add(averageScore.getBajoMedio());
+        list.add(averageScore.getBajoBajo());
+
+        Arrays.sort(list.toArray());
+
+        return calculateMedian1(list, false);
+    }
+
+    public AverageScore prueba(Integer projectId, double topRank) {
+        AverageScore averageScore;
+        averageScore = calculateMedian(projectId);
+
+        averageScore.setAltoAlto(characteristicService.calculatePercentage(averageScore.getAltoAlto(), topRank));
+        averageScore.setAltoMedio(characteristicService.calculatePercentage(averageScore.getAltoMedio(), topRank));
+        averageScore.setAltoBajo(characteristicService.calculatePercentage(averageScore.getAltoBajo(), topRank));
+
+        averageScore.setMedioAlto(characteristicService.calculatePercentage(averageScore.getMedioAlto(), topRank));
+        averageScore.setMedioMedio(characteristicService.calculatePercentage(averageScore.getMedioMedio(), topRank));
+        averageScore.setMedioBajo(characteristicService.calculatePercentage(averageScore.getMedioBajo(), topRank));
+
+        averageScore.setBajoAlto(characteristicService.calculatePercentage(averageScore.getBajoAlto(), topRank));
+        averageScore.setBajoMedio(characteristicService.calculatePercentage(averageScore.getBajoMedio(), topRank));
+        averageScore.setBajoBajo(characteristicService.calculatePercentage(averageScore.getBajoBajo(), topRank));
+
+        return averageScore;
     }
 }

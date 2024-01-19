@@ -26,7 +26,10 @@ public class OperationController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Operation> updateOperation(@RequestBody Operation operation, @PathVariable("id") Integer id) {
+    public ResponseEntity<Operation> updateOperation(
+            @RequestBody Operation operation,
+            @PathVariable("id") Integer id
+    ) {
         operation.setOperationId(id);
         operation.setRequirementId(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.operationService.saveOperation(operation));
@@ -48,23 +51,40 @@ public class OperationController {
     @GetMapping(path = "/count-all-score-by-project-id-or-type-requirement")
     public ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam Integer projectId) {
+            @RequestParam Integer projectId
+    ) {
         return operationService.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/average-score-by-project-id-or-type-requirement")
     public AverageScore averageScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,
-            @RequestParam Integer projectId) {
+            @RequestParam Integer projectId
+    ) {
         return operationService.averageScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/calculate-median")
     public AverageScore calculateMedian(@RequestParam Integer projectId) {
         return operationService.calculateMedian(projectId);
+    }
 
+    @GetMapping(path = "/prueba")
+    public AverageScore prueba(@RequestParam Integer projectId) {
+        return operationService.prueba(projectId, 81);
+    }
+
+    @GetMapping(path = "/prueba2")
+    public AverageScore prueba2(@RequestParam Integer projectId) {
+        return operationService.prueba(projectId, 72.09);
     }
 
 
+    @GetMapping(path = "/prueba3")
+    public double prueba3(@RequestParam Integer projectId) {
+
+        return operationService.prueba3(prueba(projectId));
+
+    }
 
 }

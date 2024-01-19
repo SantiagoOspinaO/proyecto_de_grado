@@ -37,7 +37,7 @@ public class OperationController {
         return ResponseEntity.ok(operationService.getAllOperations());
     }
 
-    @GetMapping(path = "/count-number-score-by-projectId-or-type-requirement")
+    @GetMapping(path = "/count-number-score-by-project-id-or-type-requirement")
     public ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
@@ -45,7 +45,7 @@ public class OperationController {
         return operationService.countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
-    @GetMapping(path = "/count-all-score-by-projectId-or-type-requirement")
+    @GetMapping(path = "/count-all-score-by-project-id-or-type-requirement")
     public ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId) {

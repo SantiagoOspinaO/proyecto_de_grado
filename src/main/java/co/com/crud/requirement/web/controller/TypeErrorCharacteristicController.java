@@ -103,7 +103,7 @@ public class TypeErrorCharacteristicController {
         return typeErrorCharacteristicService.allNumbersAndPercentageOperations(requirementId);
     }
 
-    @GetMapping(path = "/{typeErrorId}/{id}")
+    @GetMapping(path = "/count-type-error-requirement/{typeErrorId}/{id}")
     public int countTypeErrorsByRequirements(
             @PathVariable("typeErrorId") Integer typeErrorId,
             @PathVariable("id") Integer requirementId

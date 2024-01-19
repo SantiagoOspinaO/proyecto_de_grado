@@ -20,7 +20,7 @@ public interface RequirementDomainRepository {
 
     void deleteRequirement(Integer requirementId);
 
-    IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId);
+    IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId, Integer projectId);
 
     IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId);
 

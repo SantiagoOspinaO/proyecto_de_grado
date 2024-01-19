@@ -80,12 +80,13 @@ public class RequirementServiceTest {
         //Arrange
         RequirementService requirementService = mock(RequirementService.class);
         int requirementId = 2;
+        int projectId = 1;
 
         //Act
-        var result = requirementService.countRequirementsByFilterCauseError(requirementId);
+        var result = requirementService.countRequirementsByFilterCauseError(requirementId, projectId);
 
         //Assert
-        verify(requirementService, times(1)).countRequirementsByFilterCauseError(requirementId);
+        verify(requirementService, times(1)).countRequirementsByFilterCauseError(requirementId, projectId);
     }
 
     @Test

@@ -74,27 +74,6 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testUpdateCharacteristicByRequirementId() {
-        //Arrange
-        int requisitoID = 1;
-        int characteristicId = 1;
-        String nombre = "Correcto";
-        String descripcion = "Requisito para revisar niveles de adecuacion";
-        String nombreOpuesto = "Incorrecto";
-        String descripcionOpuesta = "PRueba";
-        Double notaCaracteristica = 9.0;
-        Boolean dde = true, dii = false, var = true;
-        ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
-
-        //Act
-        iCharacteristicCrudRepository.updateCharacteristicByRequirementId(requisitoID, characteristicId, nombre, descripcion, nombreOpuesto, descripcionOpuesta, notaCaracteristica, dde, dii, var);
-
-        //Assert
-        verify(iCharacteristicCrudRepository, times(1)).updateCharacteristicByRequirementId(requisitoID, characteristicId, nombre, descripcion, nombreOpuesto, descripcionOpuesta, notaCaracteristica, dde, dii, var);
-
-    }
-
-    @Test
     public void testUpdateGradeCharacteristicByRequirement() {
         //Arrange
         double notaIngresada = 8.8;

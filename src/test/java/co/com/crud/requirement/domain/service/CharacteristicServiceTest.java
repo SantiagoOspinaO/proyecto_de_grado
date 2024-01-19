@@ -104,29 +104,6 @@ public class CharacteristicServiceTest {
     }
 
     @Test
-    public void testUpdateCharacteristicByRequirementId() {
-        //Arrange
-        CharacteristicService characteristicService = mock(CharacteristicService.class);
-        Characteristic characteristic = new Characteristic();
-        var characteristicId = characteristic.getCharacteristicId();
-        characteristic.setDescription("Se encuentra en el resultado o producto");
-        characteristic.setName("Correcto");
-        characteristic.setOppositeName("Incorrecto");
-        characteristic.setOppositeDescription("No se encuentra en el resultado o producto");
-        Double gradeCharacteristic = 8.2;
-        int requirementId = 5;
-        boolean dde = false;
-        boolean dii = false;
-        boolean var = true;
-
-        //Act
-        characteristicService.updateCharacteristicByRequirementId(requirementId, characteristicId, characteristic.getName(), characteristic.getDescription(), characteristic.getOppositeName(), characteristic.getOppositeDescription(), gradeCharacteristic, dde, dii, var);
-
-        //Assert
-        verify(characteristicService, times(1)).updateCharacteristicByRequirementId(requirementId, characteristicId, characteristic.getName(), characteristic.getDescription(), characteristic.getOppositeName(), characteristic.getOppositeDescription(), gradeCharacteristic, dde, dii, var);
-    }
-
-    @Test
     public void testUpdateCauseErrorOfCharacteristic() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);

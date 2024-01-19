@@ -69,4 +69,11 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             @Param("proyectoId") Integer projectId);
 
     List<RequirementEntity> getRequirementsByProyectoId(Integer proyectoId);
+
+    @Query(value = "SELECT COUNT(r.id) " +
+            "FROM requisito r " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
+            "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
+    int countAllRequirements( @Param("tipoRequisito") String typeRequirement,
+                              @Param("proyectoId") Integer projectId);
 }

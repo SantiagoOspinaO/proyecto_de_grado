@@ -65,7 +65,12 @@ public class RequirementService {
         return requirementDomainRepository.countPerfectRequirements(typeRequirement, projectId);
     }
 
-    public List<Requirement> getRequirementsByProyectoId(Integer proyectoId) {
-        return requirementDomainRepository.getRequirementsByProyectoId(proyectoId);
+    public List<Requirement> getRequirementsByProjectId(Integer projectId) {
+        return requirementDomainRepository.getRequirementsByProyectoId(projectId);
     }
+
+    public int countAllRequirements(String typeRequirement, Integer projectId){
+        return requirementDomainRepository.countAllRequirements(typeRequirement, projectId);
+    }
+
 }

@@ -31,11 +31,11 @@ public class RequirementController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Requirement>> getAllRequirements(@RequestParam(required = false) Integer proyectoId) {
+    public ResponseEntity<List<Requirement>> getAllRequirements(@RequestParam(required = false) Integer projectId) {
         List<Requirement> requirements;
 
-        if (proyectoId != null) {
-            requirements = requirementService.getRequirementsByProyectoId(proyectoId);
+        if (projectId != null) {
+            requirements = requirementService.getRequirementsByProjectId(projectId);
         } else {
             requirements = requirementService.getAllRequirements();
         }
@@ -81,11 +81,17 @@ public class RequirementController {
     }
 
     @GetMapping(path = "/count-perfect-requirements")
-    public IPerfectOrNotPerfectRequirement countPerfectRequirements1(
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements(
             @RequestParam(required = false)String typeRequirement,
             @RequestParam Integer projectId
     ) {
         return requirementService.countPerfectRequirements(typeRequirement, projectId);
+    }
+
+    @GetMapping(path = "/count-all-requirements")
+    public int countAllRequirements(@RequestParam(required = false)String typeRequirement,
+                                    @RequestParam Integer projectId){
+        return  requirementService.countAllRequirements(typeRequirement,projectId);
     }
 
 }

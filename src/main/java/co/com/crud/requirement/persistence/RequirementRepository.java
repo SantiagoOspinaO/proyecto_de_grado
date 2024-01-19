@@ -74,4 +74,9 @@ public class RequirementRepository implements RequirementDomainRepository {
         return requirementMapper.toRequirementsEntity(requirementEntities);
     }
 
+    @Override
+    public int countAllRequirements(String typeRequirement, Integer projectId) {
+        return requirementCrudRepository.countAllRequirements(typeRequirement,projectId);
+    }
+
 }

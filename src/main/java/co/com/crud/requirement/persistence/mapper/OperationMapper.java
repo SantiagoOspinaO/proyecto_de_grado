@@ -27,4 +27,5 @@ public interface OperationMapper {
 
     @InheritInverseConfiguration
     OperationEntity toOperations(Operation operation);
+
 }

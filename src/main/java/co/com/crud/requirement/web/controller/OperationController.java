@@ -9,9 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static co.com.crud.requirement.web.constants.Constants.LOWER_RANGE_WEIGHT;
+import static co.com.crud.requirement.web.constants.Constants.UPPER_RANGE_WEIGHT;
 
 @CrossOrigin
 @RestController
@@ -66,25 +67,22 @@ public class OperationController {
 
     @GetMapping(path = "/calculate-median")
     public AverageScore calculateMedian(@RequestParam Integer projectId) {
-        return operationService.calculateMedian(projectId);
+        return operationService.calculateWeightedMedian(projectId);
     }
 
-    @GetMapping(path = "/prueba")
-    public AverageScore prueba(@RequestParam Integer projectId) {
-        return operationService.prueba(projectId, 81);
+    @GetMapping(path = "/weighted-average-upper-range")
+    public AverageScore weightedAverageOfCumulativeScoreUpperRange(@RequestParam Integer projectId) {
+        return operationService.weightedAverageOfCumulativeScore(projectId, UPPER_RANGE_WEIGHT);
     }
 
-    @GetMapping(path = "/prueba2")
-    public AverageScore prueba2(@RequestParam Integer projectId) {
-        return operationService.prueba(projectId, 72.09);
+    @GetMapping(path = "/weighted-average-lower-range")
+    public AverageScore weightedAverageOfCumulativeScoreLowerRange(@RequestParam Integer projectId) {
+        return operationService.weightedAverageOfCumulativeScore(projectId, LOWER_RANGE_WEIGHT);
     }
 
-
-    @GetMapping(path = "/prueba3")
-    public double prueba3(@RequestParam Integer projectId) {
-
-        return operationService.prueba3(prueba(projectId));
-
+    @GetMapping(path = "/total-weighted-median")
+    public double totalWeightedMedianSuitabilityLevel(@RequestParam Integer projectId) {
+        return operationService.calculateSortedWeightedMedian(weightedAverageOfCumulativeScoreUpperRange(projectId));
     }
 
 }

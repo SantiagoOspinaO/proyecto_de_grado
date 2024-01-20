@@ -11,12 +11,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static co.com.crud.requirement.web.constants.Constants.FUNCIONAL_TYPE;
+import static co.com.crud.requirement.web.constants.Constants.NO_FUNCIONAL_TYPE;
+
 @Service
 public class OperationService {
 
     private final OperationDomainRepository operationsDomainRepository;
 
     private final CharacteristicService characteristicService;
+
+    private static final int ZERO_SCORE = 0;
+
 
     @Autowired
     public OperationService(OperationDomainRepository operationsDomainRepository, CharacteristicService characteristicService) {
@@ -56,15 +62,15 @@ public class OperationService {
         var bajoMedio = countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio();
         var bajoBajo = countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo();
 
-        altoAlto = (countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getAltoAlto() / countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto() : altoAlto;
-        altoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getAltoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() : altoMedio;
-        altoBajo = (countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getAltoBajo() / countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() : altoBajo;
-        medioAlto = (countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getMedioAlto() / countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() : medioAlto;
-        medioMedio = (countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getMedioMEdio() / countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() : medioMedio;
-        medioBajo = (countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getMedioBajo() / countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() : medioBajo;
-        bajoAlto = (countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getBajoAlto() / countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() : bajoAlto;
-        bajoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getBajoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() : bajoMedio;
-        bajoBajo = (countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo() != 0) ? countAllScoreByProjectIdOrTypeRequirement.getBajoBajo() / countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo() : bajoBajo;
+        altoAlto = (countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getAltoAlto() / countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto() : altoAlto;
+        altoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getAltoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() : altoMedio;
+        altoBajo = (countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getAltoBajo() / countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() : altoBajo;
+        medioAlto = (countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioAlto() / countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() : medioAlto;
+        medioMedio = (countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioMEdio() / countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() : medioMedio;
+        medioBajo = (countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioBajo() / countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() : medioBajo;
+        bajoAlto = (countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getBajoAlto() / countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() : bajoAlto;
+        bajoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getBajoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() : bajoMedio;
+        bajoBajo = (countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getBajoBajo() / countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo() : bajoBajo;
 
         averageScore.setAltoAlto(altoAlto);
         averageScore.setAltoMedio(altoMedio);
@@ -79,10 +85,10 @@ public class OperationService {
         return averageScore;
     }
 
-    public AverageScore calculateMedian(Integer projectId) {
+    public AverageScore calculateWeightedMedian(Integer projectId) {
         AverageScore averageScore = new AverageScore();
-        AverageScore funcional = averageScoreByProjectIdOrTypeRequirement("funcional", projectId);
-        AverageScore noFuncional = averageScoreByProjectIdOrTypeRequirement("no funcional", projectId);
+        AverageScore funcional = averageScoreByProjectIdOrTypeRequirement(FUNCIONAL_TYPE, projectId);
+        AverageScore noFuncional = averageScoreByProjectIdOrTypeRequirement(NO_FUNCIONAL_TYPE, projectId);
 
         List<Double> altoAlto = new ArrayList<>();
         altoAlto.add(funcional.getAltoAlto());
@@ -127,11 +133,15 @@ public class OperationService {
         Arrays.sort(bajoBajo.toArray());
 
         boolean pair = true;
+        int index = 0;
         double medianaAltoAlto, medianaAltoMedio, medianaAltoBajo;
         double medianMedioAlto, medianMedioMedio, medianMedioBajo;
         double medianBajoAlto, medianBajoMedio, medianBajoBajo;
 
-        if (funcional.getAltoAlto() == 0 && funcional.getAltoMedio() == 0 && funcional.getAltoBajo() == 0 && funcional.getMedioAlto() == 0 && funcional.getMedioMedio() == 0 && funcional.getMedioBajo() == 0 && funcional.getBajoAlto() == 0 && funcional.getBajoMedio() == 0 && funcional.getBajoBajo() == 0) {
+        if (funcional.getAltoAlto() == ZERO_SCORE && funcional.getAltoMedio() == ZERO_SCORE && funcional.getAltoBajo() == ZERO_SCORE &&
+                funcional.getMedioAlto() == ZERO_SCORE && funcional.getMedioMedio() == ZERO_SCORE && funcional.getMedioBajo() == ZERO_SCORE &&
+                funcional.getBajoAlto() == ZERO_SCORE && funcional.getBajoMedio() == ZERO_SCORE && funcional.getBajoBajo() == ZERO_SCORE) {
+
             pair = false;
             altoAlto.remove(funcional.getAltoAlto());
             altoMedio.remove(funcional.getAltoMedio());
@@ -142,7 +152,11 @@ public class OperationService {
             bajoAlto.remove(funcional.getBajoAlto());
             bajoMedio.remove(funcional.getBajoMedio());
             bajoBajo.remove(funcional.getBajoBajo());
-        } else if (noFuncional.getAltoAlto() == 0 && noFuncional.getAltoMedio() == 0 && noFuncional.getAltoBajo() == 0 && noFuncional.getMedioAlto() == 0 && noFuncional.getMedioMedio() == 0 && noFuncional.getMedioBajo() == 0 && noFuncional.getBajoAlto() == 0 && noFuncional.getBajoMedio() == 0 && noFuncional.getBajoBajo() == 0) {
+
+        } else if (noFuncional.getAltoAlto() == ZERO_SCORE && noFuncional.getAltoMedio() == ZERO_SCORE && noFuncional.getAltoBajo() == ZERO_SCORE &&
+                noFuncional.getMedioAlto() == ZERO_SCORE && noFuncional.getMedioMedio() == ZERO_SCORE && noFuncional.getMedioBajo() == ZERO_SCORE &&
+                noFuncional.getBajoAlto() == ZERO_SCORE && noFuncional.getBajoMedio() == ZERO_SCORE && noFuncional.getBajoBajo() == ZERO_SCORE) {
+
             pair = false;
             altoAlto.remove(noFuncional.getAltoAlto());
             altoMedio.remove(noFuncional.getAltoMedio());
@@ -154,17 +168,18 @@ public class OperationService {
             bajoMedio.remove(noFuncional.getBajoMedio());
             bajoBajo.remove(noFuncional.getBajoBajo());
         }
-        medianaAltoAlto = calculateMedian(altoAlto, pair);
-        medianaAltoMedio = calculateMedian(altoMedio, pair);
-        medianaAltoBajo = calculateMedian(altoBajo, pair);
 
-        medianMedioAlto = calculateMedian(medioAlto, pair);
-        medianMedioMedio = calculateMedian(medioMedio, pair);
-        medianMedioBajo = calculateMedian(medioBajo, pair);
+        medianaAltoAlto = weightedMedianFormula(altoAlto, pair, index);
+        medianaAltoMedio = weightedMedianFormula(altoMedio, pair, index);
+        medianaAltoBajo = weightedMedianFormula(altoBajo, pair, index);
 
-        medianBajoAlto = calculateMedian(bajoAlto, pair);
-        medianBajoMedio = calculateMedian(bajoMedio, pair);
-        medianBajoBajo = calculateMedian(bajoBajo, pair);
+        medianMedioAlto = weightedMedianFormula(medioAlto, pair, index);
+        medianMedioMedio = weightedMedianFormula(medioMedio, pair, index);
+        medianMedioBajo = weightedMedianFormula(medioBajo, pair, index);
+
+        medianBajoAlto = weightedMedianFormula(bajoAlto, pair, index);
+        medianBajoMedio = weightedMedianFormula(bajoMedio, pair, index);
+        medianBajoBajo = weightedMedianFormula(bajoBajo, pair, index);
 
         averageScore.setAltoAlto(medianaAltoAlto);
         averageScore.setAltoMedio(medianaAltoMedio);
@@ -181,30 +196,21 @@ public class OperationService {
         return averageScore;
     }
 
-    private double calculateMedian(List<Double> list, boolean par) {
+    private double weightedMedianFormula(List<Double> list, boolean pair, int index) {
         double median;
-        if (par) {
+        if (pair) {
             double sumaMedios = list.get(list.size() / 2) + list.get((list.size() / 2) - 1);
             median = sumaMedios / 2;
         } else {
-            median = list.get(0);
+            median = list.get(index);
         }
         return median;
     }
 
-    private double calculateMedian1(List<Double> list, boolean par) {
-        double median;
-        if (par) {
-            double sumaMedios = list.get(list.size() / 2) + list.get((list.size() / 2) - 1);
-            median = sumaMedios / 2;
-        } else {
-            median = list.get(4);
-        }
-        return median;
-    }
-
-    public double prueba3(AverageScore averageScore) {
+    public double calculateSortedWeightedMedian(AverageScore averageScore) {
         List<Double> list = new ArrayList<>();
+        boolean pair = false;
+        int index = 4;
 
         list.add(averageScore.getAltoAlto());
         list.add(averageScore.getAltoMedio());
@@ -220,25 +226,25 @@ public class OperationService {
 
         Arrays.sort(list.toArray());
 
-        return calculateMedian1(list, false);
+        return weightedMedianFormula(list, pair, index);
     }
 
-    public AverageScore prueba(Integer projectId, double topRank) {
-        AverageScore averageScore;
-        averageScore = calculateMedian(projectId);
+    public AverageScore weightedAverageOfCumulativeScore(Integer projectId, double maximumCumulativeScore) {
+        AverageScore averageScore = calculateWeightedMedian(projectId);
 
-        averageScore.setAltoAlto(characteristicService.calculatePercentage(averageScore.getAltoAlto(), topRank));
-        averageScore.setAltoMedio(characteristicService.calculatePercentage(averageScore.getAltoMedio(), topRank));
-        averageScore.setAltoBajo(characteristicService.calculatePercentage(averageScore.getAltoBajo(), topRank));
+        averageScore.setAltoAlto(characteristicService.calculatePercentage(averageScore.getAltoAlto(), maximumCumulativeScore));
+        averageScore.setAltoMedio(characteristicService.calculatePercentage(averageScore.getAltoMedio(), maximumCumulativeScore));
+        averageScore.setAltoBajo(characteristicService.calculatePercentage(averageScore.getAltoBajo(), maximumCumulativeScore));
 
-        averageScore.setMedioAlto(characteristicService.calculatePercentage(averageScore.getMedioAlto(), topRank));
-        averageScore.setMedioMedio(characteristicService.calculatePercentage(averageScore.getMedioMedio(), topRank));
-        averageScore.setMedioBajo(characteristicService.calculatePercentage(averageScore.getMedioBajo(), topRank));
+        averageScore.setMedioAlto(characteristicService.calculatePercentage(averageScore.getMedioAlto(), maximumCumulativeScore));
+        averageScore.setMedioMedio(characteristicService.calculatePercentage(averageScore.getMedioMedio(), maximumCumulativeScore));
+        averageScore.setMedioBajo(characteristicService.calculatePercentage(averageScore.getMedioBajo(), maximumCumulativeScore));
 
-        averageScore.setBajoAlto(characteristicService.calculatePercentage(averageScore.getBajoAlto(), topRank));
-        averageScore.setBajoMedio(characteristicService.calculatePercentage(averageScore.getBajoMedio(), topRank));
-        averageScore.setBajoBajo(characteristicService.calculatePercentage(averageScore.getBajoBajo(), topRank));
+        averageScore.setBajoAlto(characteristicService.calculatePercentage(averageScore.getBajoAlto(), maximumCumulativeScore));
+        averageScore.setBajoMedio(characteristicService.calculatePercentage(averageScore.getBajoMedio(), maximumCumulativeScore));
+        averageScore.setBajoBajo(characteristicService.calculatePercentage(averageScore.getBajoBajo(), maximumCumulativeScore));
 
         return averageScore;
     }
+
 }

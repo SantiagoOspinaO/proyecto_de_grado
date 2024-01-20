@@ -66,7 +66,7 @@ public class OperationController {
     }
 
     @GetMapping(path = "/calculate-median")
-    public AverageScore calculateMedian(@RequestParam Integer projectId) {
+    public AverageScore calculateWeightedMedian(@RequestParam Integer projectId) {
         return operationService.calculateWeightedMedian(projectId);
     }
 
@@ -81,8 +81,11 @@ public class OperationController {
     }
 
     @GetMapping(path = "/total-weighted-median")
-    public double totalWeightedMedianSuitabilityLevel(@RequestParam Integer projectId) {
-        return operationService.calculateSortedWeightedMedian(weightedAverageOfCumulativeScoreUpperRange(projectId));
+    public double totalWeightedMedianSuitabilityLevel(
+            @RequestParam Integer projectId,
+            @RequestParam Integer graphicNumber
+    ) {
+        return operationService.totalWeightedMedianSuitabilityLevel(projectId, graphicNumber);
     }
 
 }

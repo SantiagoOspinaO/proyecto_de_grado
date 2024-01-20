@@ -11,16 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static co.com.crud.requirement.web.constants.Constants.FUNCIONAL_TYPE;
-import static co.com.crud.requirement.web.constants.Constants.NO_FUNCIONAL_TYPE;
+import static co.com.crud.requirement.web.constants.Constants.*;
 
 @Service
 public class OperationService {
 
     private final OperationDomainRepository operationsDomainRepository;
-
     private final CharacteristicService characteristicService;
-
     private static final int ZERO_SCORE = 0;
 
 
@@ -52,6 +49,7 @@ public class OperationService {
         AverageScore averageScore = new AverageScore();
         ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement = countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
         ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement = countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
+
         var altoAlto = countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto();
         var altoMedio = countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio();
         var altoBajo = countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo();
@@ -245,6 +243,26 @@ public class OperationService {
         averageScore.setBajoBajo(characteristicService.calculatePercentage(averageScore.getBajoBajo(), maximumCumulativeScore));
 
         return averageScore;
+    }
+
+    public double totalWeightedMedianSuitabilityLevel(Integer projectId, int option) {
+        double response = 0;
+
+        switch (option) {
+            case 0:
+                response = calculateSortedWeightedMedian(calculateWeightedMedian(projectId));
+                break;
+
+            case 1:
+                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(projectId, UPPER_RANGE_WEIGHT));
+                break;
+
+            case 2:
+                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(projectId, LOWER_RANGE_WEIGHT));
+                break;
+        }
+
+        return response;
     }
 
 }

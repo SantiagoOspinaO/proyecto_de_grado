@@ -28,7 +28,7 @@ public class OperationService {
     }
 
     public Operation saveOperation(Operation operation) {
-        Operation operationReturn = new Operation();
+        Operation operationReturn;
         operationReturn = characteristicService.allOperations(operation.getOperationId(), operation.getRequirementId());
         return operationsDomainRepository.saveOperation(operationReturn);
     }

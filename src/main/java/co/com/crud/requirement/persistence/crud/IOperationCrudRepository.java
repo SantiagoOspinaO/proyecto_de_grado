@@ -38,7 +38,7 @@ public interface IOperationCrudRepository extends CrudRepository<OperationEntity
             "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 9 ), 0) AS BajoBajo " +
             "FROM operacion op " +
             "INNER JOIN requisito r ON r.id = op.requisito_id " +
-            "WHERE (r.tipo_requisito = :tipoRequisito) " +
+            "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(
             @Param("tipoRequisito") String typeRequirement,

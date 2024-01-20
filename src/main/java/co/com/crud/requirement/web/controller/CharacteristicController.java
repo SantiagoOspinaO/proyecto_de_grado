@@ -88,12 +88,12 @@ public class CharacteristicController {
         return characteristicService.calculateWeightAverage(requirementId);
     }
 
-    @GetMapping(path = "characteristics-requirement/{id}")
+    @GetMapping(path = "/characteristics-requirement/{id}")
     public List<ICharacteristicsByRequirementId> getCharacteristicByRequirement(@PathVariable("id") Integer requirementId) {
         return characteristicService.getCharacteristicByRequirement(requirementId);
     }
 
-    @GetMapping(path = "all-operations/{id}")
+    @GetMapping(path = "/all-operations/{id}")
     public Operation getAllOperations(@PathVariable("id") Integer operationId, @PathVariable("id") Integer requirementId) {
         return characteristicService.allOperations(operationId, requirementId);
     }

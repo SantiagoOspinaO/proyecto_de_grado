@@ -82,16 +82,18 @@ public class RequirementController {
 
     @GetMapping(path = "/count-perfect-requirements")
     public IPerfectOrNotPerfectRequirement countPerfectRequirements(
-            @RequestParam(required = false)String typeRequirement,
+            @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
     ) {
         return requirementService.countPerfectRequirements(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/count-all-requirements")
-    public int countAllRequirements(@RequestParam(required = false)String typeRequirement,
-                                    @RequestParam Integer projectId){
-        return  requirementService.countAllRequirements(typeRequirement,projectId);
+    public int countAllRequirements(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return requirementService.countAllRequirements(typeRequirement, projectId);
     }
 
 }

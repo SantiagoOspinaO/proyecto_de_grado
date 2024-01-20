@@ -20,11 +20,14 @@ public class OperationService {
     private final CharacteristicService characteristicService;
     private static final int ZERO_SCORE = 0;
 
+    private final RequirementService requirementService;
+
 
     @Autowired
-    public OperationService(OperationDomainRepository operationsDomainRepository, CharacteristicService characteristicService) {
+    public OperationService(OperationDomainRepository operationsDomainRepository, CharacteristicService characteristicService, RequirementService requirementService) {
         this.operationsDomainRepository = operationsDomainRepository;
         this.characteristicService = characteristicService;
+        this.requirementService = requirementService;
     }
 
     public Operation saveOperation(Operation operation) {
@@ -43,6 +46,37 @@ public class OperationService {
 
     public ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId) {
         return operationsDomainRepository.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
+    }
+
+    public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(String typeRequirement, Integer projectId) {
+        AverageScore averageScore = new AverageScore();
+        ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement = countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
+        int allRequieremetns = requirementService.countAllRequirements(typeRequirement, projectId);
+
+        var altoAlto = countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto();
+        var altoMedio = countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio();
+        var altoBajo = countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo();
+        var medioAlto = countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto();
+        var medioMedio = countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio();
+        var medioBajo = countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo();
+        var bajoAlto = countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto();
+        var bajoMedio = countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio();
+        var bajoBajo = countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo();
+
+        averageScore.setAltoAlto(characteristicService.calculatePercentage(altoAlto, allRequieremetns));
+        averageScore.setAltoMedio(characteristicService.calculatePercentage(altoMedio, allRequieremetns));
+        averageScore.setAltoBajo(characteristicService.calculatePercentage(altoBajo, allRequieremetns));
+
+        averageScore.setMedioAlto(characteristicService.calculatePercentage(medioAlto, allRequieremetns));
+        averageScore.setMedioMedio(characteristicService.calculatePercentage(medioMedio, allRequieremetns));
+        averageScore.setMedioBajo(characteristicService.calculatePercentage(medioBajo, allRequieremetns));
+
+        averageScore.setBajoAlto(characteristicService.calculatePercentage(bajoAlto, allRequieremetns));
+        averageScore.setBajoMedio(characteristicService.calculatePercentage(bajoMedio, allRequieremetns));
+        averageScore.setBajoBajo(characteristicService.calculatePercentage(bajoAlto, allRequieremetns));
+
+        return averageScore;
+
     }
 
     public AverageScore averageScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId) {
@@ -264,5 +298,6 @@ public class OperationService {
 
         return response;
     }
+
 
 }

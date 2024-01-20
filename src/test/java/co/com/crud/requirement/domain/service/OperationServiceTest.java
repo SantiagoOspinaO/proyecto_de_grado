@@ -26,6 +26,7 @@ public class OperationServiceTest {
         //Arrange
         OperationDomainRepository mockOperationDomainRepository = mock(OperationDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
+        RequirementService requirementService = mock(RequirementService.class);
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
@@ -38,7 +39,7 @@ public class OperationServiceTest {
         ArrayList<Operation> mockOperations = new ArrayList<Operation>();
         mockOperations.add(operation);
         when(mockOperationDomainRepository.getAllOperations()).thenReturn(mockOperations);
-        OperationService operationService = new OperationService(mockOperationDomainRepository,characteristicService);
+        OperationService operationService = new OperationService(mockOperationDomainRepository,characteristicService, requirementService);
 
         //Act
         List<Operation> result = operationService.getAllOperations();
@@ -54,7 +55,8 @@ public class OperationServiceTest {
         //Arrange
         OperationDomainRepository operationDomainRepository = mock(OperationDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
-        OperationService operationService = new OperationService(operationDomainRepository,characteristicService);
+        RequirementService requirementService = mock(RequirementService.class);
+        OperationService operationService = new OperationService(operationDomainRepository,characteristicService, requirementService);
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);

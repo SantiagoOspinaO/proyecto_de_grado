@@ -57,6 +57,14 @@ public class OperationController {
         return operationService.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
+    @GetMapping(path = "/average-total-requirements-evaluated-by-level-adecuacy")
+    public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(
+            @RequestParam(required = false) String typeRequirement,
+            @RequestParam Integer projectId
+    ){
+        return operationService.averageTotalRequirementsEvaluatedByLevelAdecuacy(typeRequirement,projectId);
+    }
+
     @GetMapping(path = "/average-score-by-project-id-or-type-requirement")
     public AverageScore averageScoreByProjectIdOrTypeRequirement(
             @RequestParam(required = false) String typeRequirement,

@@ -10,7 +10,7 @@ public interface ITotalMaxScore {
 
     double getMedioAlto();
 
-    double getMedioMEdio();
+    double getMedioMedio();
 
     double getMedioBajo();
 
@@ -19,6 +19,5 @@ public interface ITotalMaxScore {
     double getBajoMedio();
 
     double getBajoBajo();
-
 
 }

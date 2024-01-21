@@ -54,7 +54,7 @@ public class OperationService {
         var altoMedio = countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio();
         var altoBajo = countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo();
         var medioAlto = countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto();
-        var medioMedio = countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio();
+        var medioMedio = countNumberScoreByProjectIdOrTypeRequirement.getMedioMedio();
         var medioBajo = countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo();
         var bajoAlto = countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto();
         var bajoMedio = countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio();
@@ -64,7 +64,7 @@ public class OperationService {
         altoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getAltoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio() : altoMedio;
         altoBajo = (countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getAltoBajo() / countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo() : altoBajo;
         medioAlto = (countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioAlto() / countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto() : medioAlto;
-        medioMedio = (countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioMEdio() / countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio() : medioMedio;
+        medioMedio = (countNumberScoreByProjectIdOrTypeRequirement.getMedioMedio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioMedio() / countNumberScoreByProjectIdOrTypeRequirement.getMedioMedio() : medioMedio;
         medioBajo = (countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getMedioBajo() / countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo() : medioBajo;
         bajoAlto = (countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getBajoAlto() / countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto() : bajoAlto;
         bajoMedio = (countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() != ZERO_SCORE) ? countAllScoreByProjectIdOrTypeRequirement.getBajoMedio() / countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio() : bajoMedio;

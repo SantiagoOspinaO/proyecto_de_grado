@@ -57,7 +57,7 @@ public class OperationService {
         var altoMedio = countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio();
         var altoBajo = countNumberScoreByProjectIdOrTypeRequirement.getAltoBajo();
         var medioAlto = countNumberScoreByProjectIdOrTypeRequirement.getMedioAlto();
-        var medioMedio = countNumberScoreByProjectIdOrTypeRequirement.getMedioMEdio();
+        var medioMedio = countNumberScoreByProjectIdOrTypeRequirement.getMedioMedio();
         var medioBajo = countNumberScoreByProjectIdOrTypeRequirement.getMedioBajo();
         var bajoAlto = countNumberScoreByProjectIdOrTypeRequirement.getBajoAlto();
         var bajoMedio = countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio();

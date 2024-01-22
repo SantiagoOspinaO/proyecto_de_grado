@@ -252,38 +252,38 @@ public class TypeErrorCharacteristicService {
         double totalMCCVAR = intrascendenteVAR + inestableVAR + noComprobableVAR;
 
         Map<String, Double> result = new HashMap<>();
-        result.put("incorrectoEIEDDE", characteristicService.calculatePercentage(incorrectoDDE, totalEIEDDE));
-        result.put("ambiguoEIEDDE", characteristicService.calculatePercentage(ambiguoDDE, totalEIEDDE));
-        result.put("incompletoEIEDDE", characteristicService.calculatePercentage(incompletoDDE, totalEIEDDE));
-        result.put("debilEIEDDE", characteristicService.calculatePercentage(debilDDE, totalEIEDDE));
-        result.put("noIdentificableEIEDDE", characteristicService.calculatePercentage(noIdentificableDDE, totalEIEDDE));
-        result.put("noTrazableEIEDDE", characteristicService.calculatePercentage(noTrazableDDE, totalEIEDDE));
+        result.put("incorrectoDDE", characteristicService.calculatePercentage(incorrectoDDE, totalEIEDDE));
+        result.put("ambiguoDDE", characteristicService.calculatePercentage(ambiguoDDE, totalEIEDDE));
+        result.put("incompletoDDE", characteristicService.calculatePercentage(incompletoDDE, totalEIEDDE));
+        result.put("debilDDE", characteristicService.calculatePercentage(debilDDE, totalEIEDDE));
+        result.put("noIdentificableDDE", characteristicService.calculatePercentage(noIdentificableDDE, totalEIEDDE));
+        result.put("noTrazableDDE", characteristicService.calculatePercentage(noTrazableDDE, totalEIEDDE));
 
-        result.put("incorrectoEIEDII", characteristicService.calculatePercentage(incorrectoDDE, totalEIEDII));
-        result.put("ambiguoEIEDII", characteristicService.calculatePercentage(ambiguoDDE, totalEIEDII));
-        result.put("incompletoEIEDII", characteristicService.calculatePercentage(incompletoDDE, totalEIEDII));
-        result.put("debilEIEDII", characteristicService.calculatePercentage(debilDDE, totalEIEDII));
-        result.put("noIdentificableEIEDII", characteristicService.calculatePercentage(noIdentificableDDE, totalEIEDII));
-        result.put("noTrazableEIEDII", characteristicService.calculatePercentage(noTrazableDDE, totalEIEDII));
+        result.put("incorrectoDII", characteristicService.calculatePercentage(incorrectoDII, totalEIEDII));
+        result.put("ambiguoDII", characteristicService.calculatePercentage(ambiguoDII, totalEIEDII));
+        result.put("incompletoDII", characteristicService.calculatePercentage(incompletoDII, totalEIEDII));
+        result.put("debilDII", characteristicService.calculatePercentage(debilDII, totalEIEDII));
+        result.put("noIdentificableDII", characteristicService.calculatePercentage(noIdentificableDII, totalEIEDII));
+        result.put("noTrazableDII", characteristicService.calculatePercentage(noTrazableDII, totalEIEDII));
 
-        result.put("incorrectoEIEVAR", characteristicService.calculatePercentage(incorrectoDII, totalEIEVAR));
-        result.put("ambiguoEIEVAR", characteristicService.calculatePercentage(ambiguoDII, totalEIEVAR));
-        result.put("incompletoEIEVAR", characteristicService.calculatePercentage(incompletoDII, totalEIEVAR));
-        result.put("debilEIEVAR", characteristicService.calculatePercentage(debilDII, totalEIEVAR));
-        result.put("noIdentificableEIEVAR", characteristicService.calculatePercentage(noIdentificableDII, totalEIEVAR));
-        result.put("noTrazableEIEVAR", characteristicService.calculatePercentage(noTrazableDII, totalEIEVAR));
+        result.put("incorrectoVAR", characteristicService.calculatePercentage(incorrectoVAR, totalEIEVAR));
+        result.put("ambiguoVAR", characteristicService.calculatePercentage(ambiguoVAR, totalEIEVAR));
+        result.put("incompletoVAR", characteristicService.calculatePercentage(incompletoVAR, totalEIEVAR));
+        result.put("debilVAR", characteristicService.calculatePercentage(debilVAR, totalEIEVAR));
+        result.put("noIdentificableVAR", characteristicService.calculatePercentage(noIdentificableVAR, totalEIEVAR));
+        result.put("noTrazableVAR", characteristicService.calculatePercentage(noTrazableVAR, totalEIEVAR));
 
-        result.put("intrascendenteMCCDDE", characteristicService.calculatePercentage(intrascendenteVAR, totalMCCDDE));
-        result.put("inestableMCCDDE", characteristicService.calculatePercentage(inestableVAR, totalMCCDDE));
-        result.put("noComprobableMCCDDE", characteristicService.calculatePercentage(noComprobableVAR, totalMCCDDE));
+        result.put("intrascendenteDDE", characteristicService.calculatePercentage(intrascendenteDDE, totalMCCDDE));
+        result.put("inestableDDE", characteristicService.calculatePercentage(inestableDDE, totalMCCDDE));
+        result.put("noComprobableDDE", characteristicService.calculatePercentage(noComprobableDDE   , totalMCCDDE));
 
-        result.put("intrascendenteMCCDII", characteristicService.calculatePercentage(intrascendenteVAR, totalMCCDII));
-        result.put("inestableMCCDII", characteristicService.calculatePercentage(inestableVAR, totalMCCDII));
-        result.put("noComprobableMCCDII", characteristicService.calculatePercentage(noComprobableVAR, totalMCCDII));
+        result.put("intrascendenteDII", characteristicService.calculatePercentage(intrascendenteDII, totalMCCDII));
+        result.put("inestableDII", characteristicService.calculatePercentage(inestableDII, totalMCCDII));
+        result.put("noComprobableDII", characteristicService.calculatePercentage(noComprobableDII, totalMCCDII));
 
-        result.put("intrascendenteMCCVAR", characteristicService.calculatePercentage(intrascendenteVAR, totalMCCVAR));
-        result.put("inestableMCCVAR", characteristicService.calculatePercentage(inestableVAR, totalMCCVAR));
-        result.put("noComprobableMCCVAR", characteristicService.calculatePercentage(noComprobableVAR, totalMCCVAR));
+        result.put("intrascendenteVAR", characteristicService.calculatePercentage(intrascendenteVAR, totalMCCVAR));
+        result.put("inestableVAR", characteristicService.calculatePercentage(inestableVAR, totalMCCVAR));
+        result.put("noComprobableVAR", characteristicService.calculatePercentage(noComprobableVAR, totalMCCVAR));
 
         return result;
     }

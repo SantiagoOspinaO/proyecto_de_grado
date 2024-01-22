@@ -58,11 +58,11 @@ public class OperationController {
     }
 
     @GetMapping(path = "/average-total-requirements-evaluated-by-level-adecuacy")
-    public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(
+    public AverageScore averageTotalRequirementsEvaluatedByLevelAdequacy(
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
-    ){
-        return operationService.averageTotalRequirementsEvaluatedByLevelAdecuacy(typeRequirement,projectId);
+    ) {
+        return operationService.averageTotalRequirementsEvaluatedByLevelAdecuacy(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/average-score-by-project-id-or-type-requirement")

@@ -18,9 +18,8 @@ public class OperationService {
 
     private final OperationDomainRepository operationsDomainRepository;
     private final CharacteristicService characteristicService;
-    private static final int ZERO_SCORE = 0;
-
     private final RequirementService requirementService;
+    private static final int ZERO_SCORE = 0;
 
 
     @Autowired
@@ -51,7 +50,7 @@ public class OperationService {
     public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(String typeRequirement, Integer projectId) {
         AverageScore averageScore = new AverageScore();
         ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement = countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
-        int allRequieremetns = requirementService.countAllRequirements(typeRequirement, projectId);
+        int allRequirements = requirementService.countAllRequirements(typeRequirement, projectId);
 
         var altoAlto = countNumberScoreByProjectIdOrTypeRequirement.getAltoAlto();
         var altoMedio = countNumberScoreByProjectIdOrTypeRequirement.getAltoMedio();
@@ -63,20 +62,19 @@ public class OperationService {
         var bajoMedio = countNumberScoreByProjectIdOrTypeRequirement.getBajoMedio();
         var bajoBajo = countNumberScoreByProjectIdOrTypeRequirement.getBajoBajo();
 
-        averageScore.setAltoAlto(characteristicService.calculatePercentage(altoAlto, allRequieremetns));
-        averageScore.setAltoMedio(characteristicService.calculatePercentage(altoMedio, allRequieremetns));
-        averageScore.setAltoBajo(characteristicService.calculatePercentage(altoBajo, allRequieremetns));
+        averageScore.setAltoAlto(characteristicService.calculatePercentage(altoAlto, allRequirements));
+        averageScore.setAltoMedio(characteristicService.calculatePercentage(altoMedio, allRequirements));
+        averageScore.setAltoBajo(characteristicService.calculatePercentage(altoBajo, allRequirements));
 
-        averageScore.setMedioAlto(characteristicService.calculatePercentage(medioAlto, allRequieremetns));
-        averageScore.setMedioMedio(characteristicService.calculatePercentage(medioMedio, allRequieremetns));
-        averageScore.setMedioBajo(characteristicService.calculatePercentage(medioBajo, allRequieremetns));
+        averageScore.setMedioAlto(characteristicService.calculatePercentage(medioAlto, allRequirements));
+        averageScore.setMedioMedio(characteristicService.calculatePercentage(medioMedio, allRequirements));
+        averageScore.setMedioBajo(characteristicService.calculatePercentage(medioBajo, allRequirements));
 
-        averageScore.setBajoAlto(characteristicService.calculatePercentage(bajoAlto, allRequieremetns));
-        averageScore.setBajoMedio(characteristicService.calculatePercentage(bajoMedio, allRequieremetns));
-        averageScore.setBajoBajo(characteristicService.calculatePercentage(bajoAlto, allRequieremetns));
+        averageScore.setBajoAlto(characteristicService.calculatePercentage(bajoAlto, allRequirements));
+        averageScore.setBajoMedio(characteristicService.calculatePercentage(bajoMedio, allRequirements));
+        averageScore.setBajoBajo(characteristicService.calculatePercentage(bajoBajo, allRequirements));
 
         return averageScore;
-
     }
 
     public AverageScore averageScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId) {

@@ -57,8 +57,8 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo < 72), 0) AS Imperfecto, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo > 72), 0) AS Perfecto " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo < 72.09), 0) AS Imperfecto, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo > 72.09), 0) AS Perfecto " +
             "FROM operacion op " +
             "INNER JOIN requisito r ON op.requisito_id=r.id " +
             "WHERE (r.proyecto_id = :proyectoId) " +

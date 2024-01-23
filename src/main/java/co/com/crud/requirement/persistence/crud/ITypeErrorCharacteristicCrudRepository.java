@@ -165,7 +165,7 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
             "INNER JOIN caracteristica c ON tec.caracteristica_id = c.id " +
             "INNER JOIN nota_caracteristica_requisito ncr ON ncr.caracteristica_id = tec.caracteristica_id " +
             "AND ncr.requisito_id = tec.requisito_id " +
-            "WHERE (ncr.nota_caracteristica < 8) " +
+            "WHERE (ncr.nota_caracteristica <= 8) " +
             "AND (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     IErrorDistributionAllRequirements errorDistributionAllRequirements(

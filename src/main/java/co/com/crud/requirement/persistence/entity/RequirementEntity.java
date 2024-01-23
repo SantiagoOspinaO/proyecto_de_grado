@@ -1,12 +1,10 @@
 package co.com.crud.requirement.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -23,12 +21,13 @@ public class RequirementEntity {
     @Column(nullable = false)
     private Integer proyectoId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 3000)
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 12)
     private String tipoRequisito;
+
 }

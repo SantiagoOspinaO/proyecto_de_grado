@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "TipoError")
-public class TypeErrorCharacteristicEntity {
+@Table(name = "operacion")
+public class OperationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,20 @@ public class TypeErrorCharacteristicEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String nombre;
+    private Integer requisitoId;
 
     @Column(nullable = false)
-    private String descripcion;
+    private Double nivelAdecuacion;
 
+    @Column(nullable = false)
+    private Double caracteristicasEvaluadas;
+
+    @Column(nullable = false)
+    private Double nivelCaracteristicaPuntuacion;
+
+    @Column(nullable = false)
+    private Double puntajeMaximo;
+
+    @Column(nullable = false)
+    private Double promedioCalculado;
 }

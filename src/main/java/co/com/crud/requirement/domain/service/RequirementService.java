@@ -2,9 +2,11 @@ package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.exception.RequirementNotFoundException;
 import co.com.crud.requirement.domain.model.Requirement;
+import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
+import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,11 +45,32 @@ public class RequirementService {
         return requirements;
     }
 
-    public boolean deleteRequirement(Integer requirementId){
+    public boolean deleteRequirement(Integer requirementId) {
         return getRequirementById(requirementId).map(requirement -> {
             requirementDomainRepository.deleteRequirement(requirementId);
 
             return true;
         }).orElse(false);
     }
+
+    public IRequirementsByFilterCauseError countRequirementsByFilterCauseError(Integer requirementId, Integer projectId) {
+        return requirementDomainRepository.countRequirementsByFilterCauseError(requirementId, projectId);
+    }
+
+    public IRequirementByGradeAndCauseError countRequirementsByGradeAndCauseError(String typeRequirement, String causeError, Integer projectId) {
+        return requirementDomainRepository.countRequirementsByGradeAndCauseError(typeRequirement, causeError, projectId);
+    }
+
+    public IPerfectOrNotPerfectRequirement countPerfectRequirements(String typeRequirement, Integer projectId) {
+        return requirementDomainRepository.countPerfectRequirements(typeRequirement, projectId);
+    }
+
+    public List<Requirement> getRequirementsByProjectId(Integer projectId) {
+        return requirementDomainRepository.getRequirementsByProyectoId(projectId);
+    }
+
+    public int countAllRequirements(String typeRequirement, Integer projectId){
+        return requirementDomainRepository.countAllRequirements(typeRequirement, projectId);
+    }
+
 }

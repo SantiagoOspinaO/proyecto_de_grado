@@ -2,11 +2,17 @@ package co.com.crud.requirement.domain.model.queryresult;
 
 public interface ICharacteristicsByRequirementId {
 
+    Integer getIdCharacteristic();
+
     String getNameCharacteristic();
 
     String getDescriptionCharacteristic();
 
-    String getGradeCharacteristic();
+    String getOppositeName();
+
+    String getOppositeDescription();
+
+    Double getGradeCharacteristic();
 
     String getTypeError();
 
@@ -14,7 +20,8 @@ public interface ICharacteristicsByRequirementId {
 
     Boolean getDde();
 
-    String getDii();
+    Boolean getDii();
 
-    String getVar();
+    Boolean getVar();
+
 }

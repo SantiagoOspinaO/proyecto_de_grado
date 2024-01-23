@@ -11,5 +11,10 @@ public class Characteristic {
 
     private String name;
 
+    private String oppositeName;
+
     private String description;
+
+    private String oppositeDescription;
+
 }

@@ -110,7 +110,7 @@ public class TypeErrorCharacteristicService {
     }
 
     public double percentageOfCauseErrorById(Integer requirementId, Integer typeErrorId, String causeError) {
-        Integer allCauseErrors = typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
+        int allCauseErrors = typeErrorCharacteristicDomainRepository.countAllCauseErrorsByRequirement(requirementId);
         double causeErrorByCause = typeErrorCharacteristicDomainRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
         return characteristicService.calculatePercentage(causeErrorByCause, allCauseErrors);
     }
@@ -275,7 +275,7 @@ public class TypeErrorCharacteristicService {
 
         result.put("intrascendenteDDE", characteristicService.calculatePercentage(intrascendenteDDE, totalMCCDDE));
         result.put("inestableDDE", characteristicService.calculatePercentage(inestableDDE, totalMCCDDE));
-        result.put("noComprobableDDE", characteristicService.calculatePercentage(noComprobableDDE   , totalMCCDDE));
+        result.put("noComprobableDDE", characteristicService.calculatePercentage(noComprobableDDE, totalMCCDDE));
 
         result.put("intrascendenteDII", characteristicService.calculatePercentage(intrascendenteDII, totalMCCDII));
         result.put("inestableDII", characteristicService.calculatePercentage(inestableDII, totalMCCDII));

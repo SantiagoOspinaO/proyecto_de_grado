@@ -103,23 +103,23 @@ public class CharacteristicService {
 
     public String allEvaluationCharactersResult(Integer requirementId) {
         double result = maximumAccumulatedScore(requirementId);
-        if (result > 72) {
+        if (result > 72.09) {
             return RequirementAdecuationValidator.Adecuation_Alto_Alto;
-        } else if (result <= 72 && result > 63) {
+        } else if (result <= 72.09 && result > 63.09) {
             return RequirementAdecuationValidator.Adecuation_Alto_Medio;
-        } else if (result <= 63 && result > 54) {
+        } else if (result <= 63.09 && result > 54.09) {
             return RequirementAdecuationValidator.Adecuation_Alto_Bajo;
-        } else if (result <= 54 && result > 45) {
+        } else if (result <= 54.09 && result > 45.09) {
             return RequirementAdecuationValidator.Adecuation_Medio_Alto;
-        } else if (result <= 45 && result > 36) {
+        } else if (result <= 45.09 && result > 36.09) {
             return RequirementAdecuationValidator.Adecuation_Medio_Medio;
-        } else if (result <= 36 && result > 27) {
+        } else if (result <= 36.09 && result > 27.09) {
             return RequirementAdecuationValidator.Adecuation_Medio_Bajo;
-        } else if (result <= 27 && result > 18) {
+        } else if (result <= 27.09 && result > 18.09) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
-        } else if (result <= 18 && result > 9) {
+        } else if (result <= 18.09 && result > 9.09) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Medio;
-        } else if (result <= 9) {
+        } else if (result <= 9.09) {
             return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
         }
         return null;

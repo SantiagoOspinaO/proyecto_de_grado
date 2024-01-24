@@ -9,15 +9,15 @@ import org.springframework.data.repository.query.Param;
 public interface IOperationCrudRepository extends CrudRepository<OperationEntity, Integer> {
 
     @Query(value = "SELECT " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 81 AND op.puntaje_maximo > 72), 0) AS AltoAlto, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 72 AND op.puntaje_maximo > 63), 0) AS AltoMedio, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 63 AND op.puntaje_maximo > 54), 0) AS AltoBajo, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 54 AND op.puntaje_maximo > 45), 0) AS MedioAlto, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 45 AND op.puntaje_maximo > 36), 0) AS MedioMedio, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 36 AND op.puntaje_maximo > 27), 0) AS MedioBajo, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 27 AND op.puntaje_maximo > 18), 0) AS BajoAlto, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 18 AND op.puntaje_maximo > 9), 0) AS BajoMedio, " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 9 ), 0) AS BajoBajo " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 81 AND op.puntaje_maximo > 72.09), 0) AS AltoAlto, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 72.09 AND op.puntaje_maximo > 63.09), 0) AS AltoMedio, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 63.09 AND op.puntaje_maximo > 54.09), 0) AS AltoBajo, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 54.09 AND op.puntaje_maximo > 45.09), 0) AS MedioAlto, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 45.09 AND op.puntaje_maximo > 36.09), 0) AS MedioMedio, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 36.09 AND op.puntaje_maximo > 27.09), 0) AS MedioBajo, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 27.09 AND op.puntaje_maximo > 18.09), 0) AS BajoAlto, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 18.09 AND op.puntaje_maximo > 9.09), 0) AS BajoMedio, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 9.09 ), 0) AS BajoBajo " +
             "FROM operacion op " +
             "INNER JOIN requisito r ON r.id = op.requisito_id " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
@@ -27,15 +27,15 @@ public interface IOperationCrudRepository extends CrudRepository<OperationEntity
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 81 AND op.puntaje_maximo > 72), 0) AS AltoAlto, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 72 AND op.puntaje_maximo > 63), 0) AS AltoMedio, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 63 AND op.puntaje_maximo > 54), 0) AS AltoBajo, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 54 AND op.puntaje_maximo > 45), 0) AS MedioAlto, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 45 AND op.puntaje_maximo > 36), 0) AS MedioMedio, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 36 AND op.puntaje_maximo > 27), 0) AS MedioBajo, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 27 AND op.puntaje_maximo > 18), 0) AS BajoAlto, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 18 AND op.puntaje_maximo > 9), 0) AS BajoMedio, " +
-            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 9 ), 0) AS BajoBajo " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 81 AND op.puntaje_maximo > 72.09), 0) AS AltoAlto, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 72.09 AND op.puntaje_maximo > 63.09), 0) AS AltoMedio, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 63.09 AND op.puntaje_maximo > 54.09), 0) AS AltoBajo, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 54.09 AND op.puntaje_maximo > 45.09), 0) AS MedioAlto, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 45.09 AND op.puntaje_maximo > 36.09), 0) AS MedioMedio, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 36.09 AND op.puntaje_maximo > 27.09), 0) AS MedioBajo, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 27.09 AND op.puntaje_maximo > 18.09), 0) AS BajoAlto, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 18.09 AND op.puntaje_maximo > 9.09), 0) AS BajoMedio, " +
+            "COALESCE(SUM(op.puntaje_maximo) FILTER (WHERE op.puntaje_maximo <= 9.09 ), 0) AS BajoBajo " +
             "FROM operacion op " +
             "INNER JOIN requisito r ON r.id = op.requisito_id " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +

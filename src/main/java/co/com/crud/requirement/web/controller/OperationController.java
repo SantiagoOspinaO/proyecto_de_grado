@@ -74,26 +74,36 @@ public class OperationController {
     }
 
     @GetMapping(path = "/calculate-median")
-    public AverageScore calculateWeightedMedian(@RequestParam Integer projectId) {
-        return operationService.calculateWeightedMedian(projectId);
+    public AverageScore calculateWeightedMedian(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.calculateWeightedMedian(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/weighted-average-upper-range")
-    public AverageScore weightedAverageOfCumulativeScoreUpperRange(@RequestParam Integer projectId) {
-        return operationService.weightedAverageOfCumulativeScore(projectId, UPPER_RANGE_WEIGHT);
+    public AverageScore weightedAverageOfCumulativeScoreUpperRange(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageOfCumulativeScore(typeRequirement, projectId, UPPER_RANGE_WEIGHT);
     }
 
     @GetMapping(path = "/weighted-average-lower-range")
-    public AverageScore weightedAverageOfCumulativeScoreLowerRange(@RequestParam Integer projectId) {
-        return operationService.weightedAverageOfCumulativeScore(projectId, LOWER_RANGE_WEIGHT);
+    public AverageScore weightedAverageOfCumulativeScoreLowerRange(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageOfCumulativeScore(typeRequirement, projectId, LOWER_RANGE_WEIGHT);
     }
 
     @GetMapping(path = "/total-weighted-median")
     public double totalWeightedMedianSuitabilityLevel(
+            @RequestParam String typeRequirement,
             @RequestParam Integer projectId,
             @RequestParam Integer graphicNumber
     ) {
-        return operationService.totalWeightedMedianSuitabilityLevel(projectId, graphicNumber);
+        return operationService.totalWeightedMedianSuitabilityLevel(typeRequirement, projectId, graphicNumber);
     }
 
 }

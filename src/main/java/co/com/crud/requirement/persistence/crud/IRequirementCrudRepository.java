@@ -74,6 +74,8 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "FROM requisito r " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
-    int countAllRequirements( @Param("tipoRequisito") String typeRequirement,
-                              @Param("proyectoId") Integer projectId);
+    int countAllRequirements(
+            @Param("tipoRequisito") String typeRequirement,
+            @Param("proyectoId") Integer projectId);
+
 }

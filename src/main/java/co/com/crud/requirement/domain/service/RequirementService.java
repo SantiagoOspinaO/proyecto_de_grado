@@ -69,7 +69,7 @@ public class RequirementService {
         return requirementDomainRepository.getRequirementsByProyectoId(projectId);
     }
 
-    public int countAllRequirements(String typeRequirement, Integer projectId){
+    public int countAllRequirements(String typeRequirement, Integer projectId) {
         return requirementDomainRepository.countAllRequirements(typeRequirement, projectId);
     }
 

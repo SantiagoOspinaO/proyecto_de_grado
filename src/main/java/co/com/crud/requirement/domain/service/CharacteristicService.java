@@ -97,7 +97,7 @@ public class CharacteristicService {
         operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
         operation.setMaximumScore(maximumAccumulatedScore(requirementId));
         operation.setCalculatedWeightAverage(calculateWeightAverage(requirementId));
-
+        operation.setQualified(true);
         return operation;
     }
 

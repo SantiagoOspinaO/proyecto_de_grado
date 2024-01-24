@@ -19,7 +19,8 @@ public interface OperationMapper {
             @Mapping(source = "caracteristicasEvaluadas", target = "evaluatedCharacteristics"),
             @Mapping(source = "nivelCaracteristicaPuntuacion", target = "levelWeightScore"),
             @Mapping(source = "puntajeMaximo", target = "maximumScore"),
-            @Mapping(source = "promedioCalculado", target = "calculatedWeightAverage")
+            @Mapping(source = "promedioCalculado", target = "calculatedWeightAverage"),
+            @Mapping(source = "calificado", target = "qualified")
     })
     Operation toOperation(OperationEntity operationEntity);
 

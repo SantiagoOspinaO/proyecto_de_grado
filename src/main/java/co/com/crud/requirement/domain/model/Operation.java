@@ -21,4 +21,6 @@ public class Operation {
 
     private Double calculatedWeightAverage;
 
+    private boolean qualified;
+
 }

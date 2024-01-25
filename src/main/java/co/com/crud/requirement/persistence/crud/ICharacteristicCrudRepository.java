@@ -173,8 +173,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "COALESCE(SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.dde = true), 0) AS noTrazable " +
             "FROM requisito r " +
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
-            "INNER JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "LEFT JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id and c.id =tec.caracteristica_id  " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDDE(
@@ -193,8 +193,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "COALESCE(SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.dii = true), 0) AS noTrazable " +
             "FROM requisito r " +
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
-            "INNER JOIN public.tipo_error_caracteristica tec on r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "LEFT JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id and c.id =tec.caracteristica_id  " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(
@@ -213,8 +213,8 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             "COALESCE(SUM(1) FILTER (WHERE c.nombre_opuesto = 'No Trazable' AND ncr.nota_caracteristica <= 8 AND tec.var = true), 0) AS noTrazable " +
             "FROM requisito r " +
             "INNER JOIN nota_caracteristica_requisito ncr ON r.id = ncr.requisito_id " +
-            "INNER JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id " +
             "INNER JOIN caracteristica c ON c.id = ncr.caracteristica_id " +
+            "LEFT JOIN public.tipo_error_caracteristica tec ON r.id = tec.requisito_id and c.id =tec.caracteristica_id  " +
             "WHERE (:tipoRequisito = '' OR r.tipo_requisito = :tipoRequisito) " +
             "AND (r.proyecto_id = :proyectoId) ", nativeQuery = true)
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(

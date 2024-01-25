@@ -58,7 +58,7 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
     @Query(value = "SELECT count(*) " +
             "FROM nota_caracteristica_requisito ncr " +
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
-            "WHERE tec.tipo_error_id = 1 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
+            "WHERE tec.tipo_error_id = 1 and ncr.nota_caracteristica <= 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorEIEByRequirement(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT count(*) " +
@@ -79,7 +79,7 @@ public interface ITypeErrorCharacteristicCrudRepository extends CrudRepository<T
     @Query(value = "SELECT count(*) " +
             "FROM nota_caracteristica_requisito ncr " +
             "JOIN tipo_error_caracteristica tec on ncr.caracteristica_id=tec.caracteristica_id and ncr.requisito_id=tec.requisito_id " +
-            "WHERE tec.tipo_error_id = 2 and ncr.nota_caracteristica < 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
+            "WHERE tec.tipo_error_id = 2 and ncr.nota_caracteristica <= 8 and ncr.requisito_id = :requisitoId", nativeQuery = true)
     int countTypeErrorMCCByRequirement(@Param("requisitoId") Integer requirementId);
 
     @Query(value = "SELECT count(*) " +

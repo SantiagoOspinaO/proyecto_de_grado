@@ -55,11 +55,11 @@ public class RequirementController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity deleteRequirement(@PathVariable("id") Integer requirementId) {
+    public ResponseEntity<Void> deleteRequirement(@PathVariable("id") Integer requirementId) {
         if (requirementService.deleteRequirement(requirementId)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -94,6 +94,11 @@ public class RequirementController {
             @RequestParam Integer projectId
     ) {
         return requirementService.countAllRequirements(typeRequirement, projectId);
+    }
+
+    @PutMapping("/update-requirement-qualified")
+    public void updateQualifiedByRequirementId(@RequestParam Integer requirementId) {
+        requirementService.updateQualifiedByRequirementId(requirementId);
     }
 
 }

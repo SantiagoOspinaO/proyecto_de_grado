@@ -29,7 +29,7 @@ public class RequirementService {
         validateMandatory(requirement.getDescription(), DESCRIPTION_FIELD_MANDATORY);
         validateMandatory(requirement.getTypeRequirement(), TYPE_FIELD_MANDATORY);
         validateMinMaxLength(requirement.getName(), 5, 3000, MAX_MIN_NANE_LENGHT_MESSAGE);
-
+        requirement.setQualified(false);
         return requirementDomainRepository.saveRequirement(requirement);
     }
 
@@ -71,6 +71,10 @@ public class RequirementService {
 
     public int countAllRequirements(String typeRequirement, Integer projectId) {
         return requirementDomainRepository.countAllRequirements(typeRequirement, projectId);
+    }
+
+    public void updateQualifiedByRequirementId(Integer requirementId) {
+        requirementDomainRepository.updateQualifiedByRequirementId(requirementId);
     }
 
 }

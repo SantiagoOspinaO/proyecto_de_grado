@@ -79,4 +79,9 @@ public class RequirementRepository implements RequirementDomainRepository {
         return requirementCrudRepository.countAllRequirements(typeRequirement, projectId);
     }
 
+    @Override
+    public void updateQualifiedByRequirementId(Integer requirementId) {
+        requirementCrudRepository.updateQualifiedByRequirementId(requirementId);
+    }
+
 }

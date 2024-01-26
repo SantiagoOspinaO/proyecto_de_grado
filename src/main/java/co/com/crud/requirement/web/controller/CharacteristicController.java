@@ -94,7 +94,10 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/all-operations/{id}")
-    public Operation getAllOperations(@PathVariable("id") Integer operationId, @PathVariable("id") Integer requirementId) {
+    public Operation getAllOperations(
+            @PathVariable("id") Integer operationId,
+            @PathVariable("id") Integer requirementId
+    ) {
         return characteristicService.allOperations(operationId, requirementId);
     }
 

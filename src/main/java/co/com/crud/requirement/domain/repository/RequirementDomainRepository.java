@@ -30,4 +30,6 @@ public interface RequirementDomainRepository {
 
     int countAllRequirements(String typeRequirement, Integer projectId);
 
+    void updateQualifiedByRequirementId(Integer requirementId);
+
 }

@@ -16,7 +16,8 @@ public interface RequirementMapper {
             @Mapping(source = "proyectoId", target = "projectId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "descripcion", target = "description"),
-            @Mapping(source = "tipoRequisito", target = "typeRequirement")
+            @Mapping(source = "tipoRequisito", target = "typeRequirement"),
+            @Mapping(source = "calificado", target = "qualified")
     })
     Requirement toRequirement(RequirementEntity requirementEntity);
 

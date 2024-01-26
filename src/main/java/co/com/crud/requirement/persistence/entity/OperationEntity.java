@@ -36,6 +36,5 @@ public class OperationEntity {
     @Column(nullable = false)
     private Double promedioCalculado;
 
-    @Column(nullable = false)
-    private boolean calificado;
+
 }

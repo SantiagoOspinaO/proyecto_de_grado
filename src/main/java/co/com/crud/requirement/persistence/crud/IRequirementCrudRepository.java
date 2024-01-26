@@ -5,9 +5,11 @@ import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCa
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -77,5 +79,10 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
     int countAllRequirements(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE requisito SET calificado = true WHERE id = :requisitoId", nativeQuery = true)
+    void updateQualifiedByRequirementId(@Param("requisitoId") Integer requirementId);
 
 }

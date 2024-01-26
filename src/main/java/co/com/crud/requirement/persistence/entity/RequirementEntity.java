@@ -30,4 +30,7 @@ public class RequirementEntity {
     @Column(nullable = false, length = 12)
     private String tipoRequisito;
 
+    @Column(nullable = false)
+    private boolean calificado;
+
 }

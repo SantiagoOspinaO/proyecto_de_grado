@@ -6,6 +6,7 @@ import co.com.crud.requirement.domain.model.queryresult.*;
 import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -19,15 +20,15 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class CharacteristicServiceTest {
 
-    private CharacteristicDomainRepository characteristicDomainRepository;
     @MockBean
-    CharacteristicDomainRepository CharacteristicDomainRepository;
+    CharacteristicDomainRepository characteristicDomainRepository;
+
+    @Autowired
+    CharacteristicService characteristicService;
 
     @Test
     public void testGetAllCharacteristicsWhenResultIsNotNull() {
         //Arrange
-        CharacteristicService characteristicService = mock(CharacteristicService.class);
-        CharacteristicDomainRepository mockCharacteristicRepository = mock(CharacteristicDomainRepository.class);
         Characteristic characteristic = new Characteristic();
         characteristic.setCharacteristicId(1);
         characteristic.setName("Correcto");
@@ -35,15 +36,17 @@ public class CharacteristicServiceTest {
         characteristic.setDescription("Se encuentra en el resultado o producto");
         characteristic.setOppositeDescription("No se encuentra en el resultado o producto");
 
-        ArrayList<Characteristic> mockCharacteristics = new ArrayList<Characteristic>();
-        mockCharacteristics.add(characteristic);
-        when(mockCharacteristicRepository.getAllCharacteristics()).thenReturn(mockCharacteristics);
+        CharacteristicDomainRepository characteristicDomainRepository = Mockito.mock(CharacteristicDomainRepository.class);
+        CharacteristicService characteristicService1 = Mockito.mock(CharacteristicService.class);
+        ArrayList<Characteristic> returnCharacteristics = new ArrayList<Characteristic>();
+        returnCharacteristics.add(characteristic);
+        when(characteristicDomainRepository.getAllCharacteristics()).thenReturn(returnCharacteristics);
 
         //Act
-        List<Characteristic> result = characteristicService.getAllCharacteristics();
+        List<Characteristic> result = characteristicService1.getAllCharacteristics();
 
         //ASSERT
-        verify(characteristicService, times(1)).getAllCharacteristics();
+        verify(characteristicService1, times(1)).getAllCharacteristics();
     }
 
     @Test

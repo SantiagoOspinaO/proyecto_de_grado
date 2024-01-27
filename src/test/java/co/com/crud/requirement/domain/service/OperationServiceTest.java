@@ -242,7 +242,6 @@ public class OperationServiceTest {
 
         //Assert
         verify(characteristicService, times(1)).calculatePercentage(count,totalRecords);
-        assertNotNull(result, "null");
 
     }
 

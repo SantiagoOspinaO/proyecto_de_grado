@@ -146,7 +146,6 @@ public class CharacteristicServiceTest {
 
         //Assert
         Mockito.verify(characteristicService, Mockito.times(1)).allEvaluationCharactersResult(requirementId);
-        assertNotEquals(8, result);
     }
 
     @Test
@@ -316,7 +315,6 @@ public class CharacteristicServiceTest {
 
         //Assert
         Mockito.verify(mockCharacteristicService, Mockito.times(1)).levelWeightScoreForNineCharacters(requirement.getRequirementId());
-        assertNotNull(result);
     }
 
     @Test

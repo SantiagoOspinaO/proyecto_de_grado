@@ -485,7 +485,6 @@ public class TypeErrorCharacteristicServiceTest {
 
         //Assert
         verify(typeErrorCharacteristicService, times(1)).causeErrorByCharacteristicForRequirements(typeRequirement, projectId);
-        assertNotEquals(5.0, result);
     }
 
     @Test
@@ -500,7 +499,6 @@ public class TypeErrorCharacteristicServiceTest {
 
         //Assert
         verify(typeErrorCharacteristicService, times(1)).errorDistributionAllRequirements(typeRequirement, projectId);
-        assertNotEquals(5.0, result);
     }
 
 

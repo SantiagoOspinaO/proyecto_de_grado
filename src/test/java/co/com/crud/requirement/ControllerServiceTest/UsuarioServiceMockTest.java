@@ -32,7 +32,7 @@ public class UsuarioServiceMockTest {
     }
 
     @Test
-    public void testTodosRequisitos(){
+    void testTodosRequisitos() {
         RequirementService requirementService1 = Mockito.mock(RequirementService.class);
         Requirement requirement = new Requirement();
         requirement.setProjectId(1);
@@ -51,7 +51,4 @@ public class UsuarioServiceMockTest {
         verify(requirementService1, times(1)).getAllRequirements();
     }
 
-    public void testRequisitoRolMock() {
-
-    }
 }

@@ -6,7 +6,7 @@ import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCau
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByRequirementIdAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
 import co.com.crud.requirement.domain.repository.OperationDomainRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 

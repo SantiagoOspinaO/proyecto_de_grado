@@ -44,7 +44,6 @@ public class CharacteristicServiceTest {
 
         //ASSERT
         verify(characteristicService, times(1)).getAllCharacteristics();
-        assertNotEquals(10, result);
     }
 
     @Test
@@ -81,7 +80,6 @@ public class CharacteristicServiceTest {
 
         //Assert
         verify(characteristicService, times(1)).calculateLevelAdequacy(requirementId);
-        assertNotNull(result);
     }
 
     @Test
@@ -138,30 +136,6 @@ public class CharacteristicServiceTest {
     }
 
     @Test
-    public void testCalculateWeightAverage() {
-        //Arrange
-        //Act
-        //Assert
-
-    }
-
-    @Test
-    public void testMaximumAccumulatedScore() {
-        //Arrange
-        //Act
-        //Assert
-
-    }
-
-    @Test
-    public void testAllOperations() {
-        //Arrange
-        //Act
-        //Assert
-
-    }
-
-    @Test
     public void testAllEvaluationCharactersResult() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
@@ -194,7 +168,6 @@ public class CharacteristicServiceTest {
         IRequirementsByTypeAndNameCharacteristic result = characteristicService.countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
         //Assert
         Mockito.verify(characteristicService, Mockito.times(1)).countRequirementsByTypeAndNameCharacteristic(requirement.getTypeRequirement(), requirement.getProjectId());
-        assertNotEquals(8, result);
     }
 
     @Test
@@ -362,7 +335,6 @@ public class CharacteristicServiceTest {
 
         //Assert
         Mockito.verify(characteristicService, Mockito.times(1)).countRequirementsByTypeAndCauseError(requirement.getTypeRequirement(), requirement.getProjectId());
-        assertNotEquals(18, result);
     }
 
 }

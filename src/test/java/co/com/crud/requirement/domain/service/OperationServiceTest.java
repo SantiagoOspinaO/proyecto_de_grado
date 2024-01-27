@@ -5,7 +5,6 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByRequirementIdAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
-import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import co.com.crud.requirement.domain.repository.OperationDomainRepository;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +32,7 @@ public class OperationServiceTest {
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.555);
         operation.setMaximumScore(45.0);
@@ -63,7 +62,7 @@ public class OperationServiceTest {
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.555);
         operation.setMaximumScore(45.0);
@@ -127,7 +126,7 @@ public class OperationServiceTest {
         operation.setOperationId(1);
         operation.setRequirementId(1);
         operation.setMaximumScore(45.0);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.55);
         operation.setCalculatedWeightAverage(0.55);

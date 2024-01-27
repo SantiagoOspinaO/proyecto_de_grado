@@ -15,7 +15,7 @@ public interface OperationMapper {
     @Mappings({
             @Mapping(source = "id", target = "operationId"),
             @Mapping(source = "requisitoId", target = "requirementId"),
-            @Mapping(source = "nivelAdecuacion", target = "levelAdecuacy"),
+            @Mapping(source = "nivelAdecuacion", target = "levelAdequacy"),
             @Mapping(source = "caracteristicasEvaluadas", target = "evaluatedCharacteristics"),
             @Mapping(source = "nivelCaracteristicaPuntuacion", target = "levelWeightScore"),
             @Mapping(source = "puntajeMaximo", target = "maximumScore"),

@@ -11,7 +11,7 @@ public class Operation {
 
     private Integer requirementId;
 
-    private Double levelAdecuacy;
+    private Double levelAdequacy;
 
     private Double evaluatedCharacteristics;
 

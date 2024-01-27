@@ -11,8 +11,11 @@ public interface OperationDomainRepository {
 
     List<Operation> getAllOperations();
 
-    ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement(String typeRequirement,Integer projectId);
+    ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId);
 
-    ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(String typeRequirement,Integer projectId);
+    ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(String typeRequirement, Integer projectId);
+
+    void updateOperation(Double maximumScore, Double levelAdequacy, Double evaluatedCharacteristics,
+                         Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId);
 
 }

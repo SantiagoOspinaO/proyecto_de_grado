@@ -92,7 +92,7 @@ public class CharacteristicService {
         Operation operation = new Operation();
         operation.setOperationId(operationId);
         operation.setRequirementId(requirementId);
-        operation.setLevelAdecuacy(calculateLevelAdequacy(requirementId));
+        operation.setLevelAdequacy(calculateLevelAdequacy(requirementId));
         operation.setEvaluatedCharacteristics(evaluatedCharacteristicForRequirement(requirementId));
         operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
         operation.setMaximumScore(maximumAccumulatedScore(requirementId));

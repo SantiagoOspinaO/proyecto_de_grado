@@ -28,12 +28,20 @@ public class OperationController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Operation> updateOperation(
-            @RequestBody Operation operation,
-            @PathVariable("id") Integer id
+            @PathVariable("id") Integer requirementId,
+            @RequestBody Operation operation
     ) {
-        operation.setOperationId(id);
-        operation.setRequirementId(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.operationService.saveOperation(operation));
+        Double levelAdequacy = operation.getLevelAdequacy();
+        Double evaluatedCharacteristics = operation.getEvaluatedCharacteristics();
+        Double levelWeightScore = operation.getLevelWeightScore();
+        Double maximumScore = operation.getMaximumScore();
+        Double calculatedWeightAverage = operation.getCalculatedWeightAverage();
+
+        operationService.updateOperation(
+                maximumScore, levelAdequacy, evaluatedCharacteristics,
+                levelWeightScore, calculatedWeightAverage, requirementId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping()

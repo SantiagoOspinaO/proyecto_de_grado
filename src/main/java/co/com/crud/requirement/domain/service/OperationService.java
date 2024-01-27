@@ -337,4 +337,10 @@ public class OperationService {
         return response;
     }
 
+    public void updateOperation(Double maximumScore, Double levelAdequacy, Double evaluatedCharacteristics,
+                                Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId) {
+        operationsDomainRepository.updateOperation(maximumScore, levelAdequacy, evaluatedCharacteristics,
+                levelWeightScore, calculatedWeightAverage, requirementId);
+    }
+
 }

@@ -49,7 +49,10 @@ public class RequirementController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Requirement> updateRequirement(@RequestBody Requirement requirement, @PathVariable("id") Integer id) {
+    public ResponseEntity<Requirement> updateRequirement(
+            @RequestBody Requirement requirement,
+            @PathVariable("id") Integer id
+    ) {
         requirement.setRequirementId(id);
         return ResponseEntity.ok(requirementService.saveRequirement(requirement));
     }
@@ -96,7 +99,7 @@ public class RequirementController {
         return requirementService.countAllRequirements(typeRequirement, projectId);
     }
 
-    @PutMapping("/update-requirement-qualified")
+    @PutMapping(path = "/update-requirement-qualified")
     public void updateQualifiedByRequirementId(@RequestParam Integer requirementId) {
         requirementService.updateQualifiedByRequirementId(requirementId);
     }

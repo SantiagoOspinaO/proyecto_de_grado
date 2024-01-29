@@ -77,4 +77,8 @@ public class RequirementService {
         requirementDomainRepository.updateQualifiedByRequirementId(requirementId);
     }
 
+    public void updateProjectStatus(Integer projectId) {
+        requirementDomainRepository.updateProjectStatus(projectId);
+    }
+
 }

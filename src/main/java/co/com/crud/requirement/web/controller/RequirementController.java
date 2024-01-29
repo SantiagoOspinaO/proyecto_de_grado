@@ -104,4 +104,9 @@ public class RequirementController {
         requirementService.updateQualifiedByRequirementId(requirementId);
     }
 
+    @PutMapping(path = "/update-project-status")
+    public void updateProjectStatus(@RequestParam Integer projectId) {
+        requirementService.updateProjectStatus(projectId);
+    }
+
 }

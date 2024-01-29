@@ -84,4 +84,9 @@ public class RequirementRepository implements RequirementDomainRepository {
         requirementCrudRepository.updateQualifiedByRequirementId(requirementId);
     }
 
+    @Override
+    public void updateProjectStatus(Integer projectId) {
+        requirementCrudRepository.updateProjectStatus(projectId);
+    }
+
 }

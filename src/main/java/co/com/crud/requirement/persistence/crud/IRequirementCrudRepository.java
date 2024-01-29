@@ -85,4 +85,13 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
     @Query(value = "UPDATE requisito SET calificado = true WHERE id = :requisitoId", nativeQuery = true)
     void updateQualifiedByRequirementId(@Param("requisitoId") Integer requirementId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE estado_proyecto " +
+            "SET estado = 7 " +
+            "FROM proyecto " +
+            "WHERE estado_proyecto.id = proyecto.estado " +
+            "AND proyecto.id = :proyectoId ", nativeQuery = true)
+    void updateProjectStatus(@Param("proyectoId") Integer proyectoId);
+
 }

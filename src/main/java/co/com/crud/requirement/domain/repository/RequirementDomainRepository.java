@@ -32,4 +32,6 @@ public interface RequirementDomainRepository {
 
     void updateQualifiedByRequirementId(Integer requirementId);
 
+    void updateProjectStatus(Integer projectId);
+
 }

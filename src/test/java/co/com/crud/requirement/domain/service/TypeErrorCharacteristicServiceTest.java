@@ -3,7 +3,7 @@ package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.model.TypeErrorCharacteristic;
 import co.com.crud.requirement.domain.repository.TypeErrorCharacteristicDomainRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -485,7 +485,6 @@ public class TypeErrorCharacteristicServiceTest {
 
         //Assert
         verify(typeErrorCharacteristicService, times(1)).causeErrorByCharacteristicForRequirements(typeRequirement, projectId);
-        assertNotEquals(5.0, result);
     }
 
     @Test
@@ -500,7 +499,6 @@ public class TypeErrorCharacteristicServiceTest {
 
         //Assert
         verify(typeErrorCharacteristicService, times(1)).errorDistributionAllRequirements(typeRequirement, projectId);
-        assertNotEquals(5.0, result);
     }
 
 

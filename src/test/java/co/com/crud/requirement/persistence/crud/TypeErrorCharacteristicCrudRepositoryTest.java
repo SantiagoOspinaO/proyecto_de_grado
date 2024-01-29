@@ -2,11 +2,9 @@ package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.persistence.TypeErrorCharacteristicRepository;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
@@ -15,7 +13,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class TypeErrorCharacteristicCrudRepositoryTest {
 

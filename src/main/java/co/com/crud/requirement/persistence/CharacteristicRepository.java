@@ -52,8 +52,8 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
-        characteristicCrudRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean CEvar, Integer requirementId, Integer characteristicId) {
+        characteristicCrudRepository.updateCauseErrorOfCharacteristic(dde, dii, CEvar, requirementId, characteristicId);
     }
 
     @Override

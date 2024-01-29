@@ -63,7 +63,7 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
     void updateCauseErrorOfCharacteristic(
             @Param("dde") boolean dde,
             @Param("dii") boolean dii,
-            @Param("var") boolean var,
+            @Param("var") boolean CEvar,
             @Param("requisitoId") Integer requirementId,
             @Param("caracteristicaId") Integer characteristicId);
 

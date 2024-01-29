@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class RequirementServiceTest {
+class RequirementServiceTest {
 
     @MockBean
     RequirementDomainRepository requirementDomainRepository;
 
     @Test
-    public void testGetAllRequirementsWhenResultIsNotNull() {
+    void testGetAllRequirementsWhenResultIsNotNull() {
         //Arrange
         RequirementDomainRepository mockRequirementRepository = mock(RequirementDomainRepository.class);
         Requirement requirement = new Requirement();
@@ -45,7 +45,7 @@ public class RequirementServiceTest {
     }
 
     @Test
-    public void testSaveRequirement() {
+    void testSaveRequirement() {
         //Arrange
         RequirementDomainRepository requirementDomainRepository = mock(RequirementDomainRepository.class);
         RequirementService requirementService = new RequirementService(requirementDomainRepository);
@@ -69,14 +69,7 @@ public class RequirementServiceTest {
     }
 
     @Test
-    public void testGetRequirementById() {
-        //Arrange
-        //Act
-        //Assert
-    }
-
-    @Test
-    public void testCountRequirementsByFilterCauseError() {
+    void testCountRequirementsByFilterCauseError() {
         //Arrange
         RequirementService requirementService = mock(RequirementService.class);
         int requirementId = 2;
@@ -90,7 +83,7 @@ public class RequirementServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByGradeAndCauseError() {
+    void testCountRequirementsByGradeAndCauseError() {
         //Arrange
         RequirementService requirementService = mock(RequirementService.class);
         String typeRequirement = "Funcional";

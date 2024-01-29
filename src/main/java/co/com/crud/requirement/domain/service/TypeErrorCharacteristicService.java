@@ -130,8 +130,7 @@ public class TypeErrorCharacteristicService {
     public Double percentageOfTypeErrosById(Integer typeErrorID, Integer requirementId) {
         Integer allRequirements = typeErrorCharacteristicDomainRepository.countAllTypeErrorsByRequirement(requirementId);
         Integer requirements = typeErrorCharacteristicDomainRepository.countTypeErrorsByRequirements(typeErrorID, requirementId);
-        double result = characteristicService.calculatePercentage(requirements, allRequirements);
-        return result;
+        return characteristicService.calculatePercentage(requirements, allRequirements);
     }
 
     public Double percentageOffAllTypeErrorById(Integer requirementId) {

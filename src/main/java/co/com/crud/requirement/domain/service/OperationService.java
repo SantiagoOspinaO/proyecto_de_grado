@@ -332,6 +332,8 @@ public class OperationService {
             case 2:
                 response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(typeRequirement, projectId, LOWER_RANGE_WEIGHT));
                 break;
+            default:
+                totalWeightedMedianSuitabilityLevel(typeRequirement,projectId,option);
         }
 
         return response;

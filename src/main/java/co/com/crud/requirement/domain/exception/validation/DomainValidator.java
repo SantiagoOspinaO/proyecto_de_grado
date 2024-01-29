@@ -34,12 +34,6 @@ public class DomainValidator {
         }
     }
 
-    /*public static void validateMandatory(Object value, String humanMessage) {
-        if (value == null || (value instanceof String && ((String) value).trim().isEmpty())) {
-            throw new MandatoryValueException(DEFAULT_MESSAGE);
-        }
-    }*/
-
     public static void validateEquals(Object value, Object expectedValue, String humanMessage) {
         if (!expectedValue.equals(value)) {
             throw new InvalidValueException(humanMessage);

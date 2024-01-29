@@ -14,13 +14,13 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
-public class RequirementCrudRepositoryTest {
+class RequirementCrudRepositoryTest {
 
     @Autowired
     private IRequirementCrudRepository requirementCrudRepository;
 
     @Test
-    public void testFindRequirementById() {
+    void testFindRequirementById() {
         //Arrange
         RequirementRepository requirementRepository = mock(RequirementRepository.class);
         IRequirementCrudRepository iRequirementCrudRepository = mock(IRequirementCrudRepository.class);
@@ -37,7 +37,7 @@ public class RequirementCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByFilterCauseError() {
+    void testCountRequirementsByFilterCauseError() {
         //Arrange
         int requisitoId = 5;
         int projectId = 1;
@@ -51,7 +51,7 @@ public class RequirementCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByGradeAndCauseError() {
+    void testCountRequirementsByGradeAndCauseError() {
         //Arrange
         String tipoRequisito = "No funcional";
         String causeError = "EIE";

@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class TypeErrorCharacteristicServiceTest {
+class TypeErrorCharacteristicServiceTest {
 
     @MockBean
     TypeErrorCharacteristicDomainRepository typeErrorDomainRepository;
 
     @Test
-    public void testGetAllTypeErrorWhenResultIsNotNull() {
+    void testGetAllTypeErrorWhenResultIsNotNull() {
         //Arrange
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
@@ -43,7 +43,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testGetTypeErrorById() {
+    void testGetTypeErrorById() {
         //Arrange
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
@@ -51,14 +51,16 @@ public class TypeErrorCharacteristicServiceTest {
         int tipeErrorId = 1;
 
         when(mockTypeErrorRepository.getTypeErrorById(tipeErrorId)).thenReturn(TypeErrorCharacteristic);
+
         //Act
         var result = typeErrorCharacteristicService.getTypeErrorById(tipeErrorId);
+
         //Assert
         verify(typeErrorCharacteristicService, times(1)).getTypeErrorById(tipeErrorId);
     }
 
     @Test
-    public void testCountRequirementsByTypeAndCauseError() {
+    void testCountRequirementsByTypeAndCauseError() {
         //Arrange
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
@@ -77,7 +79,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDDE() {
+    void testCountRequirementsByCauseErrorDDE() {
         //Arrange
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
@@ -97,7 +99,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDII() {
+    void testCountRequirementsByCauseErrorDII() {
         //Arrange
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
@@ -116,7 +118,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorVAR() {
+    void testCountRequirementsByCauseErrorVAR() {
         //Arrange
         TypeErrorCharacteristicService typeErrorCharacteristicService = mock(TypeErrorCharacteristicService.class);
         TypeErrorCharacteristicDomainRepository mockTypeErrorRepository = mock(TypeErrorCharacteristicDomainRepository.class);
@@ -135,7 +137,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorAndRequirementId() {
+    void testCountRequirementsByCauseErrorAndRequirementId() {
         //Arrange
         int requirementId = 1;
         int typeErrorId = 2;
@@ -154,7 +156,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEByRequirement() {
+    void testCountTypeErrorEIEByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -172,7 +174,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorDDEByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorDDEByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -191,7 +193,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorDIIByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorDIIByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -210,7 +212,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorVARByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorVARByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -229,7 +231,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCByRequirement() {
+    void testCountTypeErrorMCCByRequirement() {
         //Arrange
         int requirementId = 1;
         int aRetunrInt = 2;
@@ -247,7 +249,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCAndCauseErrorDDEByRequirement() {
+    void testCountTypeErrorMCCAndCauseErrorDDEByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -266,7 +268,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCAndCauseErrorDIIByRequirement() {
+    void testCountTypeErrorMCCAndCauseErrorDIIByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -285,7 +287,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCAndCauseErrorVARByRequirement() {
+    void testCountTypeErrorMCCAndCauseErrorVARByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -304,12 +306,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testcountTypeErrorsMCCByRequirement() {
-
-    }
-
-    @Test
-    public void testCountTypeErrorsByRequirements() {
+     void testCountTypeErrorsByRequirements() {
         //Arrange
         int typeErrorId = 1;
         int requirementId = 1;
@@ -327,7 +324,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountAllTypeErrorsByRequirement() {
+    void testCountAllTypeErrorsByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -344,7 +341,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testCountAllCauseErrorsByRequirement() {
+    void testCountAllCauseErrorsByRequirement() {
         //Arrange
         int requirementId = 1;
         int aReturnInt = 2;
@@ -360,13 +357,9 @@ public class TypeErrorCharacteristicServiceTest {
         assertNotEquals(5, result);
     }
 
-    @Test
-    public void testnumberOfCauseErrorById() {
-
-    }
 
     @Test
-    public void testPercentageOfCauseErrorById() {
+    void testPercentageOfCauseErrorById() {
         //Arrange
         int requirementId = 12;
         int typeErrorId = 1;
@@ -389,7 +382,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testPercentageOfTypeErrorEIEById() {
+    void testPercentageOfTypeErrorEIEById() {
         //Arrange
         int requirementId = 12;
         double aReturnDouble = 10.0;
@@ -409,7 +402,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testpercentageOfTypeErrorMCCById() {
+    void testpercentageOfTypeErrorMCCById() {
         //Arrange
         int requirementId = 12;
         double aReturnDouble = 10.0;
@@ -429,7 +422,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testPercentageOfTypeErrosById() {
+    void testPercentageOfTypeErrosById() {
         //Arrange
         int typeErrorId = 2;
         int requirementId = 10;
@@ -450,7 +443,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testPercentageOffAllTypeErrorById() {
+    void testPercentageOffAllTypeErrorById() {
         //Arrange
         int requirementId = 1;
         Double aReturnDouble = 2.0;
@@ -467,14 +460,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testallNumbersAndPercentageOperations() {
-        //Arrange
-        //Act
-        //Assert
-    }
-
-    @Test
-    public void testCauseErrorByCharacteristicForRequirements() {
+    void testCauseErrorByCharacteristicForRequirements() {
         //Arrange
         String typeRequirement = "Funcional";
         int projectId = 2;
@@ -488,7 +474,7 @@ public class TypeErrorCharacteristicServiceTest {
     }
 
     @Test
-    public void testerrorDistributionAllRequirements() {
+    void testerrorDistributionAllRequirements() {
         //Arrange
         String typeRequirement = "Funcional";
         int projectId = 2;

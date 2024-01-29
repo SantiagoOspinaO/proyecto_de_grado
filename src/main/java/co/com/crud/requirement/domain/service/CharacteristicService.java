@@ -50,8 +50,8 @@ public class CharacteristicService {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
-        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean CEvar, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, CEvar, requirementId, characteristicId);
     }
 
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {
@@ -76,7 +76,6 @@ public class CharacteristicService {
     public double maximumAccumulatedScore(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0;
-        double sum = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
             sumGrade += grade.getGrade();
         }
@@ -100,7 +99,7 @@ public class CharacteristicService {
         return operation;
     }
 
-    public String allEvaluationCharactersResult(Integer requirementId) {
+    public String allEvaluationCharsResult(Integer requirementId) {
         double result = maximumAccumulatedScore(requirementId);
         if (result > 72.09) {
             return RequirementAdecuationValidator.Adecuation_Alto_Alto;
@@ -157,7 +156,7 @@ public class CharacteristicService {
     }
 
     @NotNull
-    public Map<String, Double> getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(IRequirementsByTypeAndNameCharacteristic requirements) {
+    public Map<String, Double> getPercCountRequirementsByTypeAndNameChar(IRequirementsByTypeAndNameCharacteristic requirements) {
         double correcto = requirements.getCorrecto() != null ? requirements.getCorrecto() : 0.0;
         double incorrecto = requirements.getIncorrecto() != null ? requirements.getIncorrecto() : 0.0;
         double inequivoco = requirements.getInequivoco() != null ? requirements.getInequivoco() : 0.0;

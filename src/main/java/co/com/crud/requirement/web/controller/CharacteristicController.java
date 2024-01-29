@@ -62,9 +62,9 @@ public class CharacteristicController {
     ) {
         boolean dde = causeErrorData.get("dde");
         boolean dii = causeErrorData.get("dii");
-        boolean var = causeErrorData.get("var");
+        boolean CEvar = causeErrorData.get("var");
 
-        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, CEvar, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
 
@@ -80,7 +80,7 @@ public class CharacteristicController {
 
     @GetMapping(path = "/all-evaluation-characters-result/{id}")
     public String calculateAllEvaluationCharactersResult(@PathVariable("id") Integer requirementId) {
-        return characteristicService.allEvaluationCharactersResult(requirementId);
+        return characteristicService.allEvaluationCharsResult(requirementId);
     }
 
     @GetMapping(path = "/calculate-weight-average/{id}")
@@ -139,7 +139,7 @@ public class CharacteristicController {
             @RequestParam Integer projectId
     ) {
         IRequirementsByTypeAndNameCharacteristic requirements = countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
-        return characteristicService.getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(requirements);
+        return characteristicService.getPercCountRequirementsByTypeAndNameChar(requirements);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-dde")

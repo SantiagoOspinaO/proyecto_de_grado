@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class UsuarioServiceMockTest {
+class UsuarioServiceMockTest {
 
     @MockBean
     IRequirementCrudRepository IRequirementCrudRepository;
@@ -25,7 +25,7 @@ public class UsuarioServiceMockTest {
     RequirementService requirementService;
 
     @Test
-    public void testRequisitoMock() {
+    void testRequisitoMock() {
         when(IRequirementCrudRepository.findAll()).thenReturn(new ArrayList<>());
         assertThat(requirementService.getAllRequirements().isEmpty());
         verify(IRequirementCrudRepository).findAll();

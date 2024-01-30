@@ -2,6 +2,10 @@ package co.com.crud.requirement.domain.exception.validation;
 
 public class RequirementAdecuationValidator {
 
+    private RequirementAdecuationValidator(){
+
+    }
+
     public static final String ADECUACION_ALTO_ALTO = "Requisito tipo # con nivel de adecuacion ALTO - ALTO";
     public static final String ADECUACION_ALTO_MEDIO = "Requisito tipo # con nivel de adecuacion ALTO - MEDIO";
     public static final String ADECUACION_ALTO_BAJO = "Requisito tipo # con nivel de adecuacion ALTO - BAJO";

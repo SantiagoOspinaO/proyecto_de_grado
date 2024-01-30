@@ -62,9 +62,9 @@ public class CharacteristicController {
     ) {
         boolean dde = causeErrorData.get("dde");
         boolean dii = causeErrorData.get("dii");
-        boolean CE_VAR = causeErrorData.get("var");
+        boolean ceVAR = causeErrorData.get("var");
 
-        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, CE_VAR, requirementId, characteristicId);
+        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, ceVAR, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
 

@@ -3,6 +3,7 @@ package co.com.crud.requirement.web.controller;
 import co.com.crud.requirement.domain.model.AverageScore;
 import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.ITotalMaxScore;
+import co.com.crud.requirement.domain.service.CharacteristicService;
 import co.com.crud.requirement.domain.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,26 +21,24 @@ import static co.com.crud.requirement.web.constants.Constants.UPPER_RANGE_WEIGHT
 public class OperationController {
 
     private final OperationService operationService;
+    private final CharacteristicService characteristicService;
 
     @Autowired
-    public OperationController(OperationService operationService) {
+    public OperationController(OperationService operationService, CharacteristicService characteristicService) {
         this.operationService = operationService;
+        this.characteristicService = characteristicService;
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/update-operation/{id}")
     public ResponseEntity<Operation> updateOperation(
-            @PathVariable("id") Integer requirementId,
-            @RequestBody Operation operation
+            @PathVariable("id") Integer requirementId
     ) {
-        Double levelAdequacy = operation.getLevelAdequacy();
-        Double evaluatedCharacteristics = operation.getEvaluatedCharacteristics();
-        Double levelWeightScore = operation.getLevelWeightScore();
-        Double maximumScore = operation.getMaximumScore();
-        Double calculatedWeightAverage = operation.getCalculatedWeightAverage();
+        int operationId = characteristicService.getOperationId(requirementId);
+        Operation operation = characteristicService.allOperations(operationId, requirementId);
 
         operationService.updateOperation(
-                maximumScore, levelAdequacy, evaluatedCharacteristics,
-                levelWeightScore, calculatedWeightAverage, requirementId);
+                operation.getMaximumScore(), operation.getLevelAdequacy(), operation.getEvaluatedCharacteristics(),
+                operation.getLevelWeightScore(), operation.getCalculatedWeightAverage(), operation.getRequirementId());
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.exception.*;
 import co.com.crud.requirement.domain.exception.validation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +42,12 @@ public class RestExceptionHandler {
         LOGGER.error(e.getClass().getSimpleName(), e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public Error handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        String exceptionName = ex.getClass().getSimpleName();
+        return new Error(exceptionName, DomainValidator.NAME_ALREADY_EXISTS);
     }
 
 }

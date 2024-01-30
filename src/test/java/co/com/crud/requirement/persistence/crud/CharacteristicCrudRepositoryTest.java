@@ -32,7 +32,7 @@ class CharacteristicCrudRepositoryTest {
         Optional<CharacteristicEntity> result = iCharacteristicCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iCharacteristicCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 

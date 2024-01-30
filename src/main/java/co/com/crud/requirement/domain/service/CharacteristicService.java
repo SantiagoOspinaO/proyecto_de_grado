@@ -56,11 +56,7 @@ public class CharacteristicService {
 
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
-        int requirementEvaluated = 0;
-        for (IGradeCharacteristicByRequirementId ignored : grades) {
-            requirementEvaluated = grades.size();
-        }
-        return requirementEvaluated;
+        return grades.size();
     }
 
     public double calculateWeightAverage(Integer requirementId) {

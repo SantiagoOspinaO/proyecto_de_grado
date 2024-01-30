@@ -91,4 +91,9 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
         return characteristicCrudRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
     }
 
+    @Override
+    public int getOperationId(Integer requirementId) {
+        return characteristicCrudRepository.getOperationId(requirementId);
+    }
+
 }

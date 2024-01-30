@@ -34,4 +34,6 @@ public interface CharacteristicDomainRepository {
 
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(String typeRequirement, Integer projectId);
 
+    int getOperationId(Integer requirementId);
+
 }

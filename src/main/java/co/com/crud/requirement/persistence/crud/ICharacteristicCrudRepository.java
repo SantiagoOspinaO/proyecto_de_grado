@@ -221,4 +221,9 @@ public interface ICharacteristicCrudRepository extends CrudRepository<Characteri
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
 
+    @Query(value = "SELECT id " +
+            "FROM operacion " +
+            "WHERE requisito_id = :requisitoId ", nativeQuery = true)
+    int getOperationId(@Param("requisitoId") Integer requirementId);
+
 }

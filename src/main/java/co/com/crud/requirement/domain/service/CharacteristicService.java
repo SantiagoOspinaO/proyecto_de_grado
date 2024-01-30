@@ -240,4 +240,8 @@ public class CharacteristicService {
         }
     }
 
+    public int getOperationId(Integer requirementId) {
+        return characteristicDomainRepository.getOperationId(requirementId);
+    }
+
 }

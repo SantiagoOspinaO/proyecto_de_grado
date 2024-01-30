@@ -137,7 +137,7 @@ class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).allOperations(operation.getOperationId(), operation.getRequirementId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharsResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
@@ -158,7 +158,7 @@ class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countRequirementsByRequirementIdAndCauseError(requirement.getRequirementId(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharsResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
@@ -179,7 +179,7 @@ class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countCauseErrorByRequirementType(requirement.getTypeRequirement(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharsResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
@@ -200,7 +200,7 @@ class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countRequirementsByTypeAndCauseError(requirement.getTypeRequirement(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharsResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 

@@ -80,7 +80,7 @@ public class CharacteristicController {
 
     @GetMapping(path = "/all-evaluation-characters-result/{id}")
     public String calculateAllEvaluationCharactersResult(@PathVariable("id") Integer requirementId) {
-        return characteristicService.allEvaluationCharsResult(requirementId);
+        return characteristicService.allEvaluationCharacteristicsResult(requirementId);
     }
 
     @GetMapping(path = "/calculate-weight-average/{id}")

@@ -144,10 +144,10 @@ class CharacteristicServiceTest {
         int requirementId = 5;
 
         //Act
-        var result = characteristicService.allEvaluationCharsResult(requirementId);
+        var result = characteristicService.allEvaluationCharacteristicsResult(requirementId);
 
         //Assert
-        Mockito.verify(characteristicService, Mockito.times(1)).allEvaluationCharsResult(requirementId);
+        Mockito.verify(characteristicService, Mockito.times(1)).allEvaluationCharacteristicsResult(requirementId);
     }
 
     @Test

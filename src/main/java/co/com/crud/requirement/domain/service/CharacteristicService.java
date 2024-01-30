@@ -99,7 +99,7 @@ public class CharacteristicService {
         return operation;
     }
 
-    public String allEvaluationCharsResult(Integer requirementId) {
+    public String allEvaluationCharacteristicsResult(Integer requirementId) {
         double result = maximumAccumulatedScore(requirementId);
         if (result > 72.09) {
             return RequirementAdecuationValidator.ADECUACION_ALTO_ALTO;

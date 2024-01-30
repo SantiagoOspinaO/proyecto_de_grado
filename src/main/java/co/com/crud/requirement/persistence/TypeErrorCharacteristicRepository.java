@@ -16,114 +16,114 @@ import java.util.Optional;
 @Repository
 public class TypeErrorCharacteristicRepository implements TypeErrorCharacteristicDomainRepository {
 
-    private final ITypeErrorCharacteristicCrudRepository ITypeErrorCharacteristicCrudRepository;
+    private final ITypeErrorCharacteristicCrudRepository typeErrorCharacteristicCrudRepository;
 
     private final TypeErrorCharacteristicMapper typeErrorCharacteristicMapper;
 
     @Autowired
-    public TypeErrorCharacteristicRepository(ITypeErrorCharacteristicCrudRepository ITypeErrorCharacteristicCrudRepository, TypeErrorCharacteristicMapper typeErrorCharacteristicMapper) {
-        this.ITypeErrorCharacteristicCrudRepository = ITypeErrorCharacteristicCrudRepository;
+    public TypeErrorCharacteristicRepository(ITypeErrorCharacteristicCrudRepository typeErrorCharacteristicCrudRepository, TypeErrorCharacteristicMapper typeErrorCharacteristicMapper) {
+        this.typeErrorCharacteristicCrudRepository = typeErrorCharacteristicCrudRepository;
         this.typeErrorCharacteristicMapper = typeErrorCharacteristicMapper;
     }
 
     @Override
     public List<TypeErrorCharacteristic> getAllTypesErrors() {
-        List<TypeErrorCharacteristicEntity> typesErrorsEntities = (List<TypeErrorCharacteristicEntity>) ITypeErrorCharacteristicCrudRepository.findAll();
+        List<TypeErrorCharacteristicEntity> typesErrorsEntities = (List<TypeErrorCharacteristicEntity>) typeErrorCharacteristicCrudRepository.findAll();
         return typeErrorCharacteristicMapper.toTypesErrorsEntities(typesErrorsEntities);
     }
 
     @Override
     public Optional<TypeErrorCharacteristic> getTypeErrorById(Integer id) {
-        return ITypeErrorCharacteristicCrudRepository.findById(id).map(typeErrorCharacteristicMapper::toTypeError);
+        return typeErrorCharacteristicCrudRepository.findById(id).map(typeErrorCharacteristicMapper::toTypeError);
     }
 
     @Override
     public int countRequirementsByTypeAndCauseError(String typeRequirement, String causeError) {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(typeRequirement, causeError);
+        return typeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(typeRequirement, causeError);
     }
 
     @Override
     public int countRequirementByCauseErrorDDE() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE();
+        return typeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDDE();
     }
 
     @Override
     public int countRequirementByCauseErrorDII() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII();
+        return typeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorDII();
     }
 
     @Override
     public int countRequirementByCauseErrorVAR() {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR();
+        return typeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorVAR();
     }
 
     @Override
     public int countRequirementsByCauseErrorAndRequirementId(Integer requirementId, Integer typeErrorId, String causeError) {
-        return ITypeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
+        return typeErrorCharacteristicCrudRepository.countRequirementsByCauseErrorAndRequirementId(requirementId, typeErrorId, causeError);
     }
 
     @Override
     public int countTypeErrorEIEByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorEIEByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorEIEAndCauseErrorDDEByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDDEByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorEIEAndCauseErrorDIIByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorDIIByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorEIEAndCauseErrorVARByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorEIEAndCauseErrorVARByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorMCCByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorMCCByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorMCCAndCauseErrorDDEByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDDEByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorMCCAndCauseErrorDIIByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorDIIByRequirement(requirementId);
     }
 
     @Override
     public int countTypeErrorMCCAndCauseErrorVARByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorMCCAndCauseErrorVARByRequirement(requirementId);
     }
 
     public int countTypeErrorsByRequirements(Integer typeErrorId, Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countTypeErrorsByRequirements(typeErrorId, requirementId);
+        return typeErrorCharacteristicCrudRepository.countTypeErrorsByRequirements(typeErrorId, requirementId);
     }
 
     @Override
     public int countAllTypeErrorsByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countAllTypeErrorsByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countAllTypeErrorsByRequirement(requirementId);
     }
 
     @Override
     public int countAllCauseErrorsByRequirement(Integer requirementId) {
-        return ITypeErrorCharacteristicCrudRepository.countAllCauseErrorsByRequirement(requirementId);
+        return typeErrorCharacteristicCrudRepository.countAllCauseErrorsByRequirement(requirementId);
     }
 
     @Override
     public IRequirementsByTypeAndCauseError causeErrorByCharacteristicForRequirements(String typeRequirement,Integer projectId) {
-        return ITypeErrorCharacteristicCrudRepository.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
+        return typeErrorCharacteristicCrudRepository.causeErrorByCharacteristicForRequirements(typeRequirement,projectId);
     }
 
     @Override
     public IErrorDistributionAllRequirements errorDistributionAllRequirements(String typeRequirement, Integer projectId) {
-        return ITypeErrorCharacteristicCrudRepository.errorDistributionAllRequirements(typeRequirement,projectId);
+        return typeErrorCharacteristicCrudRepository.errorDistributionAllRequirements(typeRequirement,projectId);
     }
 
 }

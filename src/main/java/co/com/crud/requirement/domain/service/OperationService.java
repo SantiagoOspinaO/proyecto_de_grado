@@ -196,9 +196,15 @@ public class OperationService {
 
         boolean pair = true;
         int index = 0;
-        double medianaAltoAlto, medianaAltoMedio, medianaAltoBajo;
-        double medianMedioAlto, medianMedioMedio, medianMedioBajo;
-        double medianBajoAlto, medianBajoMedio, medianBajoBajo;
+        double medianaAltoAlto;
+        double medianaAltoMedio;
+        double medianaAltoBajo;
+        double medianMedioAlto;
+        double medianMedioMedio;
+        double medianMedioBajo;
+        double medianBajoAlto;
+        double medianBajoMedio;
+        double medianBajoBajo;
 
         if (funcional.getAltoAlto() == ZERO_SCORE && funcional.getAltoMedio() == ZERO_SCORE && funcional.getAltoBajo() == ZERO_SCORE &&
                 funcional.getMedioAlto() == ZERO_SCORE && funcional.getMedioMedio() == ZERO_SCORE && funcional.getMedioBajo() == ZERO_SCORE &&
@@ -333,7 +339,7 @@ public class OperationService {
                 response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(typeRequirement, projectId, LOWER_RANGE_WEIGHT));
                 break;
             default:
-                totalWeightedMedianSuitabilityLevel(typeRequirement,projectId,option);
+                totalWeightedMedianSuitabilityLevel(typeRequirement, projectId, option);
         }
 
         return response;

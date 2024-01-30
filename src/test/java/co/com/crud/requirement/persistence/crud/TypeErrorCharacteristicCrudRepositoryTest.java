@@ -70,7 +70,7 @@ class TypeErrorCharacteristicCrudRepositoryTest {
         int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
         assertNotEquals(10, result);
     }
 

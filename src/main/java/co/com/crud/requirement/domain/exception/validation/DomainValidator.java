@@ -119,12 +119,6 @@ public class DomainValidator {
         }
     }
 
-    public static <T> void validateNonEmpty(String value, String humanMessage) {
-        if (value == null || value.isEmpty()) {
-            throw new NoDataException(humanMessage);
-        }
-    }
-
     public static <T> void validateContains(T value, List<T> list, String humanMessage) {
         if (list != null && !list.contains(value)) {
             throw new InvalidValueException(humanMessage);

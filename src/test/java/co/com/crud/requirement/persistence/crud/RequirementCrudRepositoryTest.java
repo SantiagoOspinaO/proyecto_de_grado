@@ -32,7 +32,7 @@ class RequirementCrudRepositoryTest {
         Optional<RequirementEntity> result = iRequirementCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iRequirementCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iRequirementCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 

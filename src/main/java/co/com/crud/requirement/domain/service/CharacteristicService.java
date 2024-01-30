@@ -50,8 +50,8 @@ public class CharacteristicService {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean CEvar, Integer requirementId, Integer characteristicId) {
-        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, CEvar, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean CE_VAR, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, CE_VAR, requirementId, characteristicId);
     }
 
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {
@@ -114,7 +114,7 @@ public class CharacteristicService {
         } else if (result <= 36.09 && result > 27.09) {
             return RequirementAdecuationValidator.ADECUACION_MEDIO_BAJO;
         } else if (result <= 27.09 && result > 18.09) {
-            return RequirementAdecuationValidator.ADECUACION_BAJO_BAJO;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_ALTO;
         } else if (result <= 18.09 && result > 9.09) {
             return RequirementAdecuationValidator.ADECUACION_BAJO_MEDIO;
         } else if (result <= 9.09) {

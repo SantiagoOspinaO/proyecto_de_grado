@@ -57,7 +57,7 @@ public class CharacteristicService {
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         int requirementEvaluated = 0;
-        for (IGradeCharacteristicByRequirementId grade : grades) {
+        for (IGradeCharacteristicByRequirementId ignored : grades) {
             requirementEvaluated = grades.size();
         }
         return requirementEvaluated;
@@ -102,23 +102,23 @@ public class CharacteristicService {
     public String allEvaluationCharsResult(Integer requirementId) {
         double result = maximumAccumulatedScore(requirementId);
         if (result > 72.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Alto;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_ALTO;
         } else if (result <= 72.09 && result > 63.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Medio;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_MEDIO;
         } else if (result <= 63.09 && result > 54.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_BAJO;
         } else if (result <= 54.09 && result > 45.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Alto;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_ALTO;
         } else if (result <= 45.09 && result > 36.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Medio;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_MEDIO;
         } else if (result <= 36.09 && result > 27.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_BAJO;
         } else if (result <= 27.09 && result > 18.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_BAJO;
         } else if (result <= 18.09 && result > 9.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Medio;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_MEDIO;
         } else if (result <= 9.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_BAJO;
         }
         return null;
     }

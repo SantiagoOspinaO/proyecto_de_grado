@@ -2,6 +2,9 @@ package co.com.crud.requirement.web.constants;
 
 public class Constants {
 
+    private Constants() {
+    }
+
     public static final int UPPER_RANGE_WEIGHT = 81;
 
     public static final double LOWER_RANGE_WEIGHT = 72.09;

@@ -134,9 +134,9 @@ public class TypeErrorCharacteristicService {
     }
 
     public Double percentageOffAllTypeErrorById(Integer requirementId) {
-        Double MCC = percentageOfTypeErrorMCCById(requirementId);
-        Double EIE = percentageOfTypeErrorEIEById(requirementId);
-        Double result = (MCC + EIE);
+        Double mcc = percentageOfTypeErrorMCCById(requirementId);
+        Double eie = percentageOfTypeErrorEIEById(requirementId);
+        Double result = (mcc + eie);
         if (result > 99.9) {
             result = 100.0;
         }

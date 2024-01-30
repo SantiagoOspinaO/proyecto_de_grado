@@ -50,8 +50,8 @@ public class CharacteristicService {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean CE_VAR, Integer requirementId, Integer characteristicId) {
-        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, CE_VAR, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean ceVar, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, ceVar, requirementId, characteristicId);
     }
 
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {

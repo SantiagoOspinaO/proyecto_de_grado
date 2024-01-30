@@ -64,7 +64,7 @@ class RequirementServiceTest {
         Requirement result = requirementService.saveRequirement(requirement);
 
         //Assert
-        verify(requirementDomainRepository, times(1)).saveRequirement(eq(requirement));
+        verify(requirementDomainRepository, times(1)).saveRequirement(requirement);
         assertEquals(requirement, result);
     }
 

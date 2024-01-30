@@ -32,7 +32,7 @@ class TypeErrorCharacteristicCrudRepositoryTest {
         Optional<TypeErrorCharacteristicEntity> result = iTypeErrorCharacteristicCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 
@@ -45,13 +45,13 @@ class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError)).thenReturn(requisito);
 
         //Act
         int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
         assertEquals(1, result);
     }
 
@@ -64,7 +64,7 @@ class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError)).thenReturn(requisito);
 
         //Act
         int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);

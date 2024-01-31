@@ -34,4 +34,8 @@ public interface RequirementDomainRepository {
 
     void updateProjectStatus(Integer projectId);
 
+    void deleteDataRoleSelection(Integer projectId);
+
+    void deleteDataRoleUser(Integer projectId);
+
 }

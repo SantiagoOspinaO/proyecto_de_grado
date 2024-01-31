@@ -81,4 +81,12 @@ public class RequirementService {
         requirementDomainRepository.updateProjectStatus(projectId);
     }
 
+    public void deleteDataRoleSelection(Integer projectId) {
+        requirementDomainRepository.deleteDataRoleSelection(projectId);
+    }
+
+    public void deleteDataRoleUser(Integer projectId) {
+        requirementDomainRepository.deleteDataRoleUser(projectId);
+    }
+
 }

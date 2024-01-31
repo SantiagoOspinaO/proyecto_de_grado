@@ -107,6 +107,8 @@ public class RequirementController {
     @PutMapping(path = "/update-project-status")
     public void updateProjectStatus(@RequestParam Integer projectId) {
         requirementService.updateProjectStatus(projectId);
+        requirementService.deleteDataRoleSelection(projectId);
+        requirementService.deleteDataRoleUser(projectId);
     }
 
 }

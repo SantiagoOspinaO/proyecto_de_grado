@@ -59,7 +59,7 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             @Param("proyectoId") Integer projectId);
 
     @Query(value = "SELECT " +
-            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo < 72.09), 0) AS Imperfecto, " +
+            "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo <= 72.09), 0) AS Imperfecto, " +
             "COALESCE(SUM(1) FILTER (WHERE op.puntaje_maximo > 72.09), 0) AS Perfecto " +
             "FROM operacion op " +
             "INNER JOIN requisito r ON op.requisito_id=r.id " +
@@ -93,5 +93,22 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "WHERE estado_proyecto.id = proyecto.estado " +
             "AND proyecto.id = :proyectoId ", nativeQuery = true)
     void updateProjectStatus(@Param("proyectoId") Integer proyectoId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM rol_seleccion " +
+            "USING seleccion " +
+            "WHERE seleccion.id = rol_seleccion.seleccion " +
+            "AND proyecto = :proyectoId ", nativeQuery = true)
+    void deleteDataRoleSelection(@Param("proyectoId") Integer proyectoId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM rol_usuario " +
+            "USING seleccion " +
+            "WHERE seleccion.usuario = rol_usuario.usuario " +
+            "AND rol NOT IN (1, 2, 3) " +
+            "AND proyecto = :proyectoId ", nativeQuery = true)
+    void deleteDataRoleUser(@Param("proyectoId") Integer proyectoId);
 
 }

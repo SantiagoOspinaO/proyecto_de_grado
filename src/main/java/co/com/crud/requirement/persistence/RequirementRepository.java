@@ -89,4 +89,14 @@ public class RequirementRepository implements RequirementDomainRepository {
         requirementCrudRepository.updateProjectStatus(projectId);
     }
 
+    @Override
+    public void deleteDataRoleSelection(Integer projectId) {
+        requirementCrudRepository.deleteDataRoleSelection(projectId);
+    }
+
+    @Override
+    public void deleteDataRoleUser(Integer projectId) {
+        requirementCrudRepository.deleteDataRoleUser(projectId);
+    }
+
 }

@@ -5,6 +5,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,10 @@ public class RequirementService {
 
     public void deleteDataRoleUser(Integer projectId) {
         requirementDomainRepository.deleteDataRoleUser(projectId);
+    }
+
+    public ITypeConsultingProject getTypeOfConsulting(Integer projectId) {
+        return requirementDomainRepository.getTypeOfConsulting(projectId);
     }
 
 }

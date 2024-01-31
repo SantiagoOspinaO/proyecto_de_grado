@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
 import co.com.crud.requirement.persistence.crud.IRequirementCrudRepository;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
@@ -97,6 +98,11 @@ public class RequirementRepository implements RequirementDomainRepository {
     @Override
     public void deleteDataRoleUser(Integer projectId) {
         requirementCrudRepository.deleteDataRoleUser(projectId);
+    }
+
+    @Override
+    public ITypeConsultingProject getTypeOfConsulting(Integer projectId) {
+        return requirementCrudRepository.getTypeOfConsulting(projectId);
     }
 
 }

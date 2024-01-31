@@ -3,6 +3,7 @@ package co.com.crud.requirement.persistence.crud;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.Modifying;
@@ -110,5 +111,13 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "AND rol NOT IN (1, 2, 3) " +
             "AND proyecto = :proyectoId ", nativeQuery = true)
     void deleteDataRoleUser(@Param("proyectoId") Integer proyectoId);
+
+    @Query(value = "SELECT " +
+            "CASE WHEN COALESCE(SUM(1) FILTER (WHERE tipo_consultoria = 1), 0) = 1 THEN true ELSE false END AS requirementsEngineering, " +
+            "CASE WHEN COALESCE(SUM(1) FILTER (WHERE tipo_consultoria = 2), 0) = 1 THEN true ELSE false END AS sqa, " +
+            "CASE WHEN COALESCE(SUM(1) FILTER (WHERE tipo_consultoria = 3), 0) = 1 THEN true ELSE false END AS sqc " +
+            "FROM tipo_consultoria_proyecto " +
+            "WHERE proyecto = :proyectoId ", nativeQuery = true)
+    ITypeConsultingProject getTypeOfConsulting(@Param("proyectoId") Integer proyectoId);
 
 }

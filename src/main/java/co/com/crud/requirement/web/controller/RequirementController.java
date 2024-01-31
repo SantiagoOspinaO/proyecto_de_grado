@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -109,6 +110,11 @@ public class RequirementController {
         requirementService.updateProjectStatus(projectId);
         requirementService.deleteDataRoleSelection(projectId);
         requirementService.deleteDataRoleUser(projectId);
+    }
+
+    @GetMapping(path = "/get-type-consulting")
+    public ITypeConsultingProject getTypeOfConsulting(@RequestParam Integer projectId) {
+        return requirementService.getTypeOfConsulting(projectId);
     }
 
 }

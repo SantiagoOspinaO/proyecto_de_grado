@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static co.com.crud.requirement.web.constants.Constants.*;
+import static java.lang.Double.NaN;
 
 @Service
 public class OperationService {
@@ -346,9 +347,39 @@ public class OperationService {
     }
 
     public void updateOperation(Double maximumScore, Double levelAdequacy, Double evaluatedCharacteristics,
-                                Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId) {
+                                Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId
+    ) {
         operationsDomainRepository.updateOperation(maximumScore, levelAdequacy, evaluatedCharacteristics,
                 levelWeightScore, calculatedWeightAverage, requirementId);
+    }
+
+    public double weightedAverageLevelOfAdequacy(String typeRequirement, Integer projectId) {
+        AverageScore data;
+
+        if (typeRequirement.equalsIgnoreCase(FUNCIONAL_TYPE)) {
+            data = averageScoreByProjectIdOrTypeRequirement(FUNCIONAL_TYPE, projectId);
+
+        } else {
+            data = averageScoreByProjectIdOrTypeRequirement(NO_FUNCIONAL_TYPE, projectId);
+        }
+
+        int allRequirements = requirementService.countAllRequirements(typeRequirement, projectId);
+
+        double altoAlto = characteristicService.calculatePercentage((data.getAltoAlto() / allRequirements), RANGE_ALTO_ALTO);
+        double altoMedio = characteristicService.calculatePercentage((data.getAltoMedio() / allRequirements), RANGE_ALTO_MEDIO);
+        double altoBajo = characteristicService.calculatePercentage((data.getAltoBajo() / allRequirements), RANGE_ALTO_BAJO);
+
+        double medioAlto = characteristicService.calculatePercentage((data.getMedioAlto() / allRequirements), RANGE_MEDIO_ALTO);
+        double medioMedio = characteristicService.calculatePercentage((data.getMedioMedio() / allRequirements), RANGE_MEDIO_MEDIO);
+        double medioBajo = characteristicService.calculatePercentage((data.getMedioBajo() / allRequirements), RANGE_MEDIO_BAJO);
+
+        double bajoAlto = characteristicService.calculatePercentage((data.getBajoAlto() / allRequirements), RANGE_BAJO_ALTO);
+        double bajoMedio = characteristicService.calculatePercentage((data.getBajoMedio() / allRequirements), RANGE_BAJO_MEDIO);
+        double bajoBajo = characteristicService.calculatePercentage((data.getBajoBajo() / allRequirements), RANGE_BAJO_BAJO);
+
+        double totalPercentage = altoAlto + altoMedio + altoBajo + medioAlto + medioMedio + medioBajo + bajoAlto + bajoMedio + bajoBajo;
+
+        return Double.isNaN(totalPercentage) ? 0.0 : totalPercentage;
     }
 
 }

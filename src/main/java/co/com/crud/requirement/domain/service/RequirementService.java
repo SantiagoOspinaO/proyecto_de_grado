@@ -29,7 +29,7 @@ public class RequirementService {
         validateMandatory(requirement.getName(), NAME_FIELD_MANDATORY);
         validateMandatory(requirement.getDescription(), DESCRIPTION_FIELD_MANDATORY);
         validateMandatory(requirement.getTypeRequirement(), TYPE_FIELD_MANDATORY);
-        validateMinMaxLength(requirement.getName(), 5, 3000, MAX_MIN_NANE_LENGHT_MESSAGE);
+        validateMinMaxLength(requirement.getDescription(), 5, 3000, MAX_MIN_NANE_LENGHT_MESSAGE);
         requirement.setQualified(false);
         return requirementDomainRepository.saveRequirement(requirement);
     }

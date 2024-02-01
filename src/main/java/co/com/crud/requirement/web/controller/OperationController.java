@@ -113,4 +113,12 @@ public class OperationController {
         return operationService.totalWeightedMedianSuitabilityLevel(typeRequirement, projectId, graphicNumber);
     }
 
+    @GetMapping(path = "/weighted-average-level-adequacy")
+    public double weightedAverageLevelOfAdequacy(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageLevelOfAdequacy(typeRequirement, projectId);
+    }
+
 }

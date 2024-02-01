@@ -69,7 +69,7 @@ public class OperationController {
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
     ) {
-        return operationService.averageTotalRequirementsEvaluatedByLevelAdecuacy(typeRequirement, projectId);
+        return operationService.averageTotalRequirementsEvaluatedByLevelAdequacy(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/average-score-by-project-id-or-type-requirement")

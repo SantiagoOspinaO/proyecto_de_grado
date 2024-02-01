@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static co.com.crud.requirement.web.constants.Constants.*;
-import static java.lang.Double.NaN;
 
 @Service
 public class OperationService {
@@ -48,7 +47,7 @@ public class OperationService {
         return operationsDomainRepository.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
-    public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(String typeRequirement, Integer projectId) {
+    public AverageScore averageTotalRequirementsEvaluatedByLevelAdequacy(String typeRequirement, Integer projectId) {
         AverageScore averageScore = new AverageScore();
         ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement = countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
         int allRequirements = requirementService.countAllRequirements(typeRequirement, projectId);

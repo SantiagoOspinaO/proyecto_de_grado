@@ -29,7 +29,7 @@ public class RequirementRepository implements RequirementDomainRepository {
 
     @Override
     public Requirement saveRequirement(Requirement requirement) {
-        RequirementEntity requirementEntity = requirementMapper.toRequirements(requirement);
+        RequirementEntity requirementEntity = new RequirementEntity(0, requirement.getProjectId(), requirement.getName(), requirement.getDescription(), requirement.getTypeRequirement(), requirement.isQualified());
         return requirementMapper.toRequirement(requirementCrudRepository.save(requirementEntity));
     }
 
@@ -103,6 +103,11 @@ public class RequirementRepository implements RequirementDomainRepository {
     @Override
     public ITypeConsultingProject getTypeOfConsulting(Integer projectId) {
         return requirementCrudRepository.getTypeOfConsulting(projectId);
+    }
+
+    @Override
+    public boolean existsByProjectAndName(String name, Integer projectId) {
+        return requirementCrudRepository.existsByProjectAndName(name, projectId);
     }
 
 }

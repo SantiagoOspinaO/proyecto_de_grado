@@ -41,4 +41,5 @@ public interface RequirementDomainRepository {
 
     ITypeConsultingProject getTypeOfConsulting(Integer projectId);
 
+    boolean existsByProjectAndName(String name, Integer projectId);
 }

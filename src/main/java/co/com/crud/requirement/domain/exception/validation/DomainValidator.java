@@ -18,7 +18,7 @@ public class DomainValidator {
     public static final String TYPE_FIELD_MANDATORY = "El campo tipo de requisito es obligatorio y se debe especificar";
     public static final String NAME_ALREADY_EXISTS = "El nombre del requisito ya existe. Por favor, elija otro nombre";
     public static final String DEFAULT_MESSAGE = "Ocurrió un error procesando la solicitud. Por favor pongase en contacto con soporte.";
-    public static final String MAX_MIN_NANE_LENGHT_MESSAGE = "El campo nombre tiene una longitud minima de 10 caracteres, y maxima de 50 caracteres, porfavor verifica";
+    public static final String MAX_MIN_NANE_LENGTH_MESSAGE = "El campo nombre tiene una longitud minima de 10 caracteres, y maxima de 50 caracteres, porfavor verifica";
 
     private DomainValidator() {}
 

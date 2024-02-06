@@ -10,11 +10,12 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "requisito", uniqueConstraints = @UniqueConstraint(columnNames = {"proyectoId", "nombre"}))
+@Table(name = "requisito")
 public class RequirementEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "requisito_inicial_code_seq")
+    @SequenceGenerator(name = "requisito_inicial_code_seq", sequenceName = "requisito_inicial_code_seq", allocationSize = 1)
     @Column(unique = true, nullable = false)
     private Integer id;
 

@@ -25,11 +25,14 @@ public class RequirementService {
         this.requirementDomainRepository = requirementDomainRepository;
     }
 
-    public Requirement saveRequirement(Requirement requirement) {
+    public Requirement
+    saveRequirement(Requirement requirement) {
         validateMandatory(requirement.getName(), NAME_FIELD_MANDATORY);
         validateMandatory(requirement.getDescription(), DESCRIPTION_FIELD_MANDATORY);
         validateMandatory(requirement.getTypeRequirement(), TYPE_FIELD_MANDATORY);
-        validateMinMaxLength(requirement.getDescription(), 5, 3000, MAX_MIN_NANE_LENGHT_MESSAGE);
+        validateMinMaxLength(requirement.getDescription(), 5, 3000, MAX_MIN_NANE_LENGTH_MESSAGE);
+        boolean exists = requirementDomainRepository.existsByProjectAndName(requirement.getName(), requirement.getProjectId());
+        validateEquals(exists, false, NAME_ALREADY_EXISTS);
         requirement.setQualified(false);
         return requirementDomainRepository.saveRequirement(requirement);
     }

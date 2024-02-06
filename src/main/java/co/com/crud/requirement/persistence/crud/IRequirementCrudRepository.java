@@ -120,4 +120,14 @@ public interface IRequirementCrudRepository extends CrudRepository<RequirementEn
             "WHERE proyecto = :proyectoId ", nativeQuery = true)
     ITypeConsultingProject getTypeOfConsulting(@Param("proyectoId") Integer proyectoId);
 
+    @Query(value = "SELECT EXISTS " +
+            "( " +
+            "    SELECT 1 " +
+            "    FROM requisito " +
+            "    WHERE proyecto_id = :proyectoId " +
+            "    AND nombre = :nombre " +
+            ")", nativeQuery = true)
+    boolean existsByProjectAndName(
+            @Param("nombre") String name,
+            @Param("proyectoId") Integer projectId);
 }

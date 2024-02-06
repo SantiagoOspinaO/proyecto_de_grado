@@ -2,6 +2,7 @@ package co.com.crud.requirement.web.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data

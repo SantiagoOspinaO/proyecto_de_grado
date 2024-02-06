@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,17 +50,20 @@ public class RequirementController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Requirement> updateRequirement(@RequestBody Requirement requirement, @PathVariable("id") Integer id) {
+    public ResponseEntity<Requirement> updateRequirement(
+            @RequestBody Requirement requirement,
+            @PathVariable("id") Integer id
+    ) {
         requirement.setRequirementId(id);
         return ResponseEntity.ok(requirementService.saveRequirement(requirement));
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity deleteRequirement(@PathVariable("id") Integer requirementId) {
+    public ResponseEntity<Void> deleteRequirement(@PathVariable("id") Integer requirementId) {
         if (requirementService.deleteRequirement(requirementId)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -94,6 +98,23 @@ public class RequirementController {
             @RequestParam Integer projectId
     ) {
         return requirementService.countAllRequirements(typeRequirement, projectId);
+    }
+
+    @PutMapping(path = "/update-requirement-qualified")
+    public void updateQualifiedByRequirementId(@RequestParam Integer requirementId) {
+        requirementService.updateQualifiedByRequirementId(requirementId);
+    }
+
+    @PutMapping(path = "/update-project-status")
+    public void updateProjectStatus(@RequestParam Integer projectId) {
+        requirementService.updateProjectStatus(projectId);
+        requirementService.deleteDataRoleSelection(projectId);
+        requirementService.deleteDataRoleUser(projectId);
+    }
+
+    @GetMapping(path = "/get-type-consulting")
+    public ITypeConsultingProject getTypeOfConsulting(@RequestParam Integer projectId) {
+        return requirementService.getTypeOfConsulting(projectId);
     }
 
 }

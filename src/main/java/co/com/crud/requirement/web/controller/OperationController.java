@@ -3,6 +3,7 @@ package co.com.crud.requirement.web.controller;
 import co.com.crud.requirement.domain.model.AverageScore;
 import co.com.crud.requirement.domain.model.Operation;
 import co.com.crud.requirement.domain.model.queryresult.ITotalMaxScore;
+import co.com.crud.requirement.domain.service.CharacteristicService;
 import co.com.crud.requirement.domain.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,20 +21,26 @@ import static co.com.crud.requirement.web.constants.Constants.UPPER_RANGE_WEIGHT
 public class OperationController {
 
     private final OperationService operationService;
+    private final CharacteristicService characteristicService;
 
     @Autowired
-    public OperationController(OperationService operationService) {
+    public OperationController(OperationService operationService, CharacteristicService characteristicService) {
         this.operationService = operationService;
+        this.characteristicService = characteristicService;
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/update-operation/{id}")
     public ResponseEntity<Operation> updateOperation(
-            @RequestBody Operation operation,
-            @PathVariable("id") Integer id
+            @PathVariable("id") Integer requirementId
     ) {
-        operation.setOperationId(id);
-        operation.setRequirementId(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.operationService.saveOperation(operation));
+        int operationId = characteristicService.getOperationId(requirementId);
+        Operation operation = characteristicService.allOperations(operationId, requirementId);
+
+        operationService.updateOperation(
+                operation.getMaximumScore(), operation.getLevelAdequacy(), operation.getEvaluatedCharacteristics(),
+                operation.getLevelWeightScore(), operation.getCalculatedWeightAverage(), operation.getRequirementId());
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping()
@@ -62,7 +69,7 @@ public class OperationController {
             @RequestParam(required = false) String typeRequirement,
             @RequestParam Integer projectId
     ) {
-        return operationService.averageTotalRequirementsEvaluatedByLevelAdecuacy(typeRequirement, projectId);
+        return operationService.averageTotalRequirementsEvaluatedByLevelAdequacy(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/average-score-by-project-id-or-type-requirement")
@@ -74,26 +81,44 @@ public class OperationController {
     }
 
     @GetMapping(path = "/calculate-median")
-    public AverageScore calculateWeightedMedian(@RequestParam Integer projectId) {
-        return operationService.calculateWeightedMedian(projectId);
+    public AverageScore calculateWeightedMedian(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.calculateWeightedMedian(typeRequirement, projectId);
     }
 
     @GetMapping(path = "/weighted-average-upper-range")
-    public AverageScore weightedAverageOfCumulativeScoreUpperRange(@RequestParam Integer projectId) {
-        return operationService.weightedAverageOfCumulativeScore(projectId, UPPER_RANGE_WEIGHT);
+    public AverageScore weightedAverageOfCumulativeScoreUpperRange(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageOfCumulativeScore(typeRequirement, projectId, UPPER_RANGE_WEIGHT);
     }
 
     @GetMapping(path = "/weighted-average-lower-range")
-    public AverageScore weightedAverageOfCumulativeScoreLowerRange(@RequestParam Integer projectId) {
-        return operationService.weightedAverageOfCumulativeScore(projectId, LOWER_RANGE_WEIGHT);
+    public AverageScore weightedAverageOfCumulativeScoreLowerRange(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageOfCumulativeScore(typeRequirement, projectId, LOWER_RANGE_WEIGHT);
     }
 
     @GetMapping(path = "/total-weighted-median")
     public double totalWeightedMedianSuitabilityLevel(
+            @RequestParam String typeRequirement,
             @RequestParam Integer projectId,
             @RequestParam Integer graphicNumber
     ) {
-        return operationService.totalWeightedMedianSuitabilityLevel(projectId, graphicNumber);
+        return operationService.totalWeightedMedianSuitabilityLevel(typeRequirement, projectId, graphicNumber);
+    }
+
+    @GetMapping(path = "/weighted-average-level-adequacy")
+    public double weightedAverageLevelOfAdequacy(
+            @RequestParam String typeRequirement,
+            @RequestParam Integer projectId
+    ) {
+        return operationService.weightedAverageLevelOfAdequacy(typeRequirement, projectId);
     }
 
 }

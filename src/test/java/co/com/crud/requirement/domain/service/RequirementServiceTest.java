@@ -3,7 +3,7 @@ package co.com.crud.requirement.domain.service;
 
 import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class RequirementServiceTest {
+class RequirementServiceTest {
 
     @MockBean
     RequirementDomainRepository requirementDomainRepository;
 
     @Test
-    public void testGetAllRequirementsWhenResultIsNotNull() {
+    void testGetAllRequirementsWhenResultIsNotNull() {
         //Arrange
         RequirementDomainRepository mockRequirementRepository = mock(RequirementDomainRepository.class);
         Requirement requirement = new Requirement();
@@ -45,7 +45,7 @@ public class RequirementServiceTest {
     }
 
     @Test
-    public void testSaveRequirement() {
+    void testSaveRequirement() {
         //Arrange
         RequirementDomainRepository requirementDomainRepository = mock(RequirementDomainRepository.class);
         RequirementService requirementService = new RequirementService(requirementDomainRepository);
@@ -64,19 +64,12 @@ public class RequirementServiceTest {
         Requirement result = requirementService.saveRequirement(requirement);
 
         //Assert
-        verify(requirementDomainRepository, times(1)).saveRequirement(eq(requirement));
+        verify(requirementDomainRepository, times(1)).saveRequirement(requirement);
         assertEquals(requirement, result);
     }
 
     @Test
-    public void testGetRequirementById() {
-        //Arrange
-        //Act
-        //Assert
-    }
-
-    @Test
-    public void testCountRequirementsByFilterCauseError() {
+    void testCountRequirementsByFilterCauseError() {
         //Arrange
         RequirementService requirementService = mock(RequirementService.class);
         int requirementId = 2;
@@ -90,7 +83,7 @@ public class RequirementServiceTest {
     }
 
     @Test
-    public void testCountRequirementsByGradeAndCauseError() {
+    void testCountRequirementsByGradeAndCauseError() {
         //Arrange
         RequirementService requirementService = mock(RequirementService.class);
         String typeRequirement = "Funcional";

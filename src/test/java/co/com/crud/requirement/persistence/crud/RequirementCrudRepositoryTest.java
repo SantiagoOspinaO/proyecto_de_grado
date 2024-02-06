@@ -2,11 +2,9 @@ package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.persistence.RequirementRepository;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
@@ -14,15 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
-public class RequirementCrudRepositoryTest {
+class RequirementCrudRepositoryTest {
 
     @Autowired
     private IRequirementCrudRepository requirementCrudRepository;
 
     @Test
-    public void testFindRequirementById() {
+    void testFindRequirementById() {
         //Arrange
         RequirementRepository requirementRepository = mock(RequirementRepository.class);
         IRequirementCrudRepository iRequirementCrudRepository = mock(IRequirementCrudRepository.class);
@@ -34,12 +32,12 @@ public class RequirementCrudRepositoryTest {
         Optional<RequirementEntity> result = iRequirementCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iRequirementCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iRequirementCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testCountRequirementsByFilterCauseError() {
+    void testCountRequirementsByFilterCauseError() {
         //Arrange
         int requisitoId = 5;
         int projectId = 1;
@@ -53,7 +51,7 @@ public class RequirementCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByGradeAndCauseError() {
+    void testCountRequirementsByGradeAndCauseError() {
         //Arrange
         String tipoRequisito = "No funcional";
         String causeError = "EIE";

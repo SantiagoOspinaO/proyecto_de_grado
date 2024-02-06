@@ -5,6 +5,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,15 @@ public class RequirementService {
         this.requirementDomainRepository = requirementDomainRepository;
     }
 
-    public Requirement saveRequirement(Requirement requirement) {
+    public Requirement
+    saveRequirement(Requirement requirement) {
         validateMandatory(requirement.getName(), NAME_FIELD_MANDATORY);
         validateMandatory(requirement.getDescription(), DESCRIPTION_FIELD_MANDATORY);
         validateMandatory(requirement.getTypeRequirement(), TYPE_FIELD_MANDATORY);
-        validateMinMaxLength(requirement.getName(), 5, 50, MAX_MIN_NANE_LENGHT_MESSAGE);
-
+        validateMinMaxLength(requirement.getDescription(), 5, 3000, MAX_MIN_NANE_LENGTH_MESSAGE);
+        boolean exists = requirementDomainRepository.existsByProjectAndName(requirement.getName(), requirement.getProjectId());
+        validateEquals(exists, false, NAME_ALREADY_EXISTS);
+        requirement.setQualified(false);
         return requirementDomainRepository.saveRequirement(requirement);
     }
 
@@ -69,8 +73,28 @@ public class RequirementService {
         return requirementDomainRepository.getRequirementsByProyectoId(projectId);
     }
 
-    public int countAllRequirements(String typeRequirement, Integer projectId){
+    public int countAllRequirements(String typeRequirement, Integer projectId) {
         return requirementDomainRepository.countAllRequirements(typeRequirement, projectId);
+    }
+
+    public void updateQualifiedByRequirementId(Integer requirementId) {
+        requirementDomainRepository.updateQualifiedByRequirementId(requirementId);
+    }
+
+    public void updateProjectStatus(Integer projectId) {
+        requirementDomainRepository.updateProjectStatus(projectId);
+    }
+
+    public void deleteDataRoleSelection(Integer projectId) {
+        requirementDomainRepository.deleteDataRoleSelection(projectId);
+    }
+
+    public void deleteDataRoleUser(Integer projectId) {
+        requirementDomainRepository.deleteDataRoleUser(projectId);
+    }
+
+    public ITypeConsultingProject getTypeOfConsulting(Integer projectId) {
+        return requirementDomainRepository.getTypeOfConsulting(projectId);
     }
 
 }

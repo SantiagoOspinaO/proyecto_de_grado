@@ -4,10 +4,8 @@ import co.com.crud.requirement.domain.model.queryresult.ICharacteristicsByRequir
 import co.com.crud.requirement.domain.model.queryresult.IGradeCharacteristicByRequirementId;
 import co.com.crud.requirement.persistence.CharacteristicRepository;
 import co.com.crud.requirement.persistence.entity.CharacteristicEntity;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,12 +17,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class CharacteristicCrudRepositoryTest {
+class CharacteristicCrudRepositoryTest {
 
     @Test
-    public void testFindTypeErrorCharacteristicById() {
+    void testFindTypeErrorCharacteristicById() {
         //Arrange
         CharacteristicRepository CharacteristicRepository = mock(CharacteristicRepository.class);
         ICharacteristicCrudRepository iCharacteristicCrudRepository = mock(ICharacteristicCrudRepository.class);
@@ -35,12 +32,12 @@ public class CharacteristicCrudRepositoryTest {
         Optional<CharacteristicEntity> result = iCharacteristicCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iCharacteristicCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iCharacteristicCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testFindGradesByRequirementsWhenResultIsNull() {
+    void testFindGradesByRequirementsWhenResultIsNull() {
         //Arrange
         int requisitoID = 1;
         CharacteristicRepository characteristicRepository = mock(CharacteristicRepository.class);
@@ -57,7 +54,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testFindCharacteristicsByRequirementIDMustReturnEmpty() {
+    void testFindCharacteristicsByRequirementIDMustReturnEmpty() {
         //Arrange
         int requisitoID = 1;
         CharacteristicRepository characteristicRepository = mock(CharacteristicRepository.class);
@@ -74,7 +71,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testUpdateGradeCharacteristicByRequirement() {
+    void testUpdateGradeCharacteristicByRequirement() {
         //Arrange
         double notaIngresada = 8.8;
         int requisitoID = 1;
@@ -89,7 +86,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testUpdateCauseErrorOfCharacteristic() {
+    void testUpdateCauseErrorOfCharacteristic() {
         //Arrange
         int requisitoID = 1;
         int characteristicId = 1;
@@ -104,7 +101,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByTypeAndNameCharacteristicMustReturnNull() {
+    void testCountRequirementsByTypeAndNameCharacteristicMustReturnNull() {
         //Arrange
         String tipoRequisito = "Funcional";
         int projectId = 1;
@@ -119,7 +116,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountCauseErrorByRequirementType() {
+    void testCountCauseErrorByRequirementType() {
         //Arrange
         String tipoRequisito = "Funcional";
         int projectId = 1;
@@ -135,7 +132,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByRequirementIdAndCauseErrorMustReturnNull() {
+    void testCountRequirementsByRequirementIdAndCauseErrorMustReturnNull() {
         //Arrange
         int requisitoId = 2;
         int projectId = 1;
@@ -150,7 +147,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountCharacteristicsByCauseErrorDDEMustReturnNull() {
+    void testCountCharacteristicsByCauseErrorDDEMustReturnNull() {
         //Arrange
         String typeRequirement = "funcional";
         int projectId = 1;
@@ -165,7 +162,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountCharacteristicsByCauseErrorDII() {
+    void testCountCharacteristicsByCauseErrorDII() {
         //Arrange
         String typeRequirement = "funcional";
         int projectId = 1;
@@ -180,7 +177,7 @@ public class CharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountCharacteristicsByCauseErrorVARMustReturnNull() {
+    void testCountCharacteristicsByCauseErrorVARMustReturnNull() {
         //Arrange
         String typeRequirement = "funcional";
         int projectId = 1;

@@ -47,7 +47,7 @@ public class OperationService {
         return operationsDomainRepository.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
-    public AverageScore averageTotalRequirementsEvaluatedByLevelAdecuacy(String typeRequirement, Integer projectId) {
+    public AverageScore averageTotalRequirementsEvaluatedByLevelAdequacy(String typeRequirement, Integer projectId) {
         AverageScore averageScore = new AverageScore();
         ITotalMaxScore countNumberScoreByProjectIdOrTypeRequirement = countNumberScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
         int allRequirements = requirementService.countAllRequirements(typeRequirement, projectId);
@@ -115,40 +115,72 @@ public class OperationService {
         return averageScore;
     }
 
-    public AverageScore calculateWeightedMedian(Integer projectId) {
+    public AverageScore calculateWeightedMedian(String typeRequirement, Integer projectId) {
         AverageScore averageScore = new AverageScore();
+
         AverageScore funcional = averageScoreByProjectIdOrTypeRequirement(FUNCIONAL_TYPE, projectId);
         AverageScore noFuncional = averageScoreByProjectIdOrTypeRequirement(NO_FUNCIONAL_TYPE, projectId);
 
         List<Double> altoAlto = new ArrayList<>();
-        altoAlto.add(funcional.getAltoAlto());
-        altoAlto.add(noFuncional.getAltoAlto());
         List<Double> altoMedio = new ArrayList<>();
-        altoMedio.add(funcional.getAltoMedio());
-        altoMedio.add(noFuncional.getAltoMedio());
         List<Double> altoBajo = new ArrayList<>();
-        altoBajo.add(funcional.getAltoBajo());
-        altoBajo.add(noFuncional.getAltoBajo());
 
         List<Double> medioAlto = new ArrayList<>();
-        medioAlto.add(funcional.getMedioAlto());
-        medioAlto.add(noFuncional.getMedioAlto());
         List<Double> medioMedio = new ArrayList<>();
-        medioMedio.add(funcional.getMedioMedio());
-        medioMedio.add(noFuncional.getMedioMedio());
         List<Double> medioBajo = new ArrayList<>();
-        medioBajo.add(funcional.getMedioBajo());
-        medioBajo.add(noFuncional.getMedioBajo());
 
         List<Double> bajoAlto = new ArrayList<>();
-        bajoAlto.add(funcional.getBajoAlto());
-        bajoAlto.add(noFuncional.getBajoAlto());
         List<Double> bajoMedio = new ArrayList<>();
-        bajoMedio.add(funcional.getBajoMedio());
-        bajoMedio.add(noFuncional.getBajoMedio());
         List<Double> bajoBajo = new ArrayList<>();
-        bajoBajo.add(funcional.getBajoBajo());
-        bajoBajo.add(noFuncional.getBajoBajo());
+
+        if (FUNCIONAL_TYPE.equalsIgnoreCase(typeRequirement)) {
+            altoAlto.add(funcional.getAltoAlto());
+            altoMedio.add(funcional.getAltoMedio());
+            altoBajo.add(funcional.getAltoBajo());
+
+            medioAlto.add(funcional.getMedioAlto());
+            medioMedio.add(funcional.getMedioMedio());
+            medioBajo.add(funcional.getMedioBajo());
+
+            bajoAlto.add(funcional.getBajoAlto());
+            bajoMedio.add(funcional.getBajoMedio());
+            bajoBajo.add(funcional.getBajoBajo());
+
+        } else if (NO_FUNCIONAL_TYPE.equalsIgnoreCase(typeRequirement)) {
+            altoAlto.add(noFuncional.getAltoAlto());
+            altoMedio.add(noFuncional.getAltoMedio());
+            altoBajo.add(noFuncional.getAltoBajo());
+
+            medioAlto.add(noFuncional.getMedioAlto());
+            medioMedio.add(noFuncional.getMedioMedio());
+            medioBajo.add(noFuncional.getMedioBajo());
+
+            bajoAlto.add(noFuncional.getBajoAlto());
+            bajoMedio.add(noFuncional.getBajoMedio());
+            bajoBajo.add(noFuncional.getBajoBajo());
+
+        } else {
+            altoAlto.add(funcional.getAltoAlto());
+            altoAlto.add(noFuncional.getAltoAlto());
+            altoMedio.add(funcional.getAltoMedio());
+            altoMedio.add(noFuncional.getAltoMedio());
+            altoBajo.add(funcional.getAltoBajo());
+            altoBajo.add(noFuncional.getAltoBajo());
+
+            medioAlto.add(funcional.getMedioAlto());
+            medioAlto.add(noFuncional.getMedioAlto());
+            medioMedio.add(funcional.getMedioMedio());
+            medioMedio.add(noFuncional.getMedioMedio());
+            medioBajo.add(funcional.getMedioBajo());
+            medioBajo.add(noFuncional.getMedioBajo());
+
+            bajoAlto.add(funcional.getBajoAlto());
+            bajoAlto.add(noFuncional.getBajoAlto());
+            bajoMedio.add(funcional.getBajoMedio());
+            bajoMedio.add(noFuncional.getBajoMedio());
+            bajoBajo.add(funcional.getBajoBajo());
+            bajoBajo.add(noFuncional.getBajoBajo());
+        }
 
         Arrays.sort(altoAlto.toArray());
         Arrays.sort(altoMedio.toArray());
@@ -164,9 +196,15 @@ public class OperationService {
 
         boolean pair = true;
         int index = 0;
-        double medianaAltoAlto, medianaAltoMedio, medianaAltoBajo;
-        double medianMedioAlto, medianMedioMedio, medianMedioBajo;
-        double medianBajoAlto, medianBajoMedio, medianBajoBajo;
+        double medianaAltoAlto;
+        double medianaAltoMedio;
+        double medianaAltoBajo;
+        double medianMedioAlto;
+        double medianMedioMedio;
+        double medianMedioBajo;
+        double medianBajoAlto;
+        double medianBajoMedio;
+        double medianBajoBajo;
 
         if (funcional.getAltoAlto() == ZERO_SCORE && funcional.getAltoMedio() == ZERO_SCORE && funcional.getAltoBajo() == ZERO_SCORE &&
                 funcional.getMedioAlto() == ZERO_SCORE && funcional.getMedioMedio() == ZERO_SCORE && funcional.getMedioBajo() == ZERO_SCORE &&
@@ -227,13 +265,21 @@ public class OperationService {
     }
 
     private double weightedMedianFormula(List<Double> list, boolean pair, int index) {
+        if (list.isEmpty()) {
+            return 0.0;
+        }
+
         double median;
-        if (pair) {
+
+        if (pair && list.size() >= 2) {
             double sumaMedios = list.get(list.size() / 2) + list.get((list.size() / 2) - 1);
             median = sumaMedios / 2;
-        } else {
+        } else if (!pair && index >= 0 && index < list.size()) {
             median = list.get(index);
+        } else {
+            median = list.get(0);
         }
+
         return median;
     }
 
@@ -259,8 +305,8 @@ public class OperationService {
         return weightedMedianFormula(list, pair, index);
     }
 
-    public AverageScore weightedAverageOfCumulativeScore(Integer projectId, double maximumCumulativeScore) {
-        AverageScore averageScore = calculateWeightedMedian(projectId);
+    public AverageScore weightedAverageOfCumulativeScore(String typeRequirement, Integer projectId, double maximumCumulativeScore) {
+        AverageScore averageScore = calculateWeightedMedian(typeRequirement, projectId);
 
         averageScore.setAltoAlto(characteristicService.calculatePercentage(averageScore.getAltoAlto(), maximumCumulativeScore));
         averageScore.setAltoMedio(characteristicService.calculatePercentage(averageScore.getAltoMedio(), maximumCumulativeScore));
@@ -277,25 +323,62 @@ public class OperationService {
         return averageScore;
     }
 
-    public double totalWeightedMedianSuitabilityLevel(Integer projectId, int option) {
+    public double totalWeightedMedianSuitabilityLevel(String typeRequirement, Integer projectId, int option) {
         double response = 0;
 
         switch (option) {
             case 0:
-                response = calculateSortedWeightedMedian(calculateWeightedMedian(projectId));
+                response = calculateSortedWeightedMedian(calculateWeightedMedian(typeRequirement, projectId));
                 break;
 
             case 1:
-                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(projectId, UPPER_RANGE_WEIGHT));
+                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(typeRequirement, projectId, UPPER_RANGE_WEIGHT));
                 break;
 
             case 2:
-                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(projectId, LOWER_RANGE_WEIGHT));
+                response = calculateSortedWeightedMedian(weightedAverageOfCumulativeScore(typeRequirement, projectId, LOWER_RANGE_WEIGHT));
                 break;
+            default:
+                totalWeightedMedianSuitabilityLevel(typeRequirement, projectId, option);
         }
 
         return response;
     }
 
+    public void updateOperation(Double maximumScore, Double levelAdequacy, Double evaluatedCharacteristics,
+                                Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId
+    ) {
+        operationsDomainRepository.updateOperation(maximumScore, levelAdequacy, evaluatedCharacteristics,
+                levelWeightScore, calculatedWeightAverage, requirementId);
+    }
+
+    public double weightedAverageLevelOfAdequacy(String typeRequirement, Integer projectId) {
+        AverageScore data;
+
+        if (typeRequirement.equalsIgnoreCase(FUNCIONAL_TYPE)) {
+            data = averageScoreByProjectIdOrTypeRequirement(FUNCIONAL_TYPE, projectId);
+
+        } else {
+            data = averageScoreByProjectIdOrTypeRequirement(NO_FUNCIONAL_TYPE, projectId);
+        }
+
+        int allRequirements = requirementService.countAllRequirements(typeRequirement, projectId);
+
+        double altoAlto = characteristicService.calculatePercentage((data.getAltoAlto() / allRequirements), RANGE_ALTO_ALTO);
+        double altoMedio = characteristicService.calculatePercentage((data.getAltoMedio() / allRequirements), RANGE_ALTO_MEDIO);
+        double altoBajo = characteristicService.calculatePercentage((data.getAltoBajo() / allRequirements), RANGE_ALTO_BAJO);
+
+        double medioAlto = characteristicService.calculatePercentage((data.getMedioAlto() / allRequirements), RANGE_MEDIO_ALTO);
+        double medioMedio = characteristicService.calculatePercentage((data.getMedioMedio() / allRequirements), RANGE_MEDIO_MEDIO);
+        double medioBajo = characteristicService.calculatePercentage((data.getMedioBajo() / allRequirements), RANGE_MEDIO_BAJO);
+
+        double bajoAlto = characteristicService.calculatePercentage((data.getBajoAlto() / allRequirements), RANGE_BAJO_ALTO);
+        double bajoMedio = characteristicService.calculatePercentage((data.getBajoMedio() / allRequirements), RANGE_BAJO_MEDIO);
+        double bajoBajo = characteristicService.calculatePercentage((data.getBajoBajo() / allRequirements), RANGE_BAJO_BAJO);
+
+        double totalPercentage = altoAlto + altoMedio + altoBajo + medioAlto + medioMedio + medioBajo + bajoAlto + bajoMedio + bajoBajo;
+
+        return Double.isNaN(totalPercentage) ? 0.0 : totalPercentage;
+    }
 
 }

@@ -14,7 +14,8 @@ import javax.persistence.*;
 public class RequirementEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "requisito_inicial_code_seq")
+    @SequenceGenerator(name = "requisito_inicial_code_seq", sequenceName = "requisito_inicial_code_seq", allocationSize = 1)
     @Column(unique = true, nullable = false)
     private Integer id;
 
@@ -29,5 +30,8 @@ public class RequirementEntity {
 
     @Column(nullable = false, length = 12)
     private String tipoRequisito;
+
+    @Column(nullable = false)
+    private boolean calificado;
 
 }

@@ -62,9 +62,9 @@ public class CharacteristicController {
     ) {
         boolean dde = causeErrorData.get("dde");
         boolean dii = causeErrorData.get("dii");
-        boolean var = causeErrorData.get("var");
+        boolean ceVAR = causeErrorData.get("var");
 
-        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+        characteristicService.updateCauseErrorOfCharacteristic(dde, dii, ceVAR, requirementId, characteristicId);
         return ResponseEntity.ok().build();
     }
 
@@ -80,7 +80,7 @@ public class CharacteristicController {
 
     @GetMapping(path = "/all-evaluation-characters-result/{id}")
     public String calculateAllEvaluationCharactersResult(@PathVariable("id") Integer requirementId) {
-        return characteristicService.allEvaluationCharactersResult(requirementId);
+        return characteristicService.allEvaluationCharacteristicsResult(requirementId);
     }
 
     @GetMapping(path = "/calculate-weight-average/{id}")
@@ -94,7 +94,8 @@ public class CharacteristicController {
     }
 
     @GetMapping(path = "/all-operations/{id}")
-    public Operation getAllOperations(@PathVariable("id") Integer operationId, @PathVariable("id") Integer requirementId) {
+    public Operation getAllOperations(@PathVariable("id") Integer requirementId) {
+        int operationId = characteristicService.getOperationId(requirementId);
         return characteristicService.allOperations(operationId, requirementId);
     }
 
@@ -136,7 +137,7 @@ public class CharacteristicController {
             @RequestParam Integer projectId
     ) {
         IRequirementsByTypeAndNameCharacteristic requirements = countRequirementsByTypeAndNameCharacteristic(typeRequirement, projectId);
-        return characteristicService.getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(requirements);
+        return characteristicService.getPercCountRequirementsByTypeAndNameChar(requirements);
     }
 
     @GetMapping(path = "/count-characteristics-cause-error-dde")

@@ -14,12 +14,12 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CharacteristicRepositoryTest {
+class CharacteristicRepositoryTest {
     @Autowired
     private ICharacteristicCrudRepository characteristicCrudRepository;
 
     @Test
-    public void testFindCharacteristicsByRequirementId() {
+    void testFindCharacteristicsByRequirementId() {
         Integer requirementId = 1;
 
         List<ICharacteristicsByRequirementId> characteristics =

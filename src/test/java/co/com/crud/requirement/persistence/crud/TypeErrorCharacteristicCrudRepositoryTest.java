@@ -2,11 +2,9 @@ package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.persistence.TypeErrorCharacteristicRepository;
 import co.com.crud.requirement.persistence.entity.TypeErrorCharacteristicEntity;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
@@ -15,15 +13,15 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
-public class TypeErrorCharacteristicCrudRepositoryTest {
+class TypeErrorCharacteristicCrudRepositoryTest {
 
     @Autowired
     private ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository;
 
     @Test
-    public void testFindTypeErrorCharacteristicById() {
+    void testFindTypeErrorCharacteristicById() {
         //Arrange
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
@@ -34,12 +32,12 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         Optional<TypeErrorCharacteristicEntity> result = iTypeErrorCharacteristicCrudRepository.findById(requirementId);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).findById(eq(requirementId));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).findById(requirementId);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testCountRequirementsByTypeAndErrorShoulReturnRequisito() {
+    void testCountRequirementsByTypeAndErrorShoulReturnRequisito() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -47,18 +45,18 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError)).thenReturn(requisito);
 
         //Act
         int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
         assertEquals(1, result);
     }
 
     @Test
-    public void testCountRequirementsByTypeAndErrorReturnUnexpectedResult() {
+    void testCountRequirementsByTypeAndErrorReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -66,18 +64,18 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
         when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(anyString(), anyString())).thenReturn(requisito);
         String tipoRequisito = "Funcional";
         String tipoError = "MCC";
-        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError))).thenReturn(requisito);
+        when(iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError)).thenReturn(requisito);
 
         //Act
         int result = iTypeErrorCharacteristicCrudRepository.countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
 
         //Assert
-        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(eq(tipoRequisito), eq(tipoError));
+        verify(iTypeErrorCharacteristicCrudRepository, times(1)).countRequirementsByTypeAndCauseError(tipoRequisito, tipoError);
         assertNotEquals(10, result);
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorAndRequirementId() {
+    void testCountRequirementsByCauseErrorAndRequirementId() {
         //Arrange
         int requisitoId = 10;
         int tipoErrorId = 2;
@@ -92,7 +90,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDDEReturnExpectedResult() {
+    void testCountRequirementsByCauseErrorDDEReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -108,7 +106,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDDEReturnUnexpectedResult() {
+    void testCountRequirementsByCauseErrorDDEReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -124,7 +122,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDIIReturnExpectedResult() {
+    void testCountRequirementsByCauseErrorDIIReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -140,7 +138,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorDIIReturnUnexpectedResult() {
+    void testCountRequirementsByCauseErrorDIIReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -156,7 +154,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountRequirementsByCauseErrorVARReturnExpectedResult() {
+    void testCountRequirementsByCauseErrorVARReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -173,7 +171,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountRequirementsByErrorVARReturnUnexpectedResult() {
+    void testcountRequirementsByErrorVARReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -189,7 +187,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEByRequirement() {
+    void testCountTypeErrorEIEByRequirement() {
         //Arrange
         int requisito = 1;
         ITypeErrorCharacteristicCrudRepository iTypeErrorCharacteristicCrudRepository = mock(ITypeErrorCharacteristicCrudRepository.class);
@@ -206,7 +204,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCByRequirementReturnExpectedResult() {
+    void testCountTypeErrorMCCByRequirementReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -222,7 +220,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCByRequirementReturnUnexpectedResult() {
+    void testCountTypeErrorMCCByRequirementReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -238,7 +236,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountTypeErrorEIEByRequirementReturnExpectedResult() {
+    void testcountTypeErrorEIEByRequirementReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -254,7 +252,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountTypeErrorEIEByRequirementReturnUnexpectedResult() {
+    void testcountTypeErrorEIEByRequirementReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -270,7 +268,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorsByRequirementReturnExpectedResult() {
+    void testCountTypeErrorsByRequirementReturnExpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -286,7 +284,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorsByRequirementReturnUnexpectedResult() {
+    void testCountTypeErrorsByRequirementReturnUnexpectedResult() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -302,7 +300,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorDDEByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorDDEByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -318,7 +316,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorDIIByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorDIIByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -334,7 +332,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorEIEAndCauseErrorVARByRequirement() {
+    void testCountTypeErrorEIEAndCauseErrorVARByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -350,7 +348,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCByRequirement() {
+    void testCountTypeErrorMCCByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -367,7 +365,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCAndCauseErrorDDEByRequirement() {
+    void testCountTypeErrorMCCAndCauseErrorDDEByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -384,7 +382,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorMCCAndCauseErrorDIIByRequirement() {
+    void testCountTypeErrorMCCAndCauseErrorDIIByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -401,7 +399,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountTypeErrorMCCAndCauseErrorVARByRequirement() {
+    void testcountTypeErrorMCCAndCauseErrorVARByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -417,7 +415,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountTypeErrorsByRequirements() {
+    void testCountTypeErrorsByRequirements() {
         //Arrange
         int requisitoId = 10;
         int tipoErrorId = 2;
@@ -435,7 +433,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testcountAllTypeErrorsByRequirement() {
+    void testcountAllTypeErrorsByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -451,7 +449,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCountAllCauseErrorsByRequirement() {
+    void testCountAllCauseErrorsByRequirement() {
         //Arrange
         int requisito = 1;
         TypeErrorCharacteristicRepository typeErrorCharacteristicRepository = mock(TypeErrorCharacteristicRepository.class);
@@ -467,7 +465,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testCauseErrorByCharacteristicForRequirements() {
+    void testCauseErrorByCharacteristicForRequirements() {
         //Arrange
         int projectId = 10;
         String tipoRequisito = "Funcional";
@@ -483,7 +481,7 @@ public class TypeErrorCharacteristicCrudRepositoryTest {
     }
 
     @Test
-    public void testErrorDistributionAllRequirements() {
+    void testErrorDistributionAllRequirements() {
         //Arrange
         int projectId = 10;
         String tipoRequisito = "Funcional";

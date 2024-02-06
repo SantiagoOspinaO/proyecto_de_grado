@@ -35,4 +35,6 @@ public class OperationEntity {
 
     @Column(nullable = false)
     private Double promedioCalculado;
+
+
 }

@@ -18,7 +18,7 @@ public interface CharacteristicDomainRepository {
 
     void updateGradeCharacteristicByRequirement(Double gradeInput, Integer requirementId, Integer characteristicId);
 
-    void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId);
+    void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean ceVar, Integer requirementId, Integer characteristicId);
 
     IRequirementsByTypeAndNameCharacteristic countRequirementsByTypeAndNameCharacteristic(String typeRequirement, Integer projectId);
 
@@ -33,5 +33,7 @@ public interface CharacteristicDomainRepository {
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorDII(String typeRequirement, Integer projectId);
 
     ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(String typeRequirement, Integer projectId);
+
+    int getOperationId(Integer requirementId);
 
 }

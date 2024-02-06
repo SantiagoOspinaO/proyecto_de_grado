@@ -46,4 +46,9 @@ public class OperationRepository implements OperationDomainRepository {
         return operationCrudRepository.countAllScoreByProjectIdOrTypeRequirement(typeRequirement, projectId);
     }
 
+    @Override
+    public void updateOperation(Double maximumScore, Double levelAdequacy, Double evaluatedCharacteristics, Double levelWeightScore, Double calculatedWeightAverage, Integer requirementId) {
+        operationCrudRepository.updateOperation(maximumScore, levelAdequacy, evaluatedCharacteristics, levelWeightScore, calculatedWeightAverage, requirementId);
+    }
+
 }

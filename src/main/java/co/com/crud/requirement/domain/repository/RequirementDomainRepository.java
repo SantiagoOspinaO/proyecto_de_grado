@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,19 @@ public interface RequirementDomainRepository {
 
     IPerfectOrNotPerfectRequirement countPerfectRequirements(String typeRequirement, Integer projectId);
 
-    List<Requirement> getRequirementsByProyectoId(Integer proyectoId);
+    List<Requirement> getRequirementsByProyectoId(Integer projectId);
 
     int countAllRequirements(String typeRequirement, Integer projectId);
+
+    void updateQualifiedByRequirementId(Integer requirementId);
+
+    void updateProjectStatus(Integer projectId);
+
+    void deleteDataRoleSelection(Integer projectId);
+
+    void deleteDataRoleUser(Integer projectId);
+
+    ITypeConsultingProject getTypeOfConsulting(Integer projectId);
+
+    boolean existsByProjectAndName(String name, Integer projectId);
 }

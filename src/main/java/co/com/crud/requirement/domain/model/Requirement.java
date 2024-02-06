@@ -17,4 +17,6 @@ public class Requirement {
 
     private String typeRequirement;
 
+    private boolean qualified;
+
 }

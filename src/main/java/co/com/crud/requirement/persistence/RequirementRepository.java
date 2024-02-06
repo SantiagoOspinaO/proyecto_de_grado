@@ -4,6 +4,7 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IPerfectOrNotPerfectRequirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementByGradeAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
+import co.com.crud.requirement.domain.model.queryresult.ITypeConsultingProject;
 import co.com.crud.requirement.domain.repository.RequirementDomainRepository;
 import co.com.crud.requirement.persistence.crud.IRequirementCrudRepository;
 import co.com.crud.requirement.persistence.entity.RequirementEntity;
@@ -28,7 +29,7 @@ public class RequirementRepository implements RequirementDomainRepository {
 
     @Override
     public Requirement saveRequirement(Requirement requirement) {
-        RequirementEntity requirementEntity = requirementMapper.toRequirements(requirement);
+        RequirementEntity requirementEntity = new RequirementEntity(0, requirement.getProjectId(), requirement.getName(), requirement.getDescription(), requirement.getTypeRequirement(), requirement.isQualified());
         return requirementMapper.toRequirement(requirementCrudRepository.save(requirementEntity));
     }
 
@@ -76,7 +77,37 @@ public class RequirementRepository implements RequirementDomainRepository {
 
     @Override
     public int countAllRequirements(String typeRequirement, Integer projectId) {
-        return requirementCrudRepository.countAllRequirements(typeRequirement,projectId);
+        return requirementCrudRepository.countAllRequirements(typeRequirement, projectId);
+    }
+
+    @Override
+    public void updateQualifiedByRequirementId(Integer requirementId) {
+        requirementCrudRepository.updateQualifiedByRequirementId(requirementId);
+    }
+
+    @Override
+    public void updateProjectStatus(Integer projectId) {
+        requirementCrudRepository.updateProjectStatus(projectId);
+    }
+
+    @Override
+    public void deleteDataRoleSelection(Integer projectId) {
+        requirementCrudRepository.deleteDataRoleSelection(projectId);
+    }
+
+    @Override
+    public void deleteDataRoleUser(Integer projectId) {
+        requirementCrudRepository.deleteDataRoleUser(projectId);
+    }
+
+    @Override
+    public ITypeConsultingProject getTypeOfConsulting(Integer projectId) {
+        return requirementCrudRepository.getTypeOfConsulting(projectId);
+    }
+
+    @Override
+    public boolean existsByProjectAndName(String name, Integer projectId) {
+        return requirementCrudRepository.existsByProjectAndName(name, projectId);
     }
 
 }

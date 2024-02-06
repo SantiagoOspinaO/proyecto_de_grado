@@ -50,17 +50,13 @@ public class CharacteristicService {
         characteristicDomainRepository.updateGradeCharacteristicByRequirement(gradeInput, requirementId, characteristicId);
     }
 
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
-        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean ceVar, Integer requirementId, Integer characteristicId) {
+        characteristicDomainRepository.updateCauseErrorOfCharacteristic(dde, dii, ceVar, requirementId, characteristicId);
     }
 
     public double evaluatedCharacteristicForRequirement(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
-        int requirementEvaluated = 0;
-        for (IGradeCharacteristicByRequirementId grade : grades) {
-            requirementEvaluated = grades.size();
-        }
-        return requirementEvaluated;
+        return grades.size();
     }
 
     public double calculateWeightAverage(Integer requirementId) {
@@ -76,7 +72,6 @@ public class CharacteristicService {
     public double maximumAccumulatedScore(Integer requirementId) {
         List<IGradeCharacteristicByRequirementId> grades = characteristicDomainRepository.getGradesCharacteristicByRequirementId(requirementId);
         double sumGrade = 0;
-        double sum = 0;
         for (IGradeCharacteristicByRequirementId grade : grades) {
             sumGrade += grade.getGrade();
         }
@@ -92,35 +87,34 @@ public class CharacteristicService {
         Operation operation = new Operation();
         operation.setOperationId(operationId);
         operation.setRequirementId(requirementId);
-        operation.setLevelAdecuacy(calculateLevelAdequacy(requirementId));
+        operation.setLevelAdequacy(calculateLevelAdequacy(requirementId));
         operation.setEvaluatedCharacteristics(evaluatedCharacteristicForRequirement(requirementId));
         operation.setLevelWeightScore(levelWeightScoreForNineCharacters(requirementId));
         operation.setMaximumScore(maximumAccumulatedScore(requirementId));
         operation.setCalculatedWeightAverage(calculateWeightAverage(requirementId));
-
         return operation;
     }
 
-    public String allEvaluationCharactersResult(Integer requirementId) {
+    public String allEvaluationCharacteristicsResult(Integer requirementId) {
         double result = maximumAccumulatedScore(requirementId);
         if (result > 72.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Alto;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_ALTO;
         } else if (result <= 72.09 && result > 63.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Medio;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_MEDIO;
         } else if (result <= 63.09 && result > 54.09) {
-            return RequirementAdecuationValidator.Adecuation_Alto_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_ALTO_BAJO;
         } else if (result <= 54.09 && result > 45.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Alto;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_ALTO;
         } else if (result <= 45.09 && result > 36.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Medio;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_MEDIO;
         } else if (result <= 36.09 && result > 27.09) {
-            return RequirementAdecuationValidator.Adecuation_Medio_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_MEDIO_BAJO;
         } else if (result <= 27.09 && result > 18.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_ALTO;
         } else if (result <= 18.09 && result > 9.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Medio;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_MEDIO;
         } else if (result <= 9.09) {
-            return RequirementAdecuationValidator.Adecuation_Bajo_Bajo;
+            return RequirementAdecuationValidator.ADECUACION_BAJO_BAJO;
         }
         return null;
     }
@@ -158,7 +152,7 @@ public class CharacteristicService {
     }
 
     @NotNull
-    public Map<String, Double> getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(IRequirementsByTypeAndNameCharacteristic requirements) {
+    public Map<String, Double> getPercCountRequirementsByTypeAndNameChar(IRequirementsByTypeAndNameCharacteristic requirements) {
         double correcto = requirements.getCorrecto() != null ? requirements.getCorrecto() : 0.0;
         double incorrecto = requirements.getIncorrecto() != null ? requirements.getIncorrecto() : 0.0;
         double inequivoco = requirements.getInequivoco() != null ? requirements.getInequivoco() : 0.0;
@@ -240,6 +234,10 @@ public class CharacteristicService {
             String formattedPercentage = String.format("%.2f", percentage).replace(",", ".");
             return Double.parseDouble(formattedPercentage);
         }
+    }
+
+    public int getOperationId(Integer requirementId) {
+        return characteristicDomainRepository.getOperationId(requirementId);
     }
 
 }

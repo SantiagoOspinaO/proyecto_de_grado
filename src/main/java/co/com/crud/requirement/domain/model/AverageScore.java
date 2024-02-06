@@ -7,21 +7,21 @@ import lombok.Setter;
 @Setter
 public class AverageScore {
 
-    private double AltoAlto;
+    private double altoAlto;
 
-    private double AltoMedio;
+    private double altoMedio;
 
-    private double AltoBajo;
+    private double altoBajo;
 
-    private double MedioAlto;
+    private double medioAlto;
 
-    private double MedioMedio;
+    private double medioMedio;
 
-    private double MedioBajo;
+    private double medioBajo;
 
-    private double BajoAlto;
+    private double bajoAlto;
 
-    private double BajoMedio;
+    private double bajoMedio;
 
-    private double BajoBajo;
+    private double bajoBajo;
 }

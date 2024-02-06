@@ -5,9 +5,8 @@ import co.com.crud.requirement.domain.model.Requirement;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByFilterCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByRequirementIdAndCauseError;
 import co.com.crud.requirement.domain.model.queryresult.IRequirementsByTypeAndCauseError;
-import co.com.crud.requirement.domain.repository.CharacteristicDomainRepository;
 import co.com.crud.requirement.domain.repository.OperationDomainRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -19,13 +18,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class OperationServiceTest {
+class OperationServiceTest {
 
     @MockBean
     OperationDomainRepository operationDomainRepository;
 
     @Test
-    public void testGetAllOperationsWhenResultIsNotNull() {
+    void testGetAllOperationsWhenResultIsNotNull() {
         //Arrange
         OperationDomainRepository mockOperationDomainRepository = mock(OperationDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
@@ -33,7 +32,7 @@ public class OperationServiceTest {
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.555);
         operation.setMaximumScore(45.0);
@@ -42,7 +41,7 @@ public class OperationServiceTest {
         ArrayList<Operation> mockOperations = new ArrayList<Operation>();
         mockOperations.add(operation);
         when(mockOperationDomainRepository.getAllOperations()).thenReturn(mockOperations);
-        OperationService operationService = new OperationService(mockOperationDomainRepository,characteristicService, requirementService);
+        OperationService operationService = new OperationService(mockOperationDomainRepository, characteristicService, requirementService);
 
         //Act
         List<Operation> result = operationService.getAllOperations();
@@ -54,16 +53,16 @@ public class OperationServiceTest {
     }
 
     @Test
-    public void testSaveOperation() {
+    void testSaveOperation() {
         //Arrange
         OperationDomainRepository operationDomainRepository = mock(OperationDomainRepository.class);
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         RequirementService requirementService = mock(RequirementService.class);
-        OperationService operationService = new OperationService(operationDomainRepository,characteristicService, requirementService);
+        OperationService operationService = new OperationService(operationDomainRepository, characteristicService, requirementService);
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.555);
         operation.setMaximumScore(45.0);
@@ -72,7 +71,7 @@ public class OperationServiceTest {
         ArrayList<Operation> mockOperations = new ArrayList<Operation>();
         mockOperations.add(operation);
         when(operationDomainRepository.saveOperation(any())).thenReturn(operation);
-        when(characteristicService.allOperations(any(),any())).thenReturn(operation);
+        when(characteristicService.allOperations(any(), any())).thenReturn(operation);
         //Act
         Operation result = operationService.saveOperation(operation);
 
@@ -82,7 +81,7 @@ public class OperationServiceTest {
     }
 
     @Test
-    public void testCalculateWeightAverage(){
+    void testCalculateWeightAverage() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Requirement requirement = new Requirement();
@@ -97,11 +96,11 @@ public class OperationServiceTest {
 
         //Assert
         verify(characteristicService, times(1)).calculateWeightAverage(requirement.getRequirementId());
-        assertNotEquals(4,result);
+        assertNotEquals(4, result);
     }
 
     @Test
-    public void testMaximumAccumulatedScore(){
+    void testMaximumAccumulatedScore() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Requirement requirement = new Requirement();
@@ -116,18 +115,18 @@ public class OperationServiceTest {
 
         //Assert
         verify(characteristicService, times(1)).maximumAccumulatedScore(requirement.getRequirementId());
-        assertNotEquals(85.5,result);
+        assertNotEquals(85.5, result);
     }
 
     @Test
-    public void testAllOperations(){
+    void testAllOperations() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Operation operation = new Operation();
         operation.setOperationId(1);
         operation.setRequirementId(1);
         operation.setMaximumScore(45.0);
-        operation.setLevelAdecuacy(5.0);
+        operation.setLevelAdequacy(5.0);
         operation.setEvaluatedCharacteristics(9.0);
         operation.setLevelWeightScore(55.55);
         operation.setCalculatedWeightAverage(0.55);
@@ -138,12 +137,12 @@ public class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).allOperations(operation.getOperationId(), operation.getRequirementId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharactersResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
     @Test
-    public void testCountRequirementsByRequirementIdAndCauseError(){
+    void testCountRequirementsByRequirementIdAndCauseError() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Requirement requirement = new Requirement();
@@ -159,12 +158,12 @@ public class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countRequirementsByRequirementIdAndCauseError(requirement.getRequirementId(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharactersResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
     @Test
-    public void testCountCauseErrorByRequirementType(){
+    void testCountCauseErrorByRequirementType() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Requirement requirement = new Requirement();
@@ -180,12 +179,12 @@ public class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countCauseErrorByRequirementType(requirement.getTypeRequirement(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharactersResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
     @Test
-    public void testCountRequirementsByTypeAndCauseError(){
+    void testCountRequirementsByTypeAndCauseError() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         Requirement requirement = new Requirement();
@@ -201,25 +200,25 @@ public class OperationServiceTest {
         //Assert
         verify(characteristicService, times(1)).countRequirementsByTypeAndCauseError(requirement.getTypeRequirement(), requirement.getProjectId());
         verify(characteristicService, times(0)).levelWeightScoreForNineCharacters(anyInt());
-        verify(characteristicService, times(0)).allEvaluationCharactersResult(anyInt());
+        verify(characteristicService, times(0)).allEvaluationCharacteristicsResult(anyInt());
 
     }
 
     @Test
-    public void testGetPercentageCountRequirementsByTypeAndNameCharacteristicInterface(){
+    void testGetPercentageCountRequirementsByTypeAndNameCharacteristicInterface() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
 
         //Act
-        characteristicService.getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(any());
+        characteristicService.getPercCountRequirementsByTypeAndNameChar(any());
 
         //Assert
-        verify(characteristicService, times(1)).getPercentageCountRequirementsByTypeAndNameCharacteristicInterface(any());
+        verify(characteristicService, times(1)).getPercCountRequirementsByTypeAndNameChar(any());
 
     }
 
     @Test
-    public void testGetPercentageCharacteristicsByCauseErrorInterface(){
+    void testGetPercentageCharacteristicsByCauseErrorInterface() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
 
@@ -232,18 +231,17 @@ public class OperationServiceTest {
     }
 
     @Test
-    public void testCalculatePercentage(){
+    void testCalculatePercentage() {
         //Arrange
         CharacteristicService characteristicService = mock(CharacteristicService.class);
         double count = 2.0;
         double totalRecords = 3.0;
 
         //Act
-        double result = characteristicService.calculatePercentage(count,totalRecords);
+        double result = characteristicService.calculatePercentage(count, totalRecords);
 
         //Assert
-        verify(characteristicService, times(1)).calculatePercentage(count,totalRecords);
-        assertNotNull(result, "null");
+        verify(characteristicService, times(1)).calculatePercentage(count, totalRecords);
 
     }
 

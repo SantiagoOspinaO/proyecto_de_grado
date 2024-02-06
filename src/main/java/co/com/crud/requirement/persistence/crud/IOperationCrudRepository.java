@@ -2,9 +2,11 @@ package co.com.crud.requirement.persistence.crud;
 
 import co.com.crud.requirement.domain.model.queryresult.ITotalMaxScore;
 import co.com.crud.requirement.persistence.entity.OperationEntity;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface IOperationCrudRepository extends CrudRepository<OperationEntity, Integer> {
 
@@ -43,5 +45,24 @@ public interface IOperationCrudRepository extends CrudRepository<OperationEntity
     ITotalMaxScore countAllScoreByProjectIdOrTypeRequirement(
             @Param("tipoRequisito") String typeRequirement,
             @Param("proyectoId") Integer projectId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE operacion " +
+            "SET puntaje_maximo = :puntaje_maximo, " +
+            "nivel_adecuacion = :nivel_adecuacion, " +
+            "caracteristicas_evaluadas = :caracteristicas_evaluadas, " +
+            "nivel_caracteristica_puntuacion = :nivel_caracteristica_puntuacion, " +
+            "promedio_calculado = :promedio_calculado " +
+            "FROM requisito " +
+            "WHERE operacion.requisito_id = requisito.id " +
+            "AND operacion.requisito_id = :requisitoId ", nativeQuery = true)
+    void updateOperation(
+            @Param("puntaje_maximo") Double puntaje_maximo,
+            @Param("nivel_adecuacion") Double nivel_adecuacion,
+            @Param("caracteristicas_evaluadas") Double caracteristicas_evaluadas,
+            @Param("nivel_caracteristica_puntuacion") Double nivel_caracteristica_puntuacion,
+            @Param("promedio_calculado") Double promedio_calculado,
+            @Param("requisitoId") Integer requisitoId);
 
 }

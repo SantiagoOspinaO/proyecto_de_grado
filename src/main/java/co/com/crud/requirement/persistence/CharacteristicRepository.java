@@ -52,8 +52,8 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     }
 
     @Override
-    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean var, Integer requirementId, Integer characteristicId) {
-        characteristicCrudRepository.updateCauseErrorOfCharacteristic(dde, dii, var, requirementId, characteristicId);
+    public void updateCauseErrorOfCharacteristic(boolean dde, boolean dii, boolean ceVar, Integer requirementId, Integer characteristicId) {
+        characteristicCrudRepository.updateCauseErrorOfCharacteristic(dde, dii, ceVar, requirementId, characteristicId);
     }
 
     @Override
@@ -89,6 +89,11 @@ public class CharacteristicRepository implements CharacteristicDomainRepository 
     @Override
     public ICharacteristicsByCauseError countCharacteristicsByCauseErrorVAR(String typeRequirement, Integer projectId) {
         return characteristicCrudRepository.countCharacteristicsByCauseErrorVAR(typeRequirement, projectId);
+    }
+
+    @Override
+    public int getOperationId(Integer requirementId) {
+        return characteristicCrudRepository.getOperationId(requirementId);
     }
 
 }

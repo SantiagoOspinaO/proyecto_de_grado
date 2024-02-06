@@ -1,7 +1,7 @@
 package co.com.crud.requirement.web.exception;
 
 import co.com.crud.requirement.domain.exception.*;
-import co.com.crud.requirement.domain.exception.validation.*;
+import co.com.crud.requirement.domain.exception.validation.DomainValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -41,6 +41,13 @@ public class RestExceptionHandler {
         LOGGER.error(e.getClass().getSimpleName(), e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
+    @ExceptionHandler(InvalidValueException.class)
+    public ResponseEntity<Error> exceptionResolver(InvalidValueException e) {
+        Error error = new Error(e.getClass().getSimpleName(), DomainValidator.NAME_ALREADY_EXISTS);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 }

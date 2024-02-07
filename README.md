@@ -32,8 +32,13 @@ git clone https://github.com/Arquisw/SQASQCBack
     <a href="https://www.java.com/es/">
         <img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java" width="40" height="40" style="margin-right: 20px;">
     </a>
+    &nbsp;&nbsp;&nbsp;
     <a href="https://spring.io/projects/spring-boot">
         <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="40" height="40">
+    </a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="https://www.postgresql.org/">        
+        <img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" alt="Spring Boot" width="40" height="40">
     </a>
 </div>
 

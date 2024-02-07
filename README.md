@@ -1,7 +1,7 @@
 # 💻 ArquiSW - SQA/SQC 💻
 
 ## 📚 Description
-Esta aplicación web consiste en sistema de consultoría para los procesos de SQA y SQC  
+Esta aplicación web consiste en un sistema de consultoría para los procesos de SQA y SQC  
 que hace parte de la aplicación ArquiSW, la cual se desarrolló como proyecto de grado  
 para el programa de Ingeniría de Sistemas de la Universidad Catolica de Oriente
 <a href="https://www.uco.edu.co/">
@@ -18,7 +18,8 @@ git clone https://github.com/Arquisw/SQASQCBack
 ```
 2. Abrir el proyecto con el IDE de preferencia que soporte Java
 3. Compilar y ejecutar la aplicación
-4. Iniciar el servidor de desarrollo local en `localhost:8082`
+4. Ejecutar los scripts contenidos en el archivo [queries.sql](https://github.com/SantiagoOspinaO/proyecto_de_grado/blob/main/queries.sql)
+5. Iniciar el servidor de desarrollo local en `localhost:8082`
 <br>
 
 ## :technologist: Contributors
